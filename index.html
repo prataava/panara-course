@@ -1949,7 +1949,7 @@ document.getElementById("btnSimpanKunciAI").addEventListener("click", function (
 segarkanStatusKunci();
 var pilihModelAIEl = document.getElementById("pilihModelAI");
 pilihModelAIEl.value = modelAI();
-pilihModelAIEl.addEventListener("change", function () { localStorage.setItem("prata_model_ai", pilihModelAIEl.value); });
+pilihModelAIEl.addEventListener("change", function () { localStorage.setItem("prata_model_ai", pilihModelAIEl.value); segarkanPilApung(); });
 function gambarChat() {
   var d = dataUser();
   var alur = document.getElementById("alurChat");
