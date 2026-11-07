@@ -380,6 +380,18 @@
   body.gelap #kakiApung { border-top-color: #2c4470; }
   #isiApung { flex: 1; border: 1.5px solid #d8e2f2; border-radius: 12px; padding: 9px 11px; font: inherit; font-size: 14px; resize: none; background: var(--kartu); color: var(--teks); }
   body.gelap #isiApung { border-color: #33507e; }
+  /* ===== v6: penampil buku modul ===== */
+  #penampilBuku { position: fixed; inset: 0; background: #10151d; z-index: 90; display: flex; flex-direction: column; }
+  #kepalaBuku { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #0d2a55; color: #fff; }
+  #judulBuku { flex: 1; font-weight: 800; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #kepalaBuku button { background: rgba(255, 255, 255, .16); color: #fff; border: 0; min-width: 34px; height: 34px; border-radius: 9px; font-size: 16px; cursor: pointer; padding: 0 8px; }
+  #alatBuku { display: flex; gap: 6px; }
+  #badanBuku { flex: 1; overflow: auto; display: flex; align-items: flex-start; justify-content: center; padding: 10px; position: relative; touch-action: pan-y; }
+  #kanvasBuku { background: #fff; border-radius: 6px; box-shadow: 0 10px 34px rgba(0, 0, 0, .5); }
+  #muatBuku { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, .75); color: #fff; padding: 7px 14px; border-radius: 999px; font-size: 13px; white-space: nowrap; }
+  #kakiBuku { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: #0d2a55; }
+  #infoHalaman { color: #fff; font-weight: 700; font-size: 13.5px; }
+  #kakiBuku .btn { background: rgba(255, 255, 255, .14); color: #fff; }
 </style>
 </head>
 <body>
@@ -893,6 +905,12 @@ Tiap sekolah berbeda: bisa meliputi tes akademik lanjutan, kesehatan, kebugaran/
       <div class="sub" id="statusModul" style="margin-top:11px;"></div>
       <div class="batang" id="batangModulBungkus" hidden style="margin-top:9px;"><i id="batangModul" style="width:0%"></i></div>
     </div>
+    <div class="kartu">
+      <h2 class="judul-bagian">📚 Buku Modul</h2>
+      <p class="sub" style="margin-bottom:11px;">Buka berkas bukunya langsung di aplikasi dan baca seperti e-book — halamannya bisa digeser. Berkas buku tersimpan di perangkat ini (terlalu besar untuk server gratis); yang tersimpan di akun onlinemu adalah soal-soal hasil bacaannya.</p>
+      <button class="btn laut lebar" id="btnBukaBuku">📖 Buka Buku Modul</button>
+      <div class="sub" id="statusBuku" style="margin-top:9px;"></div>
+    </div>
     <div id="wadahModul"></div>
   </section>
 </main>
@@ -906,6 +924,26 @@ Tiap sekolah berbeda: bisa meliputi tes akademik lanjutan, kesehatan, kebugaran/
 </nav>
 
 <footer class="kaki" id="kakiApp">PRATA — aplikasi belajar seleksi sekolah kedinasan.<br>Soal latihan adalah soal buatan untuk berlatih, bukan soal resmi BKN/panitia.</footer>
+
+<div id="penampilBuku" hidden>
+  <div id="kepalaBuku">
+    <button id="btnTutupBuku" title="Tutup buku">✕</button>
+    <span id="judulBuku">Buku Modul</span>
+    <span id="alatBuku">
+      <button id="btnZoomKurang" title="Perkecil">−</button>
+      <button id="btnZoomTambah" title="Perbesar">+</button>
+    </span>
+  </div>
+  <div id="badanBuku">
+    <canvas id="kanvasBuku"></canvas>
+    <div id="muatBuku" hidden>⏳ Memuat halaman…</div>
+  </div>
+  <div id="kakiBuku">
+    <button class="btn" id="btnHalSebelum">‹ Sebelumnya</button>
+    <span id="infoHalaman">Halaman –</span>
+    <button class="btn" id="btnHalBerikut">Berikutnya ›</button>
+  </div>
+</div>
 
 <div id="jendelaApung" hidden>
   <div id="kepalaApung">
@@ -2328,6 +2366,7 @@ function parseModul(teks) {
   return { soal: soal, kunciKetemu: kunciUrut.length };
 }
 function gambarModul() {
+  segarkanStatusBuku();
   var wadah = document.getElementById("wadahModul");
   if (!wadah) return;
   wadah.innerHTML = "";
@@ -2381,6 +2420,8 @@ document.getElementById("inputModul").addEventListener("change", function () {
   var st = document.getElementById("statusModul");
   var batang = document.getElementById("batangModul"), bungkus = document.getElementById("batangModulBungkus");
   bungkus.hidden = false; batang.style.width = "2%";
+  bukuDoc = null;
+  idbSimpan("modulPdf", { blob: berkas, nama: berkas.name, tanggal: Date.now() }).then(function () { segarkanStatusBuku(); }).catch(function () {});
   st.textContent = "⏳ Menyiapkan pembaca PDF…";
   bacaPdfSebagaiTeks(berkas, function (no, total) {
     st.textContent = "📖 Membaca modul… halaman " + no + " dari " + total + " (buku besar bisa ±1 menit)";
@@ -2404,6 +2445,124 @@ document.getElementById("inputModul").addEventListener("change", function () {
     bungkus.hidden = true;
   });
 });
+
+/* ================= BUKU MODUL (PENAMPIL E-BOOK) ================= */
+var bukuDoc = null, bukuHal = 1, bukuZoom = 1, bukuRenderKe = 0;
+function idbBuka() {
+  return new Promise(function (res, rej) {
+    var rq = indexedDB.open("prataBuku", 1);
+    rq.onupgradeneeded = function () { rq.result.createObjectStore("berkas"); };
+    rq.onsuccess = function () { res(rq.result); };
+    rq.onerror = function () { rej(rq.error); };
+  });
+}
+function idbSimpan(kunci, nilai) {
+  return idbBuka().then(function (db) {
+    return new Promise(function (res, rej) {
+      var tx = db.transaction("berkas", "readwrite");
+      tx.objectStore("berkas").put(nilai, kunci);
+      tx.oncomplete = function () { res(); };
+      tx.onerror = function () { rej(tx.error); };
+    });
+  });
+}
+function idbAmbil(kunci) {
+  return idbBuka().then(function (db) {
+    return new Promise(function (res, rej) {
+      var rq = db.transaction("berkas", "readonly").objectStore("berkas").get(kunci);
+      rq.onsuccess = function () { res(rq.result || null); };
+      rq.onerror = function () { rej(rq.error); };
+    });
+  });
+}
+function segarkanStatusBuku() {
+  var st = document.getElementById("statusBuku");
+  if (!st) return;
+  idbAmbil("modulPdf").then(function (rec) {
+    st.textContent = (rec && rec.blob)
+      ? "Buku tersimpan di perangkat ini: " + (rec.nama || "modul.pdf") + " — ketuk tombol di atas untuk membacanya."
+      : "Belum ada buku tersimpan di perangkat ini. Pilih berkas PDF modul lewat tombol di atas — bukunya otomatis tersimpan di sini untuk dibaca.";
+  }).catch(function () {});
+}
+document.getElementById("btnBukaBuku").addEventListener("click", function () {
+  var st = document.getElementById("statusBuku");
+  idbAmbil("modulPdf").then(function (rec) {
+    if (!rec || !rec.blob) { st.textContent = "Buku belum tersimpan di perangkat ini — pilih berkas PDF modulnya sekali lewat tombol “Pilih Berkas PDF Modul” di atas."; return; }
+    document.getElementById("penampilBuku").hidden = false;
+    document.getElementById("judulBuku").textContent = "📚 " + (rec.nama || "Buku Modul").replace(/\.pdf$/i, "");
+    var muat = document.getElementById("muatBuku");
+    muat.hidden = false; muat.textContent = "⏳ Memuat buku…";
+    muatPdfJs().then(function () { return rec.blob.arrayBuffer(); })
+      .then(function (buf) { return window.pdfjsLib.getDocument({ data: buf }).promise; })
+      .then(function (doc) {
+        bukuDoc = doc;
+        var terakhir = ambilJSON("prata_buku_halaman", 1);
+        bukuHal = Math.min(Math.max(1, terakhir || 1), doc.numPages);
+        bukuZoom = 1;
+        gambarHalamanBuku();
+      })
+      .catch(function () { muat.textContent = "😕 Buku gagal dibuka. Coba pilih ulang berkasnya."; });
+  }).catch(function () {});
+});
+function gambarHalamanBuku() {
+  if (!bukuDoc) return;
+  var ke = ++bukuRenderKe;
+  var muat = document.getElementById("muatBuku");
+  muat.hidden = false; muat.textContent = "⏳ Memuat halaman…";
+  bukuDoc.getPage(bukuHal).then(function (page) {
+    if (ke !== bukuRenderKe) return null;
+    var badan = document.getElementById("badanBuku");
+    var lebarTersedia = Math.max(280, badan.clientWidth - 20);
+    var dasar = page.getViewport({ scale: 1 });
+    var skalaFit = lebarTersedia / dasar.width;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var vp = page.getViewport({ scale: skalaFit * bukuZoom * dpr });
+    var kanvas = document.getElementById("kanvasBuku");
+    kanvas.width = vp.width; kanvas.height = vp.height;
+    kanvas.style.width = (vp.width / dpr) + "px"; kanvas.style.height = (vp.height / dpr) + "px";
+    return page.render({ canvasContext: kanvas.getContext("2d"), viewport: vp }).promise;
+  }).then(function () {
+    if (ke !== bukuRenderKe) return;
+    muat.hidden = true;
+    document.getElementById("infoHalaman").textContent = "Halaman " + bukuHal + " dari " + bukuDoc.numPages;
+    document.getElementById("btnHalSebelum").disabled = bukuHal <= 1;
+    document.getElementById("btnHalBerikut").disabled = bukuHal >= bukuDoc.numPages;
+    try { localStorage.setItem("prata_buku_halaman", JSON.stringify(bukuHal)); } catch (e) {}
+    document.getElementById("badanBuku").scrollTop = 0;
+  }).catch(function () {
+    if (ke === bukuRenderKe) muat.textContent = "😕 Halaman gagal dimuat.";
+  });
+}
+function bukuGeser(delta) {
+  if (!bukuDoc) return;
+  var t = bukuHal + delta;
+  if (t < 1 || t > bukuDoc.numPages) return;
+  bukuHal = t;
+  gambarHalamanBuku();
+}
+document.getElementById("btnHalSebelum").addEventListener("click", function () { bukuGeser(-1); });
+document.getElementById("btnHalBerikut").addEventListener("click", function () { bukuGeser(1); });
+document.getElementById("btnTutupBuku").addEventListener("click", function () { document.getElementById("penampilBuku").hidden = true; });
+document.getElementById("btnZoomTambah").addEventListener("click", function () { bukuZoom = Math.min(3, Math.round((bukuZoom + 0.25) * 100) / 100); gambarHalamanBuku(); });
+document.getElementById("btnZoomKurang").addEventListener("click", function () { bukuZoom = Math.max(0.5, Math.round((bukuZoom - 0.25) * 100) / 100); gambarHalamanBuku(); });
+(function pasangGeserBuku() {
+  var badan = document.getElementById("badanBuku");
+  var awalX = null, awalY = null;
+  badan.addEventListener("touchstart", function (e) {
+    if (e.touches.length === 1) { awalX = e.touches[0].clientX; awalY = e.touches[0].clientY; }
+  }, { passive: true });
+  badan.addEventListener("touchend", function (e) {
+    if (awalX === null) return;
+    var dx = e.changedTouches[0].clientX - awalX, dy = e.changedTouches[0].clientY - awalY;
+    awalX = null;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.4) bukuGeser(dx < 0 ? 1 : -1);
+  }, { passive: true });
+  document.addEventListener("keydown", function (e) {
+    if (document.getElementById("penampilBuku").hidden) return;
+    if (e.key === "ArrowRight") bukuGeser(1);
+    if (e.key === "ArrowLeft") bukuGeser(-1);
+  });
+})();
 
 /* ================= MULAI ================= */
 (function mulai() {
