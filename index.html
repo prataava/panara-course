@@ -24,18 +24,18 @@
 <style>
   :root{
     --laut:#16305c; --laut2:#1d3565; --laut3:#0d1930; --laut-dalam:#12264a;
-    --emas:#c08c2d; --emas2:var(--emas2);
-    --kertas:#f6f5f1; --kartu:var(--putih);
+    --emas:#c08c2d; --emas2:#d9a94f;
+    --kertas:#f6f5f1; --kartu:#ffffff;
     --tinta:#1b2230; --redup:#626b7a;
     --garis:#e3e1d8; --baik:#1d7a4f; --buruk:#b3402e;
     --radius:14px;
-    --putih:var(--putih); --tint-laut:var(--tint-laut); --tint-pilih:var(--tint-laut); --tint-emas:#fdf6e7; --teks-di-emas:var(--teks-di-emas);
+    --putih:#ffffff; --tint-laut:#edf1f8; --tint-pilih:#edf1f8; --tint-emas:#fdf6e7; --teks-di-emas:#221806;
     --emas-teks:#96690f; --tint-baik:#e9f6ef; --garis-baik:#cfe6d8; --teks-baik:#173d2a;
     --tint-buruk:#fdeeea; --garis-buruk:#f0c4ba; --isi-gelap:#232a38; --isi-gelap-2:#2c3547;
     --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px; --sp-6:32px;
     --r-kecil:10px; --r-besar:18px;
     --bayang-1:0 1px 2px rgba(20,38,76,.05); --bayang-2:0 10px 26px rgba(13,25,48,.16);
-    --teks-terang:#cfe0ff; --garis-hp:var(--garis-hp); --dur-cepat:150ms; --dur:250ms; --dur-masuk:450ms; --ease-keluar:cubic-bezier(0.22,1,0.36,1);
+    --teks-terang:#cfe0ff; --garis-hp:#26355a; --garis-info:#cfddf5; --teks-info:#274069; --latar-chip:#f0ecdf; --latar-sel:#faf8f2; --latar-track:#ece8db; --garis-konsol-gelap:#3a4a6b; --buku-latar:#10151d; --buku-panel:#141b28; --buku-alat:#1a2436; --buku-input:#1d2739; --buku-garis:#33415e; --buku-garis-2:#26314a; --latar-selubung-gelap:#171c26; --garis-lembut-gelap:#2c4470; --teks-tersimpan:#8fd6a8; --dur-cepat:150ms; --dur:250ms; --dur-masuk:450ms; --ease-keluar:cubic-bezier(0.22,1,0.36,1);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -1209,6 +1209,9 @@ function sinkronSekarang() {
   };
   kirim(false);
 }
+document.addEventListener("visibilitychange", function () {
+  if (document.hidden && timerSinkron) { clearTimeout(timerSinkron); timerSinkron = null; sinkronSekarang(); }
+});
 window.addEventListener("pagehide", function () {
   if (!timerSinkron) return;
   clearTimeout(timerSinkron); timerSinkron = null;
