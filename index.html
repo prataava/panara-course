@@ -683,6 +683,11 @@
         <span class="nm">Rumus Cepat &amp; Trik</span>
         <span class="ds">Rumus inti TIU + cara mengerjakan soal dengan cepat per mapel — lengkap dengan contoh yang dikerjakan langkah demi langkah.</span>
       </button>
+      <button class="menu-item" data-pergi="kosakata">
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"/><path d="M4 12h10"/><path d="M4 19h13"/></svg></span>
+        <span class="nm">Pusat Kosakata</span>
+        <span class="ds">Kosakata baku yang paling sering keluar di TIU verbal — arti, sinonim, dan antonim, plus mode kartu hafalan.</span>
+      </button>
       <button class="menu-item" data-pergi="ceklist">
         <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.5 12.3l2.4 2.4 4.6-5.2"/></svg></span>
         <span class="nm">Checklist Tugas</span>
@@ -931,6 +936,35 @@
       <p class="sub" style="margin-top:8px;">Setiap kartu: rumus inti + satu contoh yang dikerjakan dengan cara cepat. Rumusnya dihafalkan, tekniknya dilatih di menu Latihan.</p>
     </div>
     <div id="daftarRumus"></div>
+  </section>
+
+  <section class="tampilan" id="view-kosakata" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">&larr; Beranda</button>
+      <span class="info-kuis">Pusat Kosakata (TIU Verbal)</span>
+    </div>
+    <div class="kartu" style="margin-bottom:12px;">
+      <input type="search" id="cariKata" placeholder="Cari kata, arti, sinonim, antonim&hellip;" style="width:100%;">
+      <div class="segmen" id="segmenKata" style="margin-top:10px;">
+        <button data-modekata="daftar" class="aktif">Daftar Kata</button>
+        <button data-modekata="kartu">Kartu Hafalan</button>
+      </div>
+      <p class="sub" style="margin-top:8px;" id="ringkasKata"></p>
+    </div>
+    <div id="daftarKata"></div>
+    <div id="bungkusKartuKata" hidden>
+      <div class="kartu" style="text-align:center; padding:26px 18px;">
+        <div id="kataBesar" style="font-size:26px; font-weight:800; letter-spacing:.3px;"></div>
+        <div id="kataArti" style="margin-top:12px;" hidden></div>
+        <button class="btn garis" id="btnBalikKata" style="margin-top:16px;">Lihat Arti</button>
+      </div>
+      <div style="display:flex; gap:9px;">
+        <button class="btn garis" id="btnKataSebelum" style="flex:1;">&larr; Sebelumnya</button>
+        <button class="btn garis" id="btnKataAcak" style="flex:1;">Acak</button>
+        <button class="btn garis" id="btnKataBerikut" style="flex:1;">Berikutnya &rarr;</button>
+      </div>
+      <p class="sub" id="posisiKata" style="text-align:center; margin-top:9px;"></p>
+    </div>
   </section>
 
   <!-- ======== RIWAYAT ======== -->
@@ -1741,7 +1775,7 @@ window.addEventListener("scroll", function () {
 }, { passive: true });
 
 /* ================= NAVIGASI ================= */
-var SEMUA_TAMPILAN = ["login","daftar","sandi-baru","beranda","latihan","kuis","hasil","ai","ceklist","materi","materi-detail","riwayat","bantuan","daftarsoal","portal","flashcard","info","modul","rumus"];
+var SEMUA_TAMPILAN = ["login","daftar","sandi-baru","beranda","latihan","kuis","hasil","ai","ceklist","materi","materi-detail","riwayat","bantuan","daftarsoal","portal","flashcard","info","modul","rumus","kosakata"];
 function tampil(nama) {
   SEMUA_TAMPILAN.forEach(function (v) {
     var el = document.getElementById("view-" + v);
@@ -1763,6 +1797,7 @@ function tampil(nama) {
   if (nama === "daftarsoal") gambarDaftarSoal();
   if (nama === "materi") gambarMateri();
   if (nama === "rumus") gambarRumus();
+  if (nama === "kosakata") gambarKosakata();
   if (nama === "riwayat") gambarRiwayat();
   if (nama === "ai") gambarChat();
   if (nama === "modul") gambarModul();
@@ -1828,6 +1863,171 @@ document.getElementById("segmenRumus").addEventListener("click", function (e) {
   filterRumus = b.getAttribute("data-rumus");
   document.querySelectorAll("#segmenRumus button").forEach(function (x) { x.classList.toggle("aktif", x === b); });
   gambarRumus();
+});
+var KOSAKATA = [
+  { k: "Absolut", a: "Mutlak; tidak terbatas oleh apa pun.", l: "Relatif" },
+  { k: "Abstrak", a: "Tidak berwujud; tidak dapat dilihat atau diraba.", l: "Konkret" },
+  { k: "Adekuat", a: "Memadai; cukup memenuhi syarat.", s: "Memadai" },
+  { k: "Ambigu", a: "Bermakna lebih dari satu; mendua maknanya.", s: "Bermakna ganda" },
+  { k: "Anomali", a: "Penyimpangan dari keadaan yang normal.", s: "Kejanggalan" },
+  { k: "Antagonis", a: "Tokoh yang menentang tokoh utama; bersifat melawan.", l: "Protagonis" },
+  { k: "Antipati", a: "Rasa tidak suka atau benci terhadap sesuatu.", l: "Simpati" },
+  { k: "Apatis", a: "Tidak peduli; masa bodoh.", l: "Peduli" },
+  { k: "Autentik", a: "Asli; dapat dipercaya keasliannya.", s: "Otentik, asli", l: "Palsu" },
+  { k: "Banal", a: "Biasa saja; tidak istimewa; klise." },
+  { k: "Barbar", a: "Tidak beradab; biadab.", l: "Beradab" },
+  { k: "Cendekia", a: "Terpelajar; intelektual.", s: "Terpelajar" },
+  { k: "Dedikasi", a: "Pengabdian yang sungguh-sungguh.", s: "Pengabdian" },
+  { k: "Definitif", a: "Pasti dan tidak berubah lagi.", l: "Sementara" },
+  { k: "De facto", a: "Berdasarkan kenyataan yang sebenarnya terjadi." },
+  { k: "De jure", a: "Berdasarkan hukum yang berlaku." },
+  { k: "Destruktif", a: "Bersifat merusak.", l: "Konstruktif" },
+  { k: "Dinamis", a: "Bergerak aktif dan berubah.", l: "Statis" },
+  { k: "Disparitas", a: "Perbedaan atau kesenjangan yang mencolok.", s: "Kesenjangan" },
+  { k: "Domestik", a: "Berhubungan dengan dalam negeri.", l: "Luar negeri" },
+  { k: "Efektif", a: "Berhasil guna; mencapai hasil yang diharapkan." },
+  { k: "Efisien", a: "Berdaya guna; tepat dan hemat dalam cara kerja." },
+  { k: "Egois", a: "Mementingkan diri sendiri.", l: "Altruistis" },
+  { k: "Eksklusif", a: "Khusus; terbatas untuk kalangan tertentu.", l: "Inklusif" },
+  { k: "Eksplisit", a: "Dinyatakan dengan tegas dan jelas.", l: "Implisit" },
+  { k: "Elastis", a: "Mudah berubah bentuk dan kembali seperti semula; lentur.", l: "Kaku" },
+  { k: "Empati", a: "Kemampuan memahami dan merasakan perasaan orang lain." },
+  { k: "Faktual", a: "Berdasarkan fakta atau kenyataan.", l: "Fiktif" },
+  { k: "Fleksibel", a: "Mudah menyesuaikan diri.", l: "Kaku" },
+  { k: "Generik", a: "Bersifat umum.", l: "Spesifik" },
+  { k: "Heterogen", a: "Terdiri dari bermacam-macam unsur.", l: "Homogen" },
+  { k: "Hipotesis", a: "Dugaan sementara yang masih harus dibuktikan." },
+  { k: "Identik", a: "Sama persis.", l: "Berbeda" },
+  { k: "Imigrasi", a: "Masuknya penduduk ke suatu negara untuk menetap.", l: "Emigrasi" },
+  { k: "Emigrasi", a: "Keluarnya penduduk dari suatu negara untuk menetap di negara lain.", l: "Imigrasi" },
+  { k: "Implisit", a: "Tersirat; tidak dinyatakan secara langsung.", l: "Eksplisit" },
+  { k: "Inkonsisten", a: "Tidak tetap; berubah-ubah.", l: "Konsisten" },
+  { k: "Integritas", a: "Kejujuran dan keteguhan memegang prinsip moral." },
+  { k: "Interpretasi", a: "Pemberian kesan, pendapat, atau pandangan terhadap sesuatu; penafsiran.", s: "Penafsiran" },
+  { k: "Kronis", a: "Berlangsung lama atau menahun (tentang penyakit).", l: "Akut" },
+  { k: "Akut", a: "Timbul mendadak dan cepat memburuk (tentang penyakit); tajam.", l: "Kronis" },
+  { k: "Kualitatif", a: "Berhubungan dengan mutu atau kualitas.", l: "Kuantitatif" },
+  { k: "Kuantitatif", a: "Berhubungan dengan jumlah atau bilangan.", l: "Kualitatif" },
+  { k: "Legal", a: "Sah menurut hukum.", l: "Ilegal" },
+  { k: "Logis", a: "Sesuai dengan logika; masuk akal.", l: "Irasional" },
+  { k: "Loyal", a: "Setia.", l: "Khianat" },
+  { k: "Mandiri", a: "Berdiri sendiri; tidak bergantung pada orang lain.", l: "Bergantung" },
+  { k: "Mayoritas", a: "Jumlah yang terbanyak.", l: "Minoritas" },
+  { k: "Minoritas", a: "Jumlah yang lebih sedikit.", l: "Mayoritas" },
+  { k: "Netral", a: "Tidak memihak ke mana pun.", l: "Berpihak" },
+  { k: "Objektif", a: "Berdasarkan keadaan sebenarnya, tidak dipengaruhi pendapat pribadi.", l: "Subjektif" },
+  { k: "Subjektif", a: "Berdasarkan pandangan atau perasaan pribadi.", l: "Objektif" },
+  { k: "Optimis", a: "Berpengharapan baik; yakin akan hasil yang baik.", l: "Pesimis" },
+  { k: "Pesimis", a: "Berpengharapan buruk; tidak yakin akan berhasil.", l: "Optimis" },
+  { k: "Orisinal", a: "Asli; bukan tiruan.", s: "Asli", l: "Tiruan" },
+  { k: "Permanen", a: "Tetap; tidak berubah.", l: "Sementara" },
+  { k: "Plural", a: "Jamak; lebih dari satu.", l: "Tunggal" },
+  { k: "Prakarsa", a: "Upaya atau tindakan yang pertama; inisiatif.", s: "Inisiatif" },
+  { k: "Premis", a: "Hal yang dianggap benar sebagai dasar penarikan kesimpulan." },
+  { k: "Proaktif", a: "Bertindak lebih dahulu sebelum sesuatu terjadi.", l: "Reaktif" },
+  { k: "Reaktif", a: "Bertindak hanya setelah ada rangsangan atau kejadian.", l: "Proaktif" },
+  { k: "Proporsional", a: "Sebanding; seimbang dengan bagian yang lain.", s: "Sebanding" },
+  { k: "Radikal", a: "Secara mendasar sampai ke akar-akarnya." },
+  { k: "Rasional", a: "Menurut akal sehat; masuk akal.", l: "Irasional" },
+  { k: "Relatif", a: "Bergantung pada hal lain; nisbi.", l: "Absolut" },
+  { k: "Relevan", a: "Berkaitan erat dengan hal yang dibicarakan.", s: "Berkaitan" },
+  { k: "Surplus", a: "Jumlah yang berlebih.", l: "Defisit" },
+  { k: "Defisit", a: "Kekurangan, terutama dalam anggaran.", l: "Surplus" },
+  { k: "Stabil", a: "Mantap; tidak goyah.", l: "Labil" },
+  { k: "Labil", a: "Mudah berubah; tidak tetap.", l: "Stabil" },
+  { k: "Teoretis", a: "Berdasarkan teori.", l: "Praktis" },
+  { k: "Universal", a: "Berlaku untuk semua; umum di seluruh dunia.", l: "Khusus" },
+  { k: "Verbal", a: "Dinyatakan dengan kata-kata atau secara lisan.", l: "Nonverbal" },
+  { k: "Virtual", a: "Menyerupai nyata; hadir lewat media digital (maya).", l: "Nyata" },
+  { k: "Vital", a: "Sangat penting bagi kehidupan atau keberlangsungan.", s: "Sangat penting" },
+  { k: "Konotasi", a: "Makna tambahan yang menyertai makna dasar kata; makna kiasan.", l: "Denotasi" },
+  { k: "Denotasi", a: "Makna kata yang sebenarnya, sesuai konsepnya.", l: "Konotasi" },
+  { k: "Silogisme", a: "Cara menarik kesimpulan secara logis dari dua pernyataan (premis)." },
+  { k: "Simpati", a: "Rasa iba atau tertarik pada keadaan orang lain.", l: "Antipati" },
+  { k: "Sporadis", a: "Kadang-kadang; tidak teratur; tersebar." },
+  { k: "Stagnan", a: "Terhenti; tidak bergerak atau berkembang." }
+];
+var modeKata = "daftar", idxKata = 0, kataTerbalik = false;
+function kataTersaring() {
+  var el = document.getElementById("cariKata");
+  var kata = el ? (el.value || "").toLowerCase() : "";
+  if (!kata) return KOSAKATA;
+  return KOSAKATA.filter(function (x) {
+    return (x.k + " " + x.a + " " + (x.s || "") + " " + (x.l || "")).toLowerCase().indexOf(kata) >= 0;
+  });
+}
+function gambarKosakata() {
+  var daftar = kataTersaring();
+  var ringkas = document.getElementById("ringkasKata");
+  if (ringkas) ringkas.textContent = "Menampilkan " + daftar.length + " dari " + KOSAKATA.length + " kata terkurasi — kata-kata baku yang paling sering muncul di soal TIU verbal. Arti mengikuti makna baku (KBBI).";
+  var modeKartu = modeKata === "kartu";
+  document.getElementById("daftarKata").hidden = modeKartu;
+  document.getElementById("bungkusKartuKata").hidden = !modeKartu;
+  if (modeKartu) { gambarKartuKata(daftar); return; }
+  var wadah = document.getElementById("daftarKata");
+  wadah.innerHTML = "";
+  if (!daftar.length) {
+    wadah.innerHTML = "<div class='kartu kosong'>Tidak ada kata yang cocok — coba kata kunci lain, misalnya stabil atau optimis.</div>";
+    return;
+  }
+  daftar.forEach(function (x) {
+    var k = document.createElement("div"); k.className = "kartu"; k.style.marginBottom = "10px";
+    var judul = document.createElement("div");
+    judul.innerHTML = "<b style='font-size:16px;'>" + x.k + "</b>";
+    var arti = document.createElement("p"); arti.className = "sub"; arti.style.marginTop = "3px"; arti.textContent = x.a;
+    k.appendChild(judul); k.appendChild(arti);
+    var chip = document.createElement("p"); chip.style.marginTop = "7px"; chip.style.fontSize = "13px";
+    var bagian = [];
+    if (x.s) bagian.push("≈ Sinonim: <b>" + x.s + "</b>");
+    if (x.l) bagian.push("≠ Antonim: <b>" + x.l + "</b>");
+    chip.innerHTML = bagian.join(" &nbsp;•&nbsp; ");
+    if (bagian.length) k.appendChild(chip);
+    wadah.appendChild(k);
+  });
+}
+function gambarKartuKata(daftar) {
+  daftar = daftar || kataTersaring();
+  var besar = document.getElementById("kataBesar"), arti = document.getElementById("kataArti"), posisi = document.getElementById("posisiKata");
+  if (!daftar.length) {
+    besar.textContent = "Tidak ada kata";
+    arti.hidden = true;
+    posisi.textContent = "";
+    return;
+  }
+  if (idxKata >= daftar.length) idxKata = 0;
+  var x = daftar[idxKata];
+  besar.textContent = x.k;
+  var isi = x.a;
+  if (x.s) isi += " ≈ Sinonim: " + x.s + ".";
+  if (x.l) isi += " ≠ Antonim: " + x.l + ".";
+  arti.textContent = isi;
+  arti.hidden = !kataTerbalik;
+  document.getElementById("btnBalikKata").textContent = kataTerbalik ? "Sembunyikan Arti" : "Lihat Arti";
+  posisi.textContent = "Kata " + (idxKata + 1) + " dari " + daftar.length;
+}
+document.getElementById("cariKata").addEventListener("input", function () { idxKata = 0; kataTerbalik = false; gambarKosakata(); });
+document.getElementById("segmenKata").addEventListener("click", function (e) {
+  var b = e.target.closest("[data-modekata]");
+  if (!b) return;
+  modeKata = b.getAttribute("data-modekata");
+  kataTerbalik = false;
+  document.querySelectorAll("#segmenKata button").forEach(function (x) { x.classList.toggle("aktif", x === b); });
+  gambarKosakata();
+});
+document.getElementById("btnBalikKata").addEventListener("click", function () { kataTerbalik = !kataTerbalik; gambarKartuKata(); });
+document.getElementById("btnKataSebelum").addEventListener("click", function () {
+  var daftar = kataTersaring(); if (!daftar.length) return;
+  idxKata = (idxKata - 1 + daftar.length) % daftar.length; kataTerbalik = false; gambarKartuKata(daftar);
+});
+document.getElementById("btnKataBerikut").addEventListener("click", function () {
+  var daftar = kataTersaring(); if (!daftar.length) return;
+  idxKata = (idxKata + 1) % daftar.length; kataTerbalik = false; gambarKartuKata(daftar);
+});
+document.getElementById("btnKataAcak").addEventListener("click", function () {
+  var daftar = kataTersaring(); if (daftar.length < 2) return;
+  var baru = idxKata;
+  while (baru === idxKata) baru = Math.floor(Math.random() * daftar.length);
+  idxKata = baru; kataTerbalik = false; gambarKartuKata(daftar);
 });
 function pergi(nama) {
   if (!sesiUser && nama !== "login" && nama !== "daftar") { tampil("login"); return; }
@@ -4278,7 +4478,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v351";
+var VERSI_APP = "prata-v36";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
