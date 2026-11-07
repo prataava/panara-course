@@ -1878,8 +1878,12 @@ document.getElementById("keLupa").addEventListener("click", function () {
   sbAuth("/auth/v1/recover?redirect_to=" + encodeURIComponent("https://prataava.github.io/panara-course/"), { email: email }).then(function (res) {
     if (res.ok) {
       info.textContent = "Tautan atur ulang sudah diminta untuk " + email + ". Periksa kotak masuk (dan folder spam) email itu, lalu ketuk tautannya — kamu akan dibawa kembali ke PRATA untuk membuat kata sandi baru. Bila email tidak kunjung tiba setelah beberapa menit, coba lagi nanti; pengiriman email diatur oleh server dan kadang butuh waktu.";
+    } else if (res.body && (res.body.error_code === "email_address_invalid" || /invalid/i.test(res.body.msg || ""))) {
+      info.textContent = "Server menolak alamat email ini sebagai tidak valid, jadi tautan tidak dapat dikirim ke alamat tersebut. Gunakan alamat email yang benar-benar aktif (misalnya Gmail) — akun dengan alamat email aktif tidak mengalami masalah ini.";
+    } else if (res.status === 429) {
+      info.textContent = "Terlalu banyak permintaan email dalam waktu singkat — tunggu beberapa menit lalu coba lagi. Ini batas keamanan dari server email.";
     } else {
-      info.textContent = "Permintaan belum terkirim (server menjawab " + res.status + "). Tunggu sebentar lalu coba lagi — permintaan atur ulang dibatasi frekuensinya demi keamanan.";
+      info.textContent = "Permintaan belum terkirim (server menjawab " + res.status + "). Tunggu sebentar lalu coba lagi.";
     }
   }).catch(function () {
     info.textContent = "Tidak bisa menghubungi server. Periksa koneksi internetmu lalu coba lagi.";
@@ -4274,7 +4278,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v35";
+var VERSI_APP = "prata-v351";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
