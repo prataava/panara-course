@@ -673,6 +673,11 @@
       <button class="btn laut lebar" data-mulai-latihan="TIU" style="margin-bottom:9px;">TIU — Tes Intelegensia Umum (24 soal)</button>
       <button class="btn laut lebar" data-mulai-latihan="TKP">TKP — Tes Karakteristik Pribadi (24 soal)</button>
     </div>
+    <div class="kartu" id="kartuSalah">
+      <h2 class="judul-bagian">Ulangi Kesalahan — Kotak Leitner</h2>
+      <p class="sub" id="teksSalah" style="margin-bottom:11px;">Soal yang pernah kamu jawab salah tersimpan di sini dan muncul lagi terjadwal: kotak 1 besok, lalu 2, 4, sampai 7 hari. Menjawab benar menaikkan kotak; lulus kotak 5 berarti soal itu tuntas.</p>
+      <button class="btn emas lebar" id="btnUlangiSalah" hidden>Mulai Ulangi Kesalahan</button>
+    </div>
     <div class="kartu">
       <h2 class="judul-bagian">Simulasi Mini SKD</h2>
       <p class="sub" style="margin-bottom:13px;">36 soal campuran (TWK + TIU + TKP) tanpa pembahasan di tengah — pembahasan dibuka di akhir, dinilai per kategori seperti SKD sungguhan.</p>
@@ -993,6 +998,7 @@
     <div class="segmen" id="segmenFlash">
       <button data-flash="soal" class="aktif">Dari Bank Soal</button>
       <button data-flash="tanda">★ Soal Ditandai</button>
+      <button data-flash="leitner">Kotak Leitner</button>
     </div>
     <button class="flashcard" id="kartuFlash">
       <span class="petunjuk" id="flashPetunjuk">KETUK KARTU UNTUK MELIHAT JAWABAN</span>
@@ -1005,7 +1011,11 @@
       <button class="btn" id="btnFlashAcak">Acak</button>
       <button class="btn emas" id="btnFlashLanjut">Berikutnya →</button>
     </div>
-    <p class="sub" style="margin-top:11px;">Tandai soal dengan ★ di Daftar Soal untuk membuat set flashcard khusus dari soal-soal yang kamu anggap penting/sulit.</p>
+    <div class="nav-kuis" id="barNilaiFlash" hidden style="margin-top:9px;">
+      <button class="btn" id="btnFlashBelum">✖ Belum Hafal</button>
+      <button class="btn emas" id="btnFlashHafal">✔ Sudah Hafal</button>
+    </div>
+    <p class="sub" style="margin-top:11px;">Tandai soal dengan ★ di Daftar Soal untuk membuat set flashcard khusus dari soal-soal yang kamu anggap penting/sulit. Sumber Kotak Leitner berisi soal-soal yang pernah kamu jawab salah dan sudah jatuh tempo — nilai dirimu sesudah melihat jawaban agar kotaknya bergerak.</p>
   </section>
 
   <!-- ======== INFO & JADWAL ======== -->
@@ -1280,7 +1290,7 @@ function sbTerapkanSesi(j) {
   sbSimpanSesi();
 }
 function dataBawaan() {
-  return { tugas: TUGAS_BAWAAN.map(function (t) { return { t: t.t, selesai: false, sumber: t.sumber }; }), riwayat: [], riwayatDetail: [], chat: [], tanda: {}, target: { nama: "", tgl: "" }, modul: null };
+  return { tugas: TUGAS_BAWAAN.map(function (t) { return { t: t.t, selesai: false, sumber: t.sumber }; }), riwayat: [], riwayatDetail: [], chat: [], tanda: {}, kesalahan: {}, target: { nama: "", tgl: "" }, modul: null };
 }
 function dataUser() {
   if (!dataCache) { dataCache = ambilJSON("prata_cache_" + sesiId, null) || dataBawaan(); }
@@ -1289,6 +1299,7 @@ function dataUser() {
   if (!Array.isArray(dataCache.riwayatDetail)) dataCache.riwayatDetail = [];
   if (!Array.isArray(dataCache.chat)) dataCache.chat = [];
   if (!dataCache.tanda) dataCache.tanda = {};
+  if (!dataCache.kesalahan || typeof dataCache.kesalahan !== "object") dataCache.kesalahan = {};
   if (!dataCache.target) dataCache.target = { nama: "", tgl: "" };
   if (dataCache.modul === undefined) dataCache.modul = null;
   return dataCache;
@@ -1384,6 +1395,11 @@ function gabungData(lokal, server, tsLokal, tsServer) {
   Object.keys(server.tanda || {}).forEach(function (k) { tanda[k] = server.tanda[k]; });
   Object.keys(lokal.tanda || {}).forEach(function (k) { if (!(k in tanda) || lokalBaru) tanda[k] = lokal.tanda[k]; });
   hasil.tanda = tanda;
+  // Bank kesalahan (Leitner): gabung per soal; konflik dimenangkan sisi yang lebih baru.
+  var kesalahan = {};
+  Object.keys(server.kesalahan || {}).forEach(function (k) { kesalahan[k] = server.kesalahan[k]; });
+  Object.keys(lokal.kesalahan || {}).forEach(function (k) { if (!(k in kesalahan) || lokalBaru) kesalahan[k] = lokal.kesalahan[k]; });
+  hasil.kesalahan = kesalahan;
   // Tugas: gabung per teks tugas; status selesai dari sisi yang lebih baru.
   var tugas = [], idxT = {};
   (server.tugas || []).forEach(function (t) { idxT[t.t] = tugas.length; tugas.push(Object.assign({}, t)); });
@@ -1460,6 +1476,7 @@ function tampil(nama) {
   if (nama === "beranda") segarkanBeranda();
   if (nama === "ceklist") gambarTugas();
   if (nama === "latihan" || nama === "beranda") cekSesiKuisTersimpan();
+  if (nama === "latihan") segarkanKartuSalah();
   if (nama === "flashcard") gambarFlash();
   if (nama === "info") gambarInfo();
   if (nama === "bantuan") gambarDaftarCepat();
@@ -1852,7 +1869,7 @@ function formatWaktu(detik) {
 }
 function teksInfoKuis() {
   if (!kuis) return "";
-  var dasar = "Soal " + (kuis.posisi + 1) + " dari " + kuis.daftar.length + (kuis.mode === "latihan" ? " — Latihan " + kuis.kat : " — Simulasi Mini");
+  var dasar = "Soal " + (kuis.posisi + 1) + " dari " + kuis.daftar.length + (kuis.mode === "latihan" ? " — " + (kuis.labelKuis || "Latihan " + kuis.kat) : " — Simulasi Mini");
   if (kuis.mode === "simulasi" && typeof kuis.sisaDetik === "number") dasar += " • ⏱ " + formatWaktu(Math.max(0, kuis.sisaDetik));
   return dasar;
 }
@@ -1904,6 +1921,12 @@ function lanjutkanKuisTersimpan() {
   var tersimpan = ambilJSON("panara_kuisberjalan_" + sesiUser, null);
   if (!tersimpan) return;
   tersimpan.tampilSejak = null;
+  if (tersimpan.bankSalah) {
+    var dk = dataUser();
+    var utuhSalah = (tersimpan.kunciDaftar || []).length && tersimpan.kunciDaftar.every(function (k) { return dk.kesalahan && dk.kesalahan[k]; });
+    if (!utuhSalah) { hapusKuisBerjalan(); cekSesiKuisTersimpan(); return; }
+    BANK_AKTIF = tersimpan.kunciDaftar.map(function (k) { return dk.kesalahan[k].soal; });
+  }
   if (tersimpan.bankModul) {
     var dd = dataUser();
     if (!dd.modul || !dd.modul.soal || !dd.modul.soal.length) { hapusKuisBerjalan(); cekSesiKuisTersimpan(); return; }
@@ -1933,6 +1956,38 @@ function acak(arr) {
   for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
   return a;
 }
+function segarkanKartuSalah() {
+  var el = document.getElementById("teksSalah"), btn = document.getElementById("btnUlangiSalah");
+  if (!el || !btn) return;
+  var d = dataUser();
+  var total = Object.keys(d.kesalahan || {}).length;
+  var tempo = daftarSalahJatuhTempo().length;
+  if (!total) {
+    el.textContent = "Belum ada soal salah tercatat. Nanti, soal yang kamu jawab salah saat latihan atau simulasi akan masuk ke sini dan muncul lagi terjadwal (kotak 1 besok, lalu 2, 4, sampai 7 hari) sampai kamu benar-benar menguasainya.";
+    btn.hidden = true;
+    return;
+  }
+  if (!tempo) {
+    var berikut = Math.min.apply(null, Object.keys(d.kesalahan).map(function (k) { return d.kesalahan[k].jatuh || 0; }));
+    el.textContent = "Bagus — tidak ada yang jatuh tempo sekarang. Bank kesalahanmu berisi " + total + " soal; pengulangan berikutnya " + new Date(berikut).toLocaleDateString("id-ID", { day: "numeric", month: "short" }) + ".";
+    btn.hidden = true;
+    return;
+  }
+  el.textContent = "Ada " + tempo + " soal jatuh tempo untuk diulang (dari " + total + " soal di bank kesalahanmu). Mengulang soal salah terjadwal jauh lebih menempel daripada mengulang semuanya.";
+  btn.textContent = "Mulai Ulangi Kesalahan (" + tempo + " soal)";
+  btn.hidden = false;
+}
+function mulaiUlangiSalah() {
+  var kunci = daftarSalahJatuhTempo();
+  if (!kunci.length) return;
+  var d = dataUser();
+  BANK_AKTIF = kunci.map(function (k) { return d.kesalahan[k].soal; });
+  berhentiTimerKuis();
+  kuis = { mode: "latihan", kat: "Campuran", labelKuis: "Ulangi Kesalahan", bankSalah: true, kunciDaftar: kunci, daftar: kunci.map(function (_, i) { return i; }), posisi: 0, jawaban: {}, sisaDetik: null };
+  tampil("kuis");
+  gambarSoal();
+}
+document.getElementById("btnUlangiSalah").addEventListener("click", mulaiUlangiSalah);
 function mulaiKuis(mode, kat) {
   BANK_AKTIF = SOAL;
   var daftar;
@@ -2048,6 +2103,32 @@ document.getElementById("catatanKuis").addEventListener("change", function () {
   simpanDataUser(dd);
 });
 
+var INTERVAL_KOTAK = [0, 0, 1, 2, 4, 7];
+function catatHasilSoal(d, kunciSoal, snapshot, benar) {
+  if (!d.kesalahan) d.kesalahan = {};
+  var e = d.kesalahan[kunciSoal];
+  var kini = Date.now();
+  if (benar) {
+    if (!e) return;
+    if (e.kotak >= 5) { delete d.kesalahan[kunciSoal]; return; }
+    e.kotak++;
+    e.jatuh = kini + (INTERVAL_KOTAK[e.kotak] || 7) * 86400000;
+    e.terakhir = new Date(kini).toISOString();
+  } else {
+    if (e) { e.kotak = 1; e.salah = (e.salah || 1) + 1; e.jatuh = kini; e.terakhir = new Date(kini).toISOString(); }
+    else d.kesalahan[kunciSoal] = { soal: snapshot, kotak: 1, salah: 1, jatuh: kini, terakhir: new Date(kini).toISOString() };
+  }
+  var semua = Object.keys(d.kesalahan);
+  if (semua.length > 80) {
+    semua.sort(function (a, b) { return d.kesalahan[b].kotak - d.kesalahan[a].kotak || d.kesalahan[a].jatuh - d.kesalahan[b].jatuh; });
+    semua.slice(0, semua.length - 80).forEach(function (k) { delete d.kesalahan[k]; });
+  }
+}
+function daftarSalahJatuhTempo() {
+  var d = dataUser(), kini = Date.now();
+  return Object.keys(d.kesalahan || {}).filter(function (k) { return (d.kesalahan[k].jatuh || 0) <= kini; })
+    .sort(function (a, b) { return d.kesalahan[a].kotak - d.kesalahan[b].kotak || (d.kesalahan[a].jatuh || 0) - (d.kesalahan[b].jatuh || 0); });
+}
 function tutupDurasiKuis() {
   if (!kuis || !kuis.tampilSejak || kuis.posisiTampil === null || kuis.posisiTampil === undefined) return;
   if (!kuis.durasi) kuis.durasi = {};
@@ -2072,11 +2153,17 @@ function selesaiKuis() {
       var benarSoal = false;
       if (s.k === "TKP" && s.s) { pk.poin += s.s[pil]; totalPoin += s.s[pil]; if (s.s[pil] === 5) pk.benar++; benarSoal = s.s[pil] === 5; }
       else if (s.j !== null && s.j !== undefined && pil === s.j) { pk.poin += 5; totalPoin += 5; pk.benar++; benarSoal = true; }
-      var kunciSub = kuis.bankModul ? s.k : (s.k + " — " + (s.m || "Umum"));
+      var kunciSub = (kuis.bankModul || s.asal === "modul") ? s.k : (s.k + " — " + (s.m || "Umum"));
       if (!perSub[kunciSub]) perSub[kunciSub] = { b: 0, t: 0, d: 0 };
       perSub[kunciSub].t++;
       if (benarSoal) perSub[kunciSub].b++;
       perSub[kunciSub].d += (kuis.durasi && kuis.durasi[pos]) || 0;
+      var kunciSoal = kuis.bankSalah ? kuis.kunciDaftar[pos] : (kuis.bankModul ? "M" + idx : "B" + idx);
+      var snapshot = { k: s.k, t: s.t, o: s.o, j: s.j, b: s.b, asal: kuis.bankModul ? "modul" : "bank" };
+      if (s.s) snapshot.s = s.s;
+      if (s.m) snapshot.m = s.m;
+      if (s.g) snapshot.g = s.g;
+      catatHasilSoal(dataUser(), kunciSoal, snapshot, benarSoal);
     }
   });
   var label = kuis.mode === "latihan" ? "Latihan " + (kuis.labelKuis || kuis.kat) : "Simulasi Mini SKD";
@@ -2776,6 +2863,8 @@ function daftarFlash() {
   return SOAL.map(function (s, i) { return i; });
 }
 function gambarFlash() {
+  if (flashSumber === "leitner") { gambarFlashLeitner(); return; }
+  document.getElementById("barNilaiFlash").hidden = true;
   var daftar = daftarFlash();
   var depan = document.getElementById("flashDepan"), jawab = document.getElementById("flashJawab"), info = document.getElementById("infoFlash");
   if (!daftar.length) {
@@ -2795,11 +2884,47 @@ function gambarFlash() {
   jawab.hidden = !flashBalik;
   document.getElementById("flashPetunjuk").textContent = flashBalik ? "JAWABAN" : "KETUK KARTU UNTUK MELIHAT JAWABAN";
 }
+function gambarFlashLeitner() {
+  var d = dataUser();
+  var daftar = daftarSalahJatuhTempo();
+  var depan = document.getElementById("flashDepan"), jawab = document.getElementById("flashJawab"), info = document.getElementById("infoFlash"), fg = document.getElementById("flashGambar");
+  if (!daftar.length) {
+    depan.textContent = "Tidak ada soal salah yang jatuh tempo saat ini. Soal yang kamu jawab salah saat latihan/simulasi masuk ke Kotak Leitner dan akan muncul di sini saat waktunya mengulang.";
+    jawab.hidden = true; fg.hidden = true;
+    info.textContent = "Flashcard Leitner — kosong";
+    document.getElementById("flashPetunjuk").textContent = "KOTAK LEITNER";
+    document.getElementById("barNilaiFlash").hidden = true;
+    return;
+  }
+  if (flashIndeks >= daftar.length) flashIndeks = 0;
+  if (flashIndeks < 0) flashIndeks = daftar.length - 1;
+  var kunci = daftar[flashIndeks], e = d.kesalahan[kunci], s = e.soal;
+  info.textContent = "Leitner " + (flashIndeks + 1) + " dari " + daftar.length + " • " + s.k + " • Kotak " + e.kotak + "/5";
+  if (s.g && !flashBalik) { fg.innerHTML = s.g; fg.hidden = false; } else { fg.innerHTML = ""; fg.hidden = true; }
+  depan.textContent = s.t + "\n\n" + s.o.map(function (o, i) { return "ABCDE"[i] + ". " + o; }).join("\n");
+  jawab.textContent = (s.k === "TKP" ? "Pilihan terbaik: " : "Kunci: ") + "ABCDE"[s.j] + " — " + s.o[s.j] + "\n\n" + (s.b || "");
+  jawab.hidden = !flashBalik;
+  document.getElementById("flashPetunjuk").textContent = flashBalik ? "JAWABAN — NILAI DIRIMU DI BAWAH" : "KETUK KARTU UNTUK MELIHAT JAWABAN";
+  document.getElementById("barNilaiFlash").hidden = !flashBalik;
+}
+function nilaiFlashLeitner(hafal) {
+  var daftar = daftarSalahJatuhTempo();
+  if (!daftar.length) return;
+  var kunci = daftar[Math.min(flashIndeks, daftar.length - 1)];
+  var d = dataUser();
+  if (!d.kesalahan[kunci]) return;
+  catatHasilSoal(d, kunci, d.kesalahan[kunci].soal, hafal);
+  simpanDataUser(d);
+  flashBalik = false;
+  gambarFlash();
+}
+document.getElementById("btnFlashHafal").addEventListener("click", function () { nilaiFlashLeitner(true); });
+document.getElementById("btnFlashBelum").addEventListener("click", function () { nilaiFlashLeitner(false); });
 document.getElementById("kartuFlash").addEventListener("click", function () { flashBalik = !flashBalik; gambarFlash(); });
 document.getElementById("btnFlashLanjut").addEventListener("click", function () { flashIndeks++; flashBalik = false; gambarFlash(); });
 document.getElementById("btnFlashSebelum").addEventListener("click", function () { flashIndeks--; flashBalik = false; gambarFlash(); });
 document.getElementById("btnFlashAcak").addEventListener("click", function () {
-  var daftar = daftarFlash();
+  var daftar = flashSumber === "leitner" ? daftarSalahJatuhTempo() : daftarFlash();
   if (daftar.length) flashIndeks = Math.floor(Math.random() * daftar.length);
   flashBalik = false; gambarFlash();
 });
@@ -2859,7 +2984,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v20";
+var VERSI_APP = "prata-v21";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
