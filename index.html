@@ -1619,19 +1619,20 @@ document.getElementById("inputImpor").addEventListener("change", function () {
     imporKandidat = isiData;
     document.getElementById("ringkasImpor").textContent = "Berkas berisi " + (isiData.riwayat || []).length + " entri riwayat dan " + (isiData.tugas || []).length + " tugas" +
       (isiData.modul ? ", plus modul " + ((isiData.modul.soal || []).length) + " soal" : "") +
-      ". Bagian yang ada di berkas menggantikan bagian yang sama di akun ini; bagian lain tidak berubah.";
+      ". Isi berkas akan DIGABUNGKAN ke progresmu — riwayat, tugas, bintang & catatan disatukan tanpa menghapus yang sudah ada. Target & modul yang sudah terisi di akun ini tidak diganti.";
     document.getElementById("kartuKonfirmasiImpor").hidden = false;
     st.textContent = "";
   }).catch(function () { st.textContent = "Berkas tidak bisa dibaca — impor dibatalkan."; });
 });
 document.getElementById("btnYaImpor").addEventListener("click", function () {
   if (!imporKandidat) return;
-  var d = JSON.parse(JSON.stringify(dataUser()));
-  ["tugas", "riwayat", "chat", "tanda", "target", "modul"].forEach(function (k) { if (imporKandidat[k] !== undefined) d[k] = imporKandidat[k]; });
+  // Impor = gabungkan (memakai mesin gabung yang sama dengan sinkron), bukan menimpa:
+  // memulihkan cadangan tidak boleh menghapus progres yang lebih baru dari cadangan itu.
+  var d = gabungData(JSON.parse(JSON.stringify(dataUser())), imporKandidat, Date.now(), 0);
   imporKandidat = null;
   document.getElementById("kartuKonfirmasiImpor").hidden = true;
   simpanDataUser(d);
-  document.getElementById("statusImpor").textContent = "Impor selesai — progresmu sudah diganti dari berkas dan tersinkron.";
+  document.getElementById("statusImpor").textContent = "Impor selesai — isi berkas sudah digabungkan ke progresmu dan tersinkron.";
   segarkanBeranda();
   gambarRiwayat();
 });
@@ -2767,7 +2768,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v191";
+var VERSI_APP = "prata-v192";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
