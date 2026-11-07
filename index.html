@@ -541,8 +541,26 @@
         <input class="isi" id="liSandi" type="password" autocomplete="current-password" placeholder="Kata sandimu">
         <div class="galat" id="liGalat" hidden></div>
         <button class="btn emas lebar" id="btnMasuk" style="margin-top:16px;">Masuk</button>
+        <p class="ganti-mode" style="margin-top:10px;"><a id="keLupa">Lupa kata sandi?</a></p>
+        <div class="info" id="liInfo" hidden></div>
         <div class="info">Akun PRATA kini ONLINE: masuk dengan email &amp; kata sandi, dan semua progresmu (tugas, skor, bookmark, target, modul) tersimpan di server — bisa dibuka dari perangkat mana pun. Sekali masuk, aplikasi langsung membuka Beranda pada kunjungan berikutnya.</div>
         <p class="ganti-mode">Belum punya akun? <a id="keDaftar">Daftar gratis</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tampilan" id="view-sandi-baru" hidden>
+    <div class="kotak-login">
+      <div class="logo-besar">P</div>
+      <h1>Kata Sandi <span>Baru</span></h1>
+      <p class="tagline">Kamu datang dari tautan atur ulang di email. Buat kata sandi baru untuk akunmu.</p>
+      <div class="kartu">
+        <label class="lbl" for="sbBaru1">Kata sandi baru</label>
+        <input class="isi" id="sbBaru1" type="password" autocomplete="new-password" placeholder="Minimal 6 karakter">
+        <label class="lbl" for="sbBaru2">Ulangi kata sandi baru</label>
+        <input class="isi" id="sbBaru2" type="password" autocomplete="new-password" placeholder="Ketik lagi yang sama">
+        <div class="galat" id="sbGalat" hidden></div>
+        <button class="btn emas lebar" id="btnSimpanSandiBaru" style="margin-top:16px;">Simpan &amp; Masuk</button>
       </div>
     </div>
   </section>
@@ -1171,6 +1189,16 @@
       <div class="sub" style="text-align:center;" id="hitungMundurTeks">Atur targetmu untuk melihat hitung mundur di sini.</div>
     </div>
     <div class="kartu">
+      <h2 class="judul-bagian">Keamanan Akun</h2>
+      <p class="sub" style="margin-bottom:9px;">Ganti kata sandi akunmu di sini. Kamu tetap masuk setelahnya; untuk masuk dari perangkat lain sesudah ini, pakai kata sandi yang baru.</p>
+      <label class="lbl" for="amSandi1">Kata sandi baru</label>
+      <input class="isi" id="amSandi1" type="password" autocomplete="new-password" placeholder="Minimal 6 karakter">
+      <label class="lbl" for="amSandi2" style="margin-top:9px;">Ulangi kata sandi baru</label>
+      <input class="isi" id="amSandi2" type="password" autocomplete="new-password" placeholder="Ketik lagi yang sama">
+      <button class="btn laut lebar" id="btnGantiSandi" style="margin-top:12px;">Ganti Kata Sandi</button>
+      <p class="sub" id="statusGantiSandi" style="margin-top:8px;"></p>
+    </div>
+    <div class="kartu">
       <h2 class="judul-bagian">Konfigurasi Passing Grade</h2>
       <p class="sub" style="margin-bottom:11px;">Satu pengaturan untuk semua penilaian: Kalkulator SKD, verdict Simulasi Penuh, dan catatan kelulusan memakai angka di sini. Sesuaikan bila ketentuan tahun atau jalur seleksimu berbeda.</p>
       <label class="lbl" for="pgTwk">Ambang TWK (dari maks 150)</label>
@@ -1501,6 +1529,15 @@ function sbTerapkanSesi(j) {
   sesiUser = (j.user.user_metadata && j.user.user_metadata.nama) || (j.user.email || "").split("@")[0];
   sbSimpanSesi();
 }
+var tokenPulih = null, refreshPulih = null;
+function sbUbahSandi(token, sandiBaru) {
+  return fetch(SB_URL + "/auth/v1/user", { method: "PUT", headers: { "apikey": SB_KEY, "Content-Type": "application/json", "Authorization": "Bearer " + token }, body: JSON.stringify({ password: sandiBaru }) })
+    .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, status: r.status, body: j }; }); });
+}
+function sbAmbilPengguna(token) {
+  return fetch(SB_URL + "/auth/v1/user", { headers: { "apikey": SB_KEY, "Authorization": "Bearer " + token } })
+    .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, body: j }; }); });
+}
 function dataBawaan() {
   return { tugas: TUGAS_BAWAAN.map(function (t) { return { t: t.t, selesai: false, sumber: t.sumber }; }), riwayat: [], riwayatDetail: [], chat: [], tanda: {}, kesalahan: {}, laporan: [], soalAI: [], tantangan: null, pg: null, statistik: { leitnerTuntas: 0, penuhLulus: false, fokusSesi: 0, fokusMenit: 0, tantanganSelesai: 0 }, target: { nama: "", tgl: "" }, modul: null };
 }
@@ -1704,7 +1741,7 @@ window.addEventListener("scroll", function () {
 }, { passive: true });
 
 /* ================= NAVIGASI ================= */
-var SEMUA_TAMPILAN = ["login","daftar","beranda","latihan","kuis","hasil","ai","ceklist","materi","materi-detail","riwayat","bantuan","daftarsoal","portal","flashcard","info","modul","rumus"];
+var SEMUA_TAMPILAN = ["login","daftar","sandi-baru","beranda","latihan","kuis","hasil","ai","ceklist","materi","materi-detail","riwayat","bantuan","daftarsoal","portal","flashcard","info","modul","rumus"];
 function tampil(nama) {
   SEMUA_TAMPILAN.forEach(function (v) {
     var el = document.getElementById("view-" + v);
@@ -1826,6 +1863,71 @@ document.getElementById("btnMasuk").addEventListener("click", function () {
   }).catch(function () {
     btn.disabled = false; btn.textContent = "Masuk";
     tampilGalat("liGalat", "Tidak bisa menghubungi server. Periksa koneksi internetmu lalu coba lagi.");
+  });
+});
+document.getElementById("keLupa").addEventListener("click", function () {
+  var email = document.getElementById("liEmail").value.trim();
+  var info = document.getElementById("liInfo");
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    tampilGalat("liGalat", "Isi dulu email akunmu di kolom Email di atas, lalu ketuk 'Lupa kata sandi?' sekali lagi.");
+    return;
+  }
+  tampilGalat("liGalat", "");
+  info.hidden = false;
+  info.textContent = "Mengirim tautan atur ulang ke " + email + "…";
+  sbAuth("/auth/v1/recover?redirect_to=" + encodeURIComponent("https://prataava.github.io/panara-course/"), { email: email }).then(function (res) {
+    if (res.ok) {
+      info.textContent = "Tautan atur ulang sudah diminta untuk " + email + ". Periksa kotak masuk (dan folder spam) email itu, lalu ketuk tautannya — kamu akan dibawa kembali ke PRATA untuk membuat kata sandi baru. Bila email tidak kunjung tiba setelah beberapa menit, coba lagi nanti; pengiriman email diatur oleh server dan kadang butuh waktu.";
+    } else {
+      info.textContent = "Permintaan belum terkirim (server menjawab " + res.status + "). Tunggu sebentar lalu coba lagi — permintaan atur ulang dibatasi frekuensinya demi keamanan.";
+    }
+  }).catch(function () {
+    info.textContent = "Tidak bisa menghubungi server. Periksa koneksi internetmu lalu coba lagi.";
+  });
+});
+document.getElementById("btnSimpanSandiBaru").addEventListener("click", function () {
+  var s1 = document.getElementById("sbBaru1").value, s2 = document.getElementById("sbBaru2").value;
+  var btn = document.getElementById("btnSimpanSandiBaru");
+  if (!tokenPulih) { tampilGalat("sbGalat", "Tautan atur ulang tidak terbaca. Minta tautan baru lewat 'Lupa kata sandi?' di halaman masuk."); return; }
+  if (s1.length < 6) { tampilGalat("sbGalat", "Kata sandi minimal 6 karakter."); return; }
+  if (s1 !== s2) { tampilGalat("sbGalat", "Ulangi kata sandi belum sama. Periksa lagi ya."); return; }
+  btn.disabled = true; btn.textContent = "⏳ Menyimpan…";
+  sbUbahSandi(tokenPulih, s1).then(function (res) {
+    btn.disabled = false; btn.textContent = "Simpan & Masuk";
+    if (!res.ok) { tampilGalat("sbGalat", "Tautan atur ulang ini sudah tidak berlaku (mungkin kedaluwarsa atau sudah dipakai). Minta tautan baru lewat 'Lupa kata sandi?' di halaman masuk."); return; }
+    tampilGalat("sbGalat", "");
+    sbAmbilPengguna(tokenPulih).then(function (u) {
+      if (u.ok && u.body && u.body.id) {
+        sbTerapkanSesi({ access_token: tokenPulih, refresh_token: refreshPulih, user: u.body });
+        tokenPulih = null; refreshPulih = null;
+        masukBerhasil();
+      } else {
+        tampil("login");
+      }
+    });
+  }).catch(function () {
+    btn.disabled = false; btn.textContent = "Simpan & Masuk";
+    tampilGalat("sbGalat", "Tidak bisa menghubungi server. Periksa koneksi internetmu lalu coba lagi.");
+  });
+});
+document.getElementById("btnGantiSandi").addEventListener("click", function () {
+  var s1 = document.getElementById("amSandi1").value, s2 = document.getElementById("amSandi2").value;
+  var st = document.getElementById("statusGantiSandi");
+  var btn = document.getElementById("btnGantiSandi");
+  if (s1.length < 6) { st.textContent = "Kata sandi minimal 6 karakter."; return; }
+  if (s1 !== s2) { st.textContent = "Ulangi kata sandi belum sama. Periksa lagi ya."; return; }
+  btn.disabled = true;
+  sbUbahSandi(sbToken, s1).then(function (res) {
+    btn.disabled = false;
+    if (res.ok) {
+      document.getElementById("amSandi1").value = ""; document.getElementById("amSandi2").value = "";
+      st.textContent = "Kata sandi berhasil diganti ✓ — pakai kata sandi baru ini untuk masuk dari perangkat lain.";
+    } else {
+      st.textContent = "Gagal mengganti kata sandi (server menjawab " + res.status + "). Coba lagi sebentar lagi.";
+    }
+  }).catch(function () {
+    btn.disabled = false;
+    st.textContent = "Tidak bisa menghubungi server. Periksa koneksi internetmu lalu coba lagi.";
   });
 });
 document.getElementById("btnDaftar").addEventListener("click", function () {
@@ -4172,7 +4274,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v34";
+var VERSI_APP = "prata-v35";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
@@ -4932,6 +5034,17 @@ document.getElementById("isiCatatanBuku").addEventListener("input", function () 
 
 /* ================= MULAI ================= */
 (function mulai() {
+  var hashMentah = (location.hash || "").replace(/^#/, "");
+  if (hashMentah.indexOf("type=recovery") >= 0) {
+    var prm = {};
+    hashMentah.split("&").forEach(function (kv) { var p = kv.split("="); if (p.length === 2) { try { prm[p[0]] = decodeURIComponent(p[1]); } catch (e) {} } });
+    if (prm.access_token) {
+      tokenPulih = prm.access_token; refreshPulih = prm.refresh_token || null;
+      try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+      tampil("sandi-baru");
+      return;
+    }
+  }
   var s = ambilJSON("prata_sesi_online", null);
   if (s && s.t && s.id) {
     document.getElementById("selubungMuat").hidden = false;
