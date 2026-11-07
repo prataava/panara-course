@@ -1130,6 +1130,7 @@
         <button data-katsoal="TKP">TKP</button>
         <button data-katsoal="TANDA">★ Ditandai</button>
         <button data-katsoal="SALAH">Pernah Salah</button>
+        <button data-katsoal="HOTS">HOTS</button>
       </div>
     </div>
     <p class="sub" style="margin:2px 0 10px;">Bank soal PRATA disusun &amp; diverifikasi manual — setiap soal punya kunci, pembahasan, sub-materi, dan tingkat kesulitan. Terakhir diperbarui 7 November 2026. Menemukan soal yang keliru? Buka soalnya, lalu ketuk "Laporkan Soal".</p>
@@ -2087,6 +2088,8 @@ function gambarJalur() {
     });
   });
 }
+var HOTS_BANK = {};
+[12, 13, 15, 18, 19, 20, 48, 49, 50, 53, 54, 55, 56, 57, 58, 59, 79, 80, 82, 85, 86, 87, 88, 73, 77, 26, 28, 62, 67, 91, 98, 99, 100, 101].forEach(function (i) { HOTS_BANK[i] = 1; });
 function pergi(nama) {
   if (!sesiUser && nama !== "login" && nama !== "daftar") { tampil("login"); return; }
   if (nama === "simulasi") { tampil("latihan"); return; }
@@ -3967,12 +3970,13 @@ function gambarDaftarSoal() {
     nomorPerKat[s.k]++;
     if (katSoalAktif === "TANDA") { if (!(tandaUser[idxAsli] && tandaUser[idxAsli].bintang)) return; }
     else if (katSoalAktif === "SALAH") { if (!kesalahanUser["B" + idxAsli]) return; }
+    else if (katSoalAktif === "HOTS") { if (!HOTS_BANK[idxAsli]) return; }
     else if (katSoalAktif !== "SEMUA" && s.k !== katSoalAktif) return;
     if (cari && (s.t + " " + s.b + " " + s.o.join(" ")).toLowerCase().indexOf(cari) < 0) return;
     tampilCount++;
     var item = document.createElement("div"); item.className = "item-soal"; item.setAttribute("data-ungkap", ""); amatiUngkap(item);
     var kepala = document.createElement("button"); kepala.className = "kepala";
-    var no = document.createElement("span"); no.className = "no"; no.textContent = s.k + " " + nomorPerKat[s.k] + " • " + (s.d || "Sedang");
+    var no = document.createElement("span"); no.className = "no"; no.textContent = s.k + " " + nomorPerKat[s.k] + " • " + (s.d || "Sedang") + (HOTS_BANK[idxAsli] ? " • HOTS" : "");
     var ringkas = document.createElement("span"); ringkas.textContent = s.t.replace(/\n/g, " ").slice(0, 110) + (s.t.length > 110 ? "…" : "");
     kepala.appendChild(no); kepala.appendChild(ringkas);
     var panel = document.createElement("div"); panel.className = "panel"; panel.hidden = true;
@@ -4536,7 +4540,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v37";
+var VERSI_APP = "prata-v38";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
