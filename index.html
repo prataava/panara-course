@@ -406,6 +406,23 @@
   .btn-tampilan svg{width:16px; height:16px; display:block;}
   .memuat-portal{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:var(--kertas); color:var(--redup); font-size:13px; font-weight:600; z-index:2; text-align:center; padding:12px;}
   #bingkaiApungBungkus{position:relative;}
+  /* ===== v10: coretan & catatan buku ===== */
+  #kepalaBuku button svg{width:16px; height:16px; display:block;}
+  #kepalaBuku button.aktif{background:var(--emas); color:#221806;}
+  #alatCoret{display:flex; gap:6px; flex-wrap:wrap; align-items:center; padding:8px 12px; background:#1a2436;}
+  #alatCoret[hidden]{display:none !important;}
+  #alatCoret .swatch{width:26px; height:26px; border-radius:50%; border:2px solid rgba(255,255,255,.35); cursor:pointer; padding:0;}
+  #alatCoret .swatch.aktif{border-color:#fff; box-shadow:0 0 0 2px rgba(255,255,255,.45);}
+  #alatCoret .alat{background:rgba(255,255,255,.14); color:#fff; border:0; border-radius:8px; font-size:12.5px; font-weight:700; padding:7px 10px; cursor:pointer;}
+  #alatCoret .alat.aktif{background:var(--emas); color:#221806;}
+  #bungkusKanvas{position:relative; line-height:0; margin:0 auto;}
+  #kanvasCoret{position:absolute; left:0; top:0; border-radius:6px; touch-action:none; pointer-events:none;}
+  #kanvasCoret.aktif{pointer-events:auto; cursor:crosshair;}
+  #panelCatatanBuku{background:#141b28; padding:10px 12px; border-top:1px solid #26314a;}
+  #panelCatatanBuku[hidden]{display:none !important;}
+  .kepala-catatan{display:flex; justify-content:space-between; gap:10px; color:#cfe0ff; font-size:12.5px; font-weight:700; margin-bottom:7px;}
+  #catatanStatus{color:#8fd6a8; font-weight:600;}
+  #isiCatatanBuku{width:100%; background:#1d2739; color:#fff; border:1px solid #33415e; border-radius:10px; padding:10px 11px; font:inherit; font-size:14px; line-height:1.55; resize:vertical;}
 </style>
 </head>
 <body>
@@ -493,6 +510,14 @@
       <button class="btn kecil" id="btnKeCekRingkas" style="margin-top:12px;">Lihat Checklist →</button>
     </div>
 
+    <div class="kartu" id="kartuLanjutBeranda" hidden style="border-color:var(--emas); background:#fdf6e7;">
+      <h2 class="judul-bagian">Ada sesi yang belum selesai</h2>
+      <p class="sub" id="teksLanjutBeranda" style="margin-bottom:11px;">Sesi kuis terakhir kamu tersimpan otomatis.</p>
+      <div style="display:flex; gap:9px; flex-wrap:wrap;">
+        <button class="btn emas" id="btnLanjutkanBeranda">Lanjutkan Sesi</button>
+        <button class="btn" id="btnBuangBeranda">Buang &amp; Mulai Baru</button>
+      </div>
+    </div>
     <div class="grid-menu">
       <button class="menu-item utama" data-pergi="latihan">
         <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.6 3.6a2.1 2.1 0 0 1 3 3L8 18.2l-4.2 1.1L4.9 15 16.6 3.6z"/></svg></span>
@@ -600,6 +625,10 @@
           <button class="btn kecil" id="btnBacakanBahas">Bacakan</button>
           <button class="btn kecil" id="btnTanyaBahas">Tanya AI: kenapa jawabannya ini?</button>
         </div>
+      </div>
+      <div id="alatTandaiKuis" hidden style="margin-top:12px;">
+        <button class="btn kecil" id="btnBintangKuis">☆ Tandai Soal Ini</button>
+        <textarea class="catatan" id="catatanKuis" rows="2" placeholder="Catatan pribadi untuk soal ini… (tersimpan otomatis di akunmu)"></textarea>
       </div>
       <div class="nav-kuis">
         <button class="btn" id="btnSoalSebelum">← Sebelumnya</button>
@@ -945,13 +974,29 @@ Catatan: info di atas adalah gambaran umum untuk persiapan, bukan pengumuman res
     <button id="btnTutupBuku" title="Tutup buku">✕</button>
     <span id="judulBuku">Buku Modul</span>
     <span id="alatBuku">
+      <button id="btnModeCoret" title="Coret-coret & anotasi halaman"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.6 3.6a2.1 2.1 0 0 1 3 3L8 18.2l-4.2 1.1L4.9 15 16.6 3.6z"/></svg></button>
+      <button id="btnPanelCatatan" title="Catatan halaman ini" style="font-size:13px; width:auto;">Catatan</button>
       <button id="btnZoomKurang" title="Perkecil">−</button>
       <button id="btnZoomTambah" title="Perbesar">+</button>
     </span>
   </div>
+  <div id="alatCoret" hidden>
+    <button class="swatch aktif" data-warna="#d92c2c" style="background:#d92c2c" title="Merah"></button>
+    <button class="swatch" data-warna="#1450c8" style="background:#1450c8" title="Biru"></button>
+    <button class="swatch" data-warna="#151515" style="background:#151515" title="Hitam"></button>
+    <button class="alat aktif" data-alat="pena">Pena</button>
+    <button class="alat" data-alat="stabilo">Stabilo</button>
+    <button class="alat" data-alat="hapus">Penghapus</button>
+    <button class="alat" id="btnCoretUndo">Urungkan</button>
+    <button class="alat" id="btnCoretBersih">Hapus Halaman</button>
+  </div>
   <div id="badanBuku">
-    <canvas id="kanvasBuku"></canvas>
-    <div id="muatBuku" hidden>⏳ Memuat halaman…</div>
+    <div id="bungkusKanvas"><canvas id="kanvasBuku"></canvas><canvas id="kanvasCoret"></canvas></div>
+    <div id="muatBuku" hidden>Memuat halaman…</div>
+  </div>
+  <div id="panelCatatanBuku" hidden>
+    <div class="kepala-catatan"><span>Catatan — Halaman <span id="catatanHalKe">–</span></span><span id="catatanStatus"></span></div>
+    <textarea id="isiCatatanBuku" rows="3" placeholder="Catat di sini: jawabanmu untuk soal di halaman ini, rumus penting, bagian yang belum paham, dan lain-lain. Tersimpan otomatis di perangkat ini."></textarea>
   </div>
   <div id="kakiBuku">
     <button class="btn" id="btnHalSebelum">‹ Sebelumnya</button>
@@ -1109,17 +1154,33 @@ function simpanDataUser(d) {
 }
 function sinkronSekarang() {
   if (!sesiId || !sbToken || !dataCache) return;
-  fetch(SB_URL + "/rest/v1/data_pengguna", { method: "POST", keepalive: true, headers: Object.assign(sbHeaders(), { "Prefer": "resolution=merge-duplicates" }), body: JSON.stringify({ user_id: sesiId, data: dataCache, updated_at: new Date().toISOString() }) }).catch(function () {});
+  var kirim = function (ulang) {
+    fetch(SB_URL + "/rest/v1/data_pengguna", { method: "POST", headers: Object.assign(sbHeaders(), { "Prefer": "resolution=merge-duplicates" }), body: JSON.stringify({ user_id: sesiId, data: dataCache, updated_at: new Date().toISOString() }) })
+      .then(function (r) {
+        if (r.status === 401 && !ulang) sbSegarkanToken().then(function (ok) { if (ok) kirim(true); });
+      })
+      .catch(function () {});
+  };
+  kirim(false);
 }
 window.addEventListener("pagehide", function () {
-  if (timerSinkron) { clearTimeout(timerSinkron); timerSinkron = null; sinkronSekarang(); }
+  if (!timerSinkron) return;
+  clearTimeout(timerSinkron); timerSinkron = null;
+  if (!sesiId || !sbToken || !dataCache) return;
+  var badan = JSON.stringify({ user_id: sesiId, data: dataCache, updated_at: new Date().toISOString() });
+  // keepalive peramban membatasi badan ±64KB; kiriman besar dicakup sinkron berkala biasa.
+  if (badan.length > 60000) return;
+  fetch(SB_URL + "/rest/v1/data_pengguna", { method: "POST", keepalive: true, headers: Object.assign(sbHeaders(), { "Prefer": "resolution=merge-duplicates" }), body: badan }).catch(function () {});
 });
+var janjiSegar = null;
 function sbSegarkanToken() {
+  if (janjiSegar) return janjiSegar;
   if (!sbRefresh) return Promise.resolve(false);
-  return sbAuth("/auth/v1/token?grant_type=refresh_token", { refresh_token: sbRefresh }).then(function (res) {
+  janjiSegar = sbAuth("/auth/v1/token?grant_type=refresh_token", { refresh_token: sbRefresh }).then(function (res) {
     if (res.ok && res.body.access_token) { sbTerapkanSesi(res.body); return true; }
     return false;
-  }).catch(function () { return false; });
+  }).catch(function () { return false; }).then(function (hasil) { janjiSegar = null; return hasil; });
+  return janjiSegar;
 }
 function ambilDataServer() {
   return fetch(SB_URL + "/rest/v1/data_pengguna?user_id=eq." + sesiId + "&select=data", { headers: sbHeaders() })
@@ -1157,7 +1218,7 @@ function tampil(nama) {
   });
   if (nama === "beranda") segarkanBeranda();
   if (nama === "ceklist") gambarTugas();
-  if (nama === "latihan") cekSesiKuisTersimpan();
+  if (nama === "latihan" || nama === "beranda") cekSesiKuisTersimpan();
   if (nama === "flashcard") gambarFlash();
   if (nama === "info") gambarInfo();
   if (nama === "bantuan") gambarDaftarCepat();
@@ -1249,7 +1310,7 @@ document.getElementById("btnKeluar").addEventListener("click", function () {
 /* ================= BERANDA ================= */
 function segarkanBeranda() {
   if (!sesiUser) return;
-  document.getElementById("sapaNama").textContent = "Halo, " + sesiUser + "! 👋";
+  document.getElementById("sapaNama").textContent = "Halo, " + sesiUser + "!";
   var d = dataUser();
   // Isi pahlawan (hero) beranda
   document.getElementById("heroSesi").textContent = d.riwayat.length + " sesi tercatat";
@@ -1430,28 +1491,38 @@ function hapusKuisBerjalan() {
   if (sesiUser) { try { localStorage.removeItem("panara_kuisberjalan_" + sesiUser); } catch (e) {} }
 }
 function cekSesiKuisTersimpan() {
-  var kartu = document.getElementById("kartuLanjut");
-  if (!sesiUser) { kartu.hidden = true; return; }
-  var tersimpan = ambilJSON("panara_kuisberjalan_" + sesiUser, null);
-  if (tersimpan && tersimpan.daftar && tersimpan.daftar.length) {
-    kartu.hidden = false;
+  var tersimpan = sesiUser ? ambilJSON("panara_kuisberjalan_" + sesiUser, null) : null;
+  var ada = !!(tersimpan && tersimpan.daftar && tersimpan.daftar.length);
+  var teks = "";
+  if (ada) {
     var terjawab = Object.keys(tersimpan.jawaban || {}).length;
-    document.getElementById("teksLanjut").textContent =
-      (tersimpan.mode === "simulasi" ? "Simulasi Mini" : "Latihan " + tersimpan.kat) +
+    teks = (tersimpan.mode === "simulasi" ? "Simulasi Mini" : "Latihan " + tersimpan.kat) +
       " — baru terjawab " + terjawab + " dari " + tersimpan.daftar.length + " soal. Lanjutkan dari posisi terakhir?";
-  } else { kartu.hidden = true; }
+  }
+  [["kartuLanjut", "teksLanjut"], ["kartuLanjutBeranda", "teksLanjutBeranda"]].forEach(function (p) {
+    var k = document.getElementById(p[0]);
+    if (!k) return;
+    k.hidden = !ada;
+    if (ada) document.getElementById(p[1]).textContent = teks;
+  });
 }
-document.getElementById("btnLanjutkanKuis").addEventListener("click", function () {
+function lanjutkanKuisTersimpan() {
   var tersimpan = ambilJSON("panara_kuisberjalan_" + sesiUser, null);
   if (!tersimpan) return;
   kuis = tersimpan;
   tampil("kuis");
   gambarSoal();
   mulaiTimerKuis();
-});
+}
+document.getElementById("btnLanjutkanKuis").addEventListener("click", lanjutkanKuisTersimpan);
+document.getElementById("btnLanjutkanBeranda").addEventListener("click", lanjutkanKuisTersimpan);
 document.getElementById("btnBuangKuis").addEventListener("click", function () {
   hapusKuisBerjalan();
-  document.getElementById("kartuLanjut").hidden = true;
+  cekSesiKuisTersimpan();
+});
+document.getElementById("btnBuangBeranda").addEventListener("click", function () {
+  hapusKuisBerjalan();
+  cekSesiKuisTersimpan();
 });
 function acak(arr) {
   var a = arr.slice();
@@ -1526,6 +1597,15 @@ function gambarSoal() {
     nb.addEventListener("click", function () { kuis.posisi = p; gambarSoal(); });
     grid.appendChild(nb);
   });
+  var alatTandai = document.getElementById("alatTandaiKuis");
+  var bisaTandai = kuis.mode === "latihan" && !kuis.labelKuis;
+  alatTandai.hidden = !bisaTandai;
+  if (bisaTandai) {
+    var tnd = ((dataUser().tanda || {})[idx]) || {};
+    document.getElementById("btnBintangKuis").textContent = tnd.bintang ? "★ Sudah Ditandai" : "☆ Tandai Soal Ini";
+    var ctk = document.getElementById("catatanKuis");
+    if (document.activeElement !== ctk) ctk.value = tnd.catatan || "";
+  }
   simpanKuisBerjalan();
 }
 document.getElementById("btnSoalSebelum").addEventListener("click", function () { if (kuis && kuis.posisi > 0) { kuis.posisi--; gambarSoal(); } });
@@ -1533,6 +1613,25 @@ document.getElementById("btnSoalLanjut").addEventListener("click", function () {
   if (!kuis) return;
   if (kuis.posisi === kuis.daftar.length - 1) { selesaiKuis(); }
   else { kuis.posisi++; gambarSoal(); }
+});
+document.getElementById("btnBintangKuis").addEventListener("click", function () {
+  if (!kuis || kuis.labelKuis) return;
+  var idx = kuis.daftar[kuis.posisi];
+  var dd = dataUser();
+  if (!dd.tanda) dd.tanda = {};
+  if (!dd.tanda[idx]) dd.tanda[idx] = {};
+  dd.tanda[idx].bintang = !dd.tanda[idx].bintang;
+  simpanDataUser(dd);
+  this.textContent = dd.tanda[idx].bintang ? "★ Sudah Ditandai" : "☆ Tandai Soal Ini";
+});
+document.getElementById("catatanKuis").addEventListener("change", function () {
+  if (!kuis || kuis.labelKuis) return;
+  var idx = kuis.daftar[kuis.posisi];
+  var dd = dataUser();
+  if (!dd.tanda) dd.tanda = {};
+  if (!dd.tanda[idx]) dd.tanda[idx] = {};
+  dd.tanda[idx].catatan = this.value;
+  simpanDataUser(dd);
 });
 
 function selesaiKuis() {
@@ -1694,8 +1793,20 @@ function cariOffline(teks) {
   }
   return "Untuk pertanyaan itu, bank pembahasan bawaanku belum menemukan pasangan yang pas. Tiga cara yang bisa membantumu:\n\n1. Tempel bunyi soalnya persis (termasuk angka/kata kuncinya) — pencarianku bekerja paling baik dengan teks soal asli.\n2. Coba mode 🌐 AI Gratis (online) di atas untuk pertanyaan bebas.\n3. Latih pola soalnya lewat menu Latihan — semua soal di sana sudah ada pembahasannya.\n\nContoh yang pasti bisa kujawab offline: '15% dari 240', 'sila ketiga Pancasila', 'Bhinneka Tunggal Ika kitab apa'.";
 }
+function cariBankKuat(teks) {
+  var token = tokenisasi(teks);
+  if (!token.length) return null;
+  var terbaik = null, skorTerbaik = 0;
+  SOAL.forEach(function (s) {
+    var gabung = tokenisasi(s.t + " " + s.b);
+    var skor = 0;
+    token.forEach(function (w) { if (gabung.indexOf(w) >= 0) skor++; });
+    if (skor > skorTerbaik) { skorTerbaik = skor; terbaik = s; }
+  });
+  return (terbaik && skorTerbaik >= 3 && skorTerbaik / token.length >= 0.6) ? terbaik : null;
+}
 function tanyaOnline(teks) {
-  var perintah = "Kamu adalah tutor persiapan SKD sekolah kedinasan Indonesia (TWK, TIU, TKP). Jawab dalam Bahasa Indonesia, singkat dan jelas, sertakan kunci jawaban dan cara/penjelasannya. Pertanyaan siswa: " + teks;
+  var perintah = "Kamu adalah tutor persiapan SKD sekolah kedinasan Indonesia (TWK, TIU, TKP). Jawab dalam Bahasa Indonesia, singkat dan jelas, sertakan kunci jawaban dan cara/penjelasannya. Fakta yang wajib akurat — lima sila Pancasila berurutan: 1. Ketuhanan Yang Maha Esa; 2. Kemanusiaan yang Adil dan Beradab; 3. Persatuan Indonesia; 4. Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan; 5. Keadilan Sosial bagi Seluruh Rakyat Indonesia. Bila tidak yakin atas suatu fakta, katakan tidak tahu, jangan mengarang. Pertanyaan siswa: " + teks;
   if (AI_ENDPOINT) {
     return fetch(AI_ENDPOINT, {
       method: "POST",
@@ -1734,7 +1845,7 @@ function kirimTanya() {
   var alur = document.getElementById("alurChat");
   var tunggu = document.createElement("div");
   tunggu.className = "gelembung ai"; tunggu.id = "gelembungTunggu";
-  tunggu.textContent = mesinAI === "online" ? "⏳ Sedang bertanya ke AI gratis…" : "⏳ Sedang mencari di bank pembahasan…";
+  tunggu.textContent = mesinAI === "online" ? "Sedang bertanya ke AI gratis…" : "Sedang mencari di bank pembahasan…";
   alur.appendChild(tunggu);
   tunggu.scrollIntoView({ block: "end" });
   var simpanJawaban = function (jawaban, sumber) {
@@ -1748,6 +1859,10 @@ function kirimTanya() {
   };
   if (mesinAI === "offline") {
     setTimeout(function () { simpanJawaban(cariOffline(teks), "BANK PEMBAHASAN (OFFLINE)"); }, 350);
+    return;
+  }
+  if (cariBankKuat(teks)) {
+    setTimeout(function () { simpanJawaban(cariOffline(teks), "BANK SOAL PRATA (TERVERIFIKASI)"); }, 350);
     return;
   }
   tanyaOnline(teks).then(function (jawaban) {
@@ -2381,10 +2496,12 @@ function parseModul(teks) {
     }
     if (!("A" in perHuruf && "B" in perHuruf && "C" in perHuruf && "D" in perHuruf)) return;
     var teksSoal = buf.slice(0, marks[0].awal).replace(/\s+/g, " ").trim();
+    teksSoal = teksSoal.replace(/^\d{1,3}\s+(?=Soal\s+\d+\s*[.)])/, "");
     if (teksSoal.length < 10) return;
     var opsi = ["A", "B", "C", "D", "E"].filter(function (h) { return h in perHuruf; }).map(function (h) { return perHuruf[h]; });
     if (opsi.some(function (o) { return !o; })) return;
     if (rasioAneh(teksSoal + " " + opsi.join(" ")) > 0.12) return;
+    if (opsi.some(function (o) { return (o.match(/\$/g) || []).length >= 2; })) return;
     var dedup = teksSoal.slice(0, 60);
     if (terlihat[dedup]) return;
     terlihat[dedup] = true;
@@ -2511,26 +2628,44 @@ document.getElementById("inputModul").addEventListener("change", function () {
 var bukuDoc = null, bukuHal = 1, bukuZoom = 1, bukuRenderKe = 0;
 function idbBuka() {
   return new Promise(function (res, rej) {
-    var rq = indexedDB.open("prataBuku", 1);
-    rq.onupgradeneeded = function () { rq.result.createObjectStore("berkas"); };
+    var rq = indexedDB.open("prataBuku", 2);
+    rq.onupgradeneeded = function () {
+      var db = rq.result;
+      if (!db.objectStoreNames.contains("berkas")) db.createObjectStore("berkas");
+      if (!db.objectStoreNames.contains("coretan")) db.createObjectStore("coretan");
+      if (!db.objectStoreNames.contains("catatan")) db.createObjectStore("catatan");
+    };
     rq.onsuccess = function () { res(rq.result); };
     rq.onerror = function () { rej(rq.error); };
   });
 }
-function idbSimpan(kunci, nilai) {
+function idbSimpan(kunci, nilai, store) {
+  store = store || "berkas";
   return idbBuka().then(function (db) {
     return new Promise(function (res, rej) {
-      var tx = db.transaction("berkas", "readwrite");
-      tx.objectStore("berkas").put(nilai, kunci);
+      var tx = db.transaction(store, "readwrite");
+      tx.objectStore(store).put(nilai, kunci);
       tx.oncomplete = function () { res(); };
       tx.onerror = function () { rej(tx.error); };
     });
   });
 }
-function idbAmbil(kunci) {
+function idbHapus(kunci, store) {
+  store = store || "berkas";
   return idbBuka().then(function (db) {
     return new Promise(function (res, rej) {
-      var rq = db.transaction("berkas", "readonly").objectStore("berkas").get(kunci);
+      var tx = db.transaction(store, "readwrite");
+      tx.objectStore(store).delete(kunci);
+      tx.oncomplete = function () { res(); };
+      tx.onerror = function () { rej(tx.error); };
+    });
+  });
+}
+function idbAmbil(kunci, store) {
+  store = store || "berkas";
+  return idbBuka().then(function (db) {
+    return new Promise(function (res, rej) {
+      var rq = db.transaction(store, "readonly").objectStore(store).get(kunci);
       rq.onsuccess = function () { res(rq.result || null); };
       rq.onerror = function () { rej(rq.error); };
     });
@@ -2552,7 +2687,7 @@ document.getElementById("btnBukaBuku").addEventListener("click", function () {
     document.getElementById("penampilBuku").hidden = false;
     document.getElementById("judulBuku").textContent = (rec.nama || "Buku Modul").replace(/\.pdf$/i, "");
     var muat = document.getElementById("muatBuku");
-    muat.hidden = false; muat.textContent = "⏳ Memuat buku…";
+    muat.hidden = false; muat.textContent = "Memuat buku…";
     muatPdfJs().then(function () { return rec.blob.arrayBuffer(); })
       .then(function (buf) { return window.pdfjsLib.getDocument({ data: buf }).promise; })
       .then(function (doc) {
@@ -2569,7 +2704,7 @@ function gambarHalamanBuku() {
   if (!bukuDoc) return;
   var ke = ++bukuRenderKe;
   var muat = document.getElementById("muatBuku");
-  muat.hidden = false; muat.textContent = "⏳ Memuat halaman…";
+  muat.hidden = false; muat.textContent = "Memuat halaman…";
   bukuDoc.getPage(bukuHal).then(function (page) {
     if (ke !== bukuRenderKe) return null;
     var badan = document.getElementById("badanBuku");
@@ -2590,6 +2725,8 @@ function gambarHalamanBuku() {
     document.getElementById("btnHalBerikut").disabled = bukuHal >= bukuDoc.numPages;
     try { localStorage.setItem("prata_buku_halaman", JSON.stringify(bukuHal)); } catch (e) {}
     document.getElementById("badanBuku").scrollTop = 0;
+    muatCoretanHal();
+    if (!document.getElementById("panelCatatanBuku").hidden) perbaruiPanelCatatan();
   }).catch(function () {
     if (ke === bukuRenderKe) muat.textContent = "Halaman gagal dimuat.";
   });
@@ -2613,6 +2750,7 @@ document.getElementById("btnZoomKurang").addEventListener("click", function () {
     if (e.touches.length === 1) { awalX = e.touches[0].clientX; awalY = e.touches[0].clientY; }
   }, { passive: true });
   badan.addEventListener("touchend", function (e) {
+    if (typeof bukuCoret !== "undefined" && bukuCoret.aktif) { awalX = null; return; }
     if (awalX === null) return;
     var dx = e.changedTouches[0].clientX - awalX, dy = e.changedTouches[0].clientY - awalY;
     awalX = null;
@@ -2625,14 +2763,128 @@ document.getElementById("btnZoomKurang").addEventListener("click", function () {
   });
 })();
 
+/* ================= CORETAN & CATATAN BUKU ================= */
+var bukuCoret = { aktif: false, alat: "pena", warna: "#d92c2c" };
+var coretanHal = [], coretSedang = null, timerCatatanBuku = null;
+function kanvasCoretEl() { return document.getElementById("kanvasCoret"); }
+function gambarCoretanSemua() {
+  var kc = kanvasCoretEl(), kb = document.getElementById("kanvasBuku");
+  if (!kc || !kb || !kb.width) return;
+  kc.width = kb.width; kc.height = kb.height;
+  kc.style.width = kb.style.width; kc.style.height = kb.style.height;
+  var ctx = kc.getContext("2d");
+  ctx.clearRect(0, 0, kc.width, kc.height);
+  ctx.lineCap = "round"; ctx.lineJoin = "round";
+  coretanHal.forEach(function (s) {
+    ctx.beginPath();
+    ctx.globalAlpha = s.alat === "stabilo" ? 0.35 : 1;
+    ctx.strokeStyle = s.warna;
+    ctx.lineWidth = Math.max(2, kc.width * (s.alat === "stabilo" ? 0.016 : 0.0042));
+    s.titik.forEach(function (p, i) {
+      var x = p[0] * kc.width, y = p[1] * kc.height;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+  });
+  ctx.globalAlpha = 1;
+}
+function muatCoretanHal() {
+  idbAmbil("coret-" + bukuHal, "coretan").then(function (data) {
+    coretanHal = Array.isArray(data) ? data : [];
+    gambarCoretanSemua();
+  }).catch(function () { coretanHal = []; gambarCoretanSemua(); });
+}
+function simpanCoretanHal() {
+  if (coretanHal.length) idbSimpan("coret-" + bukuHal, coretanHal, "coretan").catch(function () {});
+  else idbHapus("coret-" + bukuHal, "coretan").catch(function () {});
+}
+function posisiRelatifCoret(e) {
+  var r = kanvasCoretEl().getBoundingClientRect();
+  return [Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)), Math.min(1, Math.max(0, (e.clientY - r.top) / r.height))];
+}
+function hapusCoretanDi(nx, ny) {
+  var sebelum = coretanHal.length;
+  coretanHal = coretanHal.filter(function (s) {
+    return !s.titik.some(function (p) { var dx = p[0] - nx, dy = p[1] - ny; return dx * dx + dy * dy < 0.0009; });
+  });
+  if (coretanHal.length !== sebelum) { gambarCoretanSemua(); simpanCoretanHal(); }
+}
+(function pasangCoret() {
+  var kc = kanvasCoretEl();
+  kc.addEventListener("pointerdown", function (e) {
+    if (!bukuCoret.aktif) return;
+    e.preventDefault();
+    try { kc.setPointerCapture(e.pointerId); } catch (err) {}
+    var p = posisiRelatifCoret(e);
+    if (bukuCoret.alat === "hapus") { hapusCoretanDi(p[0], p[1]); coretSedang = { hapus: true }; return; }
+    coretSedang = { alat: bukuCoret.alat, warna: bukuCoret.alat === "stabilo" ? "#ffd21f" : bukuCoret.warna, titik: [p] };
+    coretanHal.push(coretSedang);
+    gambarCoretanSemua();
+  });
+  kc.addEventListener("pointermove", function (e) {
+    if (!bukuCoret.aktif || !coretSedang) return;
+    var p = posisiRelatifCoret(e);
+    if (coretSedang.hapus) { hapusCoretanDi(p[0], p[1]); return; }
+    var titik = coretSedang.titik, akhir = titik[titik.length - 1];
+    if (Math.abs(p[0] - akhir[0]) + Math.abs(p[1] - akhir[1]) < 0.0015) return;
+    titik.push(p);
+    gambarCoretanSemua();
+  });
+  function selesaiCoret() { if (coretSedang && !coretSedang.hapus) simpanCoretanHal(); coretSedang = null; }
+  kc.addEventListener("pointerup", selesaiCoret);
+  kc.addEventListener("pointercancel", selesaiCoret);
+})();
+document.getElementById("btnModeCoret").addEventListener("click", function () {
+  bukuCoret.aktif = !bukuCoret.aktif;
+  this.classList.toggle("aktif", bukuCoret.aktif);
+  document.getElementById("alatCoret").hidden = !bukuCoret.aktif;
+  kanvasCoretEl().classList.toggle("aktif", bukuCoret.aktif);
+});
+document.getElementById("alatCoret").addEventListener("click", function (e) {
+  var sw = e.target.closest("[data-warna]");
+  if (sw) {
+    bukuCoret.warna = sw.getAttribute("data-warna");
+    document.querySelectorAll("#alatCoret .swatch").forEach(function (x) { x.classList.toggle("aktif", x === sw); });
+    return;
+  }
+  var al = e.target.closest("[data-alat]");
+  if (al) {
+    bukuCoret.alat = al.getAttribute("data-alat");
+    document.querySelectorAll("#alatCoret [data-alat]").forEach(function (x) { x.classList.toggle("aktif", x === al); });
+  }
+});
+document.getElementById("btnCoretUndo").addEventListener("click", function () { coretanHal.pop(); gambarCoretanSemua(); simpanCoretanHal(); });
+document.getElementById("btnCoretBersih").addEventListener("click", function () { coretanHal = []; gambarCoretanSemua(); simpanCoretanHal(); });
+function perbaruiPanelCatatan() {
+  document.getElementById("catatanHalKe").textContent = bukuHal;
+  document.getElementById("catatanStatus").textContent = "";
+  idbAmbil("cat-" + bukuHal, "catatan").then(function (teks) {
+    document.getElementById("isiCatatanBuku").value = teks || "";
+  }).catch(function () {});
+}
+document.getElementById("btnPanelCatatan").addEventListener("click", function () {
+  var p = document.getElementById("panelCatatanBuku");
+  p.hidden = !p.hidden;
+  this.classList.toggle("aktif", !p.hidden);
+  if (!p.hidden) perbaruiPanelCatatan();
+});
+document.getElementById("isiCatatanBuku").addEventListener("input", function () {
+  var teks = this.value, hal = bukuHal;
+  clearTimeout(timerCatatanBuku);
+  timerCatatanBuku = setTimeout(function () {
+    idbSimpan("cat-" + hal, teks, "catatan").then(function () {
+      document.getElementById("catatanStatus").textContent = "Tersimpan ✓";
+    }).catch(function () {});
+  }, 500);
+});
+
 /* ================= MULAI ================= */
 (function mulai() {
   var s = ambilJSON("prata_sesi_online", null);
   if (s && s.t && s.id) {
     sbToken = s.t; sbRefresh = s.r; sesiId = s.id; sesiEmail = s.email; sesiUser = s.nama;
     document.getElementById("chipNama").textContent = sesiUser;
-    sbSegarkanToken();
-    masukBerhasil();
+    Promise.race([sbSegarkanToken(), new Promise(function (r) { setTimeout(r, 6000); })]).then(function () { masukBerhasil(); });
   }
   else { tampil("login"); }
 })();
