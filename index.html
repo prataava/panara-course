@@ -987,6 +987,7 @@
       <button class="mundur" data-pergi="beranda">← Beranda</button>
       <span class="info-kuis">Riwayat Skor</span>
     </div>
+    <button class="btn emas lebar" id="btnLaporanPDF" style="margin-bottom:12px;">Unduh Laporan Perkembangan (PDF)</button>
     <div class="kartu" id="kartuGrafik" hidden>
       <h2 class="judul-bagian">Grafik Progres Skor</h2>
       <div class="grafik" id="grafikSkor"></div>
@@ -2090,6 +2091,69 @@ function gambarJalur() {
 }
 var HOTS_BANK = {};
 [12, 13, 15, 18, 19, 20, 48, 49, 50, 53, 54, 55, 56, 57, 58, 59, 79, 80, 82, 85, 86, 87, 88, 73, 77, 26, 28, 62, 67, 91, 98, 99, 100, 101].forEach(function (i) { HOTS_BANK[i] = 1; });
+function teksLaporanCetak() {
+  var d = dataUser();
+  var det = d.riwayatDetail || [];
+  var per = { TWK: { b: 0, t: 0 }, TIU: { b: 0, t: 0 }, TKP: { b: 0, t: 0 } };
+  var sub = {};
+  var tb = 0, tt = 0;
+  det.forEach(function (r) {
+    Object.keys(r.perSub || {}).forEach(function (k) {
+      var p = k.split("—")[0];
+      var v = r.perSub[k];
+      if (per[p]) { per[p].b += v.b; per[p].t += v.t; }
+      if (!sub[k]) sub[k] = { b: 0, t: 0 };
+      sub[k].b += v.b; sub[k].t += v.t;
+      tb += v.b; tt += v.t;
+    });
+  });
+  var sims = (d.riwayat || []).filter(function (r) { return r.perMapel && r.maksMapel; });
+  var PGK = konfigPG();
+  var barisSim = "Belum ada simulasi terperinci yang tercatat.";
+  if (sims.length) {
+    var trakhir = sims[sims.length - 1];
+    var terbaik = sims.reduce(function (a, b) { return (b.poin / b.maks) > (a.poin / a.maks) ? b : a; }, sims[0]);
+    var lolosT = trakhir.perMapel.TWK >= PGK.TWK && trakhir.perMapel.TIU >= PGK.TIU && trakhir.perMapel.TKP >= PGK.TKP;
+    barisSim = "Simulasi terakhir (" + trakhir.tanggal + ", " + trakhir.label + "): TWK " + trakhir.perMapel.TWK + "/" + trakhir.maksMapel.TWK + ", TIU " + trakhir.perMapel.TIU + "/" + trakhir.maksMapel.TIU + ", TKP " + trakhir.perMapel.TKP + "/" + trakhir.maksMapel.TKP + " — total " + trakhir.poin + "/" + trakhir.maks + (trakhir.maks === 550 ? (lolosT ? ". Ketiga subtes mencapai ambang batas aktif." : ". Belum semua subtes mencapai ambang batas aktif.") : ".") + " Simulasi terbaik: " + terbaik.poin + "/" + terbaik.maks + " (" + terbaik.tanggal + ").";
+  }
+  var daftarSub = Object.keys(sub).filter(function (k) { return sub[k].t >= 3; }).map(function (k) { return { k: k, p: Math.round(sub[k].b / sub[k].t * 100), t: sub[k].t }; }).sort(function (a, b) { return b.p - a.p; });
+  var kuat = daftarSub.slice(0, 3).map(function (x) { return x.k + " (" + x.p + "%, " + x.t + " soal)"; }).join("; ") || "—";
+  var lemah = daftarSub.slice(-3).reverse().map(function (x) { return x.k + " (" + x.p + "%, " + x.t + " soal)"; }).join("; ") || "—";
+  var skr = new Date();
+  var tglCetak = skr.toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  function barisMapel(namaM) {
+    var v = per[namaM];
+    var persen = v.t ? Math.round(v.b / v.t * 100) : 0;
+    return "<tr><td>" + namaM + "</td><td style='text-align:right;'>" + v.b + "</td><td style='text-align:right;'>" + v.t + "</td><td style='text-align:right;'>" + persen + "%</td><td style='text-align:right;'>" + PGK[namaM] + "</td></tr>";
+  }
+  var targetBaris = d.target && d.target.nama ? ("<p><b>Target seleksi:</b> " + d.target.nama + (d.target.tgl ? " — " + d.target.tgl : "") + "</p>") : "";
+  return "<!DOCTYPE html><html lang='id'><head><meta charset='utf-8'><title>Laporan Perkembangan PRATA — " + sesiNama + "</title>" +
+    "<style>body{font-family:Georgia,'Times New Roman',serif;color:#1a1a1a;margin:40px;line-height:1.6;}h1{font-size:23px;margin:0 0 2px;}h2{font-size:16px;margin:22px 0 6px;border-bottom:2px solid #b8860b;padding-bottom:3px;}table{border-collapse:collapse;width:100%;margin-top:6px;}th,td{border:1px solid #bbb;padding:6px 9px;font-size:14px;}th{background:#f3ead2;text-align:left;}p{font-size:14.5px;margin:6px 0;}.kecil{font-size:12.5px;color:#555;}@media print{body{margin:18px;}}</style></head><body>" +
+    "<h1>Laporan Perkembangan Belajar — PRATA</h1>" +
+    "<p class='kecil'>Nama: " + sesiNama + " • Email: " + sesiEmail + " • Dicetak: " + tglCetak + "</p>" +
+    targetBaris +
+    "<h2>Ringkasan</h2>" +
+    "<p>Total sesi latihan & simulasi tercatat: <b>" + (d.riwayat || []).length + "</b>. Total soal terjawab (dengan rincian): <b>" + tt + "</b>, benar/setara benar <b>" + tb + "</b> — akurasi keseluruhan <b>" + (tt ? Math.round(tb / tt * 100) : 0) + "%</b>. Rentetan belajar: <b>" + hitungRentetan(d) + " hari</b>. Tantangan harian diselesaikan: <b>" + ((d.statistik && d.statistik.tantanganSelesai) || 0) + " kali</b>. Soal tuntas di Ulangi Kesalahan (Leitner): <b>" + ((d.statistik && d.statistik.leitnerTuntas) || 0) + "</b>.</p>" +
+    "<h2>Per Subtes (SKD)</h2>" +
+    "<table><tr><th>Subtes</th><th style='text-align:right;'>Benar</th><th style='text-align:right;'>Terjawab</th><th style='text-align:right;'>Akurasi</th><th style='text-align:right;'>Ambang Batas Aktif</th></tr>" +
+    barisMapel("TWK") + barisMapel("TIU") + barisMapel("TKP") + "</table>" +
+    "<p class='kecil'>Ambang batas dari Konfigurasi Passing Grade aktif di aplikasi" + (PGK.khusus ? " (diatur sendiri oleh pengguna)" : " (bawaan yang umum diberlakukan BKN: TWK 65, TIU 80, TKP 166)") + ". Untuk TKP, “benar” berarti memilih jawaban berskor penuh (5).</p>" +
+    "<h2>Simulasi</h2><p>" + barisSim + "</p>" +
+    "<h2>Sub-Materi Terkuat & Terlemah</h2>" +
+    "<p><b>Terkuat:</b> " + kuat + "</p><p><b>Paling perlu dilatih:</b> " + lemah + "</p>" +
+    "<p class='kecil'>Hanya sub-materi dengan minimal 3 soal terjawab yang diperingkat.</p>" +
+    "<h2>Catatan</h2>" +
+    "<p class='kecil'>Laporan ini dibuat otomatis dari data belajar pengguna di aplikasi PRATA pada tanggal cetak di atas. Angka-angkanya adalah cermin data latihan, bukan prediksi resmi dan bukan jaminan kelulusan; hasil seleksi yang sah ditentukan oleh CAT BKN (jalur sekolah kedinasan) atau panitia seleksi jalur masing-masing.</p>" +
+    "</body></html>";
+}
+document.getElementById("btnLaporanPDF").addEventListener("click", function () {
+  var w = window.open("", "_blank");
+  if (!w) { alert("Jendela laporan terblokir oleh peramban. Izinkan pop-up untuk situs ini, lalu ketuk tombolnya lagi."); return; }
+  w.document.open();
+  w.document.write(teksLaporanCetak());
+  w.document.close();
+  setTimeout(function () { try { w.focus(); w.print(); } catch (e) {} }, 450);
+});
 function pergi(nama) {
   if (!sesiUser && nama !== "login" && nama !== "daftar") { tampil("login"); return; }
   if (nama === "simulasi") { tampil("latihan"); return; }
@@ -4540,7 +4604,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v38";
+var VERSI_APP = "prata-v39";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
