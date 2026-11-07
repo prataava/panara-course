@@ -1097,6 +1097,9 @@ function dataBawaan() {
 }
 function dataUser() {
   if (!dataCache) { dataCache = ambilJSON("prata_cache_" + sesiId, null) || dataBawaan(); }
+  if (!Array.isArray(dataCache.tugas)) dataCache.tugas = dataBawaan().tugas;
+  if (!Array.isArray(dataCache.riwayat)) dataCache.riwayat = [];
+  if (!Array.isArray(dataCache.chat)) dataCache.chat = [];
   if (!dataCache.tanda) dataCache.tanda = {};
   if (!dataCache.target) dataCache.target = { nama: "", tgl: "" };
   if (dataCache.modul === undefined) dataCache.modul = null;
