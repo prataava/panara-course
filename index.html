@@ -397,6 +397,9 @@
   #muatBuku { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, .75); color: var(--putih); padding: 7px 14px; border-radius: 999px; font-size: 13px; white-space: nowrap; }
   #kakiBuku { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: var(--laut-dalam); }
   #infoHalaman { color: var(--putih); font-weight: 700; font-size: 13.5px; }
+  #loncatBuku { display: flex; align-items: center; gap: 7px; }
+  #inputLoncatHal { width: 62px; background: var(--buku-input); color: var(--putih); border: 1px solid var(--buku-garis); border-radius: 10px; padding: 8px 6px; font: inherit; font-size: 14px; font-weight: 700; text-align: center; }
+  #inputLoncatHal:focus { outline: 2px solid var(--emas); outline-offset: 1px; }
   #kakiBuku .btn { background: rgba(255, 255, 255, .14); color: var(--putih); }
   /* ===== v9: profesional — ikon SVG, tipografi konsisten ===== */
   .menu-item .ikon{color:var(--laut);}
@@ -1127,7 +1130,11 @@ Catatan: info di atas adalah gambaran umum untuk persiapan, bukan pengumuman res
   </div>
   <div id="kakiBuku">
     <button class="btn" id="btnHalSebelum">‹ Sebelumnya</button>
-    <span id="infoHalaman">Halaman –</span>
+    <span id="loncatBuku">
+      <input id="inputLoncatHal" type="number" inputmode="numeric" min="1" value="1" aria-label="Nomor halaman tujuan">
+      <span id="infoHalaman">dari –</span>
+      <button class="btn" id="btnLoncatHal">Loncat</button>
+    </span>
     <button class="btn" id="btnHalBerikut">Berikutnya ›</button>
   </div>
 </div>
@@ -2984,7 +2991,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v21";
+var VERSI_APP = "prata-v22";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
@@ -3510,7 +3517,10 @@ function gambarHalamanBuku() {
   }).then(function () {
     if (ke !== bukuRenderKe) return;
     muat.hidden = true;
-    document.getElementById("infoHalaman").textContent = "Halaman " + bukuHal + " dari " + bukuDoc.numPages;
+    document.getElementById("infoHalaman").textContent = "dari " + bukuDoc.numPages;
+    var inpHal = document.getElementById("inputLoncatHal");
+    inpHal.max = bukuDoc.numPages;
+    if (document.activeElement !== inpHal) inpHal.value = bukuHal;
     document.getElementById("btnHalSebelum").disabled = bukuHal <= 1;
     document.getElementById("btnHalBerikut").disabled = bukuHal >= bukuDoc.numPages;
     try { localStorage.setItem("prata_buku_halaman", JSON.stringify(bukuHal)); } catch (e) {}
@@ -3528,6 +3538,19 @@ function bukuGeser(delta) {
   bukuHal = t;
   gambarHalamanBuku();
 }
+function loncatKeHalaman() {
+  if (!bukuDoc) return;
+  var inp = document.getElementById("inputLoncatHal");
+  var t = parseInt(inp.value, 10);
+  if (isNaN(t)) { inp.value = bukuHal; return; }
+  t = Math.max(1, Math.min(bukuDoc.numPages, t));
+  inp.value = t;
+  if (t !== bukuHal) { bukuHal = t; gambarHalamanBuku(); }
+  inp.blur();
+}
+document.getElementById("btnLoncatHal").addEventListener("click", loncatKeHalaman);
+document.getElementById("inputLoncatHal").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); loncatKeHalaman(); } });
+document.getElementById("inputLoncatHal").addEventListener("focus", function () { this.select(); });
 document.getElementById("btnHalSebelum").addEventListener("click", function () { bukuGeser(-1); });
 document.getElementById("btnHalBerikut").addEventListener("click", function () { bukuGeser(1); });
 document.getElementById("btnTutupBuku").addEventListener("click", function () { document.getElementById("penampilBuku").hidden = true; });
