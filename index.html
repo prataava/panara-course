@@ -726,6 +726,16 @@
     <div class="segmen" id="segmenMesin">
       <button data-mesin="online" class="aktif">AI Gratis (Online)</button>
       <button data-mesin="offline">Bank Pembahasan (Offline)</button>
+      <button data-mesin="vikey">AI Asli (DeepSeek)</button>
+    </div>
+    <div class="kartu" id="kartuKunciAI" hidden style="margin-bottom:12px;">
+      <h2 class="judul-bagian">AI Asli — DeepSeek via Vikey</h2>
+      <p class="sub" style="margin-bottom:9px;">Mesin ini memakai kunci API Vikey milikmu sendiri (berbayar dari saldo Vikey-mu, sekitar Rp12 per pertanyaan). Kunci hanya tersimpan di perangkat ini — tidak dikirim ke server PRATA dan tidak ikut tersinkron ke akunmu.</p>
+      <div class="bar-tambah" style="margin-top:0;">
+        <input class="isi" id="isiKunciAI" type="password" placeholder="Tempel kunci API Vikey-mu…" autocomplete="off">
+        <button class="btn laut" id="btnSimpanKunciAI">Simpan</button>
+      </div>
+      <p class="sub" id="statusKunciAI" style="margin-top:8px;">Belum ada kunci tersimpan di perangkat ini.</p>
     </div>
     <div class="alur-chat" id="alurChat"></div>
     <div class="bar-kirim">
@@ -1900,7 +1910,20 @@ document.getElementById("segmenMesin").addEventListener("click", function (e) {
   if (!b) return;
   mesinAI = b.getAttribute("data-mesin");
   document.querySelectorAll("#segmenMesin button").forEach(function (x) { x.classList.toggle("aktif", x === b); });
+  document.getElementById("kartuKunciAI").hidden = mesinAI !== "vikey";
 });
+function segarkanStatusKunci() {
+  var ada = !!((localStorage.getItem("prata_kunci_ai") || "").trim());
+  document.getElementById("statusKunciAI").textContent = ada ? "Kunci tersimpan di perangkat ini. Mesin AI Asli siap dipakai." : "Belum ada kunci tersimpan di perangkat ini.";
+  document.getElementById("btnSimpanKunciAI").textContent = ada ? "Ganti Kunci" : "Simpan";
+}
+document.getElementById("btnSimpanKunciAI").addEventListener("click", function () {
+  var v = document.getElementById("isiKunciAI").value.trim();
+  if (v) localStorage.setItem("prata_kunci_ai", v); else localStorage.removeItem("prata_kunci_ai");
+  document.getElementById("isiKunciAI").value = "";
+  segarkanStatusKunci();
+});
+segarkanStatusKunci();
 function gambarChat() {
   var d = dataUser();
   var alur = document.getElementById("alurChat");
@@ -2004,6 +2027,26 @@ document.getElementById("btnKirimTanya").addEventListener("click", kirimTanya);
 document.getElementById("isiTanya").addEventListener("keydown", function (e) {
   if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); kirimTanya(); }
 });
+function tanyaVikey(teks) {
+  var kunci = (localStorage.getItem("prata_kunci_ai") || "").trim();
+  if (!kunci) return Promise.reject(new Error("belum ada kunci"));
+  var perintah = "Kamu adalah tutor persiapan SKD sekolah kedinasan Indonesia (TWK, TIU, TKP). Jawab dalam Bahasa Indonesia, singkat dan jelas, sertakan kunci jawaban dan cara/penjelasannya. Fakta yang wajib akurat — lima sila Pancasila berurutan: 1. Ketuhanan Yang Maha Esa; 2. Kemanusiaan yang Adil dan Beradab; 3. Persatuan Indonesia; 4. Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan; 5. Keadilan Sosial bagi Seluruh Rakyat Indonesia. Bila tidak yakin atas suatu fakta, katakan tidak tahu, jangan mengarang. Pertanyaan siswa: " + teks;
+  var kontrol = new AbortController();
+  var habis = setTimeout(function () { kontrol.abort(); }, 45000);
+  return fetch("https://api.vikey.ai/v1/chat/completions", {
+    method: "POST", signal: kontrol.signal,
+    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + kunci },
+    body: JSON.stringify({ model: "vikey/deepseek-v4.1-flash-uncensored", messages: [{ role: "user", content: perintah }], max_tokens: 800 })
+  }).then(function (r) {
+    clearTimeout(habis);
+    if (!r.ok) throw new Error("gagal");
+    return r.json();
+  }).then(function (j) {
+    var isi = j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content;
+    if (!isi) throw new Error("kosong");
+    return isi;
+  });
+}
 function kirimTanya() {
   var inp = document.getElementById("isiTanya");
   var teks = inp.value.trim();
@@ -2017,7 +2060,7 @@ function kirimTanya() {
   var alur = document.getElementById("alurChat");
   var tunggu = document.createElement("div");
   tunggu.className = "gelembung ai"; tunggu.id = "gelembungTunggu";
-  tunggu.textContent = mesinAI === "online" ? "Sedang bertanya ke AI gratis…" : "Sedang mencari di bank pembahasan…";
+  tunggu.textContent = mesinAI === "online" ? "Sedang bertanya ke AI gratis…" : mesinAI === "vikey" ? "Sedang bertanya ke DeepSeek (AI asli)…" : "Sedang mencari di bank pembahasan…";
   alur.appendChild(tunggu);
   tunggu.scrollIntoView({ block: "end" });
   var simpanJawaban = function (jawaban, sumber) {
@@ -2035,6 +2078,16 @@ function kirimTanya() {
   }
   if (cariBankKuat(teks)) {
     setTimeout(function () { simpanJawaban(cariOffline(teks), "BANK SOAL PRATA (TERVERIFIKASI)"); }, 350);
+    return;
+  }
+  if (mesinAI === "vikey") {
+    tanyaVikey(teks).then(function (jawaban) {
+      simpanJawaban(jawaban, "DEEPSEEK VIA VIKEY (AI ASLI)");
+    }).catch(function () {
+      var kunciAda = !!((localStorage.getItem("prata_kunci_ai") || "").trim());
+      var sebab = kunciAda ? "DeepSeek sedang tidak terjangkau atau kunci API ditolak" : "belum ada kunci API Vikey tersimpan — pilih mesin AI Asli lalu isi kuncimu pada kartu pengaturan di atas";
+      simpanJawaban(cariOffline(teks) + "\n\n(Catatan: " + sebab + " — jawaban di atas berasal dari Bank Pembahasan offline.)", "BANK PEMBAHASAN (OFFLINE)");
+    });
     return;
   }
   tanyaOnline(teks).then(function (jawaban) {
