@@ -594,6 +594,13 @@
       <p class="sub" id="teksFokus" style="margin-bottom:11px;">Berdasarkan rata-rata skormu sejauh ini.</p>
       <button class="btn laut" id="btnFokusLatihan">Mulai Latihan Fokus</button>
     </div>
+    <div class="kartu" id="kartuRencana">
+      <h2 class="judul-bagian">Rencana Belajar 7 Hari</h2>
+      <p class="sub" id="dasarRencana" style="margin-bottom:10px;"></p>
+      <div id="isiRencana"></div>
+      <button class="btn emas lebar" id="btnTerapkanRencana" style="margin-top:12px;">Terapkan Tugas Hari Ini ke Checklist</button>
+      <div class="sub" id="statusRencana" style="margin-top:8px;"></div>
+    </div>
     <div class="kartu" id="kartuTantangan">
       <h2 class="judul-bagian">Tantangan Harian</h2>
       <p class="sub" id="teksTantangan" style="margin-bottom:11px;">Lima soal acak pilihan hari ini dari seluruh bank soal.</p>
@@ -1791,6 +1798,7 @@ function segarkanBeranda() {
   document.getElementById("btnTantangan").hidden = !!sudahT;
   var stF = d.statistik || {};
   if (!fokusTimer.jalan) document.getElementById("statusFokus").textContent = (stF.fokusSesi || 0) > 0 ? "Total sesi fokus selesai: " + stF.fokusSesi + " sesi (" + (stF.fokusMenit || 0) + " menit)." : "Belum ada sesi fokus yang selesai — mulai dari 15 menit dulu.";
+  gambarRencana();
 }
 document.getElementById("btnKeCekRingkas").addEventListener("click", function () { pergi("ceklist"); });
 document.getElementById("btnFokusLatihan").addEventListener("click", function () {
@@ -2005,6 +2013,98 @@ function gambarPerbandingan() {
     wadah.appendChild(baris);
   });
 }
+
+var rencanaHariIni = [];
+function susunRencana(d) {
+  var agg = {}, aggM = {};
+  (d.riwayatDetail || []).forEach(function (r) {
+    Object.keys(r.perSub || {}).forEach(function (k) {
+      if (!agg[k]) agg[k] = { b: 0, t: 0 };
+      agg[k].b += r.perSub[k].b || 0; agg[k].t += r.perSub[k].t || 0;
+      var m = k.split(" — ")[0];
+      if (["TWK", "TIU", "TKP"].indexOf(m) >= 0) {
+        if (!aggM[m]) aggM[m] = { b: 0, t: 0 };
+        aggM[m].b += r.perSub[k].b || 0; aggM[m].t += r.perSub[k].t || 0;
+      }
+    });
+  });
+  var urutanMapel = ["TWK", "TIU", "TKP"].slice().sort(function (a, b) {
+    var pa = aggM[a] && aggM[a].t >= 3 ? aggM[a].b / aggM[a].t : -1;
+    var pb = aggM[b] && aggM[b].t >= 3 ? aggM[b].b / aggM[b].t : -1;
+    return pa - pb;
+  });
+  var subsLemah = Object.keys(agg).filter(function (k) { return agg[k].t >= 2; })
+    .sort(function (a, b) { return (agg[a].b / agg[a].t) - (agg[b].b / agg[b].t); }).slice(0, 3)
+    .map(function (k) { return { nama: k, pct: Math.round(agg[k].b / agg[k].t * 100) }; });
+  var tempo = 0;
+  try { tempo = daftarSalahJatuhTempo().length; } catch (e) {}
+  var sisaHari = null;
+  if (d.target && d.target.tgl) {
+    var tT = new Date(d.target.tgl + "T00:00:00");
+    if (!isNaN(tT)) sisaHari = Math.round((tT - new Date(new Date().toDateString())) / 86400000);
+  }
+  var sesi = "1 sesi latihan (15–20 soal)";
+  if (sisaHari !== null && sisaHari <= 30) sesi = "2 sesi latihan";
+  if (sisaHari !== null && sisaHari <= 7) sesi = "2 sesi latihan + ulangi kesalahan harian";
+  var namaHari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+  var rencana = [];
+  for (var h = 0; h < 7; h++) {
+    var tgl = new Date(); tgl.setDate(tgl.getDate() + h);
+    var labelHari = (h === 0 ? "Hari ini" : namaHari[tgl.getDay()]) + ", " + tgl.toLocaleDateString("id-ID", { day: "numeric", month: "short" });
+    var tugasHari = [];
+    if (h === 6) {
+      tugasHari.push("Simulasi Mini untuk mengukur kemajuan minggu ini");
+      tugasHari.push("Baca Prediksi Kesiapan & Perbandingan Simulasi di Riwayat, lalu sesuaikan fokus minggu depan");
+    } else {
+      var mapelHari = (h === 0 || h === 2 || h === 4) ? urutanMapel[0] : ((h === 1 || h === 5) ? urutanMapel[1] : urutanMapel[2]);
+      var subUntuk = null;
+      for (var si = 0; si < subsLemah.length; si++) { if (subsLemah[si].nama.split(" — ")[0] === mapelHari) { subUntuk = subsLemah[si]; break; } }
+      tugasHari.push("Latihan " + mapelHari + ": " + sesi + (subUntuk ? " — bidik sub-materi " + subUntuk.nama.split(" — ")[1] + " (barumu " + subUntuk.pct + "% benar)" : ""));
+      if (h === 0) {
+        tugasHari.push("Selesaikan Tantangan Harian (5 soal)");
+        if (tempo > 0) tugasHari.push("Ulangi Kesalahan: " + tempo + " soal jatuh tempo di Kotak Leitner");
+      }
+      if (h === 3) tugasHari.push("Kerjakan Flashcard dari Kotak Leitner (10–15 kartu)");
+    }
+    rencana.push({ hari: labelHari, tugas: tugasHari });
+  }
+  return { rencana: rencana, urutanMapel: urutanMapel, subsLemah: subsLemah, sisaHari: sisaHari, adaData: Object.keys(agg).length > 0 };
+}
+function gambarRencana() {
+  var kartu = document.getElementById("kartuRencana"), isi = document.getElementById("isiRencana"), dasar = document.getElementById("dasarRencana");
+  if (!kartu || !isi) return;
+  var d = dataUser();
+  var R = susunRencana(d);
+  if (dasar) {
+    dasar.textContent = R.adaData
+      ? "Disusun otomatis dari data nyatamu: prioritas mapel " + R.urutanMapel.join(" → ") + (R.subsLemah.length ? "; sub-materi terlemah: " + R.subsLemah[0].nama + " (" + R.subsLemah[0].pct + "% benar)" : "") + (R.sisaHari !== null ? "; target ujian " + (R.sisaHari >= 0 ? R.sisaHari + " hari lagi" : "sudah lewat — perbarui tanggalnya di Info & Jadwal") : "; atur tanggal target di Info & Jadwal agar intensitas menyesuaikan") + ". Ini kerangka belajar, bukan jadwal kaku — sesuaikan dengan waktumu."
+      : "Belum ada data latihan terperinci, jadi rencana memakai rotasi seimbang. Selesaikan satu latihan agar rencana berikutnya disusun dari kelemahan nyatamu.";
+  }
+  isi.innerHTML = "";
+  R.rencana.forEach(function (r) {
+    var blok = document.createElement("div");
+    blok.style.cssText = "padding:8px 0;border-bottom:1px solid var(--garis);";
+    var j = document.createElement("b"); j.textContent = r.hari;
+    blok.appendChild(j);
+    r.tugas.forEach(function (t) {
+      var baris = document.createElement("div"); baris.className = "sub"; baris.textContent = "• " + t;
+      blok.appendChild(baris);
+    });
+    isi.appendChild(blok);
+  });
+  rencanaHariIni = R.rencana[0] ? R.rencana[0].tugas : [];
+}
+document.getElementById("btnTerapkanRencana").addEventListener("click", function () {
+  var d = dataUser();
+  var ditambah = 0;
+  (rencanaHariIni || []).forEach(function (t) {
+    var sudah = (d.tugas || []).some(function (x) { return x.t === t && !x.selesai; });
+    if (!sudah) { d.tugas.push({ t: t, selesai: false, sumber: "rencana" }); ditambah++; }
+  });
+  if (ditambah) { simpanDataUser(d); gambarBeranda(); }
+  var st = document.getElementById("statusRencana");
+  if (st) st.textContent = ditambah ? ditambah + " tugas hari ini ditambahkan ke Checklist ✓ — buka menu Checklist untuk mencentangnya." : "Tugas hari ini sudah ada di Checklist — tidak diduplikat.";
+});
 
 function gambarRiwayat() {
   var d = dataUser();
@@ -3567,7 +3667,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v27";
+var VERSI_APP = "prata-v28";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
