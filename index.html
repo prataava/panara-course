@@ -258,6 +258,70 @@
   .item-soal .panel{padding:0 14px 14px; font-size:13.5px; line-height:1.65;}
   .item-soal .panel .opsi-kecil{color:var(--redup); white-space:pre-wrap; margin:6px 0;}
   .item-soal .panel .kunci{font-weight:800; color:var(--laut);}
+
+  /* ---------- v3: dark mode, portal gabungan, flashcard, statistik ---------- */
+  body.gelap{
+    --kertas:#12161f; --kartu:#1c222e; --tinta:#e8eaf0; --redup:#9aa3b2;
+    --garis:#333c4d; --laut:#8fb4ff;
+  }
+  body.gelap .kartu, body.gelap .menu-item, body.gelap .item-soal{background:var(--kartu);}
+  body.gelap input.isi, body.gelap textarea.isi{background:#232a38; color:var(--tinta); border-color:var(--garis);}
+  body.gelap .opsi{background:#232a38; color:var(--tinta);}
+  body.gelap .opsi .huruf{background:#2c3547; color:#cfe0ff;}
+  body.gelap .nav-kuis .btn, body.gelap .kepala-kuis .mundur{background:#232a38; color:var(--tinta);}
+  body.gelap nav.bawah{background:rgba(24,29,40,.97);}
+  body.gelap nav.bawah button.aktif{background:#26324a; color:#cfe0ff;}
+  body.gelap .rincian .sel, body.gelap .gelembung.ai{background:#232a38;}
+  body.gelap .bahas, body.gelap .hasil-alat{background:#1d2b23; color:#cdeeda; border-color:#2f4a3a;}
+  body.gelap footer.kaki{color:var(--redup);}
+  body.gelap .memuat-portal{background:#171c26; color:var(--tinta);}
+
+  .tab-portal{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;}
+  .tab-portal button{
+    border:1.5px solid var(--garis); background:var(--kartu); color:var(--tinta);
+    border-radius:999px; padding:9px 14px; font-size:13px; font-weight:700;
+  }
+  .tab-portal button.aktif{background:var(--laut); color:#fff; border-color:var(--laut);}
+  body.gelap .tab-portal button.aktif{color:#0d1930;}
+  .bingkai-portal{
+    position:relative; border:1px solid var(--garis); border-radius:14px; overflow:hidden;
+    background:#fff; height:62vh; min-height:380px;
+  }
+  .bingkai-portal iframe{width:100%; height:100%; border:0; display:block;}
+  .split-portal{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  .split-portal .bingkai-portal{height:52vh;}
+  @media (max-width:640px){ .split-portal{grid-template-columns:1fr;} .split-portal .bingkai-portal{height:44vh;} }
+  .bar-alat-portal{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;}
+  .bar-alat-portal .btn{min-height:42px; padding:8px 13px; font-size:13px;}
+
+  .flashcard{
+    background:linear-gradient(135deg,var(--laut2),var(--laut3)); color:#fff;
+    border-radius:18px; padding:24px 20px; min-height:230px; cursor:pointer;
+    display:flex; flex-direction:column; justify-content:center; gap:12px;
+    box-shadow:0 10px 26px rgba(13,25,48,.3); text-align:left; width:100%; border:none;
+  }
+  .flashcard .depan{font-size:16.5px; line-height:1.65; white-space:pre-wrap;}
+  .flashcard .petunjuk{font-size:11.5px; opacity:.75; font-weight:700; letter-spacing:.5px;}
+  .flashcard .jawab{font-size:14.5px; line-height:1.65; white-space:pre-wrap; background:rgba(255,255,255,.1); border-radius:12px; padding:12px 13px;}
+
+  .grafik{display:flex; align-items:flex-end; gap:7px; height:130px; padding-top:8px;}
+  .grafik .kolom{flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; height:100%; justify-content:flex-end;}
+  .grafik .balok{width:100%; max-width:38px; background:var(--emas); border-radius:7px 7px 3px 3px; min-height:5px;}
+  .grafik .lbl{font-size:9.5px; color:var(--redup); text-align:center; line-height:1.3;}
+  .bintang{
+    background:none; border:none; font-size:19px; padding:2px 4px; line-height:1;
+  }
+  textarea.catatan{
+    width:100%; margin-top:9px; padding:10px 11px; font-size:13.5px; border:1.5px solid var(--garis);
+    border-radius:11px; background:#fcfbf8; color:var(--tinta); resize:vertical; min-height:56px;
+  }
+  body.gelap textarea.catatan{background:#232a38;}
+  @media (max-width:480px){
+    .merekapp .tg{display:none;}
+    .chip-user{max-width:30vw; padding:6px 8px;}
+    header.bilah{gap:7px; padding:12px 10px 10px;}
+    .btn-tampilan{padding:6px 9px;}
+  }
 </style>
 </head>
 <body>
@@ -275,6 +339,7 @@
   <button class="btn-keluar" id="btnPasang" hidden>📲 Pasang App</button>
   <button class="btn-tampilan" id="btnModeHp" title="Mode HP: tampilan seperti aplikasi di HP (kolom sempit di tengah layar)">📱</button>
   <button class="btn-tampilan" id="btnLayar" title="Layar penuh">⛶</button>
+  <button class="btn-tampilan" id="btnGelap" title="Mode gelap / terang">🌙</button>
 </header>
 
 <main class="panggung">
@@ -376,16 +441,34 @@
         <span class="nm">Daftar Soal Lengkap</span>
         <span class="ds">Semua 36 soal bisa dicari &amp; dibuka kunci + pembahasannya.</span>
       </button>
+      <button class="menu-item" data-pergi="flashcard">
+        <span class="ikon">🃏</span>
+        <span class="nm">Flashcard</span>
+        <span class="ds">Kartu hafalan soal &amp; fakta penting — ketuk untuk membalik jawabannya.</span>
+      </button>
+      <button class="menu-item" data-pergi="info">
+        <span class="ikon">📅</span>
+        <span class="nm">Info &amp; Jadwal</span>
+        <span class="ds">Hitung mundur target seleksimu + info tahapan &amp; berkas kedinasan.</span>
+      </button>
       <button class="menu-item" data-pergi="portal" style="grid-column:1 / -1;">
-        <span class="ikon">🎓</span>
-        <span class="nm">Portal NF</span>
-        <span class="ds">Buka Portal NF (SIP Bimbel Nurul Fikri) — peluncur satu ketukmu yang lain.</span>
+        <span class="ikon">🌐</span>
+        <span class="nm">Portal Gabungan (Panara + NF)</span>
+        <span class="ds">Login Panara Course &amp; SIP Nurul Fikri dalam satu tempat — bisa tab atau split view, ada zoom &amp; muat ulang cepat.</span>
       </button>
     </div>
   </section>
 
   <!-- ======== PILIH LATIHAN ======== -->
   <section class="tampilan" id="view-latihan" hidden>
+    <div class="kartu" id="kartuLanjut" hidden style="border-color:var(--emas); background:#fdf6e7;">
+      <h2 class="judul-bagian">⏸️ Ada sesi yang belum selesai</h2>
+      <p class="sub" id="teksLanjut" style="margin-bottom:11px;">Sesi kuis terakhir kamu tersimpan otomatis.</p>
+      <div style="display:flex; gap:9px; flex-wrap:wrap;">
+        <button class="btn emas" id="btnLanjutkanKuis">Lanjutkan Sesi</button>
+        <button class="btn" id="btnBuangKuis">Buang &amp; Mulai Baru</button>
+      </div>
+    </div>
     <div class="kepala-kuis">
       <button class="mundur" data-pergi="beranda">← Beranda</button>
       <span class="info-kuis">Pilih kategori latihan</span>
@@ -414,7 +497,12 @@
       <span class="kat-chip" id="chipKategori">TWK</span>
       <div class="soal-teks" id="teksSoal"></div>
       <div id="wadahOpsi"></div>
-      <div class="bahas" id="kotakBahas" hidden><span class="tt">💡 Pembahasan</span><span id="teksBahas"></span></div>
+      <div class="bahas" id="kotakBahas" hidden><span class="tt">💡 Pembahasan</span><span id="teksBahas"></span>
+        <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
+          <button class="btn kecil" id="btnBacakanBahas">🔊 Bacakan</button>
+          <button class="btn kecil" id="btnTanyaBahas">🤖 Tanya AI: kenapa jawabannya ini?</button>
+        </div>
+      </div>
       <div class="nav-kuis">
         <button class="btn" id="btnSoalSebelum">← Sebelumnya</button>
         <button class="btn emas" id="btnSoalLanjut">Berikutnya →</button>
@@ -455,6 +543,11 @@
     <div class="bar-kirim">
       <textarea class="isi" id="isiTanya" rows="2" placeholder="Tulis soal atau pertanyaanmu… mis. 'Berapa 15% dari 240?' atau 'Apa isi Pasal 1 UUD 1945?'"></textarea>
       <button class="btn emas" id="btnKirimTanya">Kirim</button>
+    </div>
+    <div style="display:flex; gap:9px; align-items:center; margin-top:10px; flex-wrap:wrap;">
+      <label class="btn kecil" for="inputOcr" style="margin:0;">📷 Baca Soal dari Foto/ Screenshot</label>
+      <input type="file" id="inputOcr" accept="image/*" hidden>
+      <span class="sub" id="statusOcr"></span>
     </div>
     <p class="sub" style="margin-top:10px;">Mode online memakai layanan AI gratis publik — kadang lambat atau penuh; kalau gagal, jawaban dari Bank Pembahasan tetap diberikan. Selalu cek ulang jawaban AI dengan pembahasan resmi.</p>
   </section>
@@ -504,6 +597,16 @@
     <div class="kepala-kuis">
       <button class="mundur" data-pergi="beranda">← Beranda</button>
       <span class="info-kuis">Riwayat Skor</span>
+    </div>
+    <div class="kartu" id="kartuGrafik" hidden>
+      <h2 class="judul-bagian">📊 Grafik Progres Skor</h2>
+      <div class="grafik" id="grafikSkor"></div>
+      <p class="sub">Sepuluh sesi terakhirmu — makin tinggi baloknya, makin besar skornya.</p>
+    </div>
+    <div class="kartu" id="kartuPapan" hidden>
+      <h2 class="judul-bagian">🏆 Peringkat di Perangkat Ini</h2>
+      <div id="daftarPapan"></div>
+      <p class="sub" style="margin-top:8px;">Berdasarkan skor Simulasi Mini terbaik tiap akun yang terdaftar di perangkat ini.</p>
     </div>
     <div class="kartu"><div id="daftarRiwayat"></div></div>
   </section>
@@ -560,6 +663,18 @@
     </div>
 
     <div class="kartu">
+      <h2 class="judul-bagian">🎯 Kalkulator Skor SKD</h2>
+      <p class="sub" style="margin-bottom:11px;">Hitung skor SKD dari jumlah jawaban benar (TWK &amp; TIU: 5 poin per soal benar) dan poin TKP, lalu bandingkan dengan passing grade yang umum diberlakukan BKN (TWK 65 • TIU 80 • TKP 166).</p>
+      <div class="alat-grid">
+        <input class="isi" id="skdTwk" type="number" inputmode="numeric" placeholder="Benar TWK (dari 30)">
+        <input class="isi" id="skdTiu" type="number" inputmode="numeric" placeholder="Benar TIU (dari 35)">
+        <input class="isi penuh" id="skdTkp" type="number" inputmode="numeric" placeholder="Total poin TKP (maks 225)">
+      </div>
+      <button class="btn laut lebar" id="btnSkd" style="margin-top:10px;">Hitung Skor SKD</button>
+      <div class="hasil-alat" id="hasilSkd" hidden></div>
+    </div>
+
+    <div class="kartu">
       <h2 class="judul-bagian">⚡ Daftar Cepat</h2>
       <div id="daftarCepat"></div>
     </div>
@@ -578,9 +693,96 @@
         <button data-katsoal="TWK">TWK</button>
         <button data-katsoal="TIU">TIU</button>
         <button data-katsoal="TKP">TKP</button>
+        <button data-katsoal="TANDA">★ Ditandai</button>
       </div>
     </div>
     <div id="wadahDaftarSoal"></div>
+  </section>
+
+  <!-- ======== PORTAL GABUNGAN ======== -->
+  <section class="tampilan" id="view-portal" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">← Beranda</button>
+      <span class="info-kuis">Portal Gabungan — Panara &amp; NF</span>
+    </div>
+    <div class="tab-portal" id="tabPortal">
+      <button data-tabportal="https://panara.my.id/login" class="aktif">🔐 Login Panara</button>
+      <button data-tabportal="https://panara.my.id/dashboard">🎓 Dashboard Panara</button>
+      <button data-tabportal="https://sip.bimbelnurulfikri.id/login">📗 Login NF</button>
+      <button data-tabportal="split">🪟 Split View</button>
+    </div>
+    <div class="bar-alat-portal">
+      <button class="btn" id="btnPortalUlang">↻ Muat Ulang</button>
+      <button class="btn" id="btnPortalZoomMin">🔍− Zoom</button>
+      <button class="btn" id="btnPortalZoomPlus">🔍＋ Zoom</button>
+      <button class="btn" id="btnPortalPenuh">⛶ Layar Penuh</button>
+      <button class="btn" id="btnPortalTabBaru">↗ Buka di Tab Baru</button>
+    </div>
+    <div id="portalTunggal">
+      <div class="bingkai-portal" id="bingkaiBungkus">
+        <iframe id="bingkaiPortal" src="https://panara.my.id/login" title="Portal situs" allow="clipboard-write; fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+    <div id="portalSplit" class="split-portal" hidden>
+      <div class="bingkai-portal"><iframe id="bingkaiSplitA" title="Panara Login" allow="clipboard-write; fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      <div class="bingkai-portal"><iframe id="bingkaiSplitB" title="NF Login" allow="clipboard-write; fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    </div>
+    <p class="sub" style="margin-top:11px;">Catatan jujur: keadaan login (sesi/cookie) tersimpan di situs masing-masing — Panara di panara.my.id, NF di sip.bimbelnurulfikri.id. Portal ini tidak bisa menyimpan atau memindahkan sesi mereka; kalau login di dalam bingkai mental, pakai "↗ Buka di Tab Baru" untuk masuk di halaman aslinya, persis seperti memakai situsnya langsung.</p>
+  </section>
+
+  <!-- ======== FLASHCARD ======== -->
+  <section class="tampilan" id="view-flashcard" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">← Beranda</button>
+      <span class="info-kuis" id="infoFlash">Flashcard 1</span>
+    </div>
+    <div class="segmen" id="segmenFlash">
+      <button data-flash="soal" class="aktif">📝 Dari Bank Soal</button>
+      <button data-flash="tanda">★ Soal Ditandai</button>
+    </div>
+    <button class="flashcard" id="kartuFlash">
+      <span class="petunjuk" id="flashPetunjuk">KETUK KARTU UNTUK MELIHAT JAWABAN</span>
+      <span class="depan" id="flashDepan"></span>
+      <span class="jawab" id="flashJawab" hidden></span>
+    </button>
+    <div class="nav-kuis">
+      <button class="btn" id="btnFlashSebelum">← Sebelumnya</button>
+      <button class="btn" id="btnFlashAcak">🔀 Acak</button>
+      <button class="btn emas" id="btnFlashLanjut">Berikutnya →</button>
+    </div>
+    <p class="sub" style="margin-top:11px;">Tandai soal dengan ★ di Daftar Soal untuk membuat set flashcard khusus dari soal-soal yang kamu anggap penting/sulit.</p>
+  </section>
+
+  <!-- ======== INFO & JADWAL ======== -->
+  <section class="tampilan" id="view-info" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">← Beranda</button>
+      <span class="info-kuis">Info &amp; Jadwal Kedinasan</span>
+    </div>
+    <div class="kartu">
+      <h2 class="judul-bagian">🎯 Target Seleksiku</h2>
+      <label class="lbl" for="targetNama">Nama seleksi / sekolah kedinasan</label>
+      <input class="isi" id="targetNama" type="text" placeholder="Mis. STAN — SKD 2027">
+      <label class="lbl" for="targetTgl">Tanggal ujian (perkiraan)</label>
+      <input class="isi" id="targetTgl" type="date">
+      <button class="btn emas lebar" id="btnSimpanTarget" style="margin-top:13px;">Simpan Target</button>
+      <div class="skor-besar" id="hitungMundur" style="margin-top:10px;">—</div>
+      <div class="sub" style="text-align:center;" id="hitungMundurTeks">Atur targetmu untuk melihat hitung mundur di sini.</div>
+    </div>
+    <div class="kartu">
+      <h2 class="judul-bagian">🧭 Tahapan Seleksi (Gambaran Umum)</h2>
+      <div class="materi-isi">1. PENDAFTARAN &amp; SELEKSI ADMINISTRASI
+Daftar lewat portal SSCASN (sscasn.bkn.go.id) atau portal resmi sekolah kedinasan tujuan; unggah berkas sesuai syarat (KTP, KK, ijazah/rapor, pasfoto, dan syarat khusus tiap sekolah).
+
+2. SKD — Seleksi Kompetensi Dasar (CAT BKN)
+Tiga subtes: TWK (30 soal, maks 150), TIU (35 soal, maks 150), TKP (45 soal, maks 225). Nilai ambang batas (passing grade) yang pernah diberlakukan: TWK 65, TIU 80, TKP 166 — selalu cek ketentuan resmi tahun berjalan karena bisa berubah.
+
+3. SKB &amp; TAHAP LANJUTAN
+Tiap sekolah berbeda: bisa meliputi tes akademik lanjutan, kesehatan, kebugaran/jasmani, psikologi, dan wawancara. Bobot dan bentuknya mengikuti pengumuman resmi sekolah masing-masing.
+
+⚠️ Info di atas adalah gambaran umum untuk persiapan, bukan pengumuman resmi. Jadwal, syarat, dan passing grade yang sah selalu yang terbit di sscasn.bkn.go.id dan situs resmi sekolah kedinasan tujuan.</div>
+      <button class="btn laut lebar" data-pergi="ceklist" style="margin-top:13px;">✅ Buka Checklist Berkas &amp; Tugas</button>
+    </div>
   </section>
 
 </main>
@@ -680,15 +882,17 @@ var sesiUser = null;
 function dataUser() {
   var d = ambilJSON("panara_data_" + sesiUser, null);
   if (!d) {
-    d = { tugas: TUGAS_BAWAAN.map(function (t) { return { t: t.t, selesai: false, sumber: t.sumber }; }), riwayat: [], chat: [] };
+    d = { tugas: TUGAS_BAWAAN.map(function (t) { return { t: t.t, selesai: false, sumber: t.sumber }; }), riwayat: [], chat: [], tanda: {}, target: { nama: "", tgl: "" } };
     simpanJSON("panara_data_" + sesiUser, d);
   }
+  if (!d.tanda) d.tanda = {};
+  if (!d.target) d.target = { nama: "", tgl: "" };
   return d;
 }
 function simpanDataUser(d) { simpanJSON("panara_data_" + sesiUser, d); }
 
 /* ================= NAVIGASI ================= */
-var SEMUA_TAMPILAN = ["login","daftar","beranda","latihan","kuis","hasil","ai","ceklist","materi","materi-detail","riwayat","bantuan","daftarsoal"];
+var SEMUA_TAMPILAN = ["login","daftar","beranda","latihan","kuis","hasil","ai","ceklist","materi","materi-detail","riwayat","bantuan","daftarsoal","portal","flashcard","info"];
 function tampil(nama) {
   SEMUA_TAMPILAN.forEach(function (v) {
     var el = document.getElementById("view-" + v);
@@ -702,6 +906,9 @@ function tampil(nama) {
   });
   if (nama === "beranda") segarkanBeranda();
   if (nama === "ceklist") gambarTugas();
+  if (nama === "latihan") cekSesiKuisTersimpan();
+  if (nama === "flashcard") gambarFlash();
+  if (nama === "info") gambarInfo();
   if (nama === "bantuan") gambarDaftarCepat();
   if (nama === "daftarsoal") gambarDaftarSoal();
   if (nama === "materi") gambarMateri();
@@ -711,7 +918,6 @@ function tampil(nama) {
 }
 function pergi(nama) {
   if (!sesiUser && nama !== "login" && nama !== "daftar") { tampil("login"); return; }
-  if (nama === "portal") { window.open("https://prataava.github.io/portal-nf/", "_blank", "noopener"); return; }
   if (nama === "simulasi") { tampil("latihan"); return; }
   tampil(nama);
 }
@@ -863,10 +1069,101 @@ function gambarRiwayat() {
     baris.appendChild(kiri); baris.appendChild(skor);
     wadah.appendChild(baris);
   });
+  // Grafik progres (10 sesi terakhir)
+  var kartuG = document.getElementById("kartuGrafik");
+  var grafik = document.getElementById("grafikSkor");
+  if (d.riwayat.length >= 2) {
+    kartuG.hidden = false;
+    grafik.innerHTML = "";
+    d.riwayat.slice(-10).forEach(function (r) {
+      var kolom = document.createElement("div"); kolom.className = "kolom";
+      var balok = document.createElement("div"); balok.className = "balok";
+      balok.style.height = Math.max(6, Math.round(r.poin / r.maks * 100)) + "%";
+      balok.title = r.label + ": " + r.poin + "/" + r.maks;
+      var lbl = document.createElement("div"); lbl.className = "lbl";
+      lbl.textContent = r.poin + "\n" + (r.tanggal.split("•")[0] || "");
+      kolom.appendChild(balok); kolom.appendChild(lbl);
+      grafik.appendChild(kolom);
+    });
+  } else { kartuG.hidden = true; }
+  // Papan peringkat lokal
+  var papan = ambilJSON("panara_papan", {});
+  var namaPapan = Object.keys(papan);
+  var kartuP = document.getElementById("kartuPapan");
+  if (namaPapan.length) {
+    kartuP.hidden = false;
+    var wadahP = document.getElementById("daftarPapan");
+    wadahP.innerHTML = "";
+    namaPapan.map(function (n) { return { nama: n, terbaik: papan[n].terbaik || 0, tanggal: papan[n].tanggal || "" }; })
+      .sort(function (a, b) { return b.terbaik - a.terbaik; })
+      .forEach(function (p, i) {
+        var baris = document.createElement("div"); baris.className = "baris-riwayat";
+        var kiri = document.createElement("div");
+        kiri.textContent = (["🥇","🥈","🥉"][i] || (i + 1) + ".") + " " + p.nama + (p.nama === sesiUser ? " (kamu)" : "");
+        kiri.style.fontWeight = p.nama === sesiUser ? "800" : "400";
+        var kanan = document.createElement("div"); kanan.className = "skor"; kanan.textContent = p.terbaik + " poin";
+        baris.appendChild(kiri); baris.appendChild(kanan);
+        wadahP.appendChild(baris);
+      });
+  } else { kartuP.hidden = true; }
 }
 
 /* ================= MESIN KUIS ================= */
 var kuis = null;
+var timerKuis = null;
+function formatWaktu(detik) {
+  var m = Math.floor(detik / 60), s = detik % 60;
+  return m + ":" + (s < 10 ? "0" : "") + s;
+}
+function teksInfoKuis() {
+  if (!kuis) return "";
+  var dasar = "Soal " + (kuis.posisi + 1) + " dari " + kuis.daftar.length + (kuis.mode === "latihan" ? " — Latihan " + kuis.kat : " — Simulasi Mini");
+  if (kuis.mode === "simulasi" && typeof kuis.sisaDetik === "number") dasar += " • ⏱ " + formatWaktu(Math.max(0, kuis.sisaDetik));
+  return dasar;
+}
+function mulaiTimerKuis() {
+  berhentiTimerKuis();
+  if (!kuis || kuis.mode !== "simulasi") return;
+  timerKuis = setInterval(function () {
+    if (!kuis) { berhentiTimerKuis(); return; }
+    kuis.sisaDetik--;
+    var el = document.getElementById("infoKuis");
+    if (el && !document.getElementById("view-kuis").hidden) el.textContent = teksInfoKuis();
+    if (kuis.sisaDetik <= 0) { berhentiTimerKuis(); selesaiKuis(); return; }
+    simpanKuisBerjalan();
+  }, 1000);
+}
+function berhentiTimerKuis() { if (timerKuis) { clearInterval(timerKuis); timerKuis = null; } }
+function simpanKuisBerjalan() {
+  if (kuis && sesiUser) simpanJSON("panara_kuisberjalan_" + sesiUser, kuis);
+}
+function hapusKuisBerjalan() {
+  if (sesiUser) { try { localStorage.removeItem("panara_kuisberjalan_" + sesiUser); } catch (e) {} }
+}
+function cekSesiKuisTersimpan() {
+  var kartu = document.getElementById("kartuLanjut");
+  if (!sesiUser) { kartu.hidden = true; return; }
+  var tersimpan = ambilJSON("panara_kuisberjalan_" + sesiUser, null);
+  if (tersimpan && tersimpan.daftar && tersimpan.daftar.length) {
+    kartu.hidden = false;
+    var terjawab = Object.keys(tersimpan.jawaban || {}).length;
+    document.getElementById("teksLanjut").textContent =
+      (tersimpan.mode === "simulasi" ? "Simulasi Mini" : "Latihan " + tersimpan.kat) +
+      " — baru terjawab " + terjawab + " dari " + tersimpan.daftar.length + " soal. Lanjutkan dari posisi terakhir?";
+  } else { kartu.hidden = true; }
+}
+document.getElementById("btnLanjutkanKuis").addEventListener("click", function () {
+  var tersimpan = ambilJSON("panara_kuisberjalan_" + sesiUser, null);
+  if (!tersimpan) return;
+  kuis = tersimpan;
+  tampil("kuis");
+  gambarSoal();
+  mulaiTimerKuis();
+});
+document.getElementById("btnBuangKuis").addEventListener("click", function () {
+  hapusKuisBerjalan();
+  document.getElementById("kartuLanjut").hidden = true;
+});
 function acak(arr) {
   var a = arr.slice();
   for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
@@ -879,12 +1176,13 @@ function mulaiKuis(mode, kat) {
   } else {
     daftar = acak(SOAL.map(function (s, i) { return i; }));
   }
-  kuis = { mode: mode, kat: kat || "Campuran", daftar: daftar, posisi: 0, jawaban: {} };
+  kuis = { mode: mode, kat: kat || "Campuran", daftar: daftar, posisi: 0, jawaban: {}, sisaDetik: mode === "simulasi" ? daftar.length * 55 : null };
   tampil("kuis");
   gambarSoal();
+  mulaiTimerKuis();
 }
 document.getElementById("btnMulaiSimulasi").addEventListener("click", function () { mulaiKuis("simulasi", "Campuran"); });
-document.getElementById("btnBerhentiKuis").addEventListener("click", function () { kuis = null; tampil("latihan"); });
+document.getElementById("btnBerhentiKuis").addEventListener("click", function () { berhentiTimerKuis(); hapusKuisBerjalan(); kuis = null; tampil("latihan"); });
 
 function gambarSoal() {
   if (!kuis) return;
@@ -892,7 +1190,7 @@ function gambarSoal() {
   var s = SOAL[idx];
   var sudahJawab = kuis.jawaban.hasOwnProperty(kuis.posisi);
   document.getElementById("chipKategori").textContent = (kuis.mode === "simulasi" ? "SIMULASI • " : "") + s.k;
-  document.getElementById("infoKuis").textContent = "Soal " + (kuis.posisi + 1) + " dari " + kuis.daftar.length + (kuis.mode === "latihan" ? " — Latihan " + kuis.kat : " — Simulasi Mini");
+  document.getElementById("infoKuis").textContent = teksInfoKuis();
   document.getElementById("teksSoal").textContent = s.t;
   var wadah = document.getElementById("wadahOpsi");
   wadah.innerHTML = "";
@@ -938,6 +1236,7 @@ function gambarSoal() {
     nb.addEventListener("click", function () { kuis.posisi = p; gambarSoal(); });
     grid.appendChild(nb);
   });
+  simpanKuisBerjalan();
 }
 document.getElementById("btnSoalSebelum").addEventListener("click", function () { if (kuis && kuis.posisi > 0) { kuis.posisi--; gambarSoal(); } });
 document.getElementById("btnSoalLanjut").addEventListener("click", function () {
@@ -965,6 +1264,15 @@ function selesaiKuis() {
   var d = dataUser();
   d.riwayat.push({ tanggal: tgl, label: label, poin: totalPoin, maks: totalMaks });
   simpanDataUser(d);
+  if (kuis.mode === "simulasi") {
+    var papan = ambilJSON("panara_papan", {});
+    if (!papan[sesiUser] || totalPoin > (papan[sesiUser].terbaik || 0)) {
+      papan[sesiUser] = { terbaik: totalPoin, tanggal: tgl };
+      simpanJSON("panara_papan", papan);
+    }
+  }
+  berhentiTimerKuis();
+  hapusKuisBerjalan();
 
   document.getElementById("judulHasil").textContent = "Hasil — " + label;
   document.getElementById("skorBesar").textContent = totalPoin;
@@ -1049,6 +1357,12 @@ function gambarChat() {
     }
     var tx = document.createElement("span"); tx.textContent = m.teks;
     g.appendChild(tx);
+    if (m.dari === "ai") {
+      var bb = document.createElement("button");
+      bb.className = "btn kecil"; bb.style.marginTop = "7px"; bb.textContent = "🔊 Bacakan";
+      bb.addEventListener("click", function () { bacakanTeks(m.teks); });
+      g.appendChild(bb);
+    }
     alur.appendChild(g);
   });
   alur.lastElementChild && alur.lastElementChild.scrollIntoView({ block: "end" });
@@ -1196,11 +1510,13 @@ function gambarDaftarSoal() {
   var cari = (document.getElementById("cariSoal").value || "").toLowerCase();
   var wadah = document.getElementById("wadahDaftarSoal");
   wadah.innerHTML = "";
+  var tandaUser = dataUser().tanda;
   var nomorPerKat = { TWK: 0, TIU: 0, TKP: 0 };
   var tampilCount = 0;
-  SOAL.forEach(function (s) {
+  SOAL.forEach(function (s, idxAsli) {
     nomorPerKat[s.k]++;
-    if (katSoalAktif !== "SEMUA" && s.k !== katSoalAktif) return;
+    if (katSoalAktif === "TANDA") { if (!(tandaUser[idxAsli] && tandaUser[idxAsli].bintang)) return; }
+    else if (katSoalAktif !== "SEMUA" && s.k !== katSoalAktif) return;
     if (cari && (s.t + " " + s.b + " " + s.o.join(" ")).toLowerCase().indexOf(cari) < 0) return;
     tampilCount++;
     var item = document.createElement("div"); item.className = "item-soal";
@@ -1218,6 +1534,30 @@ function gambarDaftarSoal() {
     var tb = document.createElement("span"); tb.textContent = s.b;
     bahas.appendChild(tt); bahas.appendChild(tb);
     panel.appendChild(opsiK); panel.appendChild(kunci); panel.appendChild(bahas);
+    var barisAlat = document.createElement("div");
+    barisAlat.style.display = "flex"; barisAlat.style.gap = "8px"; barisAlat.style.marginTop = "10px"; barisAlat.style.flexWrap = "wrap";
+    var btnBintang = document.createElement("button"); btnBintang.className = "btn kecil";
+    btnBintang.textContent = (tandaUser[idxAsli] && tandaUser[idxAsli].bintang) ? "★ Sudah Ditandai" : "☆ Tandai Soal";
+    btnBintang.addEventListener("click", function () {
+      var dd = dataUser();
+      if (!dd.tanda[idxAsli]) dd.tanda[idxAsli] = {};
+      dd.tanda[idxAsli].bintang = !dd.tanda[idxAsli].bintang;
+      simpanDataUser(dd); gambarDaftarSoal();
+    });
+    var btnTanyaSoal = document.createElement("button"); btnTanyaSoal.className = "btn kecil";
+    btnTanyaSoal.textContent = "🤖 Tanya AI soal ini";
+    btnTanyaSoal.addEventListener("click", function () { tanyaTentangSoal(idxAsli); });
+    barisAlat.appendChild(btnBintang); barisAlat.appendChild(btnTanyaSoal);
+    var catatan = document.createElement("textarea"); catatan.className = "catatan";
+    catatan.placeholder = "Catatan pribadi untuk soal ini… (tersimpan otomatis)";
+    catatan.value = (tandaUser[idxAsli] && tandaUser[idxAsli].catatan) || "";
+    catatan.addEventListener("change", function () {
+      var dd = dataUser();
+      if (!dd.tanda[idxAsli]) dd.tanda[idxAsli] = {};
+      dd.tanda[idxAsli].catatan = catatan.value;
+      simpanDataUser(dd);
+    });
+    panel.appendChild(barisAlat); panel.appendChild(catatan);
     kepala.addEventListener("click", function () { panel.hidden = !panel.hidden; });
     item.appendChild(kepala); item.appendChild(panel);
     wadah.appendChild(item);
@@ -1328,6 +1668,186 @@ btnModeHpEl.addEventListener("click", function () {
   terapkanModeHp(!document.body.classList.contains("mode-hp"));
 });
 if (ambilJSON("panara_modehp", "") === "1" || localStorage.getItem("panara_modehp") === "1") terapkanModeHp(true);
+
+/* ================= v3: SUARA, AI PEMBAHAS, OCR ================= */
+function bacakanTeks(teks) {
+  if (!("speechSynthesis" in window)) { alert("Browser ini tidak mendukung fitur bacakan suara."); return; }
+  window.speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(String(teks).slice(0, 700));
+  u.lang = "id-ID";
+  window.speechSynthesis.speak(u);
+}
+document.getElementById("btnBacakanBahas").addEventListener("click", function () {
+  bacakanTeks(document.getElementById("teksBahas").textContent);
+});
+function tanyaTentangSoal(idx) {
+  var s = SOAL[idx];
+  var kunciLabel = s.k === "TKP" ? "Pilihan terbaik" : "Kunci jawaban";
+  var prompt = "Jelaskan kenapa jawaban yang benar untuk soal " + s.k + " ini adalah " + "ABCDE"[s.j] + ", dan kenapa pilihan lain kurang tepat. Beri cara berpikirnya langkah demi langkah.\n\nSoal: " + s.t +
+    "\nPilihan:\n" + s.o.map(function (o, i) { return "ABCDE"[i] + ". " + o; }).join("\n") +
+    "\n" + kunciLabel + ": " + "ABCDE"[s.j] + " — " + s.o[s.j];
+  document.getElementById("isiTanya").value = prompt;
+  pergi("ai");
+  kirimTanya();
+}
+document.getElementById("btnTanyaBahas").addEventListener("click", function () {
+  if (kuis) tanyaTentangSoal(kuis.daftar[kuis.posisi]);
+});
+document.getElementById("inputOcr").addEventListener("change", function () {
+  var berkas = this.files && this.files[0];
+  var status = document.getElementById("statusOcr");
+  this.value = "";
+  if (!berkas) return;
+  status.textContent = "⏳ Membaca teks dari gambar… (perlu internet, biasanya 10–30 detik)";
+  var jalankan = function () {
+    window.Tesseract.recognize(berkas, "ind+eng").then(function (hasil) {
+      var teks = (hasil.data.text || "").trim();
+      if (teks) {
+        document.getElementById("isiTanya").value = teks;
+        status.textContent = "✓ Teks terbaca dan sudah masuk ke kotak pertanyaan — periksa dulu, lalu ketuk Kirim.";
+      } else {
+        status.textContent = "Teks tidak terbaca jelas dari gambar itu. Coba foto yang lebih terang dan lurus.";
+      }
+    }).catch(function () { status.textContent = "Gagal membaca gambar. Coba lagi, atau ketik soalnya manual."; });
+  };
+  if (window.Tesseract) { jalankan(); return; }
+  var sc = document.createElement("script");
+  sc.src = "https://cdn.jsdelivr.net/npm/tesseract.js@5.0.5/dist/tesseract.min.js";
+  sc.onload = jalankan;
+  sc.onerror = function () { status.textContent = "Pustaka OCR gagal dimuat (masalah internet?). Ketik soalnya manual ya."; };
+  document.head.appendChild(sc);
+});
+
+/* ================= v3: KALKULATOR SKD ================= */
+document.getElementById("btnSkd").addEventListener("click", function () {
+  var twk = angka(document.getElementById("skdTwk").value);
+  var tiu = angka(document.getElementById("skdTiu").value);
+  var tkp = angka(document.getElementById("skdTkp").value);
+  if (twk === null || tiu === null || tkp === null) { tampilHasil("hasilSkd", "Isi ketiga kotaknya dulu ya: benar TWK, benar TIU, dan poin TKP."); return; }
+  twk = Math.max(0, Math.min(30, twk)); tiu = Math.max(0, Math.min(35, tiu)); tkp = Math.max(0, Math.min(225, tkp));
+  var sTwk = twk * 5, sTiu = tiu * 5, total = sTwk + sTiu + tkp;
+  var lolos = function (v, pg) { return v >= pg ? "✓ di atas passing grade " + pg : "✗ di bawah passing grade " + pg; };
+  tampilHasil("hasilSkd",
+    "Skor kamu:\n• TWK: " + fmt(sTwk) + " dari 150 — " + lolos(sTwk, 65) + "\n• TIU: " + fmt(sTiu) + " dari 150 — " + lolos(sTiu, 80) + "\n• TKP: " + fmt(tkp) + " dari 225 — " + lolos(tkp, 166) + "\n• TOTAL: " + fmt(total) + " dari 525\n\nCatatan: passing grade di atas adalah ketentuan yang umum diberlakukan BKN (TWK 65, TIU 80, TKP 166). Selalu pastikan ketentuan resmi tahun berjalan di pengumuman SSCASN/sekolah tujuan.");
+});
+
+/* ================= v3: PORTAL GABUNGAN ================= */
+var urlPortalAktif = "https://panara.my.id/login";
+var zoomPortal = 1;
+function terapkanZoomPortal() {
+  document.querySelectorAll("#view-portal .bingkai-portal").forEach(function (el) { el.style.zoom = zoomPortal; });
+}
+document.getElementById("tabPortal").addEventListener("click", function (e) {
+  var b = e.target.closest("[data-tabportal]");
+  if (!b) return;
+  document.querySelectorAll("#tabPortal button").forEach(function (x) { x.classList.toggle("aktif", x === b); });
+  var v = b.getAttribute("data-tabportal");
+  var tunggal = document.getElementById("portalTunggal"), split = document.getElementById("portalSplit");
+  if (v === "split") {
+    tunggal.hidden = true; split.hidden = false;
+    var fa = document.getElementById("bingkaiSplitA"), fb = document.getElementById("bingkaiSplitB");
+    if (!fa.getAttribute("src")) fa.src = "https://panara.my.id/login";
+    if (!fb.getAttribute("src")) fb.src = "https://sip.bimbelnurulfikri.id/login";
+  } else {
+    split.hidden = true; tunggal.hidden = false;
+    urlPortalAktif = v;
+    var f = document.getElementById("bingkaiPortal");
+    if (f.getAttribute("src") !== v) f.src = v;
+  }
+});
+document.getElementById("btnPortalUlang").addEventListener("click", function () {
+  ["bingkaiPortal", "bingkaiSplitA", "bingkaiSplitB"].forEach(function (id) {
+    var f = document.getElementById(id);
+    if (f && f.getAttribute("src")) f.src = f.getAttribute("src");
+  });
+});
+document.getElementById("btnPortalZoomPlus").addEventListener("click", function () { zoomPortal = Math.min(1.5, +(zoomPortal + 0.1).toFixed(2)); terapkanZoomPortal(); });
+document.getElementById("btnPortalZoomMin").addEventListener("click", function () { zoomPortal = Math.max(0.5, +(zoomPortal - 0.1).toFixed(2)); terapkanZoomPortal(); });
+document.getElementById("btnPortalPenuh").addEventListener("click", function () {
+  var el = document.getElementById("view-portal");
+  if (document.fullscreenElement) document.exitFullscreen();
+  else if (el.requestFullscreen) el.requestFullscreen().catch(function () {});
+});
+document.getElementById("btnPortalTabBaru").addEventListener("click", function () {
+  window.open(urlPortalAktif, "_blank", "noopener");
+});
+
+/* ================= v3: MODE GELAP ================= */
+var btnGelapEl = document.getElementById("btnGelap");
+function terapkanGelap(g) {
+  document.body.classList.toggle("gelap", g);
+  btnGelapEl.textContent = g ? "☀️" : "🌙";
+  btnGelapEl.classList.toggle("aktif", g);
+  try { localStorage.setItem("panara_gelap", g ? "1" : ""); } catch (e) {}
+}
+btnGelapEl.addEventListener("click", function () { terapkanGelap(!document.body.classList.contains("gelap")); });
+try { if (localStorage.getItem("panara_gelap") === "1") terapkanGelap(true); } catch (e) {}
+
+/* ================= v3: FLASHCARD ================= */
+var flashSumber = "soal", flashIndeks = 0, flashBalik = false;
+function daftarFlash() {
+  if (flashSumber === "tanda") {
+    var d = dataUser();
+    return SOAL.map(function (s, i) { return i; }).filter(function (i) { return d.tanda[i] && d.tanda[i].bintang; });
+  }
+  return SOAL.map(function (s, i) { return i; });
+}
+function gambarFlash() {
+  var daftar = daftarFlash();
+  var depan = document.getElementById("flashDepan"), jawab = document.getElementById("flashJawab"), info = document.getElementById("infoFlash");
+  if (!daftar.length) {
+    depan.textContent = "Belum ada soal yang ditandai. Buka Daftar Soal, lalu ketuk ☆ Tandai Soal pada soal yang penting atau sulit buatmu — soal itu akan muncul di sini.";
+    jawab.hidden = true;
+    info.textContent = "Flashcard — kosong";
+    return;
+  }
+  if (flashIndeks >= daftar.length) flashIndeks = 0;
+  if (flashIndeks < 0) flashIndeks = daftar.length - 1;
+  var s = SOAL[daftar[flashIndeks]];
+  info.textContent = "Flashcard " + (flashIndeks + 1) + " dari " + daftar.length + " • " + s.k;
+  depan.textContent = s.t + "\n\n" + s.o.map(function (o, i) { return "ABCDE"[i] + ". " + o; }).join("\n");
+  jawab.textContent = (s.k === "TKP" ? "Pilihan terbaik: " : "Kunci: ") + "ABCDE"[s.j] + " — " + s.o[s.j] + "\n\n" + s.b;
+  jawab.hidden = !flashBalik;
+  document.getElementById("flashPetunjuk").textContent = flashBalik ? "JAWABAN" : "KETUK KARTU UNTUK MELIHAT JAWABAN";
+}
+document.getElementById("kartuFlash").addEventListener("click", function () { flashBalik = !flashBalik; gambarFlash(); });
+document.getElementById("btnFlashLanjut").addEventListener("click", function () { flashIndeks++; flashBalik = false; gambarFlash(); });
+document.getElementById("btnFlashSebelum").addEventListener("click", function () { flashIndeks--; flashBalik = false; gambarFlash(); });
+document.getElementById("btnFlashAcak").addEventListener("click", function () {
+  var daftar = daftarFlash();
+  if (daftar.length) flashIndeks = Math.floor(Math.random() * daftar.length);
+  flashBalik = false; gambarFlash();
+});
+document.getElementById("segmenFlash").addEventListener("click", function (e) {
+  var b = e.target.closest("[data-flash]");
+  if (!b) return;
+  flashSumber = b.getAttribute("data-flash");
+  flashIndeks = 0; flashBalik = false;
+  document.querySelectorAll("#segmenFlash button").forEach(function (x) { x.classList.toggle("aktif", x === b); });
+  gambarFlash();
+});
+
+/* ================= v3: INFO & TARGET ================= */
+function gambarInfo() {
+  var d = dataUser();
+  document.getElementById("targetNama").value = d.target.nama || "";
+  document.getElementById("targetTgl").value = d.target.tgl || "";
+  var besar = document.getElementById("hitungMundur"), teks = document.getElementById("hitungMundurTeks");
+  if (!d.target.tgl) { besar.textContent = "—"; teks.textContent = "Atur targetmu untuk melihat hitung mundur di sini."; return; }
+  var kini = new Date(); kini.setHours(0, 0, 0, 0);
+  var tujuan = new Date(d.target.tgl + "T00:00:00");
+  var selisih = Math.round((tujuan - kini) / 86400000);
+  if (selisih > 0) { besar.textContent = selisih + " hari lagi"; teks.textContent = "menuju " + (d.target.nama || "ujianmu") + " — manfaatkan setiap harinya."; }
+  else if (selisih === 0) { besar.textContent = "HARI INI"; teks.textContent = (d.target.nama || "Ujianmu") + " berlangsung hari ini. Semangat — kamu sudah berlatih!"; }
+  else { besar.textContent = "Sudah lewat"; teks.textContent = "Tanggal target sudah berlalu — perbarui targetmu untuk seleksi berikutnya."; }
+}
+document.getElementById("btnSimpanTarget").addEventListener("click", function () {
+  var d = dataUser();
+  d.target.nama = document.getElementById("targetNama").value.trim();
+  d.target.tgl = document.getElementById("targetTgl").value;
+  simpanDataUser(d);
+  gambarInfo();
+});
 
 /* ================= PWA ================= */
 var promptPasangApp = null;

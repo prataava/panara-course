@@ -1,7 +1,7 @@
 /* PANARA COURSE — service worker: simpan kulit aplikasi agar terbuka
    sekejap dan tetap bisa dibuka saat jaringan lambat.
    Data akun & progres tersimpan lokal (localStorage), bukan di sini. */
-var NAMA_CACHE = "panara-v2";
+var NAMA_CACHE = "panara-v3";
 var BERKAS_KULIT = [
   "./",
   "./index.html",
