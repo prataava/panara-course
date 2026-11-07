@@ -455,6 +455,8 @@
   #barApungKirim { display: flex; gap: 8px; padding: 10px 12px; border-top: 1.5px solid var(--garis); align-items: flex-end; }
   #isiApung { flex: 1; resize: none; }
   #catatanApung { padding: 8px 12px 10px; margin: 0; }
+  #selubungVersi { position: fixed; left: 50%; transform: translateX(-50%); bottom: 92px; z-index: 95; background: var(--laut-dalam); color: var(--putih); padding: 9px 10px 9px 16px; border-radius: 999px; display: flex; gap: 10px; align-items: center; box-shadow: 0 12px 32px rgba(8, 24, 56, .35); font-size: .86rem; font-weight: 600; white-space: nowrap; }
+  #selubungVersi[hidden] { display: none; }
   #jendelaApung { height: min(600px, 84dvh); }
   /* ===== v11: sistem gerak, ungkap, aksesibilitas gerak ===== */
   .kartu-aksen{border-color:var(--emas); background:var(--tint-emas);}
@@ -820,7 +822,9 @@
       <div id="daftarPapan"></div>
       <p class="sub" style="margin-top:8px;">Berdasarkan skor Simulasi Mini terbaik tiap akun yang terdaftar di perangkat ini.</p>
     </div>
-    <button class="btn garis lebar" id="btnEkspor" style="margin-bottom:12px;">Unduh Progres Saya (JSON)</button>
+    <button class="btn garis lebar" id="btnEkspor" style="margin-bottom:9px;">Unduh Progres Saya (JSON)</button>
+    <label class="btn garis lebar" for="inputImpor" style="margin:0 0 12px;">Impor Progres (JSON)</label>
+    <input type="file" id="inputImpor" accept="application/json,.json" hidden>
     <div class="kartu"><div id="daftarRiwayat"></div></div>
   </section>
 
@@ -1036,6 +1040,17 @@ Catatan: info di atas adalah gambaran umum untuk persiapan, bukan pengumuman res
       <div class="sub" id="statusModul" style="margin-top:11px;"></div>
       <div class="batang" id="batangModulBungkus" hidden style="margin-top:9px;"><i id="batangModul" style="width:0%"></i></div>
     </div>
+    <div class="kartu" id="kartuPratinjauModul" hidden>
+      <h2 class="judul-bagian">Pratinjau Hasil Baca — Periksa Dulu</h2>
+      <p class="sub" id="ringkasPratinjau" style="margin-bottom:9px;"></p>
+      <div id="daftarPratinjau"></div>
+      <button class="btn garis lebar" id="btnPratinjauLagi" hidden style="margin-top:9px;">Muat 50 Berikutnya</button>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:12px;">
+        <button class="btn laut" id="btnSimpanModulKandidat">Simpan ke Bank Soal</button>
+        <button class="btn garis" id="btnBatalModulKandidat">Batalkan</button>
+      </div>
+      <p class="sub" id="catatanPratinjau" style="margin-top:8px;"></p>
+    </div>
     <div class="kartu">
       <h2 class="judul-bagian">Buku Modul</h2>
       <p class="sub" style="margin-bottom:11px;">Buka berkas bukunya langsung di aplikasi dan baca seperti e-book — halamannya bisa digeser. Berkas buku tersimpan di perangkat ini (terlalu besar untuk server gratis); yang tersimpan di akun onlinemu adalah soal-soal hasil bacaannya.</p>
@@ -1056,6 +1071,7 @@ Catatan: info di atas adalah gambaran umum untuk persiapan, bukan pengumuman res
 
 <footer class="kaki" id="kakiApp">PRATA — aplikasi belajar seleksi sekolah kedinasan.<br>Soal latihan adalah soal buatan untuk berlatih, bukan soal resmi BKN/panitia.</footer>
 
+<div id="selubungVersi" hidden><span>Versi baru PRATA tersedia.</span><button id="btnMuatUlangVersi" class="btn emas">Muat Ulang</button></div>
 <div id="penampilBuku" hidden>
   <div id="kepalaBuku">
     <button id="btnTutupBuku" aria-label="Tutup buku" title="Tutup buku">✕</button>
@@ -1312,6 +1328,52 @@ function sbSegarkanToken() {
   }).catch(function () { return false; }).then(function (hasil) { janjiSegar = null; return hasil; });
   return janjiSegar;
 }
+function capWaktuRiwayat(r) {
+  var BULAN = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, Mei: 4, Jun: 5, Jul: 6, Agu: 7, Sep: 8, Okt: 9, Nov: 10, Des: 11 };
+  try {
+    var bagian = String(r.tanggal || "").split("•");
+    var dt = bagian[0].trim().split(/\s+/);
+    var jam = (bagian[1] || "0.0").trim().split(".");
+    return new Date(+dt[2], BULAN[dt[1]] || 0, +dt[0], +jam[0] || 0, +jam[1] || 0).getTime();
+  } catch (e) { return 0; }
+}
+function gabungData(lokal, server, tsLokal, tsServer) {
+  if (!server) return lokal;
+  if (!lokal) return server;
+  var lokalBaru = (tsLokal || 0) >= (tsServer || 0);
+  var hasil = {};
+  // Riwayat & chat adalah log tambahan: gabungkan, jangan saling menimpa.
+  var sudahR = {}, riw = [];
+  (server.riwayat || []).concat(lokal.riwayat || []).forEach(function (r) {
+    var k = (r.tanggal || "") + "|" + (r.label || "") + "|" + r.poin + "|" + r.maks;
+    if (sudahR[k]) return; sudahR[k] = 1; riw.push(r);
+  });
+  riw.sort(function (a, b) { return capWaktuRiwayat(a) - capWaktuRiwayat(b); });
+  hasil.riwayat = riw.slice(-300);
+  var sudahC = {}, chat = [];
+  (server.chat || []).concat(lokal.chat || []).forEach(function (m) {
+    var k = (m.dari || "") + "|" + (m.teks || "");
+    if (sudahC[k]) return; sudahC[k] = 1; chat.push(m);
+  });
+  hasil.chat = chat.slice(-40);
+  // Tanda (bintang & catatan): gabung per soal; konflik dimenangkan sisi yang lebih baru.
+  var tanda = {};
+  Object.keys(server.tanda || {}).forEach(function (k) { tanda[k] = server.tanda[k]; });
+  Object.keys(lokal.tanda || {}).forEach(function (k) { if (!(k in tanda) || lokalBaru) tanda[k] = lokal.tanda[k]; });
+  hasil.tanda = tanda;
+  // Tugas: gabung per teks tugas; status selesai dari sisi yang lebih baru.
+  var tugas = [], idxT = {};
+  (server.tugas || []).forEach(function (t) { idxT[t.t] = tugas.length; tugas.push(Object.assign({}, t)); });
+  (lokal.tugas || []).forEach(function (t) {
+    if (t.t in idxT) { if (lokalBaru) tugas[idxT[t.t]].selesai = t.selesai; }
+    else { idxT[t.t] = tugas.length; tugas.push(Object.assign({}, t)); }
+  });
+  hasil.tugas = tugas;
+  // Target & modul: ambil utuh dari sisi yang lebih baru.
+  hasil.target = lokalBaru ? (lokal.target || server.target) : (server.target || lokal.target);
+  hasil.modul = lokalBaru ? (lokal.modul || server.modul) : (server.modul || lokal.modul);
+  return hasil;
+}
 function ambilDataServer() {
   return fetch(SB_URL + "/rest/v1/data_pengguna?user_id=eq." + sesiId + "&select=data,updated_at", { headers: sbHeaders() })
     .then(function (r) {
@@ -1319,14 +1381,19 @@ function ambilDataServer() {
       return r.json().then(function (rows) {
         var kotor = kotorSaatIni();
         var tsServer = (rows && rows.length && rows[0].updated_at) ? Date.parse(rows[0].updated_at) : 0;
-        if (kotor.t && kotor.t + 5000 > tsServer && dataCache) {
-          // Perubahan lokal belum terkirim (pengiriman sempat terputus, mis. halaman dimuat ulang):
-          // pertahankan data lokal dan kirim ulang sekarang, jangan ditimpa salinan server yang lebih lama.
+        var dataServer = (rows && rows.length && rows[0].data && Object.keys(rows[0].data).length) ? rows[0].data : null;
+        var lokalAda = dataCache || ambilJSON("prata_cache_" + sesiId, null);
+        if (!dataServer) {
+          dataCache = lokalAda || dataBawaan();
           sinkronSekarang();
-          return "ok";
+        } else {
+          // Gabungkan, jangan menimpa buta: riwayat/chat/tanda disatukan per bagian,
+          // bagian lain dimenangkan sisi yang cap waktunya lebih baru.
+          var gabungan = gabungData(lokalAda, dataServer, kotor.t, tsServer);
+          var berubahDariServer = JSON.stringify(gabungan) !== JSON.stringify(dataServer);
+          dataCache = gabungan;
+          if ((kotor.t && kotor.t + 5000 > tsServer) || berubahDariServer) { tandaiKotor(); sinkronSekarang(); }
         }
-        if (rows && rows.length && rows[0].data && Object.keys(rows[0].data).length) { dataCache = rows[0].data; }
-        else { dataCache = dataBawaan(); sinkronSekarang(); }
         try { localStorage.setItem("prata_cache_" + sesiId, JSON.stringify(dataCache)); } catch (e) {}
         return "ok";
       });
@@ -1447,8 +1514,14 @@ document.getElementById("btnDaftar").addEventListener("click", function () {
 document.getElementById("keDaftar").addEventListener("click", function () { tampil("daftar"); });
 document.getElementById("keMasuk").addEventListener("click", function () { tampil("login"); });
 document.getElementById("btnKeluar").addEventListener("click", function () {
+  var idLama = sesiId, namaLama = sesiUser;
   if (sbToken) { fetch(SB_URL + "/auth/v1/logout", { method: "POST", headers: sbHeaders() }).catch(function () {}); }
   sbHapusSesi();
+  // Bersihkan sisa data akun ini dari perangkat agar tidak terbaca pengguna berikutnya.
+  try {
+    if (idLama) { localStorage.removeItem("prata_cache_" + idLama); localStorage.removeItem("prata_kotor_" + idLama); }
+    if (namaLama) localStorage.removeItem("panara_kuisberjalan_" + namaLama);
+  } catch (e) {}
   sesiUser = null;
   dataCache = null;
   tampil("login");
@@ -1518,6 +1591,26 @@ document.getElementById("btnKeCekRingkas").addEventListener("click", function ()
 document.getElementById("btnFokusLatihan").addEventListener("click", function () {
   var kat = this.getAttribute("data-kat");
   if (kat) mulaiKuis("latihan", kat);
+});
+document.getElementById("inputImpor").addEventListener("change", function () {
+  var f = this.files && this.files[0];
+  this.value = "";
+  if (!f) return;
+  f.text().then(function (isi) {
+    var data = null;
+    try { data = JSON.parse(isi); } catch (e) {}
+    if (!data || typeof data !== "object" || (!Array.isArray(data.riwayat) && !Array.isArray(data.tugas))) {
+      alert("Berkas itu tidak cocok dengan format progres PRATA — impor dibatalkan, progresmu tidak berubah.");
+      return;
+    }
+    if (!confirm("Impor akan MENGGANTIKAN seluruh progres di akun ini dengan isi berkas. Lanjutkan?")) return;
+    var d = JSON.parse(JSON.stringify(dataUser()));
+    ["tugas", "riwayat", "chat", "tanda", "target", "modul"].forEach(function (k) { if (data[k] !== undefined) d[k] = data[k]; });
+    simpanDataUser(d);
+    alert("Impor selesai — progresmu sudah diganti dari berkas dan tersinkron.");
+    segarkanBeranda();
+    gambarRiwayat();
+  }).catch(function () { alert("Berkas tidak bisa dibaca — impor dibatalkan."); });
 });
 document.getElementById("btnEkspor").addEventListener("click", function () {
   var paket = { aplikasi: "PRATA", diekspor: new Date().toISOString(), akun: sesiUser, email: sesiEmail, data: dataUser() };
@@ -1667,21 +1760,30 @@ function teksInfoKuis() {
   if (kuis.mode === "simulasi" && typeof kuis.sisaDetik === "number") dasar += " • ⏱ " + formatWaktu(Math.max(0, kuis.sisaDetik));
   return dasar;
 }
+var langkahTimerKuis = null;
 function mulaiTimerKuis() {
   berhentiTimerKuis();
   if (!kuis || kuis.mode !== "simulasi") return;
-  timerKuis = setInterval(function () {
+  if (!kuis.tenggat) kuis.tenggat = Date.now() + Math.max(0, (kuis.sisaDetik || 0)) * 1000;
+  var detikTerakhir = null;
+  langkahTimerKuis = function () {
     if (!kuis) { berhentiTimerKuis(); return; }
-    kuis.sisaDetik--;
+    // Acuan tenggat Date.now(): waktu tetap berjalan benar walau layar mati / aplikasi ke latar.
+    kuis.sisaDetik = Math.max(0, Math.ceil((kuis.tenggat - Date.now()) / 1000));
     var el = document.getElementById("infoKuis");
     if (el && !document.getElementById("view-kuis").hidden) el.textContent = teksInfoKuis();
     if (kuis.sisaDetik <= 0) { berhentiTimerKuis(); selesaiKuis(); return; }
-    simpanKuisBerjalan();
-  }, 1000);
+    if (detikTerakhir !== kuis.sisaDetik) { detikTerakhir = kuis.sisaDetik; simpanKuisBerjalan(); }
+  };
+  timerKuis = setInterval(langkahTimerKuis, 500);
+  langkahTimerKuis();
 }
+document.addEventListener("visibilitychange", function () {
+  if (!document.hidden && timerKuis && langkahTimerKuis) langkahTimerKuis();
+});
 function berhentiTimerKuis() { if (timerKuis) { clearInterval(timerKuis); timerKuis = null; } }
 function simpanKuisBerjalan() {
-  if (kuis && sesiUser && !kuis.labelKuis) simpanJSON("panara_kuisberjalan_" + sesiUser, kuis);
+  if (kuis && sesiUser) simpanJSON("panara_kuisberjalan_" + sesiUser, kuis);
 }
 function hapusKuisBerjalan() {
   if (sesiUser) { try { localStorage.removeItem("panara_kuisberjalan_" + sesiUser); } catch (e) {} }
@@ -1692,7 +1794,7 @@ function cekSesiKuisTersimpan() {
   var teks = "";
   if (ada) {
     var terjawab = Object.keys(tersimpan.jawaban || {}).length;
-    teks = (tersimpan.mode === "simulasi" ? "Simulasi Mini" : "Latihan " + tersimpan.kat) +
+    teks = (tersimpan.labelKuis || (tersimpan.mode === "simulasi" ? "Simulasi Mini" : "Latihan " + tersimpan.kat)) +
       " — baru terjawab " + terjawab + " dari " + tersimpan.daftar.length + " soal. Lanjutkan dari posisi terakhir?";
   }
   [["kartuLanjut", "teksLanjut"], ["kartuLanjutBeranda", "teksLanjutBeranda"]].forEach(function (p) {
@@ -1705,6 +1807,15 @@ function cekSesiKuisTersimpan() {
 function lanjutkanKuisTersimpan() {
   var tersimpan = ambilJSON("panara_kuisberjalan_" + sesiUser, null);
   if (!tersimpan) return;
+  if (tersimpan.bankModul) {
+    var dd = dataUser();
+    if (!dd.modul || !dd.modul.soal || !dd.modul.soal.length) { hapusKuisBerjalan(); cekSesiKuisTersimpan(); return; }
+    BANK_AKTIF = dd.modul.soal;
+  }
+  if (tersimpan.mode === "simulasi" && tersimpan.tenggat) {
+    // Sisa waktu dihitung dari tenggat: waktu yang berlalu saat aplikasi tertutup tetap terhitung.
+    tersimpan.sisaDetik = Math.max(0, Math.ceil((tersimpan.tenggat - Date.now()) / 1000));
+  }
   kuis = tersimpan;
   tampil("kuis");
   gambarSoal();
@@ -1738,7 +1849,7 @@ function mulaiKuis(mode, kat) {
     });
     daftar = acak(daftar);
   }
-  kuis = { mode: mode, kat: kat || "Campuran", daftar: daftar, posisi: 0, jawaban: {}, sisaDetik: mode === "simulasi" ? daftar.length * 55 : null };
+  kuis = { mode: mode, kat: kat || "Campuran", daftar: daftar, posisi: 0, jawaban: {}, sisaDetik: mode === "simulasi" ? daftar.length * 55 : null, tenggat: mode === "simulasi" ? Date.now() + daftar.length * 55 * 1000 : null };
   tampil("kuis");
   gambarSoal();
   mulaiTimerKuis();
@@ -2626,6 +2737,29 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js").catch(function () {});
   });
 }
+/* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
+   service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
+var VERSI_APP = "prata-v19";
+var cekVersiTerakhir = 0;
+function cekVersiBaru() {
+  var kini = Date.now();
+  if (kini - cekVersiTerakhir < 60000) return;
+  cekVersiTerakhir = kini;
+  fetch("https://raw.githubusercontent.com/prataava/panara-course/main/sw.js?cek=" + kini, { cache: "no-store" })
+    .then(function (r) { return r.text(); })
+    .then(function (isi) {
+      var m = isi.match(/NAMA_CACHE\s*=\s*"([^"]+)"/);
+      if (m && m[1] !== VERSI_APP) document.getElementById("selubungVersi").hidden = false;
+    }).catch(function () {});
+}
+window.addEventListener("load", function () { setTimeout(cekVersiBaru, 5000); });
+document.addEventListener("visibilitychange", function () { if (!document.hidden) cekVersiBaru(); });
+document.getElementById("btnMuatUlangVersi").addEventListener("click", function () {
+  this.textContent = "Memperbarui…";
+  function muat() { location.reload(); }
+  if (window.caches) caches.keys().then(function (ks) { return Promise.all(ks.map(function (k) { return caches.delete(k); })); }).then(muat).catch(muat);
+  else muat();
+});
 
 /* ================= AI PENDAMPING & PENCARIAN WEB ================= */
 document.addEventListener("click", function (e) {
@@ -2932,7 +3066,7 @@ document.addEventListener("click", function (e) {
   var daftar = d.modul.soal.map(function (s, i) { return s.k === bagian ? i : -1; }).filter(function (i) { return i >= 0; });
   if (!daftar.length) return;
   berhentiTimerKuis();
-  kuis = { mode: "latihan", kat: bagian, labelKuis: "Modul — " + bagian, daftar: daftar, posisi: 0, jawaban: {}, sisaDetik: null };
+  kuis = { mode: "latihan", kat: bagian, labelKuis: "Modul — " + bagian, bankModul: true, daftar: daftar, posisi: 0, jawaban: {}, sisaDetik: null };
   tampil("kuis");
   gambarSoal();
 });
@@ -2941,6 +3075,10 @@ document.getElementById("inputModul").addEventListener("change", function () {
   this.value = "";
   if (!berkas) return;
   var st = document.getElementById("statusModul");
+  if (berkas.size > 30 * 1024 * 1024) {
+    st.textContent = "Berkas terlalu besar (" + Math.round(berkas.size / 1048576) + " MB). Batas aman dibaca di HP adalah 30 MB — pecah atau kompres PDF-nya dulu, lalu coba lagi.";
+    return;
+  }
   var batang = document.getElementById("batangModul"), bungkus = document.getElementById("batangModulBungkus");
   bungkus.hidden = false; batang.style.width = "2%";
   bukuDoc = null;
@@ -2957,16 +3095,77 @@ document.getElementById("inputModul").addEventListener("change", function () {
       bungkus.hidden = true;
       return;
     }
-    var d = dataUser();
-    d.modul = { judul: berkas.name.replace(/\.pdf$/i, ""), tanggal: new Date().toISOString(), soal: hasil.soal.slice(0, 800) };
-    simpanDataUser(d);
-    st.textContent = "Selesai! " + d.modul.soal.length + " soal jadi bank soal digital di akunmu.";
+    // Jangan langsung menimpa bank: tampilkan PRATINJAU dulu agar soal rusak bisa dihapus sebelum disimpan.
+    modulKandidat = { judul: berkas.name.replace(/\.pdf$/i, ""), soal: hasil.soal.slice(0, 800), totalBaca: hasil.soal.length };
+    pratinjauTampil = 50;
+    gambarPratinjauModul();
+    st.textContent = "Pratinjau siap — periksa daftar soal di bawah, hapus yang rusak, lalu simpan ke bank soal.";
     bungkus.hidden = true;
-    gambarModul();
-  }).catch(function () {
-    st.textContent = "Gagal membaca berkas ini. Pastikan berkasnya PDF yang tidak rusak dan koneksi internet aktif (pembaca PDF dimuat dari internet).";
+  }).catch(function (err) {
+    var nama = (err && err.name) || "";
+    if (nama === "PasswordException") st.textContent = "Berkas ini terkunci kata sandi, jadi tidak bisa dibaca. Buka kuncinya dulu (mis. buka PDF-nya lalu simpan/cetak ulang sebagai PDF tanpa sandi), kemudian coba lagi.";
+    else if (nama === "InvalidPDFException") st.textContent = "Berkas ini tampaknya rusak atau bukan PDF asli, jadi tidak bisa dibaca.";
+    else st.textContent = "Gagal membaca berkas ini. Pastikan berkasnya PDF yang tidak rusak dan koneksi internet aktif (pembaca PDF dimuat dari internet).";
     bungkus.hidden = true;
   });
+});
+
+/* ================= PRATINJAU MODUL (periksa sebelum masuk bank) ================= */
+var modulKandidat = null, pratinjauTampil = 50;
+function gambarPratinjauModul() {
+  var kartu = document.getElementById("kartuPratinjauModul");
+  if (!modulKandidat) { kartu.hidden = true; return; }
+  kartu.hidden = false;
+  var perK = {}, berkunci = 0;
+  modulKandidat.soal.forEach(function (x) { perK[x.k] = (perK[x.k] || 0) + 1; if (x.j !== null && x.j !== undefined) berkunci++; });
+  document.getElementById("ringkasPratinjau").textContent = "\u201C" + modulKandidat.judul + "\u201D — " + modulKandidat.soal.length + " soal terbaca (" +
+    Object.keys(perK).map(function (k) { return k + " " + perK[k]; }).join(", ") + "), " + berkunci + " berkunci." +
+    (modulKandidat.totalBaca > modulKandidat.soal.length ? " Hasil baca dibatasi 800 soal pertama." : "");
+  var d = dataUser();
+  document.getElementById("catatanPratinjau").textContent = d.modul ? "Menyimpan akan MENGGANTIKAN modul lamamu (" + (d.modul.soal || []).length + " soal)." : "";
+  var wadah = document.getElementById("daftarPratinjau");
+  wadah.innerHTML = "";
+  modulKandidat.soal.slice(0, pratinjauTampil).forEach(function (x, i) {
+    var baris = document.createElement("div");
+    baris.style.cssText = "display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--garis);";
+    var isi = document.createElement("div"); isi.style.flex = "1";
+    var atas = document.createElement("div");
+    var lencana = document.createElement("b"); lencana.textContent = (i + 1) + ". " + x.k + " ";
+    var status = document.createElement("span"); status.className = "sub";
+    status.textContent = (x.j !== null && x.j !== undefined) ? "• Kunci " + "ABCDE"[x.j] : "• Belum berkunci";
+    atas.appendChild(lencana); atas.appendChild(status);
+    var teks = document.createElement("div"); teks.className = "sub"; teks.style.color = "var(--tinta)";
+    teks.textContent = x.t.length > 150 ? x.t.slice(0, 150) + "…" : x.t;
+    isi.appendChild(atas); isi.appendChild(teks);
+    var hapus = document.createElement("button"); hapus.className = "btn garis"; hapus.textContent = "Hapus";
+    hapus.setAttribute("data-hapuskandidat", i);
+    baris.appendChild(isi); baris.appendChild(hapus);
+    wadah.appendChild(baris);
+  });
+  document.getElementById("btnPratinjauLagi").hidden = pratinjauTampil >= modulKandidat.soal.length;
+}
+document.getElementById("daftarPratinjau").addEventListener("click", function (e) {
+  var b = e.target.closest("[data-hapuskandidat]");
+  if (!b || !modulKandidat) return;
+  modulKandidat.soal.splice(+b.getAttribute("data-hapuskandidat"), 1);
+  gambarPratinjauModul();
+});
+document.getElementById("btnPratinjauLagi").addEventListener("click", function () { pratinjauTampil += 50; gambarPratinjauModul(); });
+document.getElementById("btnSimpanModulKandidat").addEventListener("click", function () {
+  if (!modulKandidat) return;
+  var d = dataUser();
+  d.modul = { judul: modulKandidat.judul, tanggal: new Date().toISOString(), soal: modulKandidat.soal };
+  simpanDataUser(d);
+  var jumlah = modulKandidat.soal.length;
+  modulKandidat = null;
+  document.getElementById("kartuPratinjauModul").hidden = true;
+  document.getElementById("statusModul").textContent = "Selesai! " + jumlah + " soal jadi bank soal digital di akunmu.";
+  gambarModul();
+});
+document.getElementById("btnBatalModulKandidat").addEventListener("click", function () {
+  modulKandidat = null;
+  document.getElementById("kartuPratinjauModul").hidden = true;
+  document.getElementById("statusModul").textContent = "Pratinjau dibatalkan — bank soal tidak berubah.";
 });
 
 /* ================= BUKU MODUL (PENAMPIL E-BOOK) ================= */
