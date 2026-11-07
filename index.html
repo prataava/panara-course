@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PANARA COURSE — Belajar Kedinasan (SKD: TWK, TIU, TKP)</title>
+<meta name="description" content="PANARA COURSE: aplikasi belajar seleksi sekolah kedinasan — latihan soal SKD (TWK, TIU, TKP) dengan pembahasan, tanya AI gratis, materi ringkas, dan checklist tugas.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#14264c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PANARA">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<style>
+  :root{
+    --laut:#14264c; --laut2:#1d3565; --laut3:#0d1930;
+    --emas:#e9a13b; --emas2:#f5bc63;
+    --kertas:#f5f3ee; --kartu:#ffffff;
+    --tinta:#1c2333; --redup:#68707f;
+    --garis:#e4e0d5; --baik:#1d7a4f; --buruk:#b3402e;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:var(--kertas); color:var(--tinta);
+    min-height:100vh; min-height:100dvh;
+    display:flex; flex-direction:column;
+  }
+  button{font-family:inherit; cursor:pointer;}
+  input,textarea{font-family:inherit;}
+  [hidden]{display:none !important;}
+
+  /* ---------- Bilah atas ---------- */
+  header.bilah{
+    background:linear-gradient(135deg,var(--laut2),var(--laut) 55%,var(--laut3));
+    color:#fff; padding:14px 16px 12px;
+    display:flex; align-items:center; gap:11px;
+    box-shadow:0 3px 14px rgba(13,25,48,.35);
+    position:sticky; top:0; z-index:5;
+  }
+  .logoapp{
+    width:40px;height:40px;flex:0 0 auto;border-radius:12px;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800; font-size:19px; color:var(--emas2); letter-spacing:.5px;
+  }
+  .merekapp{line-height:1.15; min-width:0; margin-right:auto;}
+  .merekapp .nm{font-size:16.5px; font-weight:800; letter-spacing:.6px; white-space:nowrap;}
+  .merekapp .nm span{color:var(--emas2);}
+  .merekapp .tg{font-size:11.5px; opacity:.85; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .chip-user{
+    display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25);
+    padding:7px 11px; border-radius:999px; max-width:46vw;
+  }
+  .chip-user .nama{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .btn-keluar{
+    background:transparent; border:1px solid rgba(255,255,255,.35); color:#fff;
+    font-size:12px; font-weight:600; padding:7px 10px; border-radius:999px;
+  }
+
+  main.panggung{flex:1 1 auto; width:100%; max-width:760px; margin:0 auto; padding:18px 14px 92px;}
+  .tampilan{animation:muncul .25s ease;}
+  @keyframes muncul{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+
+  /* ---------- Kartu & umum ---------- */
+  .kartu{
+    background:var(--kartu); border:1px solid var(--garis); border-radius:var(--radius);
+    padding:18px; margin-bottom:14px; box-shadow:0 1px 3px rgba(20,38,76,.05);
+  }
+  h1.sapa{font-size:22px; margin:2px 0 4px;}
+  .sub{color:var(--redup); font-size:13.5px; line-height:1.55;}
+  h2.judul-bagian{font-size:16.5px; margin:4px 0 10px;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:7px;
+    border-radius:12px; border:1px solid var(--garis); background:#fff; color:var(--tinta);
+    font-size:14px; font-weight:700; padding:12px 16px; min-height:48px;
+    transition:transform .05s ease, background .15s ease;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn.emas{background:var(--emas); border-color:var(--emas); color:#23160a;}
+  .btn.emas:hover{background:var(--emas2);}
+  .btn.laut{background:var(--laut); border-color:var(--laut); color:#fff;}
+  .btn.lebar{width:100%;}
+  .btn.kecil{min-height:40px; padding:8px 13px; font-size:13px;}
+  .btn:disabled{opacity:.55; cursor:default;}
+
+  /* ---------- Login ---------- */
+  .kotak-login{max-width:430px; margin:26px auto 0;}
+  .logo-besar{
+    width:72px;height:72px;border-radius:20px; margin:4px auto 12px;
+    background:linear-gradient(135deg,var(--laut2),var(--laut3));
+    display:flex;align-items:center;justify-content:center;
+    font-size:30px; font-weight:800; color:var(--emas2);
+    box-shadow:0 8px 22px rgba(13,25,48,.28);
+  }
+  .kotak-login h1{text-align:center; font-size:21px; margin:0 0 4px; letter-spacing:.4px;}
+  .kotak-login h1 span{color:#b97a1d;}
+  .kotak-login .tagline{text-align:center; color:var(--redup); font-size:13px; margin-bottom:18px;}
+  label.lbl{display:block; font-size:12.5px; font-weight:700; margin:13px 0 6px; color:var(--laut);}
+  input.isi, textarea.isi{
+    width:100%; padding:12px 13px; font-size:15px; color:var(--tinta);
+    border:1.5px solid var(--garis); border-radius:12px; background:#fcfbF8; outline:none;
+  }
+  input.isi:focus, textarea.isi:focus{border-color:var(--emas); background:#fff;}
+  .galat{
+    background:#fdeeea; border:1px solid #f0c4ba; color:var(--buruk);
+    font-size:13px; border-radius:10px; padding:10px 12px; margin-top:13px; line-height:1.5;
+  }
+  .info{
+    background:#eef4ff; border:1px solid #cfddf5; color:#274069;
+    font-size:12.5px; border-radius:10px; padding:10px 12px; margin-top:13px; line-height:1.55;
+  }
+  .ganti-mode{text-align:center; font-size:13.5px; margin-top:15px; color:var(--redup);}
+  .ganti-mode a{color:#b97a1d; font-weight:700; cursor:pointer; text-decoration:none;}
+
+  /* ---------- Menu beranda ---------- */
+  .grid-menu{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .menu-item{
+    background:var(--kartu); border:1px solid var(--garis); border-radius:var(--radius);
+    padding:16px 14px; text-align:left; box-shadow:0 1px 3px rgba(20,38,76,.05);
+  }
+  .menu-item .ikon{font-size:24px; display:block; margin-bottom:8px;}
+  .menu-item .nm{font-size:15px; font-weight:800; display:block;}
+  .menu-item .ds{font-size:12px; color:var(--redup); display:block; margin-top:3px; line-height:1.45;}
+  .menu-item.utama{grid-column:1 / -1; background:linear-gradient(135deg,var(--laut2),var(--laut3)); color:#fff; border:none;}
+  .menu-item.utama .ds{color:rgba(255,255,255,.82);}
+  .menu-item.utama .nm{color:#fff;}
+  .cincin{display:flex; align-items:center; gap:14px;}
+  .cincin .angka{font-size:26px; font-weight:800; color:var(--laut);}
+  .batang{height:10px; border-radius:99px; background:#eee9dc; overflow:hidden; flex:1;}
+  .batang > i{display:block; height:100%; background:var(--emas); border-radius:99px; transition:width .4s ease;}
+
+  /* ---------- Kuis ---------- */
+  .kepala-kuis{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+  .kepala-kuis .mundur{background:#fff; border:1px solid var(--garis); border-radius:10px; padding:8px 12px; font-weight:700; font-size:13px;}
+  .kepala-kuis .info-kuis{font-size:13px; color:var(--redup); font-weight:600;}
+  .soal-teks{font-size:16px; line-height:1.65; margin:2px 0 14px; white-space:pre-wrap;}
+  .kat-chip{display:inline-block; font-size:11px; font-weight:800; letter-spacing:.6px; padding:4px 9px; border-radius:99px; background:#eef4ff; color:var(--laut); margin-bottom:10px;}
+  .opsi{
+    display:flex; gap:11px; width:100%; text-align:left; align-items:flex-start;
+    border:1.5px solid var(--garis); background:#fff; border-radius:13px;
+    padding:13px 14px; margin-bottom:10px; font-size:14.5px; line-height:1.55;
+  }
+  .opsi .huruf{
+    flex:0 0 auto; width:26px; height:26px; border-radius:8px; background:#f0ecdf;
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; color:var(--laut);
+  }
+  .opsi.terpilih{border-color:var(--emas); background:#fdf6e7;}
+  .opsi.benar{border-color:var(--baik); background:#eafaf2;}
+  .opsi.salah{border-color:var(--buruk); background:#fdeeea;}
+  .opsi:disabled{cursor:default; opacity:.92;}
+  .bahas{
+    border-radius:12px; padding:13px 14px; font-size:13.5px; line-height:1.65; margin-top:6px;
+    background:#f4f8f5; border:1px solid #cfe6d8; color:#173d2a; white-space:pre-wrap;
+  }
+  .bahas .tt{font-weight:800; display:block; margin-bottom:4px;}
+  .nav-kuis{display:flex; gap:10px; margin-top:14px;}
+  .nav-kuis .btn{flex:1;}
+  .nomor-grid{display:flex; flex-wrap:wrap; gap:6px; margin-top:12px;}
+  .nomor-grid button{
+    width:36px; height:36px; border-radius:10px; border:1px solid var(--garis);
+    background:#fff; font-weight:700; font-size:12.5px;
+  }
+  .nomor-grid button.terjawab{background:var(--laut); color:#fff; border-color:var(--laut);}
+  .nomor-grid button.aktif{outline:2px solid var(--emas);}
+  .skor-besar{font-size:38px; font-weight:800; color:var(--laut); text-align:center; margin:6px 0 2px;}
+  .rincian{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:12px;}
+  .rincian .sel{background:#faf8f2; border:1px solid var(--garis); border-radius:12px; padding:11px 8px; text-align:center;}
+  .rincian .sel .v{font-size:19px; font-weight:800;}
+  .rincian .sel .k{font-size:11px; color:var(--redup); font-weight:700; letter-spacing:.4px;}
+
+  /* ---------- Chat AI ---------- */
+  .alur-chat{display:flex; flex-direction:column; gap:10px; margin-bottom:12px;}
+  .gelembung{max-width:88%; padding:11px 13px; border-radius:15px; font-size:14px; line-height:1.6; white-space:pre-wrap; word-wrap:break-word;}
+  .gelembung.ai{background:#fff; border:1px solid var(--garis); align-self:flex-start; border-bottom-left-radius:5px;}
+  .gelembung.saya{background:var(--laut); color:#fff; align-self:flex-end; border-bottom-right-radius:5px;}
+  .gelembung .sumber{display:block; font-size:10.5px; font-weight:800; letter-spacing:.5px; opacity:.65; margin-bottom:5px;}
+  .bar-kirim{display:flex; gap:9px; align-items:flex-end;}
+  .bar-kirim textarea{flex:1; resize:none; max-height:110px;}
+  .segmen{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;}
+  .segmen button{
+    border:1.5px solid var(--garis); background:#fff; border-radius:999px;
+    padding:8px 14px; font-size:13px; font-weight:700;
+  }
+  .segmen button.aktif{background:var(--laut); color:#fff; border-color:var(--laut);}
+
+  /* ---------- Checklist ---------- */
+  .tugas{display:flex; gap:11px; align-items:flex-start; padding:11px 4px; border-bottom:1px solid var(--garis);}
+  .tugas:last-child{border-bottom:none;}
+  .tugas input[type=checkbox]{width:21px; height:21px; margin-top:1px; accent-color:var(--baik); flex:0 0 auto;}
+  .tugas .isi-tugas{flex:1; font-size:14.5px; line-height:1.5;}
+  .tugas .isi-tugas small{display:block; color:var(--redup); font-size:11.5px; margin-top:2px;}
+  .tugas.selesai .isi-tugas{color:var(--redup); text-decoration:line-through;}
+  .tugas .hapus{background:none; border:none; color:var(--buruk); font-size:16px; padding:2px 6px;}
+  .bar-tambah{display:flex; gap:9px; margin-top:13px;}
+  .bar-tambah input{flex:1;}
+
+  /* ---------- Materi & riwayat ---------- */
+  .materi-isi{font-size:14px; line-height:1.75; white-space:pre-wrap;}
+  .baris-riwayat{display:flex; justify-content:space-between; gap:10px; padding:11px 2px; border-bottom:1px solid var(--garis); font-size:13.5px;}
+  .baris-riwayat:last-child{border-bottom:none;}
+  .baris-riwayat .k{color:var(--redup); font-size:12px;}
+  .baris-riwayat .skor{font-weight:800; color:var(--laut); white-space:nowrap;}
+  .kosong{text-align:center; color:var(--redup); font-size:13.5px; padding:18px 8px; line-height:1.6;}
+
+  /* ---------- Navigasi bawah ---------- */
+  nav.bawah{
+    position:fixed; left:0; right:0; bottom:0; z-index:6;
+    background:rgba(255,255,255,.97); border-top:1px solid var(--garis);
+    display:flex; padding:7px 6px calc(7px + env(safe-area-inset-bottom));
+    box-shadow:0 -3px 14px rgba(20,38,76,.06);
+  }
+  nav.bawah button{
+    flex:1; background:none; border:none; padding:6px 2px; border-radius:11px;
+    font-size:10.5px; font-weight:700; color:var(--redup);
+    display:flex; flex-direction:column; align-items:center; gap:3px;
+  }
+  nav.bawah button .ic{font-size:19px; line-height:1;}
+  nav.bawah button.aktif{color:var(--laut); background:#eef4ff;}
+  footer.kaki{text-align:center; color:var(--redup); font-size:11.5px; padding:0 16px 18px; line-height:1.6;}
+  @media (max-width:480px){ .grid-menu{grid-template-columns:1fr 1fr;} .rincian{grid-template-columns:1fr 1fr 1fr;} }
+</style>
+</head>
+<body>
+
+<header class="bilah">
+  <div class="logoapp">P</div>
+  <div class="merekapp">
+    <div class="nm">PANARA <span>COURSE</span></div>
+    <div class="tg">Belajar Seleksi Sekolah Kedinasan</div>
+  </div>
+  <div class="chip-user" id="chipUser" hidden>
+    <span class="nama" id="chipNama">Pengguna</span>
+    <button class="btn-keluar" id="btnKeluar">Keluar</button>
+  </div>
+  <button class="btn-keluar" id="btnPasang" hidden>📲 Pasang App</button>
+</header>
+
+<main class="panggung">
+
+  <!-- ======== LOGIN ======== -->
+  <section class="tampilan" id="view-login">
+    <div class="kotak-login">
+      <div class="logo-besar">P</div>
+      <h1>PANARA <span>COURSE</span></h1>
+      <p class="tagline">Masuk untuk melanjutkan belajarmu:<br>latihan SKD, tanya AI, dan checklist persiapan kedinasan.</p>
+      <div class="kartu">
+        <label class="lbl" for="liNama">Nama pengguna</label>
+        <input class="isi" id="liNama" type="text" autocomplete="username" placeholder="mis. farhan">
+        <label class="lbl" for="liSandi">Kata sandi</label>
+        <input class="isi" id="liSandi" type="password" autocomplete="current-password" placeholder="Kata sandimu">
+        <div class="galat" id="liGalat" hidden></div>
+        <button class="btn emas lebar" id="btnMasuk" style="margin-top:16px;">Masuk</button>
+        <div class="info">Akun PANARA COURSE tersimpan aman di perangkat ini. Sekali masuk, aplikasi langsung membuka Beranda pada kunjungan berikutnya — tidak perlu login berulang kali.</div>
+        <p class="ganti-mode">Belum punya akun? <a id="keDaftar">Daftar gratis</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== DAFTAR ======== -->
+  <section class="tampilan" id="view-daftar" hidden>
+    <div class="kotak-login">
+      <div class="logo-besar">P</div>
+      <h1>Daftar <span>PANARA COURSE</span></h1>
+      <p class="tagline">Satu akun untuk semua progres belajarmu di perangkat ini.</p>
+      <div class="kartu">
+        <label class="lbl" for="dfNama">Nama pengguna</label>
+        <input class="isi" id="dfNama" type="text" autocomplete="username" placeholder="Pilih nama pengguna">
+        <label class="lbl" for="dfSandi">Kata sandi (min. 6 karakter)</label>
+        <input class="isi" id="dfSandi" type="password" autocomplete="new-password" placeholder="Buat kata sandi">
+        <label class="lbl" for="dfSandi2">Ulangi kata sandi</label>
+        <input class="isi" id="dfSandi2" type="password" autocomplete="new-password" placeholder="Ketik lagi kata sandinya">
+        <div class="galat" id="dfGalat" hidden></div>
+        <button class="btn emas lebar" id="btnDaftar" style="margin-top:16px;">Buat Akun &amp; Masuk</button>
+        <p class="ganti-mode">Sudah punya akun? <a id="keMasuk">Masuk di sini</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== BERANDA ======== -->
+  <section class="tampilan" id="view-beranda" hidden>
+    <h1 class="sapa" id="sapaNama">Halo!</h1>
+    <p class="sub" style="margin-bottom:14px;">Siap lanjut persiapan kedinasan hari ini? Semua fiturmu ada di sini.</p>
+
+    <div class="kartu">
+      <div class="cincin">
+        <div style="flex:1;">
+          <div style="font-weight:800; font-size:14.5px; margin-bottom:3px;">Progres Checklist Tugas</div>
+          <div class="sub" id="ringkasanCek">Belum ada tugas.</div>
+        </div>
+        <div class="angka" id="persenCek">0%</div>
+      </div>
+      <div class="batang" style="margin-top:11px;"><i id="batangCek" style="width:0%"></i></div>
+      <button class="btn kecil" id="btnKeCekRingkas" style="margin-top:12px;">Lihat Checklist →</button>
+    </div>
+
+    <div class="grid-menu">
+      <button class="menu-item utama" data-pergi="latihan">
+        <span class="ikon">📝</span>
+        <span class="nm">Latihan Soal Kedinasan</span>
+        <span class="ds">Bank soal SKD — TWK, TIU, TKP — lengkap dengan kunci &amp; pembahasan setiap soal.</span>
+      </button>
+      <button class="menu-item" data-pergi="simulasi">
+        <span class="ikon">🎯</span>
+        <span class="nm">Simulasi Mini</span>
+        <span class="ds">36 soal campuran seperti urutan SKD asli, dinilai per kategori.</span>
+      </button>
+      <button class="menu-item" data-pergi="ai">
+        <span class="ikon">🤖</span>
+        <span class="nm">Tanya AI Gratis</span>
+        <span class="ds">Tanya soal kedinasan apa pun — dibantu AI gratis &amp; bank pembahasan bawaan.</span>
+      </button>
+      <button class="menu-item" data-pergi="materi">
+        <span class="ikon">📚</span>
+        <span class="nm">Materi Ringkas</span>
+        <span class="ds">Ringkasan TWK, TIU, TKP yang padat dan gampang diulang.</span>
+      </button>
+      <button class="menu-item" data-pergi="ceklist">
+        <span class="ikon">✅</span>
+        <span class="nm">Checklist Tugas</span>
+        <span class="ds">Daftar tugas persiapanmu — tersimpan otomatis per akun.</span>
+      </button>
+      <button class="menu-item" data-pergi="riwayat">
+        <span class="ikon">📈</span>
+        <span class="nm">Riwayat Skor</span>
+        <span class="ds">Hasil latihan &amp; simulasimu dari waktu ke waktu.</span>
+      </button>
+      <button class="menu-item" data-pergi="portal" style="grid-column:1 / -1;">
+        <span class="ikon">🎓</span>
+        <span class="nm">Portal NF</span>
+        <span class="ds">Buka Portal NF (SIP Bimbel Nurul Fikri) — peluncur satu ketukmu yang lain.</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ======== PILIH LATIHAN ======== -->
+  <section class="tampilan" id="view-latihan" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">← Beranda</button>
+      <span class="info-kuis">Pilih kategori latihan</span>
+    </div>
+    <div class="kartu">
+      <h2 class="judul-bagian">📝 Latihan per Kategori</h2>
+      <p class="sub" style="margin-bottom:13px;">Setiap soal langsung dibahas setelah kamu menjawab, jadi kamu belajar sambil mengerjakan.</p>
+      <button class="btn laut lebar" data-mulai-latihan="TWK" style="margin-bottom:9px;">🇮🇩 TWK — Tes Wawasan Kebangsaan (12 soal)</button>
+      <button class="btn laut lebar" data-mulai-latihan="TIU" style="margin-bottom:9px;">🧮 TIU — Tes Intelegensia Umum (12 soal)</button>
+      <button class="btn laut lebar" data-mulai-latihan="TKP">🧭 TKP — Tes Karakteristik Pribadi (12 soal)</button>
+    </div>
+    <div class="kartu">
+      <h2 class="judul-bagian">🎯 Simulasi Mini SKD</h2>
+      <p class="sub" style="margin-bottom:13px;">36 soal campuran (TWK + TIU + TKP) tanpa pembahasan di tengah — pembahasan dibuka di akhir, dinilai per kategori seperti SKD sungguhan.</p>
+      <button class="btn emas lebar" id="btnMulaiSimulasi">Mulai Simulasi Mini</button>
+    </div>
+  </section>
+
+  <!-- ======== KUIS ======== -->
+  <section class="tampilan" id="view-kuis" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" id="btnBerhentiKuis">✕ Berhenti</button>
+      <span class="info-kuis" id="infoKuis">Soal 1 dari 12</span>
+    </div>
+    <div class="kartu">
+      <span class="kat-chip" id="chipKategori">TWK</span>
+      <div class="soal-teks" id="teksSoal"></div>
+      <div id="wadahOpsi"></div>
+      <div class="bahas" id="kotakBahas" hidden><span class="tt">💡 Pembahasan</span><span id="teksBahas"></span></div>
+      <div class="nav-kuis">
+        <button class="btn" id="btnSoalSebelum">← Sebelumnya</button>
+        <button class="btn emas" id="btnSoalLanjut">Berikutnya →</button>
+      </div>
+      <div class="nomor-grid" id="gridNomor"></div>
+    </div>
+  </section>
+
+  <!-- ======== HASIL ======== -->
+  <section class="tampilan" id="view-hasil" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">← Beranda</button>
+      <span class="info-kuis" id="judulHasil">Hasil Latihan</span>
+    </div>
+    <div class="kartu">
+      <div class="sub" style="text-align:center;">Skor kamu</div>
+      <div class="skor-besar" id="skorBesar">0</div>
+      <div class="sub" style="text-align:center;" id="skorKeterangan"></div>
+      <div class="rincian" id="rincianHasil"></div>
+      <div class="info" id="catatanPG" hidden></div>
+      <button class="btn emas lebar" id="btnLihatBahas" style="margin-top:14px;">Lihat Pembahasan Semua Soal</button>
+      <button class="btn lebar" data-pergi="latihan" style="margin-top:9px;">Latihan Lagi</button>
+    </div>
+    <div id="wadahReview"></div>
+  </section>
+
+  <!-- ======== TANYA AI ======== -->
+  <section class="tampilan" id="view-ai" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">← Beranda</button>
+      <span class="info-kuis">Tanya AI — Bantuan Soal Kedinasan</span>
+    </div>
+    <div class="segmen" id="segmenMesin">
+      <button data-mesin="online" class="aktif">🌐 AI Gratis (online)</button>
+      <button data-mesin="offline">📚 Bank Pembahasan (offline)</button>
+    </div>
+    <div class="alur-chat" id="alurChat"></div>
+    <div class="bar-kirim">
+      <textarea class="isi" id="isiTanya" rows="2" placeholder="Tulis soal atau pertanyaanmu… mis. 'Berapa 15% dari 240?' atau 'Apa isi Pasal 1 UUD 1945?'"></textarea>
+      <button class="btn emas" id="btnKirimTanya">Kirim</button>
+    </div>
+    <p class="sub" style="margin-top:10px;">Mode online memakai layanan AI gratis publik — kadang lambat atau penuh; kalau gagal, jawaban dari Bank Pembahasan tetap diberikan. Selalu cek ulang jawaban AI dengan pembahasan resmi.</p>
+  </section>
+
+  <!-- ======== CHECKLIST ======== -->
+  <section class="tampilan" id="view-ceklist" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">← Beranda</button>
+      <span class="info-kuis">Checklist Tugas Persiapan</span>
+    </div>
+    <div class="kartu">
+      <div class="cincin">
+        <div style="flex:1;">
+          <div style="font-weight:800; font-size:14.5px; margin-bottom:3px;">Selesai <span id="cekSelesaiTeks">0 dari 0</span> tugas</div>
+          <div class="sub">Centang tugas yang sudah kamu kerjakan — tersimpan otomatis.</div>
+        </div>
+        <div class="angka" id="cekPersen">0%</div>
+      </div>
+      <div class="batang" style="margin-top:11px;"><i id="cekBatang" style="width:0%"></i></div>
+      <div id="daftarTugas" style="margin-top:8px;"></div>
+      <div class="bar-tambah">
+        <input class="isi" id="tugasBaru" type="text" placeholder="Tambah tugas baru…">
+        <button class="btn emas" id="btnTambahTugas">Tambah</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== MATERI ======== -->
+  <section class="tampilan" id="view-materi" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">← Beranda</button>
+      <span class="info-kuis">Materi Ringkas Kedinasan</span>
+    </div>
+    <div id="daftarMateri"></div>
+  </section>
+
+  <section class="tampilan" id="view-materi-detail" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="materi">← Semua Materi</button>
+      <span class="info-kuis" id="materiDetailJudul">Materi</span>
+    </div>
+    <div class="kartu"><div class="materi-isi" id="materiDetailIsi"></div></div>
+  </section>
+
+  <!-- ======== RIWAYAT ======== -->
+  <section class="tampilan" id="view-riwayat" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">← Beranda</button>
+      <span class="info-kuis">Riwayat Skor</span>
+    </div>
+    <div class="kartu"><div id="daftarRiwayat"></div></div>
+  </section>
+
+</main>
+
+<nav class="bawah" id="navBawah" hidden>
+  <button data-pergi="beranda"><span class="ic">🏠</span>Beranda</button>
+  <button data-pergi="latihan"><span class="ic">📝</span>Latihan</button>
+  <button data-pergi="ai"><span class="ic">🤖</span>Tanya AI</button>
+  <button data-pergi="ceklist"><span class="ic">✅</span>Tugas</button>
+  <button data-pergi="materi"><span class="ic">📚</span>Materi</button>
+</nav>
+
+<footer class="kaki" id="kakiApp">PANARA COURSE — aplikasi belajar seleksi sekolah kedinasan.<br>Soal latihan adalah soal buatan untuk berlatih, bukan soal resmi BKN/panitia.</footer>
+
+<script>
+"use strict";
+
+/* ================= DATA: BANK SOAL KEDINASAN (SKD) =================
+   k = kategori, t = teks soal, o = opsi (5), j = indeks kunci,
+   s = skor per opsi (khusus TKP, 1-5), b = pembahasan. */
+var SOAL = [
+/* ---------- TWK ---------- */
+{k:"TWK", t:"Sila ketiga Pancasila berbunyi …", o:["Ketuhanan Yang Maha Esa","Kemanusiaan yang adil dan beradab","Persatuan Indonesia","Kerakyatan yang dipimpin oleh hikmat kebijaksanaan dalam permusyawaratan/perwakilan","Keadilan sosial bagi seluruh rakyat Indonesia"], j:2, b:"Urutan Pancasila: (1) Ketuhanan Yang Maha Esa, (2) Kemanusiaan yang adil dan beradab, (3) Persatuan Indonesia, (4) Kerakyatan yang dipimpin oleh hikmat kebijaksanaan dalam permusyawaratan/perwakilan, (5) Keadilan sosial bagi seluruh rakyat Indonesia."},
+{k:"TWK", t:"Pasal 1 ayat (1) UUD 1945 menyatakan bahwa Negara Indonesia adalah …", o:["Negara hukum yang berbentuk kesatuan","Negara Kesatuan yang berbentuk Republik","Negara Serikat yang berbentuk Republik","Negara Kesatuan yang berbentuk Kerajaan","Negara demokrasi yang berbentuk Republik"], j:1, b:"Pasal 1 ayat (1) UUD 1945: 'Negara Indonesia ialah Negara Kesatuan, yang berbentuk Republik.' Pasangannya: kesatuan = bentuk negara, republik = bentuk pemerintahan."},
+{k:"TWK", t:"Semboyan Bhinneka Tunggal Ika berasal dari Kitab …, karya Mpu Tantular.", o:["Negarakertagama","Sutasoma","Pararaton","Bharatayuddha","Arjunawiwaha"], j:1, b:"Bhinneka Tunggal Ika terdapat dalam Kitab Sutasoma karangan Mpu Tantular pada masa Majapahit. Kitab Negarakertagama adalah karya Mpu Prapanca."},
+{k:"TWK", t:"Berdasarkan Pasal 24 ayat (2) UUD 1945, kekuasaan kehakiman dilakukan oleh …", o:["Presiden dengan persetujuan DPR","Mahkamah Agung dan Mahkamah Konstitusi","Kejaksaan Agung dan Kepolisian","Dewan Perwakilan Rakyat","Mahkamah Agung dan Kejaksaan"], j:1, b:"Pasal 24 ayat (2): kekuasaan kehakiman dilakukan oleh sebuah Mahkamah Agung dan badan peradilan di bawahnya, serta oleh sebuah Mahkamah Konstitusi."},
+{k:"TWK", t:"Teks Proklamasi Kemerdekaan Indonesia dibacakan pada 17 Agustus 1945 di …", o:["Rengasdengklok, Jawa Barat","Lapangan Ikada, Jakarta","Jalan Pegangsaan Timur No. 56, Jakarta","Gedung Pancasila, Jakarta","Istana Yogyakarta"], j:2, b:"Soekarno membacakan teks proklamasi di rumahnya, Jalan Pegangsaan Timur No. 56, Jakarta. Rengasdengklok adalah tempat Soekarno-Hatta diamankan sehari sebelumnya."},
+{k:"TWK", t:"Sumpah Pemuda diikrarkan pada tanggal …", o:["20 Mei 1908","28 Oktober 1928","1 Juni 1945","17 Agustus 1945","10 November 1945"], j:1, b:"Sumpah Pemuda lahir dari Kongres Pemuda II pada 28 Oktober 1928: satu tanah air, satu bangsa, satu bahasa — Indonesia. Tanggal 20 Mei 1908 adalah Hari Kebangkitan Nasional (berdirinya Budi Utomo)."},
+{k:"TWK", t:"Ketentuan 'Bahasa negara ialah Bahasa Indonesia' diatur dalam UUD 1945 Pasal …", o:["Pasal 33","Pasal 34","Pasal 35","Pasal 36","Pasal 37"], j:3, b:"Bab XV UUD 1945 mengatur bendera, bahasa, lambang negara, dan lagu kebangsaan. Pasal 35 = bendera, Pasal 36 = bahasa, Pasal 36A = lambang Garuda Pancasila, Pasal 36B = lagu Indonesia Raya."},
+{k:"TWK", t:"Pada perisai Garuda Pancasila, sila pertama Pancasila dilambangkan dengan …", o:["Rantai","Bintang","Pohon beringin","Kepala banteng","Padi dan kapas"], j:1, b:"Pasangan simbol dan sila: bintang = sila 1, rantai = sila 2, pohon beringin = sila 3, kepala banteng = sila 4, padi dan kapas = sila 5."},
+{k:"TWK", t:"Bendera pusaka Sang Saka Merah Putih yang dikibarkan pada proklamasi dijahit oleh …", o:["S. K. Trimurti","Sayuti Melik","Fatmawati","Ibu Sud","Cut Nyak Dien"], j:2, b:"Bendera pusaka dijahit oleh Fatmawati, istri Soekarno. Sayuti Melik adalah pengetik naskah proklamasi."},
+{k:"TWK", t:"Menurut Pasal 4 ayat (1) UUD 1945, pemegang kekuasaan pemerintahan negara Indonesia adalah …", o:["Majelis Permusyawaratan Rakyat","Dewan Perwakilan Rakyat","Presiden","Mahkamah Agung","Perdana Menteri"], j:2, b:"Pasal 4 ayat (1): 'Presiden Republik Indonesia memegang kekuasaan pemerintahan menurut Undang-Undang Dasar.' Indonesia tidak mengenal perdana menteri; presiden sekaligus kepala negara dan kepala pemerintahan."},
+{k:"TWK", t:"Sidang pertama BPUPKI yang membahas dasar negara berlangsung pada …", o:["29 Mei – 1 Juni 1945","18 – 22 Agustus 1945","28 – 30 Oktober 1928","1 – 10 Maret 1945","14 – 16 April 1945"], j:0, b:"BPUPKI bersidang pertama pada 29 Mei – 1 Juni 1945. Pada 1 Juni 1945 Soekarno menyampaikan pidato tentang Pancasila — diperingati sebagai Hari Lahir Pancasila."},
+{k:"TWK", t:"Pasal 27 ayat (1) UUD 1945 menegaskan bahwa segala warga negara bersamaan kedudukannya di dalam …", o:["Hukum dan pemerintahan","Perekonomian dan perdagangan","Pendidikan dan kebudayaan","Pertahanan dan keamanan","Agama dan kepercayaan"], j:0, b:"Pasal 27 ayat (1): 'Segala warga negara bersamaan kedudukannya di dalam hukum dan pemerintahan dan wajib menjunjung hukum dan pemerintahan itu dengan tidak ada kecualinya.' Ini dasar persamaan di hadapan hukum."},
+/* ---------- TIU ---------- */
+{k:"TIU", t:"2, 6, 12, 20, 30, …\nAngka berikutnya adalah …", o:["36","40","42","44","46"], j:2, b:"Lihat selisihnya: +4, +6, +8, +10 — selalu bertambah 2. Selisih berikutnya +12, jadi 30 + 12 = 42. Pola lain: n kuadrat + n (1, 6, 12 … 6²+6=42)."},
+{k:"TIU", t:"A, C, F, J, O, …\nHuruf berikutnya adalah …", o:["S","T","U","V","W"], j:2, b:"Lompatan huruf bertambah terus: A ke C (+2), C ke F (+3), F ke J (+4), J ke O (+5), maka berikutnya +6: O ke U."},
+{k:"TIU", t:"15% dari 240 adalah …", o:["24","30","36","40","48"], j:2, b:"15% × 240 = 36. Trik cepat: 10% dari 240 = 24 dan 5% = 12, jumlahnya 36."},
+{k:"TIU", t:"Suatu pekerjaan dapat diselesaikan 5 orang dalam 12 hari. Jika dikerjakan 10 orang dengan kemampuan yang sama, pekerjaan itu selesai dalam …", o:["3 hari","4 hari","6 hari","8 hari","24 hari"], j:2, b:"Perbandingan berbalik nilai: makin banyak orang, makin cepat selesai. 5 × 12 = 10 × x, jadi x = 60/10 = 6 hari."},
+{k:"TIU", t:"Sinonim kata AMBIGU adalah …", o:["Jelas","Bermakna ganda","Tunggal","Pasti","Terang"], j:1, b:"Ambigu berarti mempunyai makna lebih dari satu / bermakna ganda, sehingga dapat menimbulkan keraguan atau salah tafsir."},
+{k:"TIU", t:"Antonim kata EKSKLUSIF adalah …", o:["Khusus","Tertutup","Inklusif","Istimewa","Terbatas"], j:2, b:"Eksklusif berarti terbatas/tertutup untuk kalangan tertentu; lawan katanya inklusif, yaitu terbuka dan mencakup semua pihak."},
+{k:"TIU", t:"GURU : SEKOLAH = DOKTER : …", o:["Pasien","Obat","Rumah Sakit","Stetoskop","Perawat"], j:2, b:"Pola analogi tempat bekerja: guru bekerja di sekolah, dokter bekerja di rumah sakit."},
+{k:"TIU", t:"Semua peserta yang rajin berlatih lulus seleksi. Dina rajin berlatih.\nKesimpulan yang tepat adalah …", o:["Dina tidak lulus seleksi","Dina lulus seleksi","Dina mungkin lulus seleksi","Tidak dapat ditarik kesimpulan","Sebagian peserta lulus seleksi"], j:1, b:"Silogisme sah: premis 'semua yang rajin berlatih lulus' dan fakta 'Dina rajin berlatih' menghasilkan kesimpulan pasti 'Dina lulus seleksi'."},
+{k:"TIU", t:"3, 7, 15, 31, …\nAngka berikutnya adalah …", o:["47","55","62","63","64"], j:3, b:"Polanya kali 2 tambah 1: 3 ke 7, 7 ke 15, 15 ke 31, maka 31 × 2 + 1 = 63."},
+{k:"TIU", t:"Nilai rata-rata dari 6, 7, 8, 9, 10 adalah …", o:["7","7,5","8","8,5","9"], j:2, b:"Jumlah = 6+7+8+9+10 = 40, dibagi 5 bilangan = 8. Trik: pada deret berurutan, rata-rata = nilai tengahnya, yaitu 8."},
+{k:"TIU", t:"Sebuah tas berharga Rp80.000,00 mendapat diskon 25%. Uang yang harus dibayar adalah …", o:["Rp55.000,00","Rp60.000,00","Rp62.000,00","Rp64.000,00","Rp65.000,00"], j:1, b:"Diskon = 25% × 80.000 = 20.000. Bayar = 80.000 − 20.000 = Rp60.000. Cara cepat: bayar 75% dari 80.000 = 60.000."},
+{k:"TIU", t:"4, 9, 16, 25, …\nAngka berikutnya adalah …", o:["30","32","36","40","49"], j:2, b:"Deret bilangan kuadrat: 2²=4, 3²=9, 4²=16, 5²=25, berikutnya 6²=36."},
+
+/* ---------- TKP (skor 1-5 per opsi; tertinggi = sikap terbaik) ---------- */
+{k:"TKP", t:"Kamu bertugas di loket pelayanan. Antrean cukup panjang, lalu datang seorang lansia yang tampak kebingungan mengisi formulir. Sikapmu …", o:["Memintanya mengantre seperti warga lain sampai tiba gilirannya","Membiarkannya karena bukan bagian dari tugasmu","Mengarahkannya ke jalur/meja prioritas dan membantunya mengisi formulir sesuai ketentuan","Menyuruhnya pulang dan kembali lagi bersama keluarganya","Memarahi keluarganya karena membiarkan lansia datang sendiri"], j:2, s:[2,1,5,2,1], b:"Pelayanan prima mengutamakan empati dan prioritas bagi kelompok rentan (lansia, disabilitas, ibu hamil) sesuai ketentuan. Membantu dengan tertib menunjukkan sikap melayani, bukan membiarkan atau menolak."},
+{k:"TKP", t:"Rekan satu timmu bekerja lambat sehingga antrean layanan menumpuk dan beberapa warga mulai mengeluh. Sikapmu …", o:["Segera membantunya mengambil sebagian pekerjaan sambil tetap menyelesaikan tugasmu dan berkoordinasi dengan atasan bila perlu","Membiarkan saja karena itu tanggung jawab masing-masing","Menegurnya keras-keras di depan warga agar ia bekerja lebih cepat","Melaporkan ke atasan agar ia segera diganti tanpa membantunya","Pura-pura sibuk agar tidak ikut menanggung beban"], j:0, s:[5,2,1,3,1], b:"Kerja sama tim berarti saling menutup kekurangan demi pelayanan. Membantu langsung adalah tindakan paling aktif; melaporkan tanpa membantu tidak menyelesaikan masalah warga saat itu juga."},
+{k:"TKP", t:"Setelah selesai mengurus berkasnya, seorang warga menyelipkan amplop berisi uang sambil berkata ini tanda terima kasih. Sikapmu …", o:["Menerimanya karena diberikan dengan ikhlas","Menerimanya lalu membagikannya kepada rekan-rekan","Menolak dengan halus dan menjelaskan bahwa pelayanan memang gratis serta merupakan tugasmu","Menolak dengan marah dan mengusir warga tersebut","Menerimanya jika jumlahnya tidak terlalu besar"], j:2, s:[1,1,5,2,2], b:"Integritas ASN: segala bentuk pemberian terkait jabatan adalah gratifikasi dan wajib ditolak. Tolak dengan sopan agar warga tetap merasa dihargai, sambil menegaskan layanan tidak dipungut biaya."},
+{k:"TKP", t:"Saat jam layanan ramai, sistem komputer tiba-tiba bermasalah sehingga data tidak bisa diinput. Sikapmu …", o:["Menutup loket dan menyuruh warga kembali besok","Menjelaskan keadaan dengan tenang, mencatat data warga secara manual agar tetap terlayani, dan melaporkan gangguan ke petugas IT/atasan","Menunggu saja tanpa memberi tahu warga apa pun","Menyalahkan petugas IT di depan warga","Tetap diam dan berharap sistem pulih sendiri"], j:1, s:[2,5,1,1,2], b:"Profesionalisme saat krisis: komunikasikan masalah dengan jujur, beri solusi sementara (pencatatan manual) agar warga tidak pulang dengan tangan kosong, dan eskalasi ke pihak yang berwenang memperbaikinya."},
+{k:"TKP", t:"Atasanmu memintamu sedikit mengubah angka laporan agar kinerja kantor terlihat lebih baik. Sikapmu …", o:["Mengubahnya karena perintah atasan adalah kewajiban","Menolak dengan sopan, menyampaikan data apa adanya, dan menawarkan saran perbaikan kinerja yang nyata","Mengubahnya asal tidak terlalu besar selisihnya","Melaporkan atasan ke media sosial agar viral","Diam-diam mengubahnya tetapi menyimpan data asli untuk berjaga-jaga"], j:1, s:[1,5,1,1,2], b:"Kejujuran dan integritas mengalahkan kepatuhan buta. ASN wajib menolak perintah yang melanggar aturan dengan cara yang santun dan solutif — data tetap benar, dan kamu tetap membantu lewat saran perbaikan yang sah."},
+{k:"TKP", t:"Kamu menyadari telah salah memasukkan data seorang warga sehingga berkasnya berpotensi bermasalah. Sikapmu …", o:["Diam saja dan berharap tidak ada yang menyadarinya","Segera memperbaiki data, melaporkan kesalahan ke atasan, dan meminta maaf serta membantu warga yang terdampak","Menyalahkan sistem yang sering bermasalah","Menunggu sampai warga itu komplain terlebih dahulu","Meminta rekanmu untuk mengaku sebagai yang salah input"], j:1, s:[1,5,2,2,1], b:"Tanggung jawab berarti mengakui dan memperbaiki kesalahan secepat mungkin, transparan kepada atasan, dan memulihkan hak warga. Menyembunyikan kesalahan justru memperbesar masalah."},
+{k:"TKP", t:"Dalam rapat tim, rekanmu bersikeras pada caranya padahal kamu yakin caramu lebih efisien. Sikapmu …", o:["Memaksakan pendapatmu karena kamu yang paling benar","Mengalah total tanpa menyampaikan pendapat","Menyampaikan alasan dan datamu dengan santun, mendengarkan pertimbangannya, lalu mengikuti keputusan bersama/SOP yang berlaku","Membicarakannya di belakang dengan rekan lain","Keluar dari rapat karena kesal"], j:2, s:[2,2,5,1,1], b:"Asertif dan kolaboratif: sampaikan pendapat berbasis alasan/data, hargai pandangan lain, dan tunduk pada keputusan bersama atau SOP. Tujuannya hasil terbaik untuk layanan, bukan menang sendiri."},
+{k:"TKP", t:"Menjelang akhir jam kerja, atasan memberi tugas tambahan mendesak untuk persiapan acara kedinasan besok pagi. Sikapmu …", o:["Menolak karena sudah di luar jam kerja","Mengerjakannya dengan bersungut-sungut di depan rekan-rekan","Menyelesaikannya dengan baik sesuai ketentuan lembur yang berlaku dan mengoordinasikan pembagian tugas bila perlu","Menyerahkannya diam-diam kepada rekan yang lebih muda","Pulang saja tanpa pemberitahuan"], j:2, s:[2,2,5,3,1], b:"Dedikasi dan loyalitas pada tugas: pekerjaan mendesak yang sah diselesaikan secara profesional dengan tetap mengikuti aturan (mis. administrasi lembur) dan koordinasi tim, bukan ditolak atau dikerjakan setengah hati."},
+{k:"TKP", t:"Seorang warga marah-marah di loket karena merasa proses berkasnya terlalu lama. Sikapmu …", o:["Membalas dengan nada lebih tinggi agar ia diam","Meninggalkannya dan melayani warga berikutnya","Mendengarkan keluhannya dengan empati, menjelaskan tahapan dan perkiraan waktunya, serta menawarkan solusi yang bisa dibantu","Mengatakan bahwa semua orang juga mengalami hal yang sama","Memanggil petugas keamanan tanpa berusaha memahami masalahnya"], j:2, s:[1,2,5,2,3], b:"Kunci menghadapi komplain: dengarkan dulu (empati), beri penjelasan yang jelas tentang proses, dan tawarkan langkah solutif. Sikap tenang dan membantu meredakan emosi sekaligus menyelesaikan akar masalah."},
+{k:"TKP", t:"Teman dekatmu mengajak tidak mengikuti pelatihan wajib dengan alasan materinya membosankan dan absensi bisa dititipkan. Sikapmu …", o:["Ikut bolos karena tidak enak menolak ajakan teman","Menolak ajakannya, mengingatkan bahwa pelatihan itu kewajiban dan bermanfaat, serta tetap mengikuti pelatihan dengan sungguh-sungguh","Bolos tetapi tetap belajar materi sendiri di rumah","Ikut pelatihan hanya pada sesi pertama lalu pulang","Menitipkan absen tetapi benar-benar mempelajari materinya"], j:1, s:[1,5,2,2,2], b:"Integritas dan orientasi belajar: titip absen adalah kecurangan. Menolak ajakan yang salah sambil mengingatkan teman menunjukkan loyalitas yang benar — pada aturan dan pengembangan diri, bukan pada ajakan keliru."},
+{k:"TKP", t:"Kamu menemukan dompet warga tertinggal di ruang tunggu kantor. Sikapmu …", o:["Menyimpannya dan menggunakannya bila pemilik tidak mencarinya","Mengamankannya, mencatat ciri dan waktu penemuan, lalu menyerahkannya ke petugas keamanan/piket untuk diumumkan kepada pemiliknya","Membiarkannya di tempat semula","Membukanya dan mengambil uangnya sebagai upah menemukan","Memberikannya kepada rekan yang mengaku kenal pemiliknya tanpa catatan apa pun"], j:1, s:[1,5,2,1,2], b:"Kejujuran plus prosedur: barang temuan diamankan, dicatat, dan diserahkan melalui jalur resmi agar sampai ke pemilik yang sah dan tidak menimbulkan masalah di kemudian hari."},
+{k:"TKP", t:"Kamu dipercaya memegang tugas baru yang belum pernah kamu kerjakan dan belum kamu kuasai. Sikapmu …", o:["Menolak tugas itu karena takut salah","Menerimanya, segera mempelajari panduan/SOP, dan aktif bertanya kepada senior sampai benar-benar paham","Mengerjakannya asal-asalan yang penting selesai","Menunggu ada yang mengajari tanpa berusaha sendiri","Meminta tugas itu dialihkan ke orang lain setiap kali"], j:1, s:[2,5,1,2,2], b:"Orientasi pengembangan diri: tugas baru adalah kesempatan belajar. Sikap terbaik adalah menerima dengan tanggung jawab, belajar mandiri lewat SOP, dan bertanya secara proaktif — bukan menghindar atau asal jadi."}
+];
+
+/* ================= DATA: MATERI ================= */
+var MATERI = [
+{judul:"🇮🇩 TWK — Wawasan Kebangsaan", ringkas:"Pancasila, UUD 1945, NKRI, Bhinneka Tunggal Ika, dan sejarah perjuangan bangsa.", isi:"PANCASILA & SIMBOLNYA\n1. Ketuhanan Yang Maha Esa — bintang\n2. Kemanusiaan yang adil dan beradab — rantai\n3. Persatuan Indonesia — pohon beringin\n4. Kerakyatan yang dipimpin oleh hikmat kebijaksanaan dalam permusyawaratan/perwakilan — kepala banteng\n5. Keadilan sosial bagi seluruh rakyat Indonesia — padi dan kapas\n\nPASAL-PASAL UUD 1945 YANG SERING KELUAR\n• Pasal 1 ayat (1): Negara Kesatuan berbentuk Republik.\n• Pasal 1 ayat (2): Kedaulatan di tangan rakyat, dilaksanakan menurut UUD.\n• Pasal 4 ayat (1): Presiden memegang kekuasaan pemerintahan.\n• Pasal 24 ayat (2): Kekuasaan kehakiman oleh MA dan MK.\n• Pasal 27 ayat (1): Warga negara bersamaan kedudukannya dalam hukum dan pemerintahan.\n• Pasal 28A–28J: Hak asasi manusia.\n• Pasal 29: Negara berdasar Ketuhanan YME; kebebasan beragama.\n• Pasal 31: Hak atas pendidikan; wajib belajar.\n• Pasal 33: Perekonomian disusun sebagai usaha bersama berdasar asas kekeluargaan.\n• Pasal 35: Bendera = Sang Merah Putih. Pasal 36: Bahasa negara = Bahasa Indonesia. Pasal 36A: Lambang negara = Garuda Pancasila. Pasal 36B: Lagu kebangsaan = Indonesia Raya.\n\nSEJARAH PENTING\n• 1908: Budi Utomo — Kebangkitan Nasional (20 Mei).\n• 1928: Sumpah Pemuda (28 Oktober) — satu tanah air, bangsa, bahasa.\n• 1945: BPUPKI sidang I (29 Mei–1 Juni), pidato Pancasila Soekarno 1 Juni; PPKI 18 Agustus mengesahkan UUD 1945 & memilih Presiden/Wapres.\n• Proklamasi 17 Agustus 1945 di Jl. Pegangsaan Timur 56, Jakarta; bendera pusaka dijahit Fatmawati; naskah diketik Sayuti Melik.\n\nBHINNEKA TUNGGAL IKA\nDari Kitab Sutasoma (Mpu Tantular): 'berbeda-beda tetapi tetap satu jua' — landasan menghargai keberagaman suku, agama, ras, dan budaya dalam NKRI."},
+{judul:"🧮 TIU — Tes Intelegensia Umum", ringkas:"Deret angka/huruf, hitungan cepat, perbandingan, sinonim-antonim, analogi, dan silogisme.", isi:"DERET ANGKA — cek tiga pola ini dulu:\n1. Selisih tetap/bertingkat: 2,6,12,20,30 (selisih +4,+6,+8,+10, …).\n2. Kali + tambah: 3,7,15,31 (×2+1).\n3. Kuadrat/pangkat: 4,9,16,25 (pangkat dua dari 2,3,4,5).\nDeret huruf sama prinsipnya: ubah huruf jadi nomor urut (A=1 … Z=26).\n\nHITUNGAN CEPAT\n• Persen: 15% dari 240 = 10% (24) + 5% (12) = 36.\n• Diskon: yang dibayar = (100 − diskon)% × harga awal. Diskon 25% berarti bayar 75%.\n• Rata-rata = jumlah ÷ banyak data; pada deret berurutan, rata-rata = nilai tengah.\n• Perbandingan berbalik nilai (pekerja vs hari): pekerja bertambah, hari berkurang. Rumus: a × b = c × x.\n• Perbandingan senilai (harga vs jumlah barang): keduanya bergerak searah.\n\nVERBAL\n• Sinonim = persamaan kata (ambigu = bermakna ganda).\n• Antonim = lawan kata (eksklusif lawan inklusif).\n• Analogi: temukan hubungannya dulu (profesi : tempat kerja; alat : fungsi; sebab : akibat), baru cocokkan pilihan.\n\nLOGIKA / SILOGISME\n• 'Semua A adalah B' + 'X adalah A' menghasilkan kesimpulan pasti 'X adalah B'.\n• Hati-hati kata 'sebagian' dan 'mungkin' — kesimpulan harus PASTI benar.\n• Jika premis tidak cukup, jawaban yang benar bisa 'tidak dapat disimpulkan'."},
+{judul:"🧭 TKP — Karakteristik Pribadi", ringkas:"Cara memilih jawaban terbaik: pelayanan, integritas, kerja sama, dan tanggung jawab.", isi:"PRINSIP MEMILIH JAWABAN TKP\nDi TKP tidak ada jawaban salah total — semua opsi dinilai 1–5. Pilih sikap yang PALING aktif, paling melayani, dan tetap sesuai aturan.\n\n1. PELAYANAN PRIMA\nUtamakan warga: bantu lebih dulu, komunikasikan kendala dengan jujur, beri solusi — jangan membiarkan, menolak, atau menyuruh pulang tanpa jalan keluar. Kelompok rentan (lansia, disabilitas, ibu hamil) diprioritaskan sesuai ketentuan.\n\n2. INTEGRITAS\nTolak gratifikasi dengan sopan. Jangan pernah memalsukan data/laporan, jangan titip absen. Jika atasan menyuruh hal yang melanggar aturan, tolak dengan santun + tawarkan cara yang benar.\n\n3. TANGGUNG JAWAB\nSalah input? Akui, perbaiki segera, lapor atasan, bantu warga yang terdampak. Barang temuan: amankan, catat, serahkan lewat jalur resmi.\n\n4. KERJA SAMA & KOMUNIKASI\nRekan lambat → bantu, bukan dicela di depan umum. Beda pendapat → sampaikan dengan data, putuskan bersama/ikuti SOP. Warga marah → dengarkan dengan empati, jelaskan proses, tawarkan solusi.\n\n5. DEDIKASI & PENGEMBANGAN DIRI\nTugas mendesak yang sah dikerjakan profesional (ikuti aturan lembur). Tugas baru yang belum dikuasai diterima sambil belajar dan bertanya — bukan dihindari.\n\nPOLA UMUM: opsi terbaik biasanya yang paling PROAKTIF + EMPATIK + SESUAI ATURAN. Opsi pasif ('membiarkan', 'menunggu', 'diam saja') hampir selalu bernilai rendah."}
+];
+
+/* ================= DATA: CHECKLIST BAWAAN ================= */
+var TUGAS_BAWAAN = [
+{t:"Buat jadwal belajar harian (mis. 1 jam/hari)", sumber:"otomatis"},
+{t:"Pelajari Materi TWK: Pancasila & UUD 1945", sumber:"otomatis"},
+{t:"Kerjakan Latihan TWK (12 soal) di PANARA COURSE", sumber:"otomatis"},
+{t:"Kerjakan Latihan TIU (12 soal) di PANARA COURSE", sumber:"otomatis"},
+{t:"Kerjakan Latihan TKP (12 soal) & baca pembahasannya", sumber:"otomatis"},
+{t:"Coba Simulasi Mini SKD (36 soal campuran)", sumber:"otomatis"},
+{t:"Cek pengumuman & syarat sekolah kedinasan tujuan", sumber:"otomatis"},
+{t:"Siapkan berkas: KTP, KK, ijazah/rapor, pasfoto", sumber:"otomatis"},
+{t:"Jaga pola tidur & latihan fisik ringan tiap minggu", sumber:"otomatis"}
+];
+
+/* ================= PENYIMPANAN & AKUN ================= */
+function ambilJSON(kunci, bawaan) {
+  try { var v = localStorage.getItem(kunci); return v ? JSON.parse(v) : bawaan; } catch (e) { return bawaan; }
+}
+function simpanJSON(kunci, nilai) {
+  try { localStorage.setItem(kunci, JSON.stringify(nilai)); } catch (e) {}
+}
+function hashSandi(nama, sandi) {
+  var h = 5381, s = nama.toLowerCase() + "::" + sandi;
+  for (var i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; }
+  return "h" + (h >>> 0).toString(36);
+}
+var sesiUser = null;
+function dataUser() {
+  var d = ambilJSON("panara_data_" + sesiUser, null);
+  if (!d) {
+    d = { tugas: TUGAS_BAWAAN.map(function (t) { return { t: t.t, selesai: false, sumber: t.sumber }; }), riwayat: [], chat: [] };
+    simpanJSON("panara_data_" + sesiUser, d);
+  }
+  return d;
+}
+function simpanDataUser(d) { simpanJSON("panara_data_" + sesiUser, d); }
+
+/* ================= NAVIGASI ================= */
+var SEMUA_TAMPILAN = ["login","daftar","beranda","latihan","kuis","hasil","ai","ceklist","materi","materi-detail","riwayat"];
+function tampil(nama) {
+  SEMUA_TAMPILAN.forEach(function (v) {
+    var el = document.getElementById("view-" + v);
+    if (el) el.hidden = (v !== nama);
+  });
+  var perluLogin = !(nama === "login" || nama === "daftar");
+  document.getElementById("navBawah").hidden = !perluLogin || !sesiUser;
+  document.getElementById("chipUser").hidden = !sesiUser;
+  document.querySelectorAll("nav.bawah button").forEach(function (b) {
+    b.classList.toggle("aktif", b.getAttribute("data-pergi") === nama);
+  });
+  if (nama === "beranda") segarkanBeranda();
+  if (nama === "ceklist") gambarTugas();
+  if (nama === "materi") gambarMateri();
+  if (nama === "riwayat") gambarRiwayat();
+  if (nama === "ai") gambarChat();
+  window.scrollTo(0, 0);
+}
+function pergi(nama) {
+  if (!sesiUser && nama !== "login" && nama !== "daftar") { tampil("login"); return; }
+  if (nama === "portal") { window.open("https://prataava.github.io/portal-nf/", "_blank", "noopener"); return; }
+  if (nama === "simulasi") { tampil("latihan"); return; }
+  tampil(nama);
+}
+document.addEventListener("click", function (e) {
+  var t = e.target.closest("[data-pergi]");
+  if (t) { pergi(t.getAttribute("data-pergi")); }
+  var l = e.target.closest("[data-mulai-latihan]");
+  if (l) { mulaiKuis("latihan", l.getAttribute("data-mulai-latihan")); }
+});
+
+/* ================= LOGIN & DAFTAR ================= */
+function tampilGalat(id, teks) { var g = document.getElementById(id); g.textContent = teks; g.hidden = !teks; }
+function masukBerhasil(nama) {
+  sesiUser = nama;
+  simpanJSON("panara_sesi", nama);
+  document.getElementById("chipNama").textContent = nama;
+  dataUser();
+  tampil("beranda");
+}
+document.getElementById("btnMasuk").addEventListener("click", function () {
+  var nama = document.getElementById("liNama").value.trim();
+  var sandi = document.getElementById("liSandi").value;
+  var users = ambilJSON("panara_users", {});
+  if (!nama || !sandi) { tampilGalat("liGalat", "Isi nama pengguna dan kata sandi dulu ya."); return; }
+  var kunci = Object.keys(users).filter(function (k) { return k.toLowerCase() === nama.toLowerCase(); })[0];
+  if (!kunci) { tampilGalat("liGalat", "Nama pengguna belum terdaftar. Ketuk 'Daftar gratis' di bawah untuk membuat akun."); return; }
+  if (users[kunci].sandi !== hashSandi(kunci, sandi)) { tampilGalat("liGalat", "Kata sandi salah. Coba lagi ya."); return; }
+  tampilGalat("liGalat", "");
+  masukBerhasil(kunci);
+});
+document.getElementById("btnDaftar").addEventListener("click", function () {
+  var nama = document.getElementById("dfNama").value.trim();
+  var s1 = document.getElementById("dfSandi").value, s2 = document.getElementById("dfSandi2").value;
+  var users = ambilJSON("panara_users", {});
+  if (nama.length < 3) { tampilGalat("dfGalat", "Nama pengguna minimal 3 karakter."); return; }
+  if (Object.keys(users).some(function (k) { return k.toLowerCase() === nama.toLowerCase(); })) { tampilGalat("dfGalat", "Nama pengguna itu sudah dipakai. Pilih nama lain ya."); return; }
+  if (s1.length < 6) { tampilGalat("dfGalat", "Kata sandi minimal 6 karakter."); return; }
+  if (s1 !== s2) { tampilGalat("dfGalat", "Ulangi kata sandi belum sama. Periksa lagi ya."); return; }
+  users[nama] = { sandi: hashSandi(nama, s1), dibuat: new Date().toISOString() };
+  simpanJSON("panara_users", users);
+  tampilGalat("dfGalat", "");
+  masukBerhasil(nama);
+});
+document.getElementById("keDaftar").addEventListener("click", function () { tampil("daftar"); });
+document.getElementById("keMasuk").addEventListener("click", function () { tampil("login"); });
+document.getElementById("btnKeluar").addEventListener("click", function () {
+  sesiUser = null;
+  try { localStorage.removeItem("panara_sesi"); } catch (e) {}
+  tampil("login");
+});
+["liSandi","dfSandi2"].forEach(function (id) {
+  document.getElementById(id).addEventListener("keydown", function (e) {
+    if (e.key === "Enter") { document.getElementById(id === "liSandi" ? "btnMasuk" : "btnDaftar").click(); }
+  });
+});
+
+/* ================= BERANDA ================= */
+function segarkanBeranda() {
+  if (!sesiUser) return;
+  document.getElementById("sapaNama").textContent = "Halo, " + sesiUser + "! 👋";
+  var d = dataUser();
+  var total = d.tugas.length, selesai = d.tugas.filter(function (t) { return t.selesai; }).length;
+  var persen = total ? Math.round(selesai / total * 100) : 0;
+  document.getElementById("persenCek").textContent = persen + "%";
+  document.getElementById("batangCek").style.width = persen + "%";
+  document.getElementById("ringkasanCek").textContent = total ? (selesai + " dari " + total + " tugas selesai. " + (persen === 100 ? "Luar biasa, semua tuntas! 🎉" : "Sedikit lagi, tetap semangat!")) : "Belum ada tugas — tambahkan lewat menu Checklist.";
+}
+document.getElementById("btnKeCekRingkas").addEventListener("click", function () { pergi("ceklist"); });
+
+/* ================= CHECKLIST TUGAS ================= */
+function gambarTugas() {
+  var d = dataUser();
+  var wadah = document.getElementById("daftarTugas");
+  wadah.innerHTML = "";
+  if (!d.tugas.length) { wadah.innerHTML = "<div class='kosong'>Belum ada tugas. Tambahkan tugas pertamamu di bawah ini.</div>"; }
+  d.tugas.forEach(function (t, i) {
+    var baris = document.createElement("div");
+    baris.className = "tugas" + (t.selesai ? " selesai" : "");
+    var cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = !!t.selesai;
+    cb.addEventListener("change", function () {
+      var dd = dataUser(); dd.tugas[i].selesai = cb.checked; simpanDataUser(dd); gambarTugas();
+    });
+    var isi = document.createElement("div"); isi.className = "isi-tugas";
+    isi.textContent = t.t;
+    var kecil = document.createElement("small");
+    kecil.textContent = t.sumber === "otomatis" ? "✨ Dibuat otomatis oleh PANARA COURSE" : "Ditambahkan sendiri";
+    isi.appendChild(kecil);
+    var hapus = document.createElement("button"); hapus.className = "hapus"; hapus.textContent = "🗑"; hapus.title = "Hapus tugas";
+    hapus.addEventListener("click", function () {
+      var dd = dataUser(); dd.tugas.splice(i, 1); simpanDataUser(dd); gambarTugas();
+    });
+    baris.appendChild(cb); baris.appendChild(isi); baris.appendChild(hapus);
+    wadah.appendChild(baris);
+  });
+  var total = d.tugas.length, selesai = d.tugas.filter(function (t) { return t.selesai; }).length;
+  var persen = total ? Math.round(selesai / total * 100) : 0;
+  document.getElementById("cekSelesaiTeks").textContent = selesai + " dari " + total;
+  document.getElementById("cekPersen").textContent = persen + "%";
+  document.getElementById("cekBatang").style.width = persen + "%";
+}
+document.getElementById("btnTambahTugas").addEventListener("click", tambahTugas);
+document.getElementById("tugasBaru").addEventListener("keydown", function (e) { if (e.key === "Enter") tambahTugas(); });
+function tambahTugas() {
+  var inp = document.getElementById("tugasBaru");
+  var teks = inp.value.trim();
+  if (!teks) return;
+  var d = dataUser();
+  d.tugas.push({ t: teks, selesai: false, sumber: "sendiri" });
+  simpanDataUser(d);
+  inp.value = "";
+  gambarTugas();
+}
+
+/* ================= MATERI ================= */
+function gambarMateri() {
+  var wadah = document.getElementById("daftarMateri");
+  wadah.innerHTML = "";
+  MATERI.forEach(function (m, i) {
+    var kartu = document.createElement("div"); kartu.className = "kartu";
+    var j = document.createElement("h2"); j.className = "judul-bagian"; j.textContent = m.judul;
+    var r = document.createElement("p"); r.className = "sub"; r.textContent = m.ringkas; r.style.marginBottom = "12px";
+    var b = document.createElement("button"); b.className = "btn laut lebar"; b.textContent = "Baca Materi";
+    b.addEventListener("click", function () {
+      document.getElementById("materiDetailJudul").textContent = m.judul;
+      document.getElementById("materiDetailIsi").textContent = m.isi;
+      tampil("materi-detail");
+    });
+    kartu.appendChild(j); kartu.appendChild(r); kartu.appendChild(b);
+    wadah.appendChild(kartu);
+  });
+}
+
+/* ================= RIWAYAT ================= */
+function gambarRiwayat() {
+  var d = dataUser();
+  var wadah = document.getElementById("daftarRiwayat");
+  wadah.innerHTML = "";
+  if (!d.riwayat.length) {
+    wadah.innerHTML = "<div class='kosong'>Belum ada riwayat. Selesaikan satu sesi latihan atau simulasi, hasilnya akan tercatat di sini.</div>";
+    return;
+  }
+  d.riwayat.slice().reverse().forEach(function (r) {
+    var baris = document.createElement("div"); baris.className = "baris-riwayat";
+    var kiri = document.createElement("div");
+    var atas = document.createElement("div"); atas.textContent = r.label; atas.style.fontWeight = "700";
+    var bawah = document.createElement("div"); bawah.className = "k"; bawah.textContent = r.tanggal;
+    kiri.appendChild(atas); kiri.appendChild(bawah);
+    var skor = document.createElement("div"); skor.className = "skor"; skor.textContent = r.poin + " / " + r.maks;
+    baris.appendChild(kiri); baris.appendChild(skor);
+    wadah.appendChild(baris);
+  });
+}
+
+/* ================= MESIN KUIS ================= */
+var kuis = null;
+function acak(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+  return a;
+}
+function mulaiKuis(mode, kat) {
+  var daftar;
+  if (mode === "latihan") {
+    daftar = SOAL.map(function (s, i) { return s.k === kat ? i : -1; }).filter(function (i) { return i >= 0; });
+  } else {
+    daftar = acak(SOAL.map(function (s, i) { return i; }));
+  }
+  kuis = { mode: mode, kat: kat || "Campuran", daftar: daftar, posisi: 0, jawaban: {} };
+  tampil("kuis");
+  gambarSoal();
+}
+document.getElementById("btnMulaiSimulasi").addEventListener("click", function () { mulaiKuis("simulasi", "Campuran"); });
+document.getElementById("btnBerhentiKuis").addEventListener("click", function () { kuis = null; tampil("latihan"); });
+
+function gambarSoal() {
+  if (!kuis) return;
+  var idx = kuis.daftar[kuis.posisi];
+  var s = SOAL[idx];
+  var sudahJawab = kuis.jawaban.hasOwnProperty(kuis.posisi);
+  document.getElementById("chipKategori").textContent = (kuis.mode === "simulasi" ? "SIMULASI • " : "") + s.k;
+  document.getElementById("infoKuis").textContent = "Soal " + (kuis.posisi + 1) + " dari " + kuis.daftar.length + (kuis.mode === "latihan" ? " — Latihan " + kuis.kat : " — Simulasi Mini");
+  document.getElementById("teksSoal").textContent = s.t;
+  var wadah = document.getElementById("wadahOpsi");
+  wadah.innerHTML = "";
+  var terkunci = kuis.mode === "latihan" && sudahJawab;
+  s.o.forEach(function (teksOpsi, i) {
+    var b = document.createElement("button");
+    b.className = "opsi";
+    if (kuis.jawaban[kuis.posisi] === i) b.classList.add("terpilih");
+    if (terkunci) {
+      b.disabled = true;
+      if (s.k === "TKP") { if (i === s.j) b.classList.add("benar"); }
+      else if (i === s.j) b.classList.add("benar");
+      else if (kuis.jawaban[kuis.posisi] === i) b.classList.add("salah");
+    }
+    var huruf = document.createElement("span"); huruf.className = "huruf"; huruf.textContent = "ABCDE"[i];
+    var isi = document.createElement("span"); isi.textContent = teksOpsi;
+    b.appendChild(huruf); b.appendChild(isi);
+    b.addEventListener("click", function () {
+      if (kuis.mode === "latihan" && kuis.jawaban.hasOwnProperty(kuis.posisi)) return;
+      kuis.jawaban[kuis.posisi] = i;
+      gambarSoal();
+    });
+    wadah.appendChild(b);
+  });
+  var kotak = document.getElementById("kotakBahas");
+  if (kuis.mode === "latihan" && sudahJawab) {
+    kotak.hidden = false;
+    var tambahan = "";
+    if (s.k === "TKP") {
+      tambahan = "\n\nPilihan terbaik: " + "ABCDE"[s.j] + " (skor 5). Pilihanmu memberi skor " + s.s[kuis.jawaban[kuis.posisi]] + " dari 5.";
+    }
+    document.getElementById("teksBahas").textContent = s.b + tambahan;
+  } else { kotak.hidden = true; }
+  document.getElementById("btnSoalSebelum").disabled = kuis.posisi === 0;
+  document.getElementById("btnSoalLanjut").textContent = kuis.posisi === kuis.daftar.length - 1 ? "Selesai & Lihat Hasil ✓" : "Berikutnya →";
+  var grid = document.getElementById("gridNomor");
+  grid.innerHTML = "";
+  kuis.daftar.forEach(function (_, p) {
+    var nb = document.createElement("button");
+    nb.textContent = p + 1;
+    if (kuis.jawaban.hasOwnProperty(p)) nb.classList.add("terjawab");
+    if (p === kuis.posisi) nb.classList.add("aktif");
+    nb.addEventListener("click", function () { kuis.posisi = p; gambarSoal(); });
+    grid.appendChild(nb);
+  });
+}
+document.getElementById("btnSoalSebelum").addEventListener("click", function () { if (kuis && kuis.posisi > 0) { kuis.posisi--; gambarSoal(); } });
+document.getElementById("btnSoalLanjut").addEventListener("click", function () {
+  if (!kuis) return;
+  if (kuis.posisi === kuis.daftar.length - 1) { selesaiKuis(); }
+  else { kuis.posisi++; gambarSoal(); }
+});
+
+function selesaiKuis() {
+  var perKat = { TWK: { poin: 0, maks: 0, benar: 0, total: 0 }, TIU: { poin: 0, maks: 0, benar: 0, total: 0 }, TKP: { poin: 0, maks: 0, benar: 0, total: 0 } };
+  var totalPoin = 0, totalMaks = 0, terjawab = 0;
+  kuis.daftar.forEach(function (idx, pos) {
+    var s = SOAL[idx], pil = kuis.jawaban[pos];
+    var pk = perKat[s.k];
+    pk.total++; pk.maks += 5; totalMaks += 5;
+    if (pil !== undefined) {
+      terjawab++;
+      if (s.k === "TKP") { pk.poin += s.s[pil]; totalPoin += s.s[pil]; if (s.s[pil] === 5) pk.benar++; }
+      else if (pil === s.j) { pk.poin += 5; totalPoin += 5; pk.benar++; }
+    }
+  });
+  var label = kuis.mode === "latihan" ? "Latihan " + kuis.kat : "Simulasi Mini SKD";
+  var sekarang = new Date();
+  var tgl = sekarang.toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) + " • " + sekarang.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
+  var d = dataUser();
+  d.riwayat.push({ tanggal: tgl, label: label, poin: totalPoin, maks: totalMaks });
+  simpanDataUser(d);
+
+  document.getElementById("judulHasil").textContent = "Hasil — " + label;
+  document.getElementById("skorBesar").textContent = totalPoin;
+  var ket = "";
+  if (kuis.mode === "latihan" && kuis.kat !== "TKP") {
+    ket = "Benar " + perKat[kuis.kat].benar + " dari " + perKat[kuis.kat].total + " soal • Dijawab " + terjawab + " dari " + kuis.daftar.length + " soal";
+  } else if (kuis.mode === "latihan") {
+    ket = "Rata-rata skor TKP kamu " + (perKat.TKP.total ? (perKat.TKP.poin / perKat.TKP.total).toFixed(1) : "0") + " dari 5 per soal • Dijawab " + terjawab + " dari " + kuis.daftar.length + " soal";
+  } else {
+    ket = "Total poin simulasi mini (maks " + totalMaks + ") • Dijawab " + terjawab + " dari " + kuis.daftar.length + " soal";
+  }
+  document.getElementById("skorKeterangan").textContent = ket;
+  var rincian = document.getElementById("rincianHasil");
+  rincian.innerHTML = "";
+  var kats = kuis.mode === "latihan" ? [kuis.kat] : ["TWK", "TIU", "TKP"];
+  kats.forEach(function (k) {
+    var sel = document.createElement("div"); sel.className = "sel";
+    var v = document.createElement("div"); v.className = "v"; v.textContent = perKat[k].poin + "/" + perKat[k].maks;
+    var kk = document.createElement("div"); kk.className = "k"; kk.textContent = k + (k === "TKP" ? " (poin)" : " (poin)");
+    sel.appendChild(v); sel.appendChild(kk);
+    rincian.appendChild(sel);
+  });
+  var pg = document.getElementById("catatanPG");
+  if (kuis.mode === "simulasi") {
+    pg.hidden = false;
+    pg.textContent = "Sebagai gambaran: pada SKD resmi (jumlah soal penuh: TWK 30, TIU 35, TKP 45), nilai ambang batas (passing grade) yang pernah diberlakukan BKN adalah TWK 65 dari 150, TIU 80 dari 150, dan TKP 166 dari 225. Simulasi Mini ini berskala lebih kecil (maks 60 per kategori) — pakai sebagai pengukur arah belajar, bukan penentu kelulusan.";
+  } else { pg.hidden = true; }
+
+  var review = document.getElementById("wadahReview");
+  review.innerHTML = "";
+  kuis.daftar.forEach(function (idx, pos) {
+    var s = SOAL[idx], pil = kuis.jawaban[pos];
+    var kartu = document.createElement("div"); kartu.className = "kartu";
+    var chip = document.createElement("span"); chip.className = "kat-chip"; chip.textContent = s.k + " • Soal " + (pos + 1);
+    var t = document.createElement("div"); t.className = "soal-teks"; t.textContent = s.t;
+    var jw = document.createElement("div"); jw.className = "sub";
+    jw.textContent = pil === undefined ? "Jawabanmu: (tidak dijawab)" : "Jawabanmu: " + "ABCDE"[pil] + " — " + s.o[pil];
+    var kn = document.createElement("div"); kn.className = "sub"; kn.style.fontWeight = "700"; kn.style.color = "var(--laut)";
+    kn.textContent = (s.k === "TKP" ? "Pilihan terbaik: " : "Kunci jawaban: ") + "ABCDE"[s.j] + " — " + s.o[s.j] + (s.k === "TKP" && pil !== undefined ? " • Skor kamu: " + s.s[pil] + "/5" : "");
+    var bh = document.createElement("div"); bh.className = "bahas";
+    var tt = document.createElement("span"); tt.className = "tt"; tt.textContent = "💡 Pembahasan";
+    var tb = document.createElement("span"); tb.textContent = s.b;
+    bh.appendChild(tt); bh.appendChild(tb);
+    kartu.appendChild(chip); kartu.appendChild(t); kartu.appendChild(jw); kartu.appendChild(kn); kartu.appendChild(bh);
+    review.appendChild(kartu);
+  });
+  tampil("hasil");
+}
+document.getElementById("btnLihatBahas").addEventListener("click", function () {
+  var r = document.getElementById("wadahReview");
+  if (r) r.scrollIntoView({ behavior: "smooth" });
+});
+
+/* ================= TANYA AI ================= */
+var AI_ENDPOINT = ""; /* Bila nanti ada endpoint AI milik sendiri (Cloudflare Worker), isi di sini: format OpenAI-compatible. */
+var mesinAI = "online";
+document.getElementById("segmenMesin").addEventListener("click", function (e) {
+  var b = e.target.closest("[data-mesin]");
+  if (!b) return;
+  mesinAI = b.getAttribute("data-mesin");
+  document.querySelectorAll("#segmenMesin button").forEach(function (x) { x.classList.toggle("aktif", x === b); });
+});
+function gambarChat() {
+  var d = dataUser();
+  var alur = document.getElementById("alurChat");
+  alur.innerHTML = "";
+  if (!d.chat.length) {
+    var g = document.createElement("div"); g.className = "gelembung ai";
+    var sm = document.createElement("span"); sm.className = "sumber"; sm.textContent = "PANARA COURSE";
+    var tx = document.createElement("span");
+    tx.textContent = "Halo, " + sesiUser + "! Aku asisten belajar kedinasanmu. Tulis soal TWK, TIU, atau TKP yang membuatmu penasaran — misalnya tempel persis bunyi soalnya — nanti kubantu jawab dan bahas. 📚";
+    g.appendChild(sm); g.appendChild(tx);
+    alur.appendChild(g);
+    return;
+  }
+  d.chat.forEach(function (m) {
+    var g = document.createElement("div");
+    g.className = "gelembung " + (m.dari === "saya" ? "saya" : "ai");
+    if (m.dari === "ai" && m.sumber) {
+      var sm = document.createElement("span"); sm.className = "sumber"; sm.textContent = m.sumber;
+      g.appendChild(sm);
+    }
+    var tx = document.createElement("span"); tx.textContent = m.teks;
+    g.appendChild(tx);
+    alur.appendChild(g);
+  });
+  alur.lastElementChild && alur.lastElementChild.scrollIntoView({ block: "end" });
+}
+var STOPKATA = { "yang":1,"dan":2,"di":1,"ke":1,"dari":1,"adalah":1,"ini":1,"itu":1,"apa":1,"berapa":1,"siapa":1,"untuk":1,"dengan":1,"pada":1,"dalam":1,"atau":1,"jika":1,"maka":1,"soal":1,"tolong":1,"jelaskan":1,"maksudnya":1,"bagaimana":1,"kenapa":1,"mengapa":1,"ada":1,"tidak":1,"bukan":1,"ialah":1,"yaitu":1,"tentang":1,"cara":1,"dong":1,"ya":1,"sih":1,"kok":1 };
+function tokenisasi(teks) {
+  return teks.toLowerCase().replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter(function (w) { return w.length >= 3 && !STOPKATA[w]; });
+}
+function cariOffline(teks) {
+  var token = tokenisasi(teks);
+  var terbaik = null, skorTerbaik = 0;
+  SOAL.forEach(function (s) {
+    var gabung = tokenisasi(s.t + " " + s.b);
+    var skor = 0;
+    token.forEach(function (w) { if (gabung.indexOf(w) >= 0) skor++; });
+    /\d+/.test(teks) && /\d+/.test(s.t) && teks.replace(/\D/g, "").slice(0, 6) === s.t.replace(/\D/g, "").slice(0, 6) && (skor += 2);
+    if (skor > skorTerbaik) { skorTerbaik = skor; terbaik = s; }
+  });
+  if (terbaik && skorTerbaik >= 2) {
+    var kunci = terbaik.k === "TKP"
+      ? "Pilihan terbaik: " + "ABCDE"[terbaik.j] + " — " + terbaik.o[terbaik.j]
+      : "Kunci jawaban: " + "ABCDE"[terbaik.j] + " — " + terbaik.o[terbaik.j];
+    return "Kutemukan soal yang mirip di bank soal PANARA (" + terbaik.k + "):\n\n" + terbaik.t + "\n\n" + kunci + "\n\nPembahasan: " + terbaik.b;
+  }
+  var matTerbaik = null, skorMat = 0;
+  MATERI.forEach(function (m) {
+    var gabung = tokenisasi(m.judul + " " + m.ringkas + " " + m.isi);
+    var skor = 0;
+    token.forEach(function (w) { if (gabung.indexOf(w) >= 0) skor++; });
+    if (skor > skorMat) { skorMat = skor; matTerbaik = m; }
+  });
+  if (matTerbaik && skorMat >= 2) {
+    return "Dari " + matTerbaik.judul + ":\n\n" + matTerbaik.isi.slice(0, 900) + "\n\n(Buka menu Materi untuk membaca selengkapnya, atau coba mode AI Gratis (online) untuk pertanyaan yang lebih bebas.)";
+  }
+  return "Untuk pertanyaan itu, bank pembahasan bawaanku belum menemukan pasangan yang pas. Tiga cara yang bisa membantumu:\n\n1. Tempel bunyi soalnya persis (termasuk angka/kata kuncinya) — pencarianku bekerja paling baik dengan teks soal asli.\n2. Coba mode 🌐 AI Gratis (online) di atas untuk pertanyaan bebas.\n3. Latih pola soalnya lewat menu Latihan — semua soal di sana sudah ada pembahasannya.\n\nContoh yang pasti bisa kujawab offline: '15% dari 240', 'sila ketiga Pancasila', 'Bhinneka Tunggal Ika kitab apa'.";
+}
+function tanyaOnline(teks) {
+  var perintah = "Kamu adalah tutor persiapan SKD sekolah kedinasan Indonesia (TWK, TIU, TKP). Jawab dalam Bahasa Indonesia, singkat dan jelas, sertakan kunci jawaban dan cara/penjelasannya. Pertanyaan siswa: " + teks;
+  if (AI_ENDPOINT) {
+    return fetch(AI_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: [{ role: "user", content: perintah }] })
+    }).then(function (r) { return r.json(); }).then(function (j) {
+      var isi = j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content;
+      if (!isi) throw new Error("kosong");
+      return isi;
+    });
+  }
+  var kontrol = new AbortController();
+  var habis = setTimeout(function () { kontrol.abort(); }, 25000);
+  return fetch("https://text.pollinations.ai/" + encodeURIComponent(perintah), { signal: kontrol.signal })
+    .then(function (r) { clearTimeout(habis); if (!r.ok) throw new Error("gagal"); return r.text(); })
+    .then(function (t) {
+      t = (t || "").trim();
+      if (t.length < 2) throw new Error("kosong");
+      return t;
+    });
+}
+document.getElementById("btnKirimTanya").addEventListener("click", kirimTanya);
+document.getElementById("isiTanya").addEventListener("keydown", function (e) {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); kirimTanya(); }
+});
+function kirimTanya() {
+  var inp = document.getElementById("isiTanya");
+  var teks = inp.value.trim();
+  if (!teks) return;
+  inp.value = "";
+  var d = dataUser();
+  d.chat.push({ dari: "saya", teks: teks });
+  if (d.chat.length > 40) d.chat = d.chat.slice(-40);
+  simpanDataUser(d);
+  gambarChat();
+  var alur = document.getElementById("alurChat");
+  var tunggu = document.createElement("div");
+  tunggu.className = "gelembung ai"; tunggu.id = "gelembungTunggu";
+  tunggu.textContent = mesinAI === "online" ? "⏳ Sedang bertanya ke AI gratis…" : "⏳ Sedang mencari di bank pembahasan…";
+  alur.appendChild(tunggu);
+  tunggu.scrollIntoView({ block: "end" });
+  var simpanJawaban = function (jawaban, sumber) {
+    var dd = dataUser();
+    dd.chat.push({ dari: "ai", teks: jawaban, sumber: sumber });
+    if (dd.chat.length > 40) dd.chat = dd.chat.slice(-40);
+    simpanDataUser(dd);
+    var tg = document.getElementById("gelembungTunggu");
+    if (tg) tg.remove();
+    gambarChat();
+  };
+  if (mesinAI === "offline") {
+    setTimeout(function () { simpanJawaban(cariOffline(teks), "BANK PEMBAHASAN (OFFLINE)"); }, 350);
+    return;
+  }
+  tanyaOnline(teks).then(function (jawaban) {
+    simpanJawaban(jawaban, "AI GRATIS (ONLINE)");
+  }).catch(function () {
+    simpanJawaban(cariOffline(teks) + "\n\n(Catatan: mode AI online sedang tidak terjangkau — jawaban di atas berasal dari Bank Pembahasan offline.)", "BANK PEMBAHASAN (OFFLINE)");
+  });
+}
+
+/* ================= PWA ================= */
+var promptPasangApp = null;
+var btnPasangApp = document.getElementById("btnPasang");
+window.addEventListener("beforeinstallprompt", function (e) {
+  e.preventDefault();
+  promptPasangApp = e;
+  btnPasangApp.hidden = false;
+});
+window.addEventListener("appinstalled", function () { btnPasangApp.hidden = true; promptPasangApp = null; });
+if (/iphone|ipad|ipod/i.test(window.navigator.userAgent) && !window.navigator.standalone) btnPasangApp.hidden = false;
+btnPasangApp.addEventListener("click", function () {
+  if (promptPasangApp) {
+    promptPasangApp.prompt();
+    promptPasangApp.userChoice.then(function () { promptPasangApp = null; btnPasangApp.hidden = true; });
+  } else {
+    alert("Cara pasang: buka menu browser (⋮ atau tombol Bagikan), lalu pilih 'Instal aplikasi' / 'Tambahkan ke Layar Utama'.");
+  }
+});
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  });
+}
+
+/* ================= MULAI ================= */
+(function mulai() {
+  var tersimpan = ambilJSON("panara_sesi", null);
+  var users = ambilJSON("panara_users", {});
+  if (tersimpan && users[tersimpan]) { masukBerhasil(tersimpan); }
+  else { tampil("login"); }
+})();
+</script>
+</body>
+</html>
