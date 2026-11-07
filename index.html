@@ -3141,8 +3141,28 @@ function validasiSoalAI(teksMentah, mapel) {
   var awal = teksMentah.indexOf("["), akhir = teksMentah.lastIndexOf("]");
   if (awal < 0 || akhir <= awal) return hasil;
   var arr;
-  try { arr = JSON.parse(teksMentah.slice(awal, akhir + 1)); } catch (e) { return hasil; }
-  if (!Array.isArray(arr)) return hasil;
+  try { arr = JSON.parse(teksMentah.slice(awal, akhir + 1)); } catch (e) { arr = null; }
+  if (!Array.isArray(arr)) {
+    // Penyelamatan: respons AI terpotong — ambil objek soal {...} yang utuh satu per satu.
+    arr = [];
+    var dalam = 0, mulaiObj = -1, diString = false, kabur = false;
+    for (var ci = awal; ci < teksMentah.length; ci++) {
+      var ch = teksMentah[ci];
+      if (kabur) { kabur = false; continue; }
+      if (ch === "\\") { kabur = true; continue; }
+      if (ch === '"') { diString = !diString; continue; }
+      if (diString) continue;
+      if (ch === "{") { if (dalam === 0) mulaiObj = ci; dalam++; }
+      else if (ch === "}") {
+        dalam--;
+        if (dalam === 0 && mulaiObj >= 0) {
+          try { arr.push(JSON.parse(teksMentah.slice(mulaiObj, ci + 1))); } catch (e2) {}
+          mulaiObj = -1;
+        }
+      }
+    }
+    if (!arr.length) return hasil;
+  }
   var teksBank = {};
   SOAL.forEach(function (q) { teksBank[(q.t || "").replace(/\s+/g, " ").trim().toLowerCase()] = 1; });
   (dataUser().soalAI || []).forEach(function (q) { teksBank[(q.t || "").replace(/\s+/g, " ").trim().toLowerCase()] = 1; });
@@ -3166,6 +3186,29 @@ function validasiSoalAI(teksMentah, mapel) {
     hasil.valid.push(soal);
   });
   return hasil;
+}
+function buatSoalVikey(prompt) {
+  var kunci = (localStorage.getItem("prata_kunci_ai") || "").trim();
+  if (!kunci) return Promise.reject(new Error("Belum ada kunci Vikey tersimpan — isi dulu di menu Tanya AI (mesin AI Asli), sekali saja."));
+  var kontrol = new AbortController();
+  var habis = setTimeout(function () { kontrol.abort(); }, 90000);
+  return fetch("https://api.vikey.ai/v1/chat/completions", {
+    method: "POST", signal: kontrol.signal,
+    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + kunci },
+    body: JSON.stringify({ model: modelAI(), messages: [{ role: "user", content: prompt }], max_tokens: 4000 })
+  }).then(function (r) {
+    clearTimeout(habis);
+    if (!r.ok) throw new Error("Vikey menolak panggilan (HTTP " + r.status + ") — periksa kunci & saldo Vikey-mu.");
+    return r.json();
+  }).then(function (j) {
+    var isi = j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content;
+    if (!isi) throw new Error("Jawaban AI kosong — coba lagi.");
+    return isi;
+  }).catch(function (e) {
+    clearTimeout(habis);
+    if (e && e.name === "AbortError") throw new Error("AI terlalu lama menjawab (>90 detik) — coba lagi.");
+    throw e;
+  });
 }
 var kandidatAI = null;
 function gambarPratinjauAI() {
@@ -3225,8 +3268,8 @@ document.getElementById("btnBuatSoalAI").addEventListener("click", function () {
     (mapel === "TKP"
       ? "- Soal TKP berbentuk situasi kerja ASN. Setiap opsi diberi skor 1-5; tepat satu opsi berskor 5 (paling tepat) dan j adalah indeks opsi berskor 5 itu. Sertakan bidang \"s\" berisi skor tiap opsi.\n"
       : "- Tepat satu jawaban benar; j adalah indeks jawaban benar (0-4).\n") +
-    "- Sertakan pembahasan singkat 1-2 kalimat yang membuktikan kunci / skor tertingginya.\n- Buat soal BARU yang orisinal, bukan menyalin soal yang sudah terkenal.\n- Balas HANYA JSON array tanpa teks lain, format: [{\"t\":\"teks soal\",\"o\":[\"opsi 1\",\"opsi 2\",\"opsi 3\",\"opsi 4\",\"opsi 5\"],\"j\":0,\"b\":\"pembahasan\"" + (mapel === "TKP" ? ",\"s\":[5,3,2,1,4]" : "") + "}]";
-  panggilVikeyAI(prompt).then(function (teks) {
+    "- Sertakan pembahasan ringkas (maksimal 1 kalimat) yang membuktikan kunci / skor tertingginya; jaga opsi tetap padat.\n- Buat soal BARU yang orisinal, bukan menyalin soal yang sudah terkenal.\n- Balas HANYA JSON array tanpa teks lain, format: [{\"t\":\"teks soal\",\"o\":[\"opsi 1\",\"opsi 2\",\"opsi 3\",\"opsi 4\",\"opsi 5\"],\"j\":0,\"b\":\"pembahasan\"" + (mapel === "TKP" ? ",\"s\":[5,3,2,1,4]" : "") + "}]";
+  buatSoalVikey(prompt).then(function (teks) {
     btn.disabled = false;
     var v = validasiSoalAI(teks, mapel);
     if (!v.valid.length) {
@@ -3876,7 +3919,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v29";
+var VERSI_APP = "prata-v291";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
