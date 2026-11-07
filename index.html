@@ -224,6 +224,40 @@
   nav.bawah button.aktif{color:var(--laut); background:#eef4ff;}
   footer.kaki{text-align:center; color:var(--redup); font-size:11.5px; padding:0 16px 18px; line-height:1.6;}
   @media (max-width:480px){ .grid-menu{grid-template-columns:1fr 1fr;} .rincian{grid-template-columns:1fr 1fr 1fr;} }
+
+  /* ---------- v2: tombol tampilan, mode HP, bantuan, daftar soal ---------- */
+  .btn-tampilan{
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.3); color:#fff;
+    border-radius:999px; padding:7px 11px; font-size:13px; font-weight:700;
+  }
+  .btn-tampilan.aktif{background:var(--emas); border-color:var(--emas); color:#23160a;}
+  body.mode-hp{background:#0d1930;}
+  body.mode-hp main.panggung{
+    max-width:430px; background:var(--kertas); min-height:100dvh;
+    box-shadow:0 0 44px rgba(0,0,0,.5); border-left:1px solid #26355a; border-right:1px solid #26355a;
+  }
+  body.mode-hp header.bilah{max-width:430px; margin:0 auto; width:100%;}
+  body.mode-hp nav.bawah{left:50%; right:auto; transform:translateX(-50%); width:100%; max-width:430px;}
+  body.mode-hp footer.kaki{max-width:430px; margin:0 auto;}
+  .alat-grid{display:grid; grid-template-columns:1fr 1fr; gap:9px;}
+  .alat-grid .penuh{grid-column:1 / -1;}
+  .hasil-alat{
+    background:#f4f8f5; border:1px solid #cfe6d8; color:#173d2a;
+    border-radius:12px; padding:12px 13px; font-size:14px; line-height:1.65; margin-top:11px; white-space:pre-wrap;
+  }
+  ul.cepat{margin:6px 0 0; padding-left:19px; font-size:13.5px; line-height:1.75;}
+  .item-soal{border:1px solid var(--garis); border-radius:13px; margin-bottom:10px; background:#fff; overflow:hidden;}
+  .item-soal .kepala{
+    width:100%; text-align:left; background:none; border:none; padding:13px 14px;
+    display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.55;
+  }
+  .item-soal .kepala .no{
+    flex:0 0 auto; background:#eef4ff; color:var(--laut); font-weight:800; font-size:12px;
+    border-radius:8px; padding:3px 8px; margin-top:1px;
+  }
+  .item-soal .panel{padding:0 14px 14px; font-size:13.5px; line-height:1.65;}
+  .item-soal .panel .opsi-kecil{color:var(--redup); white-space:pre-wrap; margin:6px 0;}
+  .item-soal .panel .kunci{font-weight:800; color:var(--laut);}
 </style>
 </head>
 <body>
@@ -239,6 +273,8 @@
     <button class="btn-keluar" id="btnKeluar">Keluar</button>
   </div>
   <button class="btn-keluar" id="btnPasang" hidden>📲 Pasang App</button>
+  <button class="btn-tampilan" id="btnModeHp" title="Mode HP: tampilan seperti aplikasi di HP (kolom sempit di tengah layar)">📱</button>
+  <button class="btn-tampilan" id="btnLayar" title="Layar penuh">⛶</button>
 </header>
 
 <main class="panggung">
@@ -329,6 +365,16 @@
         <span class="ikon">📈</span>
         <span class="nm">Riwayat Skor</span>
         <span class="ds">Hasil latihan &amp; simulasimu dari waktu ke waktu.</span>
+      </button>
+      <button class="menu-item" data-pergi="bantuan">
+        <span class="ikon">🛠️</span>
+        <span class="nm">Bantuan Jawab</span>
+        <span class="ds">Kotak alat bantu menjawab: hitung persen, diskon, rata-rata, pola deret — lengkap dengan langkahnya.</span>
+      </button>
+      <button class="menu-item" data-pergi="daftarsoal">
+        <span class="ikon">📋</span>
+        <span class="nm">Daftar Soal Lengkap</span>
+        <span class="ds">Semua 36 soal bisa dicari &amp; dibuka kunci + pembahasannya.</span>
       </button>
       <button class="menu-item" data-pergi="portal" style="grid-column:1 / -1;">
         <span class="ikon">🎓</span>
@@ -462,6 +508,81 @@
     <div class="kartu"><div id="daftarRiwayat"></div></div>
   </section>
 
+  <!-- ======== BANTUAN JAWAB ======== -->
+  <section class="tampilan" id="view-bantuan" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">← Beranda</button>
+      <span class="info-kuis">Bantuan Jawab — Kotak Alat Siswa</span>
+    </div>
+
+    <div class="kartu">
+      <h2 class="judul-bagian">🔎 Cari Soal di Bank Soal</h2>
+      <p class="sub" style="margin-bottom:11px;">Ketik kata kunci (mis. "persen", "Pancasila", "deret") — soal yang cocok akan ditampilkan lengkap dengan kunci &amp; pembahasannya.</p>
+      <div class="bar-tambah" style="margin-top:0;">
+        <input class="isi" id="cariCepat" type="text" placeholder="Kata kunci soal…">
+        <button class="btn emas" id="btnCariCepat">Cari</button>
+      </div>
+    </div>
+
+    <div class="kartu">
+      <h2 class="judul-bagian">🧮 Alat Persen</h2>
+      <div class="alat-grid">
+        <input class="isi" id="alPersenA" type="number" inputmode="decimal" placeholder="Persen (mis. 15)">
+        <input class="isi" id="alPersenB" type="number" inputmode="decimal" placeholder="Dari nilai (mis. 240)">
+      </div>
+      <button class="btn laut lebar" id="btnAlPersen" style="margin-top:10px;">Hitung Persen</button>
+      <div class="hasil-alat" id="hasilPersen" hidden></div>
+    </div>
+
+    <div class="kartu">
+      <h2 class="judul-bagian">🏷️ Alat Diskon</h2>
+      <div class="alat-grid">
+        <input class="isi" id="alDiskonHarga" type="number" inputmode="numeric" placeholder="Harga awal (Rp)">
+        <input class="isi" id="alDiskonPersen" type="number" inputmode="decimal" placeholder="Diskon % (mis. 25)">
+      </div>
+      <button class="btn laut lebar" id="btnAlDiskon" style="margin-top:10px;">Hitung Harga Bayar</button>
+      <div class="hasil-alat" id="hasilDiskon" hidden></div>
+    </div>
+
+    <div class="kartu">
+      <h2 class="judul-bagian">📊 Alat Rata-Rata</h2>
+      <input class="isi" id="alRataInput" type="text" placeholder="Tulis angka dipisah koma — mis. 6, 7, 8, 9, 10">
+      <button class="btn laut lebar" id="btnAlRata" style="margin-top:10px;">Hitung Rata-Rata</button>
+      <div class="hasil-alat" id="hasilRata" hidden></div>
+    </div>
+
+    <div class="kartu">
+      <h2 class="judul-bagian">🔢 Alat Pola Deret</h2>
+      <p class="sub" style="margin-bottom:11px;">Tulis deret angka (dipisah koma), alat ini menebak polanya dan memberi angka berikutnya beserta alasannya.</p>
+      <input class="isi" id="alDeretInput" type="text" placeholder="Mis. 2, 6, 12, 20, 30">
+      <button class="btn laut lebar" id="btnAlDeret" style="margin-top:10px;">Cek Pola Deret</button>
+      <div class="hasil-alat" id="hasilDeret" hidden></div>
+    </div>
+
+    <div class="kartu">
+      <h2 class="judul-bagian">⚡ Daftar Cepat</h2>
+      <div id="daftarCepat"></div>
+    </div>
+  </section>
+
+  <!-- ======== DAFTAR SOAL ======== -->
+  <section class="tampilan" id="view-daftarsoal" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">← Beranda</button>
+      <span class="info-kuis">Daftar Soal Lengkap (36 soal)</span>
+    </div>
+    <div class="kartu">
+      <input class="isi" id="cariSoal" type="text" placeholder="🔎 Cari soal… (kata kunci, mis. 'diskon' atau 'Pasal')">
+      <div class="segmen" id="segmenKategori" style="margin-top:12px; margin-bottom:2px;">
+        <button data-katsoal="SEMUA" class="aktif">Semua</button>
+        <button data-katsoal="TWK">TWK</button>
+        <button data-katsoal="TIU">TIU</button>
+        <button data-katsoal="TKP">TKP</button>
+      </div>
+    </div>
+    <div id="wadahDaftarSoal"></div>
+  </section>
+
 </main>
 
 <nav class="bawah" id="navBawah" hidden>
@@ -567,7 +688,7 @@ function dataUser() {
 function simpanDataUser(d) { simpanJSON("panara_data_" + sesiUser, d); }
 
 /* ================= NAVIGASI ================= */
-var SEMUA_TAMPILAN = ["login","daftar","beranda","latihan","kuis","hasil","ai","ceklist","materi","materi-detail","riwayat"];
+var SEMUA_TAMPILAN = ["login","daftar","beranda","latihan","kuis","hasil","ai","ceklist","materi","materi-detail","riwayat","bantuan","daftarsoal"];
 function tampil(nama) {
   SEMUA_TAMPILAN.forEach(function (v) {
     var el = document.getElementById("view-" + v);
@@ -581,6 +702,8 @@ function tampil(nama) {
   });
   if (nama === "beranda") segarkanBeranda();
   if (nama === "ceklist") gambarTugas();
+  if (nama === "bantuan") gambarDaftarCepat();
+  if (nama === "daftarsoal") gambarDaftarSoal();
   if (nama === "materi") gambarMateri();
   if (nama === "riwayat") gambarRiwayat();
   if (nama === "ai") gambarChat();
@@ -1024,6 +1147,187 @@ function kirimTanya() {
     simpanJawaban(cariOffline(teks) + "\n\n(Catatan: mode AI online sedang tidak terjangkau — jawaban di atas berasal dari Bank Pembahasan offline.)", "BANK PEMBAHASAN (OFFLINE)");
   });
 }
+
+/* ================= v2: BANTUAN JAWAB & DAFTAR SOAL ================= */
+var DAFTAR_CEPAT = [
+{judul:"🧮 Rumus Cepat TIU", butir:[
+  "Persen dari nilai = persen ÷ 100 × nilai. Contoh: 15% dari 240 = 36.",
+  "Diskon: yang dibayar = (100 − diskon)% × harga awal.",
+  "Rata-rata = jumlah semua nilai ÷ banyaknya nilai.",
+  "Perbandingan berbalik nilai: pekerja × hari tetap. 5 orang × 12 hari = 10 orang × 6 hari.",
+  "Deret selisih bertingkat: cek selisih antarangka, lalu selisih dari selisihnya.",
+  "Deret kali-tambah: bentuk ×a + b, mis. 3, 7, 15, 31 adalah ×2 + 1.",
+  "Deret kuadrat: 4, 9, 16, 25 = 2², 3², 4², 5² — berikutnya 6² = 36."
+]},
+{judul:"🇮🇩 Pasal & Fakta Cepat TWK", butir:[
+  "Pasal 1 ayat (1): Negara Kesatuan berbentuk Republik.",
+  "Pasal 4 ayat (1): Presiden memegang kekuasaan pemerintahan.",
+  "Pasal 24 ayat (2): Kekuasaan kehakiman oleh MA dan MK.",
+  "Pasal 27 ayat (1): Warga negara bersamaan kedudukannya dalam hukum dan pemerintahan.",
+  "Pasal 36: Bahasa negara ialah Bahasa Indonesia.",
+  "Simbol Pancasila: bintang, rantai, pohon beringin, kepala banteng, padi & kapas.",
+  "Bhinneka Tunggal Ika: Kitab Sutasoma, Mpu Tantular.",
+  "Sumpah Pemuda: 28 Oktober 1928. Proklamasi: 17 Agustus 1945, Pegangsaan Timur 56."
+]},
+{judul:"🧭 Prinsip Cepat TKP", butir:[
+  "Paling melayani + sesuai aturan = skor tertinggi.",
+  "Tolak gratifikasi dengan sopan; layanan negara itu gratis.",
+  "Salah kerja? Akui, perbaiki, lapor atasan, bantu warga terdampak.",
+  "Rekan kesulitan → bantu dulu, bukan dicela atau dibiarkan.",
+  "Warga marah → dengarkan dengan empati, jelaskan proses, tawarkan solusi.",
+  "Opsi pasif (membiarkan, menunggu, diam saja) hampir selalu skor rendah."
+]}];
+var daftarCepatSudah = false;
+function gambarDaftarCepat() {
+  if (daftarCepatSudah) return;
+  daftarCepatSudah = true;
+  var wadah = document.getElementById("daftarCepat");
+  DAFTAR_CEPAT.forEach(function (dc) {
+    var h = document.createElement("div");
+    h.style.fontWeight = "800"; h.style.margin = "12px 0 2px"; h.textContent = dc.judul;
+    var ul = document.createElement("ul"); ul.className = "cepat";
+    dc.butir.forEach(function (b) { var li = document.createElement("li"); li.textContent = b; ul.appendChild(li); });
+    wadah.appendChild(h); wadah.appendChild(ul);
+  });
+}
+
+var katSoalAktif = "SEMUA";
+function gambarDaftarSoal() {
+  var cari = (document.getElementById("cariSoal").value || "").toLowerCase();
+  var wadah = document.getElementById("wadahDaftarSoal");
+  wadah.innerHTML = "";
+  var nomorPerKat = { TWK: 0, TIU: 0, TKP: 0 };
+  var tampilCount = 0;
+  SOAL.forEach(function (s) {
+    nomorPerKat[s.k]++;
+    if (katSoalAktif !== "SEMUA" && s.k !== katSoalAktif) return;
+    if (cari && (s.t + " " + s.b + " " + s.o.join(" ")).toLowerCase().indexOf(cari) < 0) return;
+    tampilCount++;
+    var item = document.createElement("div"); item.className = "item-soal";
+    var kepala = document.createElement("button"); kepala.className = "kepala";
+    var no = document.createElement("span"); no.className = "no"; no.textContent = s.k + " " + nomorPerKat[s.k];
+    var ringkas = document.createElement("span"); ringkas.textContent = s.t.replace(/\n/g, " ").slice(0, 110) + (s.t.length > 110 ? "…" : "");
+    kepala.appendChild(no); kepala.appendChild(ringkas);
+    var panel = document.createElement("div"); panel.className = "panel"; panel.hidden = true;
+    var opsiK = document.createElement("div"); opsiK.className = "opsi-kecil";
+    opsiK.textContent = s.o.map(function (o, i) { return "ABCDE"[i] + ". " + o; }).join("\n");
+    var kunci = document.createElement("div"); kunci.className = "kunci";
+    kunci.textContent = (s.k === "TKP" ? "Pilihan terbaik: " : "Kunci: ") + "ABCDE"[s.j] + " — " + s.o[s.j];
+    var bahas = document.createElement("div"); bahas.className = "bahas";
+    var tt = document.createElement("span"); tt.className = "tt"; tt.textContent = "💡 Pembahasan";
+    var tb = document.createElement("span"); tb.textContent = s.b;
+    bahas.appendChild(tt); bahas.appendChild(tb);
+    panel.appendChild(opsiK); panel.appendChild(kunci); panel.appendChild(bahas);
+    kepala.addEventListener("click", function () { panel.hidden = !panel.hidden; });
+    item.appendChild(kepala); item.appendChild(panel);
+    wadah.appendChild(item);
+  });
+  if (!tampilCount) {
+    wadah.innerHTML = "<div class='kartu'><div class='kosong'>Tidak ada soal yang cocok. Coba kata kunci lain, atau pilih kategori 'Semua'.</div></div>";
+  }
+}
+document.getElementById("segmenKategori").addEventListener("click", function (e) {
+  var b = e.target.closest("[data-katsoal]");
+  if (!b) return;
+  katSoalAktif = b.getAttribute("data-katsoal");
+  document.querySelectorAll("#segmenKategori button").forEach(function (x) { x.classList.toggle("aktif", x === b); });
+  gambarDaftarSoal();
+});
+document.getElementById("cariSoal").addEventListener("input", gambarDaftarSoal);
+document.getElementById("btnCariCepat").addEventListener("click", function () {
+  document.getElementById("cariSoal").value = document.getElementById("cariCepat").value;
+  katSoalAktif = "SEMUA";
+  document.querySelectorAll("#segmenKategori button").forEach(function (x) { x.classList.toggle("aktif", x.getAttribute("data-katsoal") === "SEMUA"); });
+  pergi("daftarsoal");
+});
+
+/* ---------- Kotak alat hitung ---------- */
+function angka(str) { var n = parseFloat(String(str || "").replace(",", ".")); return isNaN(n) ? null : n; }
+function fmt(n) {
+  if (Math.abs(n - Math.round(n)) < 1e-9) return Math.round(n).toLocaleString("id-ID");
+  return n.toLocaleString("id-ID", { maximumFractionDigits: 2 });
+}
+function tampilHasil(id, teks) { var el = document.getElementById(id); el.textContent = teks; el.hidden = false; }
+document.getElementById("btnAlPersen").addEventListener("click", function () {
+  var a = angka(document.getElementById("alPersenA").value), b = angka(document.getElementById("alPersenB").value);
+  if (a === null || b === null) { tampilHasil("hasilPersen", "Isi dulu kedua kotaknya ya: persen dan nilainya."); return; }
+  var hasil = a / 100 * b;
+  tampilHasil("hasilPersen", "Hasil: " + fmt(a) + "% dari " + fmt(b) + " = " + fmt(hasil) + "\n\nLangkah: " + fmt(a) + " ÷ 100 × " + fmt(b) + " = " + fmt(hasil) + ".\nTrik cepat: cari 10%-nya dulu (" + fmt(b / 10) + "), lalu sesuaikan — 5% adalah setengah dari 10%.");
+});
+document.getElementById("btnAlDiskon").addEventListener("click", function () {
+  var h = angka(document.getElementById("alDiskonHarga").value), p = angka(document.getElementById("alDiskonPersen").value);
+  if (h === null || p === null) { tampilHasil("hasilDiskon", "Isi dulu harga awal dan persen diskonnya ya."); return; }
+  var potong = h * p / 100, bayar = h - potong;
+  tampilHasil("hasilDiskon", "Harga bayar: Rp" + fmt(bayar) + "\n\nLangkah: diskon " + fmt(p) + "% dari Rp" + fmt(h) + " = Rp" + fmt(potong) + " (yang kamu hemat).\nBayar = Rp" + fmt(h) + " − Rp" + fmt(potong) + " = Rp" + fmt(bayar) + ".");
+});
+document.getElementById("btnAlRata").addEventListener("click", function () {
+  var mentah = document.getElementById("alRataInput").value.split(/[,\s;]+/).filter(function (x) { return x !== ""; });
+  var nilai = mentah.map(angka).filter(function (n) { return n !== null; });
+  if (nilai.length < 2) { tampilHasil("hasilRata", "Tulis minimal dua angka ya, dipisah koma. Contoh: 6, 7, 8, 9, 10"); return; }
+  var jumlah = nilai.reduce(function (a, b) { return a + b; }, 0);
+  var rata = jumlah / nilai.length;
+  tampilHasil("hasilRata", "Rata-rata: " + fmt(rata) + "\n\nLangkah: jumlah semua angka = " + nilai.map(fmt).join(" + ") + " = " + fmt(jumlah) + ".\nDibagi banyaknya angka (" + nilai.length + ") → " + fmt(jumlah) + " ÷ " + nilai.length + " = " + fmt(rata) + ".");
+});
+document.getElementById("btnAlDeret").addEventListener("click", function () {
+  var mentah = document.getElementById("alDeretInput").value.split(/[,\s;]+/).filter(function (x) { return x !== ""; });
+  var d = mentah.map(angka).filter(function (n) { return n !== null; });
+  if (d.length < 3) { tampilHasil("hasilDeret", "Tulis minimal tiga angka deret ya. Contoh: 2, 6, 12, 20, 30"); return; }
+  var selisih = []; for (var i = 1; i < d.length; i++) selisih.push(d[i] - d[i - 1]);
+  var semuaSama = function (arr) { return arr.every(function (x) { return Math.abs(x - arr[0]) < 1e-9; }); };
+  if (semuaSama(selisih)) {
+    tampilHasil("hasilDeret", "Angka berikutnya: " + fmt(d[d.length - 1] + selisih[0]) + "\n\nPola: selisih tetap +" + fmt(selisih[0]) + " di setiap langkah (" + selisih.map(fmt).join(", ") + "). Jadi angka terakhir ditambah " + fmt(selisih[0]) + ".");
+    return;
+  }
+  var selisih2 = []; for (var j = 1; j < selisih.length; j++) selisih2.push(selisih[j] - selisih[j - 1]);
+  if (selisih2.length >= 1 && semuaSama(selisih2)) {
+    var sBerikut = selisih[selisih.length - 1] + selisih2[0];
+    tampilHasil("hasilDeret", "Angka berikutnya: " + fmt(d[d.length - 1] + sBerikut) + "\n\nPola: selisihnya bertambah tetap +" + fmt(selisih2[0]) + " (selisih: " + selisih.map(fmt).join(", ") + "). Selisih berikutnya " + fmt(sBerikut) + ", jadi " + fmt(d[d.length - 1]) + " + " + fmt(sBerikut) + " = " + fmt(d[d.length - 1] + sBerikut) + ".");
+    return;
+  }
+  var akar = d.map(function (x) { return Math.sqrt(x); });
+  var akarBulatBerurutan = akar.every(function (a) { return Math.abs(a - Math.round(a)) < 1e-9; }) &&
+    akar.every(function (a, i2) { return i2 === 0 || Math.round(a) === Math.round(akar[i2 - 1]) + 1; });
+  if (akarBulatBerurutan) {
+    var akarBerikut = Math.round(akar[akar.length - 1]) + 1;
+    tampilHasil("hasilDeret", "Angka berikutnya: " + fmt(akarBerikut * akarBerikut) + "\n\nPola: deret kuadrat — " + akar.map(function (a) { return Math.round(a); }).join("², ") + "². Berikutnya " + akarBerikut + "² = " + fmt(akarBerikut * akarBerikut) + ".");
+    return;
+  }
+  if (Math.abs(d[1] - d[0]) > 1e-9) {
+    var aKali = (d[2] - d[1]) / (d[1] - d[0]);
+    var bTambah = d[1] - aKali * d[0];
+    var cocok = Math.abs(aKali - Math.round(aKali)) < 1e-9 && Math.abs(bTambah - Math.round(bTambah)) < 1e-9;
+    if (cocok) {
+      for (var k = 1; k < d.length; k++) { if (Math.abs(d[k] - (aKali * d[k - 1] + bTambah)) > 1e-9) { cocok = false; break; } }
+    }
+    if (cocok) {
+      var berikut = aKali * d[d.length - 1] + bTambah;
+      tampilHasil("hasilDeret", "Angka berikutnya: " + fmt(berikut) + "\n\nPola: setiap angka = sebelumnya × " + fmt(aKali) + (bTambah ? " + " + fmt(bTambah) : "") + ". Jadi " + fmt(d[d.length - 1]) + " × " + fmt(aKali) + (bTambah ? " + " + fmt(bTambah) : "") + " = " + fmt(berikut) + ".");
+      return;
+    }
+  }
+  tampilHasil("hasilDeret", "Pola deret ini belum bisa dikenali alatku. Coba periksa tiga pola paling umum di soal TIU:\n1. Selisih tetap atau selisih yang bertambah teratur.\n2. Kali + tambah (mis. ×2 + 1).\n3. Bilangan kuadrat (4, 9, 16, 25, …).\nBuka juga Daftar Cepat di bawah dan Materi TIU untuk contoh lengkapnya.");
+});
+
+/* ---------- Layar penuh & Mode HP ---------- */
+var btnLayarEl = document.getElementById("btnLayar");
+var btnModeHpEl = document.getElementById("btnModeHp");
+btnLayarEl.addEventListener("click", function () {
+  if (document.fullscreenElement) { document.exitFullscreen(); }
+  else if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen().catch(function () {}); }
+});
+document.addEventListener("fullscreenchange", function () {
+  btnLayarEl.classList.toggle("aktif", !!document.fullscreenElement);
+  btnLayarEl.textContent = document.fullscreenElement ? "⛶✕" : "⛶";
+});
+function terapkanModeHp(nyala) {
+  document.body.classList.toggle("mode-hp", nyala);
+  btnModeHpEl.classList.toggle("aktif", nyala);
+  try { localStorage.setItem("panara_modehp", nyala ? "1" : ""); } catch (e) {}
+}
+btnModeHpEl.addEventListener("click", function () {
+  terapkanModeHp(!document.body.classList.contains("mode-hp"));
+});
+if (ambilJSON("panara_modehp", "") === "1" || localStorage.getItem("panara_modehp") === "1") terapkanModeHp(true);
 
 /* ================= PWA ================= */
 var promptPasangApp = null;
