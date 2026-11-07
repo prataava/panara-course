@@ -860,6 +860,11 @@
       <div id="daftarAnalitik"></div>
       <p class="sub" style="margin-top:8px;">Diurutkan dari yang paling perlu dilatih. Persentase dari soal yang dijawab; waktu adalah rata-rata per soal.</p>
     </div>
+    <div class="kartu" id="kartuPrediksi" hidden>
+      <h2 class="judul-bagian">Prediksi Kesiapan</h2>
+      <div id="isiPrediksi"></div>
+      <p class="sub" style="margin-top:8px;">Perkiraan jujur dari data simulasimu sendiri — bukan angka acak dan bukan jaminan kelulusan. Ambang memakai Konfigurasi Passing Grade aktif; hasil resmi ditentukan CAT BKN.</p>
+    </div>
     <div class="kartu" id="kartuBanding" hidden>
       <h2 class="judul-bagian">Perbandingan Simulasi</h2>
       <div id="isiBanding"></div>
@@ -1906,6 +1911,74 @@ function gambarMateri() {
 }
 
 /* ================= RIWAYAT ================= */
+function hitungPrediksi(d) {
+  var PG = konfigPG();
+  var sims = (d.riwayat || []).filter(function (r) { return (r.label || "").indexOf("Simulasi") === 0 && r.perMapel && r.maksMapel; }).slice(-5);
+  if (!sims.length) return null;
+  var mapel = ["TWK", "TIU", "TKP"];
+  var per = {};
+  mapel.forEach(function (k) {
+    var jumlah = 0;
+    sims.forEach(function (r) {
+      var ambangSkala = PG[k] * ((r.maksMapel[k] || 0) / MAKS_SKD[k]);
+      if (ambangSkala > 0) jumlah += (r.perMapel[k] || 0) / ambangSkala;
+    });
+    per[k] = jumlah / sims.length;
+  });
+  var indeks = Math.round((per.TWK + per.TIU + per.TKP) / 3 * 100);
+  var persens = sims.map(function (r) { return r.maks ? r.poin / r.maks * 100 : 0; });
+  var rentang = Math.round(Math.max.apply(null, persens) - Math.min.apply(null, persens));
+  var labelKons = sims.length < 2 ? "baru satu simulasi terperinci — kerjakan lagi untuk melihat konsistensi" : (rentang <= 10 ? "stabil" : (rentang <= 25 ? "cukup stabil" : "naik-turun"));
+  var terlemah = mapel.reduce(function (a, b) { return per[a] <= per[b] ? a : b; });
+  return { per: per, indeks: indeks, rentang: rentang, labelKons: labelKons, sesi: sims.length, terlemah: terlemah, pg: PG };
+}
+function gambarPrediksi() {
+  var kartu = document.getElementById("kartuPrediksi"), isi = document.getElementById("isiPrediksi");
+  if (!kartu || !isi) return;
+  var d = dataUser();
+  var P = hitungPrediksi(d);
+  var adaSim = (d.riwayat || []).some(function (r) { return (r.label || "").indexOf("Simulasi") === 0; });
+  if (!P) {
+    if (!adaSim) { kartu.hidden = true; return; }
+    kartu.hidden = false;
+    isi.innerHTML = "<p class='sub'>Mulai sekarang PRATA mencatat rincian skor per mapel dari setiap simulasi. Selesaikan satu Simulasi Mini atau Penuh, lalu prediksi kesiapanmu — dihitung dari data itu — akan tampil di sini.</p>";
+    return;
+  }
+  kartu.hidden = false;
+  isi.innerHTML = "";
+  var besar = document.createElement("div");
+  besar.className = "skor-besar";
+  besar.textContent = P.indeks + "%";
+  isi.appendChild(besar);
+  var subB = document.createElement("p"); subB.className = "sub"; subB.style.textAlign = "center";
+  subB.textContent = "Indeks kesiapan rata-rata terhadap ambang lulus, dari " + P.sesi + " simulasi terakhirmu yang terperinci. Konsistensi hasil: " + P.labelKons + (P.sesi > 1 ? " (rentang antar simulasi " + P.rentang + "%)" : "") + ".";
+  isi.appendChild(subB);
+  ["TWK", "TIU", "TKP"].forEach(function (k) {
+    var cap = P.per[k], pctT = Math.round(cap * 100);
+    var baris = document.createElement("div");
+    baris.style.cssText = "padding:8px 0;border-bottom:1px solid var(--garis);";
+    var atas = document.createElement("div");
+    atas.style.cssText = "display:flex;justify-content:space-between;gap:10px;align-items:baseline;";
+    var nm = document.createElement("b"); nm.textContent = k + " (ambang " + P.pg[k] + ")";
+    var ang = document.createElement("span"); ang.className = "sub";
+    ang.textContent = cap >= 1 ? "✓ melewati ambang (" + pctT + "% dari ambang)" : pctT + "% dari ambang";
+    atas.appendChild(nm); atas.appendChild(ang);
+    var trek = document.createElement("div");
+    trek.style.cssText = "height:8px;border-radius:99px;background:var(--latar-track);margin-top:6px;overflow:hidden;";
+    var isiBar = document.createElement("div");
+    isiBar.style.cssText = "height:100%;width:" + Math.min(100, pctT) + "%;background:" + (cap >= 1 ? "var(--baik)" : pctT >= 60 ? "var(--emas)" : "var(--buruk)") + ";";
+    trek.appendChild(isiBar);
+    baris.appendChild(atas); baris.appendChild(trek);
+    isi.appendChild(baris);
+  });
+  var target = document.createElement("p");
+  target.style.cssText = "margin-top:10px; font-weight:600;";
+  var tl = P.terlemah, capL = P.per[tl];
+  target.textContent = capL >= 1 ? "Ketiga mapel rata-rata sudah melewati ambang — pertahankan dan jaga konsistensinya." :
+    "Target berikutnya: kejar " + tl + " — capaian rata-ratamu " + Math.round(capL * 100) + "% dari ambang " + P.pg[tl] + ", masih perlu naik sekitar " + Math.max(1, Math.round((1 - capL) * P.pg[tl])) + " poin lagi pada skala Simulasi Penuh untuk mencapai ambang.";
+  isi.appendChild(target);
+}
+
 function gambarPerbandingan() {
   var kartu = document.getElementById("kartuBanding"), wadah = document.getElementById("isiBanding");
   if (!kartu || !wadah) return;
@@ -2002,6 +2075,41 @@ function gambarRiwayat() {
       daftarA.appendChild(baris);
     });
   }
+  // Akurasi per tingkat kesulitan (dari sesi yang terekam dengan pencatatan kesulitan)
+  var aggS = {};
+  (d.riwayatDetail || []).forEach(function (r) {
+    Object.keys(r.perSulit || {}).forEach(function (k) {
+      if (!aggS[k]) aggS[k] = { b: 0, t: 0 };
+      aggS[k].b += r.perSulit[k].b || 0; aggS[k].t += r.perSulit[k].t || 0;
+    });
+  });
+  var kunciS = ["Mudah", "Sedang", "Sulit"].filter(function (k) { return aggS[k] && aggS[k].t > 0; });
+  if (kunciS.length) {
+    if (!kunciA.length) daftarA.innerHTML = "";
+    kartuA.hidden = false;
+    var judulS = document.createElement("div");
+    judulS.style.cssText = "font-weight:700; margin:12px 0 2px;";
+    judulS.textContent = "Akurasi per Tingkat Kesulitan";
+    daftarA.appendChild(judulS);
+    kunciS.forEach(function (k) {
+      var aS = aggS[k], pctS = Math.round(aS.b / aS.t * 100);
+      var barisS = document.createElement("div");
+      barisS.style.cssText = "padding:8px 0;border-bottom:1px solid var(--garis);";
+      var atasS = document.createElement("div");
+      atasS.style.cssText = "display:flex;justify-content:space-between;gap:10px;align-items:baseline;";
+      var nmS = document.createElement("b"); nmS.textContent = "Soal " + k;
+      var angS = document.createElement("span"); angS.className = "sub"; angS.textContent = pctS + "% • " + aS.b + "/" + aS.t + " benar";
+      atasS.appendChild(nmS); atasS.appendChild(angS);
+      var trekS = document.createElement("div");
+      trekS.style.cssText = "height:8px;border-radius:99px;background:var(--latar-track);margin-top:6px;overflow:hidden;";
+      var isiS = document.createElement("div");
+      isiS.style.cssText = "height:100%;width:" + pctS + "%;background:" + (pctS >= 70 ? "var(--baik)" : pctS >= 40 ? "var(--emas)" : "var(--buruk)") + ";";
+      trekS.appendChild(isiS);
+      barisS.appendChild(atasS); barisS.appendChild(trekS);
+      daftarA.appendChild(barisS);
+    });
+  }
+  gambarPrediksi();
   // Lencana pencapaian (dihitung dari data nyata pengguna)
   var wadahL = document.getElementById("daftarLencana");
   var terbukaL = 0;
@@ -2492,6 +2600,7 @@ function selesaiKuis() {
   tutupDurasiKuis();
   var perKat = { TWK: { poin: 0, maks: 0, benar: 0, total: 0 }, TIU: { poin: 0, maks: 0, benar: 0, total: 0 }, TKP: { poin: 0, maks: 0, benar: 0, total: 0 } };
   var perSub = {};
+  var perSulit = {};
   var totalPoin = 0, totalMaks = 0, terjawab = 0;
   kuis.daftar.forEach(function (idx, pos) {
     var s = bankAktif()[idx], pil = kuis.jawaban[pos];
@@ -2510,6 +2619,11 @@ function selesaiKuis() {
       perSub[kunciSub].t++;
       if (benarSoal) perSub[kunciSub].b++;
       perSub[kunciSub].d += (kuis.durasi && kuis.durasi[pos]) || 0;
+      if (s.d) {
+        if (!perSulit[s.d]) perSulit[s.d] = { b: 0, t: 0 };
+        perSulit[s.d].t++;
+        if (benarSoal) perSulit[s.d].b++;
+      }
       var kunciSoal = kuis.bankSalah ? kuis.kunciDaftar[pos] : (kuis.bankModul ? "M" + idx : "B" + idx);
       var snapshot = { k: s.k, t: s.t, o: s.o, j: s.j, b: s.b, asal: kuis.bankModul ? "modul" : "bank" };
       if (s.s) snapshot.s = s.s;
@@ -2522,10 +2636,15 @@ function selesaiKuis() {
   var sekarang = new Date();
   var tgl = sekarang.toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) + " • " + sekarang.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
   var d = dataUser();
-  d.riwayat.push({ tanggal: tgl, label: label, poin: totalPoin, maks: totalMaks });
+  var entriRiwayat = { tanggal: tgl, label: label, poin: totalPoin, maks: totalMaks };
+  if (kuis.mode === "simulasi") {
+    entriRiwayat.perMapel = { TWK: perKat.TWK.poin, TIU: perKat.TIU.poin, TKP: perKat.TKP.poin };
+    entriRiwayat.maksMapel = { TWK: perKat.TWK.maks, TIU: perKat.TIU.maks, TKP: perKat.TKP.maks };
+  }
+  d.riwayat.push(entriRiwayat);
   if (Object.keys(perSub).length) {
     if (!Array.isArray(d.riwayatDetail)) d.riwayatDetail = [];
-    d.riwayatDetail.push({ tanggal: tgl, label: label, perSub: perSub });
+    d.riwayatDetail.push({ tanggal: tgl, label: label, perSub: perSub, perSulit: perSulit });
     if (d.riwayatDetail.length > 100) d.riwayatDetail = d.riwayatDetail.slice(-100);
   }
   if (!d.statistik) d.statistik = { leitnerTuntas: 0, penuhLulus: false, fokusSesi: 0, fokusMenit: 0, tantanganSelesai: 0 };
@@ -3448,7 +3567,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v26";
+var VERSI_APP = "prata-v27";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
