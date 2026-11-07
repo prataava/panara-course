@@ -221,6 +221,15 @@
   .pc{display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; line-height:1.18; font-size:.93em;}
   .pc>span{padding:0 5px; white-space:nowrap;}
   .pc .pc-b{border-top:2px solid currentColor;}
+  .pusat-grid{display:grid; grid-template-columns:1fr 1fr; gap:9px; margin:10px 0;}
+  .pusat-stat{background:var(--latar-sel); border:1px solid var(--garis); border-radius:var(--r-kecil); padding:10px 12px;}
+  .pusat-stat .angka{font-size:19px; font-weight:800; line-height:1.25;}
+  .pusat-stat .label{font-size:12px; color:var(--redup);}
+  .baris-bilah{display:flex; align-items:center; gap:9px; margin:6px 0; font-size:13px;}
+  .baris-bilah .nm{width:38px; font-weight:700;}
+  .baris-bilah .track{flex:1; height:9px; background:var(--latar-track); border-radius:99px; overflow:hidden;}
+  .baris-bilah .isi{height:100%; border-radius:99px;}
+  .baris-bilah .val{width:86px; text-align:right; color:var(--redup); font-size:12px;}
   .baris-riwayat{display:flex; justify-content:space-between; gap:10px; padding:11px 2px; border-bottom:1px solid var(--garis); font-size:13.5px;}
   .baris-riwayat:last-child{border-bottom:none;}
   .baris-riwayat .k{color:var(--redup); font-size:12px;}
@@ -593,6 +602,10 @@
         <button class="btn" id="btnBuangBeranda">Buang &amp; Mulai Baru</button>
       </div>
     </div>
+    <div class="kartu" id="kartuPusat">
+      <h2 class="judul-bagian">Pusat Kendali Belajar</h2>
+      <div id="isiPusat"></div>
+    </div>
     <div class="kartu" id="kartuFokus" hidden>
       <h2 class="judul-bagian">Fokus Latihan Berikutnya</h2>
       <p class="sub" id="teksFokus" style="margin-bottom:11px;">Berdasarkan rata-rata skormu sejauh ini.</p>
@@ -932,6 +945,11 @@
       <h2 class="judul-bagian">Lencana Pencapaian</h2>
       <p class="sub" id="ringkasLencana" style="margin-bottom:10px;"></p>
       <div id="daftarLencana" style="display:grid; grid-template-columns:1fr 1fr; gap:9px;"></div>
+    </div>
+    <div class="kartu">
+      <h2 class="judul-bagian">Aktivitas 7 Hari Terakhir</h2>
+      <div id="daftarAktivitas"></div>
+      <p class="sub" style="margin-top:8px;">Jumlah sesi latihan &amp; simulasi yang selesai per hari.</p>
     </div>
     <div class="kartu" id="kartuPapan" hidden>
       <h2 class="judul-bagian">Peringkat Online — Semua Pengguna</h2>
@@ -1938,6 +1956,72 @@ function segarkanBeranda() {
   var stF = d.statistik || {};
   if (!fokusTimer.jalan) document.getElementById("statusFokus").textContent = (stF.fokusSesi || 0) > 0 ? "Total sesi fokus selesai: " + stF.fokusSesi + " sesi (" + (stF.fokusMenit || 0) + " menit)." : "Belum ada sesi fokus yang selesai — mulai dari 15 menit dulu.";
   gambarRencana();
+  gambarPusatKendali(d);
+}
+function gambarPusatKendali(d) {
+  var isi = document.getElementById("isiPusat");
+  if (!isi) return;
+  d = d || dataUser();
+  function esc(t) { return String(t == null ? "" : t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  var sims = (d.riwayat || []).filter(function (r) { return (r.label || "").indexOf("Simulasi") === 0; });
+  var terakhir = sims.length ? sims[sims.length - 1] : null;
+  var tertinggi = 0;
+  sims.forEach(function (r) { if (r.poin > tertinggi) tertinggi = r.poin; });
+  var agg = {}, totB = 0, totT = 0, totD = 0;
+  (d.riwayatDetail || []).forEach(function (r) {
+    Object.keys(r.perSub || {}).forEach(function (k) {
+      if (!agg[k]) agg[k] = { b: 0, t: 0, d: 0 };
+      agg[k].b += r.perSub[k].b || 0; agg[k].t += r.perSub[k].t || 0; agg[k].d += r.perSub[k].d || 0;
+    });
+  });
+  var perMapel = { TWK: { b: 0, t: 0 }, TIU: { b: 0, t: 0 }, TKP: { b: 0, t: 0 } };
+  Object.keys(agg).forEach(function (k) {
+    totB += agg[k].b; totT += agg[k].t; totD += agg[k].d;
+    var mp = k.split(" — ")[0];
+    if (perMapel[mp]) { perMapel[mp].b += agg[k].b; perMapel[mp].t += agg[k].t; }
+  });
+  if (!sims.length && !totT) {
+    isi.innerHTML = "<p class='sub'>Belum ada data belajar. Selesaikan satu Latihan atau Simulasi Mini, dan pusat kendali ini akan terisi otomatis: skor terakhir &amp; tertinggi, akurasi per mapel, kecepatan menjawab, materi terkuat &amp; terlemah, sampai prediksi kesiapanmu — semua dari progres aslimu.</p>";
+    return;
+  }
+  var akurasi = totT ? Math.round(totB / totT * 100) : null;
+  var cepat = totT ? Math.round(totD / totT) : null;
+  var kuat = null, lemah = null, pKuat = -1, pLemah = 2;
+  Object.keys(agg).forEach(function (k) {
+    if (agg[k].t >= 3) { var p = agg[k].b / agg[k].t; if (p > pKuat) { pKuat = p; kuat = k; } if (p < pLemah) { pLemah = p; lemah = k; } }
+  });
+  var P = hitungPrediksi(d);
+  var PG = konfigPG();
+  var html = "";
+  if (d.target && d.target.tgl) {
+    var kini = new Date(); kini.setHours(0, 0, 0, 0);
+    var selisih = Math.round((new Date(d.target.tgl + "T00:00:00") - kini) / 86400000);
+    html += "<p class='sub' style='margin-bottom:2px;'>Target: <b>" + esc(d.target.nama || "Seleksi") + "</b> — " + (selisih > 0 ? selisih + " hari lagi" : selisih === 0 ? "hari ini!" : "sudah lewat") + " • Ambang lulusmu: TWK " + PG.TWK + " • TIU " + PG.TIU + " • TKP " + PG.TKP + "</p>";
+  }
+  html += "<div class='pusat-grid'>";
+  html += "<div class='pusat-stat'><div class='angka'>" + (terakhir ? terakhir.poin + " poin" : "—") + "</div><div class='label'>Simulasi terakhir" + (terakhir ? " (" + esc(terakhir.label.replace(" SKD", "")) + ")" : "") + "</div></div>";
+  html += "<div class='pusat-stat'><div class='angka'>" + (tertinggi ? tertinggi + " poin" : "—") + "</div><div class='label'>Simulasi tertinggi</div></div>";
+  html += "<div class='pusat-stat'><div class='angka'>" + (akurasi === null ? "—" : akurasi + "%") + "</div><div class='label'>Akurasi keseluruhan (" + totT + " soal terjawab)</div></div>";
+  html += "<div class='pusat-stat'><div class='angka'>" + (P ? P.indeks + "%" : "—") + "</div><div class='label'>Prediksi kesiapan" + (P ? " (" + P.sesi + " simulasi)" : " — perlu simulasi") + "</div></div>";
+  html += "</div>";
+  ["TWK", "TIU", "TKP"].forEach(function (k) {
+    var pm = perMapel[k];
+    var pct = pm.t ? Math.round(pm.b / pm.t * 100) : 0;
+    var warna = !pm.t ? "var(--redup)" : (pct >= 70 ? "var(--baik)" : (pct >= 40 ? "var(--emas-teks)" : "var(--buruk)"));
+    html += "<div class='baris-bilah'><span class='nm'>" + k + "</span><span class='track'><span class='isi' style='display:block; width:" + pct + "%; background:" + warna + ";'></span></span><span class='val'>" + (pm.t ? pct + "% (" + pm.b + "/" + pm.t + ")" : "belum ada data") + "</span></div>";
+  });
+  var baris = [];
+  if (kuat) baris.push("Terkuat: <b>" + esc(kuat) + "</b> (" + Math.round(pKuat * 100) + "% benar)");
+  if (lemah && lemah !== kuat) baris.push("Terlemah: <b>" + esc(lemah) + "</b> (" + Math.round(pLemah * 100) + "% benar)");
+  if (cepat !== null) baris.push("Kecepatan rata-rata: ±" + cepat + " detik per soal");
+  if (baris.length) html += "<p class='sub' style='margin-top:9px;'>" + baris.join(" • ") + "</p>";
+  var jatuhTempo = daftarSalahJatuhTempo().length;
+  var sudahT = d.tantangan && d.tantangan.tanggal === kunciHariIni();
+  var aktifTerakhir = (d.riwayat && d.riwayat.length) ? d.riwayat[d.riwayat.length - 1] : null;
+  html += "<p class='sub' style='margin-top:6px;'>Briefing hari ini: Tantangan Harian " + (sudahT ? "sudah selesai ✓" : "belum dikerjakan") + " • " + jatuhTempo + " soal Leitner jatuh tempo" + (aktifTerakhir ? " • Aktivitas terakhir: " + esc(aktifTerakhir.label) + " (" + esc(aktifTerakhir.tanggal.split(" • ")[0]) + ")" : "") + "</p>";
+  var kotor = sesiId ? kotorSaatIni().n : 0;
+  html += "<p class='sub' style='margin-top:6px;'>" + (kotor > 0 ? "Status sinkron: ada perubahan yang belum terkirim ke server (perangkat offline?) — akan tersinkron otomatis saat online." : "Status sinkron: semua progres tersimpan di server ✓") + "</p>";
+  isi.innerHTML = html;
 }
 document.getElementById("btnKeCekRingkas").addEventListener("click", function () { pergi("ceklist"); });
 document.getElementById("btnFokusLatihan").addEventListener("click", function () {
@@ -2382,6 +2466,45 @@ function gambarRiwayat() {
       }).catch(function () {});
   }
   gambarPerbandingan();
+  gambarAktivitas();
+}
+function gambarAktivitas() {
+  var wadah = document.getElementById("daftarAktivitas");
+  if (!wadah) return;
+  var d = dataUser();
+  var BLN = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, Mei: 4, Jun: 5, Jul: 6, Agu: 7, Sep: 8, Okt: 9, Nov: 10, Des: 11 };
+  var perHari = {};
+  (d.riwayat || []).forEach(function (r) {
+    var m = /^(\d{1,2})\s+(\w{3})\s+(\d{4})/.exec(r.tanggal || "");
+    if (m && BLN[m[2]] !== undefined) {
+      var key = m[3] + "-" + BLN[m[2]] + "-" + m[1];
+      perHari[key] = (perHari[key] || 0) + 1;
+    }
+  });
+  var maks = 1, kolom = [];
+  for (var i = 6; i >= 0; i--) {
+    var t = new Date(); t.setHours(0, 0, 0, 0); t.setDate(t.getDate() - i);
+    var key = t.getFullYear() + "-" + t.getMonth() + "-" + t.getDate();
+    var n = perHari[key] || 0;
+    if (n > maks) maks = n;
+    kolom.push({ n: n, hari: t.toLocaleDateString("id-ID", { weekday: "short" }), tgl: t.getDate(), ini: i === 0 });
+  }
+  wadah.innerHTML = "";
+  var bungkus = document.createElement("div");
+  bungkus.style.cssText = "display:flex; gap:6px; align-items:flex-end; height:96px;";
+  kolom.forEach(function (k) {
+    var sel = document.createElement("div");
+    sel.style.cssText = "flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; gap:4px;";
+    var angka = document.createElement("div"); angka.textContent = k.n ? String(k.n) : "";
+    angka.style.cssText = "font-size:11px; font-weight:700; color:var(--redup);";
+    var batang = document.createElement("div");
+    batang.style.cssText = "width:70%; max-width:26px; border-radius:6px 6px 3px 3px; background:" + (k.ini ? "var(--baik)" : "var(--garis-info)") + "; height:" + Math.max(6, Math.round(k.n / maks * 62)) + "px;";
+    var label = document.createElement("div"); label.textContent = k.hari + " " + k.tgl;
+    label.style.cssText = "font-size:10.5px; color:var(--redup); white-space:nowrap;";
+    sel.appendChild(angka); sel.appendChild(batang); sel.appendChild(label);
+    bungkus.appendChild(sel);
+  });
+  wadah.appendChild(bungkus);
 }
 var modePapan = "semua", papanBarisCache = [];
 function gambarPapan() {
@@ -4049,7 +4172,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v33";
+var VERSI_APP = "prata-v34";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
