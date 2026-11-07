@@ -428,6 +428,14 @@
   .kepala-catatan{display:flex; justify-content:space-between; gap:10px; color:var(--teks-terang); font-size:12.5px; font-weight:700; margin-bottom:7px;}
   #catatanStatus{color:var(--teks-tersimpan); font-weight:600;}
   #isiCatatanBuku{width:100%; background:var(--buku-input); color:var(--putih); border:1px solid var(--buku-garis); border-radius:10px; padding:10px 11px; font:inherit; font-size:14px; line-height:1.55; resize:vertical;}
+  /* ===== v14: lencana kunci, editor kunci, tombol gelap ===== */
+  .lencana { font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+  .lencana.ada { background: var(--tint-baik); color: var(--teks-baik); border: 1px solid var(--garis-baik); }
+  .lencana.kosong { background: var(--tint-buruk); color: var(--buruk); border: 1px solid var(--garis-buruk); }
+  .lencana.manual { background: var(--tint-emas); color: var(--teks-di-emas); border: 1px solid var(--emas); }
+  .editor-kunci { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+  .editor-kunci .lbl { font-size: 12.5px; font-weight: 700; color: var(--redup); margin-right: 2px; }
+  body.gelap .btn:not(.laut):not(.emas):not(.garis) { background: var(--isi-gelap); color: var(--tinta); }
   /* ===== v13: selubung muat, streak, fokus ===== */
   #selubungMuat { position: fixed; inset: 0; z-index: 300; background: var(--kertas); display: flex; align-items: center; justify-content: center; }
   #selubungMuat[hidden] { display: none; }
@@ -862,6 +870,10 @@
     <div class="kepala-kuis">
       <button class="mundur" data-pergi="beranda">← Beranda</button>
       <span class="info-kuis">Daftar Soal Lengkap (36 soal)</span>
+    </div>
+    <div class="segmen" id="segmenSumber" style="margin-bottom:12px;">
+      <button data-sumber="bank" class="aktif">Bank PRATA</button>
+      <button data-sumber="modul">Modul Saya</button>
     </div>
     <div class="kartu">
       <input class="isi" id="cariSoal" type="text" placeholder="Cari soal… (kata kunci, mis. 'diskon' atau 'Pasal')">
@@ -1751,7 +1763,9 @@ function selesaiKuis() {
     var s = bankAktif()[idx], pil = kuis.jawaban[pos];
     if (!perKat[s.k]) perKat[s.k] = { poin: 0, maks: 0, benar: 0, total: 0 };
     var pk = perKat[s.k];
-    pk.total++; pk.maks += 5; totalMaks += 5;
+    pk.total++;
+    var dinilai = (s.j !== null && s.j !== undefined) || (s.k === "TKP" && s.s);
+    if (dinilai) { pk.maks += 5; totalMaks += 5; }
     if (pil !== undefined) {
       terjawab++;
       if (s.k === "TKP" && s.s) { pk.poin += s.s[pil]; totalPoin += s.s[pil]; if (s.s[pil] === 5) pk.benar++; }
@@ -2026,10 +2040,13 @@ function gambarDaftarCepat() {
 }
 
 var katSoalAktif = "SEMUA";
+var sumberDaftar = "bank";
 function gambarDaftarSoal() {
   var cari = (document.getElementById("cariSoal").value || "").toLowerCase();
   var wadah = document.getElementById("wadahDaftarSoal");
   wadah.innerHTML = "";
+  if (sumberDaftar === "modul") { gambarDaftarModul(wadah, cari); return; }
+  document.querySelector("#view-daftarsoal .info-kuis").textContent = "Daftar Soal Lengkap (36 soal)";
   var tandaUser = dataUser().tanda;
   var nomorPerKat = { TWK: 0, TIU: 0, TKP: 0 };
   var tampilCount = 0;
@@ -2086,6 +2103,76 @@ function gambarDaftarSoal() {
     wadah.innerHTML = "<div class='kartu'><div class='kosong'>Tidak ada soal yang cocok. Coba kata kunci lain, atau pilih kategori 'Semua'.</div></div>";
   }
 }
+function gambarDaftarModul(wadah, cari) {
+  var d = dataUser();
+  var info = document.querySelector("#view-daftarsoal .info-kuis");
+  if (!d.modul || !d.modul.soal || !d.modul.soal.length) {
+    info.textContent = "Daftar Soal — Modul Saya";
+    var k = document.createElement("div"); k.className = "kartu";
+    var p = document.createElement("p"); p.className = "sub";
+    p.textContent = "Belum ada modul di akunmu. Buka menu Modul Saya untuk memilih berkas PDF modul — soal-soalnya akan muncul di sini dan bisa kamu atur kuncinya satu per satu.";
+    k.appendChild(p); wadah.appendChild(k); return;
+  }
+  var soal = d.modul.soal;
+  var berkunci = soal.filter(function (s) { return s.j !== null && s.j !== undefined; }).length;
+  info.textContent = "Soal Modul (" + soal.length + " soal • " + berkunci + " berkunci)";
+  var perMapel = {};
+  soal.forEach(function (s, idx) {
+    perMapel[s.k] = (perMapel[s.k] || 0) + 1;
+    if (cari && (s.t + " " + s.o.join(" ")).toLowerCase().indexOf(cari) < 0) return;
+    var item = document.createElement("div"); item.className = "item-soal"; item.setAttribute("data-ungkap", ""); amatiUngkap(item);
+    var kepala = document.createElement("button"); kepala.className = "kepala";
+    var no = document.createElement("span"); no.className = "no"; no.textContent = s.k + " " + perMapel[s.k];
+    var ringkas = document.createElement("span"); ringkas.textContent = s.t.replace(/\n/g, " ").slice(0, 100) + (s.t.length > 100 ? "…" : "");
+    var lencana = document.createElement("span");
+    var berkunciIni = s.j !== null && s.j !== undefined;
+    lencana.className = "lencana " + (!berkunciIni ? "kosong" : (s.jm ? "manual" : "ada"));
+    lencana.textContent = !berkunciIni ? "Belum berkunci" : (s.jm ? "Kunci manual" : "Berkunci");
+    kepala.appendChild(no); kepala.appendChild(ringkas); kepala.appendChild(lencana);
+    var panel = document.createElement("div"); panel.className = "panel"; panel.hidden = true;
+    var opsiK = document.createElement("div"); opsiK.className = "opsi-kecil";
+    opsiK.textContent = s.o.map(function (o, i) { return "ABCDE"[i] + ". " + o; }).join("\n");
+    panel.appendChild(opsiK);
+    if (berkunciIni) {
+      var kunci = document.createElement("div"); kunci.className = "kunci";
+      kunci.textContent = "Kunci: " + "ABCDE"[s.j] + " — " + s.o[s.j];
+      panel.appendChild(kunci);
+    }
+    var editor = document.createElement("div"); editor.className = "editor-kunci";
+    var lbl = document.createElement("span"); lbl.className = "lbl"; lbl.textContent = "Atur kunci:";
+    editor.appendChild(lbl);
+    s.o.forEach(function (o, i) {
+      var bt = document.createElement("button");
+      bt.className = "btn kecil" + (s.j === i ? " emas" : "");
+      bt.textContent = "ABCDE"[i];
+      bt.addEventListener("click", function () {
+        var dd = dataUser(); dd.modul.soal[idx].j = i; dd.modul.soal[idx].jm = true;
+        simpanDataUser(dd); gambarDaftarSoal();
+      });
+      editor.appendChild(bt);
+    });
+    if (berkunciIni) {
+      var hapusK = document.createElement("button"); hapusK.className = "btn kecil"; hapusK.textContent = "Hapus Kunci";
+      hapusK.addEventListener("click", function () {
+        var dd = dataUser(); dd.modul.soal[idx].j = null; delete dd.modul.soal[idx].jm;
+        simpanDataUser(dd); gambarDaftarSoal();
+      });
+      editor.appendChild(hapusK);
+    }
+    panel.appendChild(editor);
+    kepala.addEventListener("click", function () { panel.hidden = !panel.hidden; });
+    item.appendChild(kepala); item.appendChild(panel);
+    wadah.appendChild(item);
+  });
+}
+document.getElementById("segmenSumber").addEventListener("click", function (e) {
+  var b = e.target.closest("[data-sumber]");
+  if (!b) return;
+  sumberDaftar = b.getAttribute("data-sumber");
+  document.querySelectorAll("#segmenSumber button").forEach(function (x) { x.classList.toggle("aktif", x === b); });
+  document.getElementById("segmenKategori").style.display = sumberDaftar === "modul" ? "none" : "";
+  gambarDaftarSoal();
+});
 document.getElementById("segmenKategori").addEventListener("click", function (e) {
   var b = e.target.closest("[data-katsoal]");
   if (!b) return;
