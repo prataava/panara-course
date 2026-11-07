@@ -6,7 +6,7 @@
 <title>PRATA — Belajar Kedinasan (SKD: TWK, TIU, TKP)</title>
 <meta name="description" content="PRATA: aplikasi belajar seleksi sekolah kedinasan — latihan soal SKD (TWK, TIU, TKP) dengan pembahasan, tanya AI gratis, materi ringkas, dan checklist tugas.">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#14264c">
+<meta name="theme-color" content="#12264a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -102,7 +102,7 @@
   .kotak-login .tagline{text-align:center; color:var(--redup); font-size:13px; margin-bottom:18px;}
   label.lbl{display:block; font-size:12.5px; font-weight:700; margin:13px 0 6px; color:var(--laut);}
   input.isi, textarea.isi{
-    width:100%; padding:12px 13px; font-size:15px; color:var(--tinta);
+    width:100%; padding:12px 13px; font-size:16px; color:var(--tinta);
     border:1.5px solid var(--garis); border-radius:12px; background:#ffffff; outline:none;
   }
   input.isi:focus, textarea.isi:focus{border-color:var(--emas); background:#fff;}
@@ -402,6 +402,10 @@
   body.gelap .opsi.terpilih{background:#2a3852; border-color:#8fb4ff;}
   h1.sapa{letter-spacing:-.01em;}
   h2.judul-bagian{letter-spacing:-.01em;}
+  .btn-tampilan{display:inline-flex; align-items:center; justify-content:center; min-width:34px;}
+  .btn-tampilan svg{width:16px; height:16px; display:block;}
+  .memuat-portal{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:var(--kertas); color:var(--redup); font-size:13px; font-weight:600; z-index:2; text-align:center; padding:12px;}
+  #bingkaiApungBungkus{position:relative;}
 </style>
 </head>
 <body>
@@ -416,10 +420,10 @@
     <span class="nama" id="chipNama">Pengguna</span>
     <button class="btn-keluar" id="btnKeluar">Keluar</button>
   </div>
-  <button class="btn-keluar" id="btnPasang" hidden>📲 Pasang App</button>
-  <button class="btn-tampilan" id="btnModeHp" title="Mode HP: tampilan seperti aplikasi di HP (kolom sempit di tengah layar)">📱</button>
-  <button class="btn-tampilan" id="btnLayar" title="Layar penuh">⛶</button>
-  <button class="btn-tampilan" id="btnGelap" title="Mode gelap / terang">🌙</button>
+  <button class="btn-keluar" id="btnPasang" hidden>Pasang App</button>
+  <button class="btn-tampilan" id="btnModeHp" title="Mode HP: tampilan seperti aplikasi di HP (kolom sempit di tengah layar)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></button>
+  <button class="btn-tampilan" id="btnLayar" title="Layar penuh"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg></button>
+  <button class="btn-tampilan" id="btnGelap" title="Mode gelap / terang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a7 7 0 0 0 9.5 9.5z"/></svg></button>
 </header>
 
 <main class="panggung">
@@ -437,7 +441,7 @@
         <input class="isi" id="liSandi" type="password" autocomplete="current-password" placeholder="Kata sandimu">
         <div class="galat" id="liGalat" hidden></div>
         <button class="btn emas lebar" id="btnMasuk" style="margin-top:16px;">Masuk</button>
-        <div class="info">🌐 Akun PRATA kini ONLINE: masuk dengan email &amp; kata sandi, dan semua progresmu (tugas, skor, bookmark, target, modul) tersimpan di server — bisa dibuka dari perangkat mana pun. Sekali masuk, aplikasi langsung membuka Beranda pada kunjungan berikutnya.</div>
+        <div class="info">Akun PRATA kini ONLINE: masuk dengan email &amp; kata sandi, dan semua progresmu (tugas, skor, bookmark, target, modul) tersimpan di server — bisa dibuka dari perangkat mana pun. Sekali masuk, aplikasi langsung membuka Beranda pada kunjungan berikutnya.</div>
         <p class="ganti-mode">Belum punya akun? <a id="keDaftar">Daftar gratis</a></p>
       </div>
     </div>
@@ -570,9 +574,9 @@
     <div class="kartu">
       <h2 class="judul-bagian">Latihan per Kategori</h2>
       <p class="sub" style="margin-bottom:13px;">Setiap soal langsung dibahas setelah kamu menjawab, jadi kamu belajar sambil mengerjakan.</p>
-      <button class="btn laut lebar" data-mulai-latihan="TWK" style="margin-bottom:9px;">🇮🇩 TWK — Tes Wawasan Kebangsaan (12 soal)</button>
-      <button class="btn laut lebar" data-mulai-latihan="TIU" style="margin-bottom:9px;">🧮 TIU — Tes Intelegensia Umum (12 soal)</button>
-      <button class="btn laut lebar" data-mulai-latihan="TKP">🧭 TKP — Tes Karakteristik Pribadi (12 soal)</button>
+      <button class="btn laut lebar" data-mulai-latihan="TWK" style="margin-bottom:9px;">TWK — Tes Wawasan Kebangsaan (12 soal)</button>
+      <button class="btn laut lebar" data-mulai-latihan="TIU" style="margin-bottom:9px;">TIU — Tes Intelegensia Umum (12 soal)</button>
+      <button class="btn laut lebar" data-mulai-latihan="TKP">TKP — Tes Karakteristik Pribadi (12 soal)</button>
     </div>
     <div class="kartu">
       <h2 class="judul-bagian">Simulasi Mini SKD</h2>
@@ -591,10 +595,10 @@
       <span class="kat-chip" id="chipKategori">TWK</span>
       <div class="soal-teks" id="teksSoal"></div>
       <div id="wadahOpsi"></div>
-      <div class="bahas" id="kotakBahas" hidden><span class="tt">💡 Pembahasan</span><span id="teksBahas"></span>
+      <div class="bahas" id="kotakBahas" hidden><span class="tt">Pembahasan</span><span id="teksBahas"></span>
         <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
-          <button class="btn kecil" id="btnBacakanBahas">🔊 Bacakan</button>
-          <button class="btn kecil" id="btnTanyaBahas">🤖 Tanya AI: kenapa jawabannya ini?</button>
+          <button class="btn kecil" id="btnBacakanBahas">Bacakan</button>
+          <button class="btn kecil" id="btnTanyaBahas">Tanya AI: kenapa jawabannya ini?</button>
         </div>
       </div>
       <div class="nav-kuis">
@@ -630,8 +634,8 @@
       <span class="info-kuis">Tanya AI — Bantuan Soal Kedinasan</span>
     </div>
     <div class="segmen" id="segmenMesin">
-      <button data-mesin="online" class="aktif">🌐 AI Gratis (online)</button>
-      <button data-mesin="offline">📚 Bank Pembahasan (offline)</button>
+      <button data-mesin="online" class="aktif">AI Gratis (Online)</button>
+      <button data-mesin="offline">Bank Pembahasan (Offline)</button>
     </div>
     <div class="alur-chat" id="alurChat"></div>
     <div class="bar-kirim">
@@ -639,7 +643,7 @@
       <button class="btn emas" id="btnKirimTanya">Kirim</button>
     </div>
     <div style="display:flex; gap:9px; align-items:center; margin-top:10px; flex-wrap:wrap;">
-      <label class="btn kecil" for="inputOcr" style="margin:0;">📷 Baca Soal dari Foto/ Screenshot</label>
+      <label class="btn kecil" for="inputOcr" style="margin:0;">Baca Soal dari Foto</label>
       <input type="file" id="inputOcr" accept="image/*" hidden>
       <span class="sub" id="statusOcr"></span>
     </div>
@@ -781,7 +785,7 @@
       <span class="info-kuis">Daftar Soal Lengkap (36 soal)</span>
     </div>
     <div class="kartu">
-      <input class="isi" id="cariSoal" type="text" placeholder="🔎 Cari soal… (kata kunci, mis. 'diskon' atau 'Pasal')">
+      <input class="isi" id="cariSoal" type="text" placeholder="Cari soal… (kata kunci, mis. 'diskon' atau 'Pasal')">
       <div class="segmen" id="segmenKategori" style="margin-top:12px; margin-bottom:2px;">
         <button data-katsoal="SEMUA" class="aktif">Semua</button>
         <button data-katsoal="TWK">TWK</button>
@@ -800,16 +804,16 @@
       <span class="info-kuis">Portal Gabungan — Panara &amp; NF</span>
     </div>
     <div class="tab-portal" id="tabPortal">
-      <button data-tabportal="https://panara.my.id/login" class="aktif">🔐 Login Panara</button>
-      <button data-tabportal="https://panara.my.id/dashboard">🎓 Dashboard Panara</button>
-      <button data-tabportal="https://sip.bimbelnurulfikri.id/login">📗 Login NF</button>
-      <button data-tabportal="split">🪟 Split View</button>
+      <button data-tabportal="https://panara.my.id/login" class="aktif">Login Panara</button>
+      <button data-tabportal="https://panara.my.id/dashboard">Dashboard Panara</button>
+      <button data-tabportal="https://sip.bimbelnurulfikri.id/login">Login NF</button>
+      <button data-tabportal="split">Split View</button>
     </div>
     <div class="bar-alat-portal">
       <button class="btn" id="btnPortalUlang">↻ Muat Ulang</button>
-      <button class="btn" id="btnPortalZoomMin">🔍− Zoom</button>
-      <button class="btn" id="btnPortalZoomPlus">🔍＋ Zoom</button>
-      <button class="btn" id="btnPortalPenuh">⛶ Layar Penuh</button>
+      <button class="btn" id="btnPortalZoomMin">Zoom −</button>
+      <button class="btn" id="btnPortalZoomPlus">Zoom +</button>
+      <button class="btn" id="btnPortalPenuh">Layar Penuh</button>
       <button class="btn" id="btnPortalTabBaru">↗ Buka di Tab Baru</button>
       <button class="btn emas" id="btnApung">AI Mengambang</button>
     </div>
@@ -836,12 +840,13 @@
     </div>
     <div id="portalTunggal">
       <div class="bingkai-portal" id="bingkaiBungkus">
+        <div class="memuat-portal" id="selubungPortal">Memuat halaman…</div>
         <iframe id="bingkaiPortal" src="https://panara.my.id/login" title="Portal situs" allow="clipboard-write; fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
     <div id="portalSplit" class="split-portal" hidden>
-      <div class="bingkai-portal"><iframe id="bingkaiSplitA" title="Panara Login" allow="clipboard-write; fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-      <div class="bingkai-portal"><iframe id="bingkaiSplitB" title="NF Login" allow="clipboard-write; fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      <div class="bingkai-portal"><div class="memuat-portal" id="selubungSplitA">Memuat halaman…</div><iframe id="bingkaiSplitA" title="Panara Login" allow="clipboard-write; fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      <div class="bingkai-portal"><div class="memuat-portal" id="selubungSplitB">Memuat halaman…</div><iframe id="bingkaiSplitB" title="NF Login" allow="clipboard-write; fullscreen" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
     </div>
     <p class="sub" style="margin-top:11px;">Catatan jujur: keadaan login (sesi/cookie) tersimpan di situs masing-masing — Panara di panara.my.id, NF di sip.bimbelnurulfikri.id. Portal ini tidak bisa menyimpan atau memindahkan sesi mereka; kalau login di dalam bingkai mental, pakai "↗ Buka di Tab Baru" untuk masuk di halaman aslinya, persis seperti memakai situsnya langsung.</p>
   </section>
@@ -853,7 +858,7 @@
       <span class="info-kuis" id="infoFlash">Flashcard 1</span>
     </div>
     <div class="segmen" id="segmenFlash">
-      <button data-flash="soal" class="aktif">📝 Dari Bank Soal</button>
+      <button data-flash="soal" class="aktif">Dari Bank Soal</button>
       <button data-flash="tanda">★ Soal Ditandai</button>
     </div>
     <button class="flashcard" id="kartuFlash">
@@ -863,7 +868,7 @@
     </button>
     <div class="nav-kuis">
       <button class="btn" id="btnFlashSebelum">← Sebelumnya</button>
-      <button class="btn" id="btnFlashAcak">🔀 Acak</button>
+      <button class="btn" id="btnFlashAcak">Acak</button>
       <button class="btn emas" id="btnFlashLanjut">Berikutnya →</button>
     </div>
     <p class="sub" style="margin-top:11px;">Tandai soal dengan ★ di Daftar Soal untuk membuat set flashcard khusus dari soal-soal yang kamu anggap penting/sulit.</p>
@@ -896,8 +901,8 @@ Tiga subtes: TWK (30 soal, maks 150), TIU (35 soal, maks 150), TKP (45 soal, mak
 3. SKB &amp; TAHAP LANJUTAN
 Tiap sekolah berbeda: bisa meliputi tes akademik lanjutan, kesehatan, kebugaran/jasmani, psikologi, dan wawancara. Bobot dan bentuknya mengikuti pengumuman resmi sekolah masing-masing.
 
-⚠️ Info di atas adalah gambaran umum untuk persiapan, bukan pengumuman resmi. Jadwal, syarat, dan passing grade yang sah selalu yang terbit di sscasn.bkn.go.id dan situs resmi sekolah kedinasan tujuan.</div>
-      <button class="btn laut lebar" data-pergi="ceklist" style="margin-top:13px;">✅ Buka Checklist Berkas &amp; Tugas</button>
+Catatan: info di atas adalah gambaran umum untuk persiapan, bukan pengumuman resmi. Jadwal, syarat, dan passing grade yang sah selalu yang terbit di sscasn.bkn.go.id dan situs resmi sekolah kedinasan tujuan.</div>
+      <button class="btn laut lebar" data-pergi="ceklist" style="margin-top:13px;">Buka Checklist Berkas &amp; Tugas</button>
     </div>
   </section>
 
@@ -975,6 +980,7 @@ Tiap sekolah berbeda: bisa meliputi tes akademik lanjutan, kesehatan, kebugaran/
     <button data-tabapung="copilot">Copilot</button>
   </div>
   <div id="bingkaiApungBungkus">
+    <div class="memuat-portal" id="selubungApung" hidden>Memuat situs…</div>
     <div class="bar-bingkai">
       <span id="namaBingkaiApung">Kimi</span>
       <button class="btn emas" id="btnBingkaiBuka">↗ Buka sebagai Jendela</button>
@@ -1035,9 +1041,9 @@ var SOAL = [
 
 /* ================= DATA: MATERI ================= */
 var MATERI = [
-{judul:"🇮🇩 TWK — Wawasan Kebangsaan", ringkas:"Pancasila, UUD 1945, NKRI, Bhinneka Tunggal Ika, dan sejarah perjuangan bangsa.", isi:"PANCASILA & SIMBOLNYA\n1. Ketuhanan Yang Maha Esa — bintang\n2. Kemanusiaan yang adil dan beradab — rantai\n3. Persatuan Indonesia — pohon beringin\n4. Kerakyatan yang dipimpin oleh hikmat kebijaksanaan dalam permusyawaratan/perwakilan — kepala banteng\n5. Keadilan sosial bagi seluruh rakyat Indonesia — padi dan kapas\n\nPASAL-PASAL UUD 1945 YANG SERING KELUAR\n• Pasal 1 ayat (1): Negara Kesatuan berbentuk Republik.\n• Pasal 1 ayat (2): Kedaulatan di tangan rakyat, dilaksanakan menurut UUD.\n• Pasal 4 ayat (1): Presiden memegang kekuasaan pemerintahan.\n• Pasal 24 ayat (2): Kekuasaan kehakiman oleh MA dan MK.\n• Pasal 27 ayat (1): Warga negara bersamaan kedudukannya dalam hukum dan pemerintahan.\n• Pasal 28A–28J: Hak asasi manusia.\n• Pasal 29: Negara berdasar Ketuhanan YME; kebebasan beragama.\n• Pasal 31: Hak atas pendidikan; wajib belajar.\n• Pasal 33: Perekonomian disusun sebagai usaha bersama berdasar asas kekeluargaan.\n• Pasal 35: Bendera = Sang Merah Putih. Pasal 36: Bahasa negara = Bahasa Indonesia. Pasal 36A: Lambang negara = Garuda Pancasila. Pasal 36B: Lagu kebangsaan = Indonesia Raya.\n\nSEJARAH PENTING\n• 1908: Budi Utomo — Kebangkitan Nasional (20 Mei).\n• 1928: Sumpah Pemuda (28 Oktober) — satu tanah air, bangsa, bahasa.\n• 1945: BPUPKI sidang I (29 Mei–1 Juni), pidato Pancasila Soekarno 1 Juni; PPKI 18 Agustus mengesahkan UUD 1945 & memilih Presiden/Wapres.\n• Proklamasi 17 Agustus 1945 di Jl. Pegangsaan Timur 56, Jakarta; bendera pusaka dijahit Fatmawati; naskah diketik Sayuti Melik.\n\nBHINNEKA TUNGGAL IKA\nDari Kitab Sutasoma (Mpu Tantular): 'berbeda-beda tetapi tetap satu jua' — landasan menghargai keberagaman suku, agama, ras, dan budaya dalam NKRI."},
-{judul:"🧮 TIU — Tes Intelegensia Umum", ringkas:"Deret angka/huruf, hitungan cepat, perbandingan, sinonim-antonim, analogi, dan silogisme.", isi:"DERET ANGKA — cek tiga pola ini dulu:\n1. Selisih tetap/bertingkat: 2,6,12,20,30 (selisih +4,+6,+8,+10, …).\n2. Kali + tambah: 3,7,15,31 (×2+1).\n3. Kuadrat/pangkat: 4,9,16,25 (pangkat dua dari 2,3,4,5).\nDeret huruf sama prinsipnya: ubah huruf jadi nomor urut (A=1 … Z=26).\n\nHITUNGAN CEPAT\n• Persen: 15% dari 240 = 10% (24) + 5% (12) = 36.\n• Diskon: yang dibayar = (100 − diskon)% × harga awal. Diskon 25% berarti bayar 75%.\n• Rata-rata = jumlah ÷ banyak data; pada deret berurutan, rata-rata = nilai tengah.\n• Perbandingan berbalik nilai (pekerja vs hari): pekerja bertambah, hari berkurang. Rumus: a × b = c × x.\n• Perbandingan senilai (harga vs jumlah barang): keduanya bergerak searah.\n\nVERBAL\n• Sinonim = persamaan kata (ambigu = bermakna ganda).\n• Antonim = lawan kata (eksklusif lawan inklusif).\n• Analogi: temukan hubungannya dulu (profesi : tempat kerja; alat : fungsi; sebab : akibat), baru cocokkan pilihan.\n\nLOGIKA / SILOGISME\n• 'Semua A adalah B' + 'X adalah A' menghasilkan kesimpulan pasti 'X adalah B'.\n• Hati-hati kata 'sebagian' dan 'mungkin' — kesimpulan harus PASTI benar.\n• Jika premis tidak cukup, jawaban yang benar bisa 'tidak dapat disimpulkan'."},
-{judul:"🧭 TKP — Karakteristik Pribadi", ringkas:"Cara memilih jawaban terbaik: pelayanan, integritas, kerja sama, dan tanggung jawab.", isi:"PRINSIP MEMILIH JAWABAN TKP\nDi TKP tidak ada jawaban salah total — semua opsi dinilai 1–5. Pilih sikap yang PALING aktif, paling melayani, dan tetap sesuai aturan.\n\n1. PELAYANAN PRIMA\nUtamakan warga: bantu lebih dulu, komunikasikan kendala dengan jujur, beri solusi — jangan membiarkan, menolak, atau menyuruh pulang tanpa jalan keluar. Kelompok rentan (lansia, disabilitas, ibu hamil) diprioritaskan sesuai ketentuan.\n\n2. INTEGRITAS\nTolak gratifikasi dengan sopan. Jangan pernah memalsukan data/laporan, jangan titip absen. Jika atasan menyuruh hal yang melanggar aturan, tolak dengan santun + tawarkan cara yang benar.\n\n3. TANGGUNG JAWAB\nSalah input? Akui, perbaiki segera, lapor atasan, bantu warga yang terdampak. Barang temuan: amankan, catat, serahkan lewat jalur resmi.\n\n4. KERJA SAMA & KOMUNIKASI\nRekan lambat → bantu, bukan dicela di depan umum. Beda pendapat → sampaikan dengan data, putuskan bersama/ikuti SOP. Warga marah → dengarkan dengan empati, jelaskan proses, tawarkan solusi.\n\n5. DEDIKASI & PENGEMBANGAN DIRI\nTugas mendesak yang sah dikerjakan profesional (ikuti aturan lembur). Tugas baru yang belum dikuasai diterima sambil belajar dan bertanya — bukan dihindari.\n\nPOLA UMUM: opsi terbaik biasanya yang paling PROAKTIF + EMPATIK + SESUAI ATURAN. Opsi pasif ('membiarkan', 'menunggu', 'diam saja') hampir selalu bernilai rendah."}
+{judul:"TWK — Wawasan Kebangsaan", ringkas:"Pancasila, UUD 1945, NKRI, Bhinneka Tunggal Ika, dan sejarah perjuangan bangsa.", isi:"PANCASILA & SIMBOLNYA\n1. Ketuhanan Yang Maha Esa — bintang\n2. Kemanusiaan yang adil dan beradab — rantai\n3. Persatuan Indonesia — pohon beringin\n4. Kerakyatan yang dipimpin oleh hikmat kebijaksanaan dalam permusyawaratan/perwakilan — kepala banteng\n5. Keadilan sosial bagi seluruh rakyat Indonesia — padi dan kapas\n\nPASAL-PASAL UUD 1945 YANG SERING KELUAR\n• Pasal 1 ayat (1): Negara Kesatuan berbentuk Republik.\n• Pasal 1 ayat (2): Kedaulatan di tangan rakyat, dilaksanakan menurut UUD.\n• Pasal 4 ayat (1): Presiden memegang kekuasaan pemerintahan.\n• Pasal 24 ayat (2): Kekuasaan kehakiman oleh MA dan MK.\n• Pasal 27 ayat (1): Warga negara bersamaan kedudukannya dalam hukum dan pemerintahan.\n• Pasal 28A–28J: Hak asasi manusia.\n• Pasal 29: Negara berdasar Ketuhanan YME; kebebasan beragama.\n• Pasal 31: Hak atas pendidikan; wajib belajar.\n• Pasal 33: Perekonomian disusun sebagai usaha bersama berdasar asas kekeluargaan.\n• Pasal 35: Bendera = Sang Merah Putih. Pasal 36: Bahasa negara = Bahasa Indonesia. Pasal 36A: Lambang negara = Garuda Pancasila. Pasal 36B: Lagu kebangsaan = Indonesia Raya.\n\nSEJARAH PENTING\n• 1908: Budi Utomo — Kebangkitan Nasional (20 Mei).\n• 1928: Sumpah Pemuda (28 Oktober) — satu tanah air, bangsa, bahasa.\n• 1945: BPUPKI sidang I (29 Mei–1 Juni), pidato Pancasila Soekarno 1 Juni; PPKI 18 Agustus mengesahkan UUD 1945 & memilih Presiden/Wapres.\n• Proklamasi 17 Agustus 1945 di Jl. Pegangsaan Timur 56, Jakarta; bendera pusaka dijahit Fatmawati; naskah diketik Sayuti Melik.\n\nBHINNEKA TUNGGAL IKA\nDari Kitab Sutasoma (Mpu Tantular): 'berbeda-beda tetapi tetap satu jua' — landasan menghargai keberagaman suku, agama, ras, dan budaya dalam NKRI."},
+{judul:"TIU — Tes Intelegensia Umum", ringkas:"Deret angka/huruf, hitungan cepat, perbandingan, sinonim-antonim, analogi, dan silogisme.", isi:"DERET ANGKA — cek tiga pola ini dulu:\n1. Selisih tetap/bertingkat: 2,6,12,20,30 (selisih +4,+6,+8,+10, …).\n2. Kali + tambah: 3,7,15,31 (×2+1).\n3. Kuadrat/pangkat: 4,9,16,25 (pangkat dua dari 2,3,4,5).\nDeret huruf sama prinsipnya: ubah huruf jadi nomor urut (A=1 … Z=26).\n\nHITUNGAN CEPAT\n• Persen: 15% dari 240 = 10% (24) + 5% (12) = 36.\n• Diskon: yang dibayar = (100 − diskon)% × harga awal. Diskon 25% berarti bayar 75%.\n• Rata-rata = jumlah ÷ banyak data; pada deret berurutan, rata-rata = nilai tengah.\n• Perbandingan berbalik nilai (pekerja vs hari): pekerja bertambah, hari berkurang. Rumus: a × b = c × x.\n• Perbandingan senilai (harga vs jumlah barang): keduanya bergerak searah.\n\nVERBAL\n• Sinonim = persamaan kata (ambigu = bermakna ganda).\n• Antonim = lawan kata (eksklusif lawan inklusif).\n• Analogi: temukan hubungannya dulu (profesi : tempat kerja; alat : fungsi; sebab : akibat), baru cocokkan pilihan.\n\nLOGIKA / SILOGISME\n• 'Semua A adalah B' + 'X adalah A' menghasilkan kesimpulan pasti 'X adalah B'.\n• Hati-hati kata 'sebagian' dan 'mungkin' — kesimpulan harus PASTI benar.\n• Jika premis tidak cukup, jawaban yang benar bisa 'tidak dapat disimpulkan'."},
+{judul:"TKP — Karakteristik Pribadi", ringkas:"Cara memilih jawaban terbaik: pelayanan, integritas, kerja sama, dan tanggung jawab.", isi:"PRINSIP MEMILIH JAWABAN TKP\nDi TKP tidak ada jawaban salah total — semua opsi dinilai 1–5. Pilih sikap yang PALING aktif, paling melayani, dan tetap sesuai aturan.\n\n1. PELAYANAN PRIMA\nUtamakan warga: bantu lebih dulu, komunikasikan kendala dengan jujur, beri solusi — jangan membiarkan, menolak, atau menyuruh pulang tanpa jalan keluar. Kelompok rentan (lansia, disabilitas, ibu hamil) diprioritaskan sesuai ketentuan.\n\n2. INTEGRITAS\nTolak gratifikasi dengan sopan. Jangan pernah memalsukan data/laporan, jangan titip absen. Jika atasan menyuruh hal yang melanggar aturan, tolak dengan santun + tawarkan cara yang benar.\n\n3. TANGGUNG JAWAB\nSalah input? Akui, perbaiki segera, lapor atasan, bantu warga yang terdampak. Barang temuan: amankan, catat, serahkan lewat jalur resmi.\n\n4. KERJA SAMA & KOMUNIKASI\nRekan lambat → bantu, bukan dicela di depan umum. Beda pendapat → sampaikan dengan data, putuskan bersama/ikuti SOP. Warga marah → dengarkan dengan empati, jelaskan proses, tawarkan solusi.\n\n5. DEDIKASI & PENGEMBANGAN DIRI\nTugas mendesak yang sah dikerjakan profesional (ikuti aturan lembur). Tugas baru yang belum dikuasai diterima sambil belajar dan bertanya — bukan dihindari.\n\nPOLA UMUM: opsi terbaik biasanya yang paling PROAKTIF + EMPATIK + SESUAI ATURAN. Opsi pasif ('membiarkan', 'menunggu', 'diam saja') hampir selalu bernilai rendah."}
 ];
 
 /* ================= DATA: CHECKLIST BAWAAN ================= */
@@ -1254,7 +1260,7 @@ function segarkanBeranda() {
   if (d.target && d.target.tgl) {
     var kini = new Date(); kini.setHours(0, 0, 0, 0);
     var selisih = Math.round((new Date(d.target.tgl + "T00:00:00") - kini) / 86400000);
-    ht.textContent = "🎯 " + (d.target.nama || "Target seleksimu") + ": " + (selisih > 0 ? selisih + " hari lagi" : selisih === 0 ? "HARI INI — semangat!" : "sudah lewat, perbarui targetmu");
+    ht.textContent = (d.target.nama || "Target seleksimu") + ": " + (selisih > 0 ? selisih + " hari lagi" : selisih === 0 ? "HARI INI — semangat!" : "sudah lewat, perbarui targetmu");
   } else {
     ht.textContent = "Atur target seleksimu di menu Info & Jadwal.";
   }
@@ -1262,7 +1268,7 @@ function segarkanBeranda() {
   var persen = total ? Math.round(selesai / total * 100) : 0;
   document.getElementById("persenCek").textContent = persen + "%";
   document.getElementById("batangCek").style.width = persen + "%";
-  document.getElementById("ringkasanCek").textContent = total ? (selesai + " dari " + total + " tugas selesai. " + (persen === 100 ? "Luar biasa, semua tuntas! 🎉" : "Sedikit lagi, tetap semangat!")) : "Belum ada tugas — tambahkan lewat menu Checklist.";
+  document.getElementById("ringkasanCek").textContent = total ? (selesai + " dari " + total + " tugas selesai. " + (persen === 100 ? "Luar biasa, semua tuntas!" : "Sedikit lagi, tetap semangat!")) : "Belum ada tugas — tambahkan lewat menu Checklist.";
 }
 document.getElementById("btnKeCekRingkas").addEventListener("click", function () { pergi("ceklist"); });
 
@@ -1282,7 +1288,7 @@ function gambarTugas() {
     var isi = document.createElement("div"); isi.className = "isi-tugas";
     isi.textContent = t.t;
     var kecil = document.createElement("small");
-    kecil.textContent = t.sumber === "otomatis" ? "✨ Dibuat otomatis oleh PRATA" : "Ditambahkan sendiri";
+    kecil.textContent = t.sumber === "otomatis" ? "Dibuat otomatis oleh PRATA" : "Ditambahkan sendiri";
     isi.appendChild(kecil);
     var hapus = document.createElement("button"); hapus.className = "hapus"; hapus.textContent = "🗑"; hapus.title = "Hapus tugas";
     hapus.addEventListener("click", function () {
@@ -1379,7 +1385,7 @@ function gambarRiwayat() {
         rows.forEach(function (p, i) {
           var baris = document.createElement("div"); baris.className = "baris-riwayat";
           var kiri = document.createElement("div");
-          kiri.textContent = (["🥇","🥈","🥉"][i] || (i + 1) + ".") + " " + p.nama + (p.nama === sesiUser ? " (kamu)" : "");
+          kiri.textContent = (i + 1) + ". " + p.nama + (p.nama === sesiUser ? " (kamu)" : "");
           kiri.style.fontWeight = p.nama === sesiUser ? "800" : "400";
           var kanan = document.createElement("div"); kanan.className = "skor"; kanan.textContent = p.terbaik + " poin";
           baris.appendChild(kiri); baris.appendChild(kanan);
@@ -1602,7 +1608,7 @@ function selesaiKuis() {
     if (s.j === null || s.j === undefined) { kn.textContent = "Kunci jawaban: belum tersedia untuk soal ini — lihat pembahasan atau tanyakan ke AI."; }
     else { kn.textContent = (s.k === "TKP" ? "Pilihan terbaik: " : "Kunci jawaban: ") + "ABCDE"[s.j] + " — " + s.o[s.j] + (s.k === "TKP" && s.s && pil !== undefined ? " • Skor kamu: " + s.s[pil] + "/5" : ""); }
     var bh = document.createElement("div"); bh.className = "bahas";
-    var tt = document.createElement("span"); tt.className = "tt"; tt.textContent = "💡 Pembahasan";
+    var tt = document.createElement("span"); tt.className = "tt"; tt.textContent = "Pembahasan";
     var tb = document.createElement("span"); tb.textContent = s.b;
     bh.appendChild(tt); bh.appendChild(tb);
     kartu.appendChild(chip); kartu.appendChild(t); kartu.appendChild(jw); kartu.appendChild(kn); kartu.appendChild(bh);
@@ -1648,7 +1654,7 @@ function gambarChat() {
     g.appendChild(tx);
     if (m.dari === "ai") {
       var bb = document.createElement("button");
-      bb.className = "btn kecil"; bb.style.marginTop = "7px"; bb.textContent = "🔊 Bacakan";
+      bb.className = "btn kecil"; bb.style.marginTop = "7px"; bb.textContent = "Bacakan";
       bb.addEventListener("click", function () { bacakanTeks(m.teks); });
       g.appendChild(bb);
     }
@@ -1753,7 +1759,7 @@ function kirimTanya() {
 
 /* ================= v2: BANTUAN JAWAB & DAFTAR SOAL ================= */
 var DAFTAR_CEPAT = [
-{judul:"🧮 Rumus Cepat TIU", butir:[
+{judul:"Rumus Cepat TIU", butir:[
   "Persen dari nilai = persen ÷ 100 × nilai. Contoh: 15% dari 240 = 36.",
   "Diskon: yang dibayar = (100 − diskon)% × harga awal.",
   "Rata-rata = jumlah semua nilai ÷ banyaknya nilai.",
@@ -1762,7 +1768,7 @@ var DAFTAR_CEPAT = [
   "Deret kali-tambah: bentuk ×a + b, mis. 3, 7, 15, 31 adalah ×2 + 1.",
   "Deret kuadrat: 4, 9, 16, 25 = 2², 3², 4², 5² — berikutnya 6² = 36."
 ]},
-{judul:"🇮🇩 Pasal & Fakta Cepat TWK", butir:[
+{judul:"Pasal & Fakta Cepat TWK", butir:[
   "Pasal 1 ayat (1): Negara Kesatuan berbentuk Republik.",
   "Pasal 4 ayat (1): Presiden memegang kekuasaan pemerintahan.",
   "Pasal 24 ayat (2): Kekuasaan kehakiman oleh MA dan MK.",
@@ -1772,7 +1778,7 @@ var DAFTAR_CEPAT = [
   "Bhinneka Tunggal Ika: Kitab Sutasoma, Mpu Tantular.",
   "Sumpah Pemuda: 28 Oktober 1928. Proklamasi: 17 Agustus 1945, Pegangsaan Timur 56."
 ]},
-{judul:"🧭 Prinsip Cepat TKP", butir:[
+{judul:"Prinsip Cepat TKP", butir:[
   "Paling melayani + sesuai aturan = skor tertinggi.",
   "Tolak gratifikasi dengan sopan; layanan negara itu gratis.",
   "Salah kerja? Akui, perbaiki, lapor atasan, bantu warga terdampak.",
@@ -1819,7 +1825,7 @@ function gambarDaftarSoal() {
     var kunci = document.createElement("div"); kunci.className = "kunci";
     kunci.textContent = (s.k === "TKP" ? "Pilihan terbaik: " : "Kunci: ") + "ABCDE"[s.j] + " — " + s.o[s.j];
     var bahas = document.createElement("div"); bahas.className = "bahas";
-    var tt = document.createElement("span"); tt.className = "tt"; tt.textContent = "💡 Pembahasan";
+    var tt = document.createElement("span"); tt.className = "tt"; tt.textContent = "Pembahasan";
     var tb = document.createElement("span"); tb.textContent = s.b;
     bahas.appendChild(tt); bahas.appendChild(tb);
     panel.appendChild(opsiK); panel.appendChild(kunci); panel.appendChild(bahas);
@@ -1834,7 +1840,7 @@ function gambarDaftarSoal() {
       simpanDataUser(dd); gambarDaftarSoal();
     });
     var btnTanyaSoal = document.createElement("button"); btnTanyaSoal.className = "btn kecil";
-    btnTanyaSoal.textContent = "🤖 Tanya AI soal ini";
+    btnTanyaSoal.textContent = "Tanya AI soal ini";
     btnTanyaSoal.addEventListener("click", function () { tanyaTentangSoal(idxAsli); });
     barisAlat.appendChild(btnBintang); barisAlat.appendChild(btnTanyaSoal);
     var catatan = document.createElement("textarea"); catatan.className = "catatan";
@@ -1938,6 +1944,7 @@ document.getElementById("btnAlDeret").addEventListener("click", function () {
 });
 
 /* ---------- Layar penuh & Mode HP ---------- */
+var IKON_PENUH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg>';
 var btnLayarEl = document.getElementById("btnLayar");
 var btnModeHpEl = document.getElementById("btnModeHp");
 btnLayarEl.addEventListener("click", function () {
@@ -1946,7 +1953,7 @@ btnLayarEl.addEventListener("click", function () {
 });
 document.addEventListener("fullscreenchange", function () {
   btnLayarEl.classList.toggle("aktif", !!document.fullscreenElement);
-  btnLayarEl.textContent = document.fullscreenElement ? "⛶✕" : "⛶";
+  btnLayarEl.innerHTML = document.fullscreenElement ? "✕" : IKON_PENUH;
 });
 function terapkanModeHp(nyala) {
   document.body.classList.toggle("mode-hp", nyala);
@@ -2021,6 +2028,16 @@ document.getElementById("btnSkd").addEventListener("click", function () {
 });
 
 /* ================= v3: PORTAL GABUNGAN ================= */
+[["bingkaiPortal", "selubungPortal"], ["bingkaiSplitA", "selubungSplitA"], ["bingkaiSplitB", "selubungSplitB"]].forEach(function (pasangan) {
+  var fr = document.getElementById(pasangan[0]), sl = document.getElementById(pasangan[1]);
+  if (fr && sl) fr.addEventListener("load", function () { sl.hidden = true; });
+});
+function segarkanSelubungPortal() {
+  ["selubungPortal", "selubungSplitA", "selubungSplitB"].forEach(function (id) {
+    var sl = document.getElementById(id);
+    if (sl) sl.hidden = false;
+  });
+}
 var urlPortalAktif = "https://panara.my.id/login";
 var zoomPortal = 1;
 function terapkanZoomPortal() {
@@ -2031,6 +2048,7 @@ document.getElementById("tabPortal").addEventListener("click", function (e) {
   if (!b) return;
   document.querySelectorAll("#tabPortal button").forEach(function (x) { x.classList.toggle("aktif", x === b); });
   var v = b.getAttribute("data-tabportal");
+  segarkanSelubungPortal();
   var tunggal = document.getElementById("portalTunggal"), split = document.getElementById("portalSplit");
   if (v === "split") {
     tunggal.hidden = true; split.hidden = false;
@@ -2045,6 +2063,7 @@ document.getElementById("tabPortal").addEventListener("click", function (e) {
   }
 });
 document.getElementById("btnPortalUlang").addEventListener("click", function () {
+  segarkanSelubungPortal();
   ["bingkaiPortal", "bingkaiSplitA", "bingkaiSplitB"].forEach(function (id) {
     var f = document.getElementById(id);
     if (f && f.getAttribute("src")) f.src = f.getAttribute("src");
@@ -2062,10 +2081,12 @@ document.getElementById("btnPortalTabBaru").addEventListener("click", function (
 });
 
 /* ================= v3: MODE GELAP ================= */
+var IKON_BULAN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a7 7 0 0 0 9.5 9.5z"/></svg>';
+var IKON_MATAHARI = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg>';
 var btnGelapEl = document.getElementById("btnGelap");
 function terapkanGelap(g) {
   document.body.classList.toggle("gelap", g);
-  btnGelapEl.textContent = g ? "☀️" : "🌙";
+  btnGelapEl.innerHTML = g ? IKON_MATAHARI : IKON_BULAN;
   btnGelapEl.classList.toggle("aktif", g);
   try { localStorage.setItem("panara_gelap", g ? "1" : ""); } catch (e) {}
 }
@@ -2198,11 +2219,18 @@ function pilihTabApung(kunci) {
   document.getElementById("jendelaApung").classList.add("besar");
   document.getElementById("namaBingkaiApung").textContent = ai.nama;
   var fr = document.getElementById("bingkaiApung");
-  if (fr.getAttribute("data-aktif") !== kunci) { fr.setAttribute("data-aktif", kunci); fr.src = ai.url; }
+  if (fr.getAttribute("data-aktif") !== kunci) {
+    fr.setAttribute("data-aktif", kunci);
+    document.getElementById("selubungApung").hidden = false;
+    fr.src = ai.url;
+  }
 }
 document.getElementById("tabApung").addEventListener("click", function (e) {
   var b = e.target.closest("[data-tabapung]");
   if (b) pilihTabApung(b.getAttribute("data-tabapung"));
+});
+document.getElementById("bingkaiApung").addEventListener("load", function () {
+  document.getElementById("selubungApung").hidden = true;
 });
 document.getElementById("btnBingkaiBuka").addEventListener("click", function () {
   var ai = APUNG_AI[tabApungAktif];
@@ -2413,7 +2441,7 @@ function gambarModul() {
   var m = d.modul;
   var kartu = document.createElement("div"); kartu.className = "kartu";
   var judul = document.createElement("h2"); judul.className = "judul-bagian";
-  judul.textContent = "📚 " + (m.judul || "Modul terbaca");
+  judul.textContent = (m.judul || "Modul terbaca");
   kartu.appendChild(judul);
   var per = {}, berkunci = 0;
   m.soal.forEach(function (s) { per[s.k] = (per[s.k] || 0) + 1; if (s.j !== null && s.j !== undefined) berkunci++; });
@@ -2427,7 +2455,7 @@ function gambarModul() {
     kartu.appendChild(btn);
   });
   var hapus = document.createElement("button"); hapus.className = "btn lebar"; hapus.style.marginTop = "10px";
-  hapus.textContent = "🗑 Hapus Modul dari Akun";
+  hapus.textContent = "Hapus Modul dari Akun";
   hapus.addEventListener("click", function () { var dd = dataUser(); dd.modul = null; simpanDataUser(dd); gambarModul(); });
   kartu.appendChild(hapus);
   wadah.appendChild(kartu);
@@ -2457,24 +2485,24 @@ document.getElementById("inputModul").addEventListener("change", function () {
   idbSimpan("modulPdf", { blob: berkas, nama: berkas.name, tanggal: Date.now() }).then(function () { segarkanStatusBuku(); }).catch(function () {});
   st.textContent = "⏳ Menyiapkan pembaca PDF…";
   bacaPdfSebagaiTeks(berkas, function (no, total) {
-    st.textContent = "📖 Membaca modul… halaman " + no + " dari " + total + " (buku besar bisa ±1 menit)";
+    st.textContent = "Membaca modul… halaman " + no + " dari " + total + " (buku besar bisa ±1 menit)";
     batang.style.width = Math.round(no / total * 100) + "%";
   }).then(function (hasilB) {
-    st.textContent = "🧠 Mengambil soal & kunci dari " + hasilB.halaman + " halaman…";
+    st.textContent = "Mengambil soal & kunci dari " + hasilB.halaman + " halaman…";
     var hasil = parseModul(hasilB.teks);
     if (!hasil.soal.length) {
-      st.textContent = "😕 Tidak ada soal yang terbaca bersih dari berkas ini. Fitur ini butuh PDF yang teksnya bisa dipilih (bukan hasil pindai gambar).";
+      st.textContent = "Tidak ada soal yang terbaca bersih dari berkas ini. Fitur ini butuh PDF yang teksnya bisa dipilih (bukan hasil pindai gambar).";
       bungkus.hidden = true;
       return;
     }
     var d = dataUser();
     d.modul = { judul: berkas.name.replace(/\.pdf$/i, ""), tanggal: new Date().toISOString(), soal: hasil.soal.slice(0, 800) };
     simpanDataUser(d);
-    st.textContent = "✅ Selesai! " + d.modul.soal.length + " soal jadi bank soal digital di akunmu.";
+    st.textContent = "Selesai! " + d.modul.soal.length + " soal jadi bank soal digital di akunmu.";
     bungkus.hidden = true;
     gambarModul();
   }).catch(function () {
-    st.textContent = "😕 Gagal membaca berkas ini. Pastikan berkasnya PDF yang tidak rusak dan koneksi internet aktif (pembaca PDF dimuat dari internet).";
+    st.textContent = "Gagal membaca berkas ini. Pastikan berkasnya PDF yang tidak rusak dan koneksi internet aktif (pembaca PDF dimuat dari internet).";
     bungkus.hidden = true;
   });
 });
@@ -2534,7 +2562,7 @@ document.getElementById("btnBukaBuku").addEventListener("click", function () {
         bukuZoom = 1;
         gambarHalamanBuku();
       })
-      .catch(function () { muat.textContent = "😕 Buku gagal dibuka. Coba pilih ulang berkasnya."; });
+      .catch(function () { muat.textContent = "Buku gagal dibuka. Coba pilih ulang berkasnya."; });
   }).catch(function () {});
 });
 function gambarHalamanBuku() {
@@ -2563,7 +2591,7 @@ function gambarHalamanBuku() {
     try { localStorage.setItem("prata_buku_halaman", JSON.stringify(bukuHal)); } catch (e) {}
     document.getElementById("badanBuku").scrollTop = 0;
   }).catch(function () {
-    if (ke === bukuRenderKe) muat.textContent = "😕 Halaman gagal dimuat.";
+    if (ke === bukuRenderKe) muat.textContent = "Halaman gagal dimuat.";
   });
 }
 function bukuGeser(delta) {
