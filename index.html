@@ -446,8 +446,15 @@
   .muat-putar { width: 38px; height: 38px; margin: 0 auto 13px; border-radius: 50%; border: 3.5px solid var(--garis); border-top-color: var(--laut); animation: putar 0.8s linear infinite; }
   @keyframes putar { to { transform: rotate(360deg); } }
   /* ===== v12: konsol AI = peluncur ChatGPT & Gemini ===== */
-  #badanApung { padding: 14px; overflow-y: auto; }
-  #jendelaApung { height: auto; max-height: 82vh; }
+  #badanApung { display: flex; flex-direction: column; overflow: hidden; }
+  #tabApung { display: flex; gap: 6px; padding: 10px 12px 8px; align-items: center; }
+  .tab-ai { border: 1.5px solid var(--garis); background: var(--kartu); color: var(--tinta); border-radius: 999px; padding: 6px 14px; font-weight: 700; font-size: .82rem; cursor: pointer; }
+  .tab-ai.aktif { background: var(--laut-dalam); color: var(--putih); border-color: var(--laut-dalam); }
+  #btnApungJendela { margin-left: auto; border: 1.5px solid var(--garis); background: var(--kartu); color: var(--tinta); border-radius: 999px; width: 32px; height: 32px; cursor: pointer; font-size: .95rem; }
+  #bungkusBingkaiApung { flex: 1; min-height: 0; }
+  #bingkaiApung { width: 100%; height: 100%; border: 0; background: var(--putih); display: block; }
+  #catatanApung { padding: 8px 12px 10px; margin: 0; }
+  #jendelaApung { height: min(600px, 84dvh); }
   /* ===== v11: sistem gerak, ungkap, aksesibilitas gerak ===== */
   .kartu-aksen{border-color:var(--emas); background:var(--tint-emas);}
   header.bilah.berbayang{box-shadow:0 6px 18px rgba(13,25,48,.25);}
@@ -726,15 +733,21 @@
     <div class="segmen" id="segmenMesin">
       <button data-mesin="online" class="aktif">AI Gratis (Online)</button>
       <button data-mesin="offline">Bank Pembahasan (Offline)</button>
-      <button data-mesin="vikey">AI Asli (DeepSeek)</button>
+      <button data-mesin="vikey">AI Asli (Vikey)</button>
     </div>
     <div class="kartu" id="kartuKunciAI" hidden style="margin-bottom:12px;">
-      <h2 class="judul-bagian">AI Asli — DeepSeek via Vikey</h2>
+      <h2 class="judul-bagian">AI Asli — Vikey (DeepSeek • GPT • Gemini)</h2>
       <p class="sub" style="margin-bottom:9px;">Mesin ini memakai kunci API Vikey milikmu sendiri (berbayar dari saldo Vikey-mu, sekitar Rp12 per pertanyaan). Kunci hanya tersimpan di perangkat ini — tidak dikirim ke server PRATA dan tidak ikut tersinkron ke akunmu.</p>
       <div class="bar-tambah" style="margin-top:0;">
         <input class="isi" id="isiKunciAI" type="password" placeholder="Tempel kunci API Vikey-mu…" autocomplete="off">
         <button class="btn laut" id="btnSimpanKunciAI">Simpan</button>
       </div>
+      <label style="display:block;margin-top:10px;"><span class="sub">Model AI</span>
+        <select id="pilihModelAI" class="isi" style="width:100%;margin-top:4px;">
+          <option value="vikey/deepseek-v4.1-flash-uncensored">DeepSeek — cepat &amp; andal</option>
+          <option value="openai/gpt-5.6-terra">GPT (OpenAI) — asli</option>
+          <option value="gemini/gemini-3.8-flash">Gemini (Google) — asli</option>
+        </select></label>
       <p class="sub" id="statusKunciAI" style="margin-top:8px;">Belum ada kunci tersimpan di perangkat ini.</p>
     </div>
     <div class="alur-chat" id="alurChat"></div>
@@ -1087,9 +1100,13 @@ Catatan: info di atas adalah gambaran umum untuk persiapan, bukan pengumuman res
     </span>
   </div>
   <div id="badanApung">
-    <p class="sub" style="margin:0 0 11px;">ChatGPT dan Gemini melarang situsnya ditanam di dalam aplikasi lain — server mereka menolak bingkai dari situs mana pun. Karena itu tombol di bawah membukanya sebagai <b>jendela pendamping</b>: jendela terpisah di samping PRATA yang bisa dipakai bersamaan.</p>
-    <button class="btn laut lebar" id="btnApungChatGPT" style="margin-bottom:9px;">Buka ChatGPT &#8599;</button>
-    <button class="btn emas lebar" id="btnApungGemini">Buka Gemini &#8599;</button>
+    <div id="tabApung">
+      <button class="tab-ai aktif" data-apung="chatgpt">ChatGPT</button>
+      <button class="tab-ai" data-apung="gemini">Gemini</button>
+      <button id="btnApungJendela" title="Buka tab aktif sebagai jendela pendamping">&#8599;</button>
+    </div>
+    <div id="bungkusBingkaiApung"><iframe id="bingkaiApung" title="Situs AI dalam bingkai"></iframe></div>
+    <p class="sub" id="catatanApung">ChatGPT &amp; Gemini melarang situsnya ditanam di aplikasi lain langsung dari server mereka — bila bingkai ditolak, ketuk &#8599;. Cara chat GPT/Gemini di dalam aplikasi: menu Tanya AI → AI Asli (Vikey) → pilih model GPT/Gemini.</p>
   </div>
 </div>
 
@@ -1924,6 +1941,9 @@ document.getElementById("btnSimpanKunciAI").addEventListener("click", function (
   segarkanStatusKunci();
 });
 segarkanStatusKunci();
+var pilihModelAIEl = document.getElementById("pilihModelAI");
+pilihModelAIEl.value = modelAI();
+pilihModelAIEl.addEventListener("change", function () { localStorage.setItem("prata_model_ai", pilihModelAIEl.value); });
 function gambarChat() {
   var d = dataUser();
   var alur = document.getElementById("alurChat");
@@ -2027,6 +2047,8 @@ document.getElementById("btnKirimTanya").addEventListener("click", kirimTanya);
 document.getElementById("isiTanya").addEventListener("keydown", function (e) {
   if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); kirimTanya(); }
 });
+function modelAI() { return localStorage.getItem("prata_model_ai") || "vikey/deepseek-v4.1-flash-uncensored"; }
+function labelModelAI() { var m = modelAI(); if (m.indexOf("openai/") === 0) return "GPT"; if (m.indexOf("gemini/") === 0) return "GEMINI"; return "DEEPSEEK"; }
 function tanyaVikey(teks) {
   var kunci = (localStorage.getItem("prata_kunci_ai") || "").trim();
   if (!kunci) return Promise.reject(new Error("belum ada kunci"));
@@ -2036,7 +2058,7 @@ function tanyaVikey(teks) {
   return fetch("https://api.vikey.ai/v1/chat/completions", {
     method: "POST", signal: kontrol.signal,
     headers: { "Content-Type": "application/json", "Authorization": "Bearer " + kunci },
-    body: JSON.stringify({ model: "vikey/deepseek-v4.1-flash-uncensored", messages: [{ role: "user", content: perintah }], max_tokens: 800 })
+    body: JSON.stringify({ model: modelAI(), messages: [{ role: "user", content: perintah }], max_tokens: 800 })
   }).then(function (r) {
     clearTimeout(habis);
     if (!r.ok) throw new Error("gagal");
@@ -2082,10 +2104,10 @@ function kirimTanya() {
   }
   if (mesinAI === "vikey") {
     tanyaVikey(teks).then(function (jawaban) {
-      simpanJawaban(jawaban, "DEEPSEEK VIA VIKEY (AI ASLI)");
+      simpanJawaban(jawaban, labelModelAI() + " VIA VIKEY (AI ASLI)");
     }).catch(function () {
       var kunciAda = !!((localStorage.getItem("prata_kunci_ai") || "").trim());
-      var sebab = kunciAda ? "DeepSeek sedang tidak terjangkau atau kunci API ditolak" : "belum ada kunci API Vikey tersimpan — pilih mesin AI Asli lalu isi kuncimu pada kartu pengaturan di atas";
+      var sebab = kunciAda ? "AI Asli sedang tidak terjangkau atau kunci API ditolak" : "belum ada kunci API Vikey tersimpan — pilih mesin AI Asli lalu isi kuncimu pada kartu pengaturan di atas";
       simpanJawaban(cariOffline(teks) + "\n\n(Catatan: " + sebab + " — jawaban di atas berasal dari Bank Pembahasan offline.)", "BANK PEMBAHASAN (OFFLINE)");
     });
     return;
@@ -2618,11 +2640,19 @@ var apungKecil = false;
 function bukaPendampingAI(url) {
   window.open(url, "_blank", "width=460,height=780,noopener");
 }
-document.getElementById("btnApungChatGPT").addEventListener("click", function () { bukaPendampingAI("https://chatgpt.com"); });
-document.getElementById("btnApungGemini").addEventListener("click", function () { bukaPendampingAI("https://gemini.google.com"); });
+var APUNG_AI = { chatgpt: "https://chatgpt.com/", gemini: "https://gemini.google.com/app" };
+var tabApungAktif = "chatgpt";
+function pilihTabApung(kunciApung) {
+  tabApungAktif = kunciApung;
+  document.querySelectorAll("#tabApung .tab-ai").forEach(function (t) { t.classList.toggle("aktif", t.dataset.apung === kunciApung); });
+  document.getElementById("bingkaiApung").src = APUNG_AI[kunciApung];
+}
+document.querySelectorAll("#tabApung .tab-ai").forEach(function (t) { t.addEventListener("click", function () { pilihTabApung(t.dataset.apung); }); });
+document.getElementById("btnApungJendela").addEventListener("click", function () { bukaPendampingAI(APUNG_AI[tabApungAktif]); });
 document.getElementById("btnApung").addEventListener("click", function () {
   var j = document.getElementById("jendelaApung");
   j.hidden = !j.hidden;
+  if (!j.hidden && !document.getElementById("bingkaiApung").getAttribute("src")) pilihTabApung(tabApungAktif);
 });
 document.getElementById("btnApungTutup").addEventListener("click", function () { document.getElementById("jendelaApung").hidden = true; });
 document.getElementById("btnApungKecil").addEventListener("click", function () {
