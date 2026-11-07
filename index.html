@@ -182,6 +182,7 @@
   }
   .nomor-grid button.terjawab{background:var(--laut-dalam); color:var(--putih); border-color:var(--laut-dalam);}
   .nomor-grid button.aktif{outline:2px solid var(--emas);}
+  .nomor-grid button.ragu{background:var(--emas); color:#fff; border-color:var(--emas);}
   .skor-besar{font-size:38px; font-weight:800; color:var(--laut); text-align:center; margin:6px 0 2px;}
   .rincian{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:12px;}
   .rincian .sel{background:var(--latar-sel); border:1px solid var(--garis); border-radius:12px; padding:11px 8px; text-align:center;}
@@ -718,6 +719,7 @@
       <button class="mundur" id="btnBerhentiKuis">✕ Berhenti</button>
       <span class="info-kuis" id="infoKuis">Soal 1 dari 12</span>
     </div>
+    <div id="waspadaWaktu" hidden style="background:var(--buruk); color:#fff; border-radius:12px; padding:10px 14px; margin-bottom:12px; font-weight:600;">⏰ Sisa waktu tinggal kurang dari 5 menit — periksa lagi soal yang kamu tandai ragu-ragu (kuning di peta nomor) sebelum waktu habis.</div>
     <div class="kartu">
       <span class="kat-chip" id="chipKategori">TWK</span>
       <div class="soal-teks" id="teksSoal"></div>
@@ -737,7 +739,11 @@
         <button class="btn" id="btnSoalSebelum">← Sebelumnya</button>
         <button class="btn emas" id="btnSoalLanjut">Berikutnya →</button>
       </div>
+      <div style="display:flex; justify-content:center; margin-top:10px;">
+        <button class="btn kecil" id="btnRagu">🚩 Tandai Ragu-ragu</button>
+      </div>
       <div class="nomor-grid" id="gridNomor"></div>
+      <p class="sub" style="margin-top:8px; text-align:center;">Peta nomor: biru tua = sudah dijawab • kuning = ragu-ragu • garis emas = posisimu sekarang</p>
     </div>
   </section>
 
@@ -853,6 +859,11 @@
       <h2 class="judul-bagian">Analitik per Sub-Materi</h2>
       <div id="daftarAnalitik"></div>
       <p class="sub" style="margin-top:8px;">Diurutkan dari yang paling perlu dilatih. Persentase dari soal yang dijawab; waktu adalah rata-rata per soal.</p>
+    </div>
+    <div class="kartu" id="kartuBanding" hidden>
+      <h2 class="judul-bagian">Perbandingan Simulasi</h2>
+      <div id="isiBanding"></div>
+      <p class="sub" style="margin-top:8px;">Dibandingkan dalam persen skor agar Simulasi Mini (maks 180) dan Simulasi Penuh (maks 550) setara. Keterangan menunjukkan perubahan dari simulasi sebelumnya.</p>
     </div>
     <div class="kartu" id="kartuLencana">
       <h2 class="judul-bagian">Lencana Pencapaian</h2>
@@ -1895,6 +1906,33 @@ function gambarMateri() {
 }
 
 /* ================= RIWAYAT ================= */
+function gambarPerbandingan() {
+  var kartu = document.getElementById("kartuBanding"), wadah = document.getElementById("isiBanding");
+  if (!kartu || !wadah) return;
+  var d = dataUser();
+  var sims = (d.riwayat || []).filter(function (r) { return (r.label || "").indexOf("Simulasi") === 0; }).slice(-4);
+  if (sims.length < 2) { kartu.hidden = true; return; }
+  kartu.hidden = false;
+  wadah.innerHTML = "";
+  sims.forEach(function (r, i) {
+    var persen = r.maks ? Math.round(r.poin / r.maks * 100) : 0;
+    var delta = "simulasi pertama yang tercatat";
+    if (i > 0) {
+      var sbl = sims[i - 1];
+      var db = persen - (sbl.maks ? Math.round(sbl.poin / sbl.maks * 100) : 0);
+      delta = db > 0 ? "▲ naik " + db + "% dari simulasi sebelumnya" : (db < 0 ? "▼ turun " + Math.abs(db) + "% dari simulasi sebelumnya" : "▬ sama dengan simulasi sebelumnya");
+    }
+    var baris = document.createElement("div"); baris.className = "baris-riwayat";
+    var kiri = document.createElement("div");
+    var atas = document.createElement("div"); atas.textContent = r.label; atas.style.fontWeight = "700";
+    var bawah = document.createElement("div"); bawah.className = "k"; bawah.textContent = r.tanggal + " • " + delta;
+    kiri.appendChild(atas); kiri.appendChild(bawah);
+    var skor = document.createElement("div"); skor.className = "skor"; skor.textContent = r.poin + " / " + r.maks + " (" + persen + "%)";
+    baris.appendChild(kiri); baris.appendChild(skor);
+    wadah.appendChild(baris);
+  });
+}
+
 function gambarRiwayat() {
   var d = dataUser();
   var wadah = document.getElementById("daftarRiwayat");
@@ -2005,6 +2043,7 @@ function gambarRiwayat() {
         });
       }).catch(function () {});
   }
+  gambarPerbandingan();
 }
 
 /* ================= MESIN KUIS ================= */
@@ -2034,6 +2073,8 @@ function mulaiTimerKuis() {
     kuis.sisaDetik = Math.max(0, Math.ceil((kuis.tenggat - Date.now()) / 1000));
     var el = document.getElementById("infoKuis");
     if (el && !document.getElementById("view-kuis").hidden) el.textContent = teksInfoKuis();
+    var ww = document.getElementById("waspadaWaktu");
+    if (ww) ww.hidden = !(kuis.sisaDetik > 0 && kuis.sisaDetik <= 300);
     if (kuis.sisaDetik <= 0) { berhentiTimerKuis(); selesaiKuis(); return; }
     if (detikTerakhir !== kuis.sisaDetik) { detikTerakhir = kuis.sisaDetik; simpanKuisBerjalan(); }
   };
@@ -2351,10 +2392,19 @@ function gambarSoal() {
     var nb = document.createElement("button");
     nb.textContent = p + 1;
     if (kuis.jawaban.hasOwnProperty(p)) nb.classList.add("terjawab");
+    if (kuis.ragu && kuis.ragu[p]) nb.classList.add("ragu");
     if (p === kuis.posisi) nb.classList.add("aktif");
     nb.addEventListener("click", function () { kuis.posisi = p; gambarSoal(); });
     grid.appendChild(nb);
   });
+  var btnRaguEl = document.getElementById("btnRagu");
+  if (btnRaguEl) {
+    var raguKini = !!(kuis.ragu && kuis.ragu[kuis.posisi]);
+    btnRaguEl.textContent = raguKini ? "🚩 Ditandai Ragu-ragu — ketuk untuk batal" : "🚩 Tandai Ragu-ragu";
+    btnRaguEl.style.background = raguKini ? "var(--emas)" : "";
+    btnRaguEl.style.color = raguKini ? "#fff" : "";
+    btnRaguEl.style.borderColor = raguKini ? "var(--emas)" : "";
+  }
   var alatTandai = document.getElementById("alatTandaiKuis");
   var bisaTandai = kuis.mode === "latihan" && !kuis.labelKuis;
   alatTandai.hidden = !bisaTandai;
@@ -2367,6 +2417,12 @@ function gambarSoal() {
   simpanKuisBerjalan();
 }
 document.getElementById("btnSoalSebelum").addEventListener("click", function () { if (kuis && kuis.posisi > 0) { kuis.posisi--; gambarSoal(); } });
+document.getElementById("btnRagu").addEventListener("click", function () {
+  if (!kuis) return;
+  if (!kuis.ragu) kuis.ragu = {};
+  if (kuis.ragu[kuis.posisi]) delete kuis.ragu[kuis.posisi]; else kuis.ragu[kuis.posisi] = true;
+  gambarSoal();
+});
 document.getElementById("btnSoalLanjut").addEventListener("click", function () {
   if (!kuis) return;
   if (kuis.posisi === kuis.daftar.length - 1) { selesaiKuis(); }
@@ -3392,7 +3448,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v25";
+var VERSI_APP = "prata-v26";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
