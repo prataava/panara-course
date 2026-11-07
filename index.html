@@ -825,6 +825,15 @@
     <button class="btn garis lebar" id="btnEkspor" style="margin-bottom:9px;">Unduh Progres Saya (JSON)</button>
     <label class="btn garis lebar" for="inputImpor" style="margin:0 0 12px;">Impor Progres (JSON)</label>
     <input type="file" id="inputImpor" accept="application/json,.json" hidden>
+    <p class="sub" id="statusImpor" style="margin-bottom:12px;"></p>
+    <div class="kartu" id="kartuKonfirmasiImpor" hidden style="margin-bottom:12px;">
+      <h2 class="judul-bagian">Impor Progres?</h2>
+      <p class="sub" id="ringkasImpor" style="margin-bottom:10px;"></p>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;">
+        <button class="btn laut" id="btnYaImpor">Ya, Impor</button>
+        <button class="btn garis" id="btnBatalImpor">Batal</button>
+      </div>
+    </div>
     <div class="kartu"><div id="daftarRiwayat"></div></div>
   </section>
 
@@ -1592,25 +1601,44 @@ document.getElementById("btnFokusLatihan").addEventListener("click", function ()
   var kat = this.getAttribute("data-kat");
   if (kat) mulaiKuis("latihan", kat);
 });
+var imporKandidat = null;
 document.getElementById("inputImpor").addEventListener("change", function () {
   var f = this.files && this.files[0];
   this.value = "";
   if (!f) return;
+  var st = document.getElementById("statusImpor");
   f.text().then(function (isi) {
     var data = null;
     try { data = JSON.parse(isi); } catch (e) {}
-    if (!data || typeof data !== "object" || (!Array.isArray(data.riwayat) && !Array.isArray(data.tugas))) {
-      alert("Berkas itu tidak cocok dengan format progres PRATA — impor dibatalkan, progresmu tidak berubah.");
+    // Berkas hasil Ekspor PRATA membungkus datanya di kunci "data"; berkas mentah langsung di level atas.
+    var isiData = (data && typeof data === "object" && data.data && typeof data.data === "object") ? data.data : data;
+    if (!isiData || typeof isiData !== "object" || (!Array.isArray(isiData.riwayat) && !Array.isArray(isiData.tugas))) {
+      st.textContent = "Berkas itu tidak cocok dengan format progres PRATA — impor dibatalkan, progresmu tidak berubah.";
       return;
     }
-    if (!confirm("Impor akan MENGGANTIKAN seluruh progres di akun ini dengan isi berkas. Lanjutkan?")) return;
-    var d = JSON.parse(JSON.stringify(dataUser()));
-    ["tugas", "riwayat", "chat", "tanda", "target", "modul"].forEach(function (k) { if (data[k] !== undefined) d[k] = data[k]; });
-    simpanDataUser(d);
-    alert("Impor selesai — progresmu sudah diganti dari berkas dan tersinkron.");
-    segarkanBeranda();
-    gambarRiwayat();
-  }).catch(function () { alert("Berkas tidak bisa dibaca — impor dibatalkan."); });
+    imporKandidat = isiData;
+    document.getElementById("ringkasImpor").textContent = "Berkas berisi " + (isiData.riwayat || []).length + " entri riwayat dan " + (isiData.tugas || []).length + " tugas" +
+      (isiData.modul ? ", plus modul " + ((isiData.modul.soal || []).length) + " soal" : "") +
+      ". Bagian yang ada di berkas menggantikan bagian yang sama di akun ini; bagian lain tidak berubah.";
+    document.getElementById("kartuKonfirmasiImpor").hidden = false;
+    st.textContent = "";
+  }).catch(function () { st.textContent = "Berkas tidak bisa dibaca — impor dibatalkan."; });
+});
+document.getElementById("btnYaImpor").addEventListener("click", function () {
+  if (!imporKandidat) return;
+  var d = JSON.parse(JSON.stringify(dataUser()));
+  ["tugas", "riwayat", "chat", "tanda", "target", "modul"].forEach(function (k) { if (imporKandidat[k] !== undefined) d[k] = imporKandidat[k]; });
+  imporKandidat = null;
+  document.getElementById("kartuKonfirmasiImpor").hidden = true;
+  simpanDataUser(d);
+  document.getElementById("statusImpor").textContent = "Impor selesai — progresmu sudah diganti dari berkas dan tersinkron.";
+  segarkanBeranda();
+  gambarRiwayat();
+});
+document.getElementById("btnBatalImpor").addEventListener("click", function () {
+  imporKandidat = null;
+  document.getElementById("kartuKonfirmasiImpor").hidden = true;
+  document.getElementById("statusImpor").textContent = "Impor dibatalkan — progresmu tidak berubah.";
 });
 document.getElementById("btnEkspor").addEventListener("click", function () {
   var paket = { aplikasi: "PRATA", diekspor: new Date().toISOString(), akun: sesiUser, email: sesiEmail, data: dataUser() };
@@ -2739,7 +2767,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v19";
+var VERSI_APP = "prata-v191";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
@@ -3082,12 +3110,13 @@ document.getElementById("inputModul").addEventListener("change", function () {
   var batang = document.getElementById("batangModul"), bungkus = document.getElementById("batangModulBungkus");
   bungkus.hidden = false; batang.style.width = "2%";
   bukuDoc = null;
-  idbSimpan("modulPdf", { blob: berkas, nama: berkas.name, tanggal: Date.now() }).then(function () { segarkanStatusBuku(); }).catch(function () {});
   st.textContent = "⏳ Menyiapkan pembaca PDF…";
   bacaPdfSebagaiTeks(berkas, function (no, total) {
     st.textContent = "Membaca modul… halaman " + no + " dari " + total + " (buku besar bisa ±1 menit)";
     batang.style.width = Math.round(no / total * 100) + "%";
   }).then(function (hasilB) {
+    // PDF terbukti bisa dibuka: sekarang simpan sebagai buku di perangkat.
+    idbSimpan("modulPdf", { blob: berkas, nama: berkas.name, tanggal: Date.now() }).then(function () { segarkanStatusBuku(); }).catch(function () {});
     st.textContent = "Mengambil soal & kunci dari " + hasilB.halaman + " halaman…";
     var hasil = parseModul(hasilB.teks);
     if (!hasil.soal.length) {
