@@ -367,6 +367,19 @@
   nav.bawah button{transition:background .15s ease, color .15s ease;}
   .opsi{transition:border-color .12s ease, background .12s ease;}
   .item-soal{box-shadow:0 1px 4px rgba(20,38,76,.05);}
+  /* ===== v5: online, AI pendamping, jendela mengambang, modul ===== */
+  select.isi { appearance: auto; }
+  #jendelaApung { position: fixed; right: 14px; bottom: 86px; width: min(360px, 92vw); height: min(480px, 74dvh); background: var(--kartu); border: 1.5px solid #d8e2f2; border-radius: 18px; box-shadow: 0 18px 50px rgba(8, 24, 56, .35); z-index: 70; display: flex; flex-direction: column; overflow: hidden; }
+  body.gelap #jendelaApung { border-color: #33507e; }
+  #kepalaApung { background: linear-gradient(135deg, var(--laut), #0d2a55); color: #fff; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; cursor: move; touch-action: none; user-select: none; }
+  .judul-apung { font-weight: 800; font-size: 13.5px; }
+  .tombol-apung button { background: rgba(255, 255, 255, .16); color: #fff; border: 0; width: 28px; height: 28px; border-radius: 8px; font-size: 14px; cursor: pointer; margin-left: 5px; }
+  #alurApung { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; background: var(--latar); }
+  .gelembung.kecil { max-width: 92%; font-size: 13.5px; padding: 8px 11px; }
+  #kakiApung { display: flex; gap: 8px; padding: 10px; border-top: 1px solid #e3e9f4; align-items: flex-end; }
+  body.gelap #kakiApung { border-top-color: #2c4470; }
+  #isiApung { flex: 1; border: 1.5px solid #d8e2f2; border-radius: 12px; padding: 9px 11px; font: inherit; font-size: 14px; resize: none; background: var(--kartu); color: var(--teks); }
+  body.gelap #isiApung { border-color: #33507e; }
 </style>
 </head>
 <body>
@@ -396,13 +409,13 @@
       <h1>PRA<span>TA</span></h1>
       <p class="tagline">Masuk untuk melanjutkan belajarmu:<br>latihan SKD, tanya AI, dan checklist persiapan kedinasan.</p>
       <div class="kartu">
-        <label class="lbl" for="liNama">Nama pengguna</label>
-        <input class="isi" id="liNama" type="text" autocomplete="username" placeholder="mis. farhan">
+        <label class="lbl" for="liEmail">Email</label>
+        <input class="isi" id="liEmail" type="email" autocomplete="email" placeholder="nama@email.com">
         <label class="lbl" for="liSandi">Kata sandi</label>
         <input class="isi" id="liSandi" type="password" autocomplete="current-password" placeholder="Kata sandimu">
         <div class="galat" id="liGalat" hidden></div>
         <button class="btn emas lebar" id="btnMasuk" style="margin-top:16px;">Masuk</button>
-        <div class="info">Akun PRATA tersimpan aman di perangkat ini. Sekali masuk, aplikasi langsung membuka Beranda pada kunjungan berikutnya — tidak perlu login berulang kali.</div>
+        <div class="info">🌐 Akun PRATA kini ONLINE: masuk dengan email &amp; kata sandi, dan semua progresmu (tugas, skor, bookmark, target, modul) tersimpan di server — bisa dibuka dari perangkat mana pun. Sekali masuk, aplikasi langsung membuka Beranda pada kunjungan berikutnya.</div>
         <p class="ganti-mode">Belum punya akun? <a id="keDaftar">Daftar gratis</a></p>
       </div>
     </div>
@@ -413,10 +426,12 @@
     <div class="kotak-login">
       <div class="logo-besar">P</div>
       <h1>Daftar <span>PRATA</span></h1>
-      <p class="tagline">Satu akun untuk semua progres belajarmu di perangkat ini.</p>
+      <p class="tagline">Satu akun online untuk semua progres belajarmu — tersimpan di server, bisa dibuka dari perangkat mana pun.</p>
       <div class="kartu">
-        <label class="lbl" for="dfNama">Nama pengguna</label>
-        <input class="isi" id="dfNama" type="text" autocomplete="username" placeholder="Pilih nama pengguna">
+        <label class="lbl" for="dfNama">Nama tampilan</label>
+        <input class="isi" id="dfNama" type="text" autocomplete="username" placeholder="Nama yang tampil di peringkat, mis. Farhan">
+        <label class="lbl" for="dfEmail">Email</label>
+        <input class="isi" id="dfEmail" type="email" autocomplete="email" placeholder="nama@email.com — untuk masuk dari perangkat mana pun">
         <label class="lbl" for="dfSandi">Kata sandi (min. 6 karakter)</label>
         <input class="isi" id="dfSandi" type="password" autocomplete="new-password" placeholder="Buat kata sandi">
         <label class="lbl" for="dfSandi2">Ulangi kata sandi</label>
@@ -492,6 +507,11 @@
         <span class="ikon">📋</span>
         <span class="nm">Daftar Soal Lengkap</span>
         <span class="ds">Semua 36 soal bisa dicari &amp; dibuka kunci + pembahasannya.</span>
+      </button>
+      <button class="menu-item" data-pergi="modul">
+        <span class="ikon">📖</span>
+        <span class="nm">Modul Saya</span>
+        <span class="ds">Unggah PDF modul belajarmu — aplikasi membaca &amp; mengambil soalnya jadi bank soal digital.</span>
       </button>
       <button class="menu-item" data-pergi="flashcard">
         <span class="ikon">🃏</span>
@@ -769,6 +789,28 @@
       <button class="btn" id="btnPortalZoomPlus">🔍＋ Zoom</button>
       <button class="btn" id="btnPortalPenuh">⛶ Layar Penuh</button>
       <button class="btn" id="btnPortalTabBaru">↗ Buka di Tab Baru</button>
+      <button class="btn emas" id="btnApung">🤖 AI Mengambang</button>
+    </div>
+    <div class="kartu" style="padding:14px;">
+      <div style="font-weight:800; font-size:14px; margin-bottom:4px;">🤖 AI Pendamping &amp; Pencarian Web</div>
+      <p class="sub" style="margin-bottom:10px;">Pilih AI favoritmu — terbuka sebagai jendela pendamping di samping portal, bisa dipakai bersamaan (situs AI besar melarang ditanam di dalam aplikasi lain, jadi mereka dibuka berdampingan). Untuk bertanya tanpa meninggalkan portal, pakai tombol emas “AI Mengambang” di atas: jendela AI PRATA melayang di atas portal dan bisa digeser.</p>
+      <div class="tab-portal" style="margin-bottom:10px;">
+        <button data-aiweb="https://chatgpt.com">ChatGPT</button>
+        <button data-aiweb="https://gemini.google.com">Gemini</button>
+        <button data-aiweb="https://claude.ai">Claude</button>
+        <button data-aiweb="https://chat.deepseek.com">DeepSeek</button>
+        <button data-aiweb="https://www.perplexity.ai">Perplexity</button>
+        <button data-aiweb="https://copilot.microsoft.com">Copilot</button>
+      </div>
+      <div class="bar-tambah" style="margin-top:0;">
+        <input class="isi" id="cariWeb" type="text" placeholder="Cari di web…">
+        <select class="isi" id="mesinCari" style="flex:0 0 118px;">
+          <option value="google">Google</option>
+          <option value="bing">Bing</option>
+          <option value="ddg">DuckDuckGo</option>
+        </select>
+        <button class="btn laut" id="btnCariWeb">Cari</button>
+      </div>
     </div>
     <div id="portalTunggal">
       <div class="bingkai-portal" id="bingkaiBungkus">
@@ -837,6 +879,22 @@ Tiap sekolah berbeda: bisa meliputi tes akademik lanjutan, kesehatan, kebugaran/
     </div>
   </section>
 
+  <!-- ======== MODUL SAYA ======== -->
+  <section class="tampilan" id="view-modul" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">← Beranda</button>
+      <span class="info-kuis">Modul Saya — Baca PDF Jadi Bank Soal</span>
+    </div>
+    <div class="kartu">
+      <h2 class="judul-bagian">📖 Baca Modul dari Perangkatmu</h2>
+      <p class="sub" style="margin-bottom:11px;">Pilih berkas PDF modul belajarmu. Aplikasi membaca isinya di perangkatmu, mengambil soal-soal bernomor beserta opsinya, mencocokkan kunci dari bagian “KUNCI JAWABAN” bila ada, lalu menjadikannya bank soal digital yang bisa langsung dilatih. Hasil bacaan tersimpan di akun onlinemu.</p>
+      <label class="btn emas lebar" for="inputModul" style="margin:0;">📄 Pilih Berkas PDF Modul</label>
+      <input type="file" id="inputModul" accept="application/pdf" hidden>
+      <div class="sub" id="statusModul" style="margin-top:11px;"></div>
+      <div class="batang" id="batangModulBungkus" hidden style="margin-top:9px;"><i id="batangModul" style="width:0%"></i></div>
+    </div>
+    <div id="wadahModul"></div>
+  </section>
 </main>
 
 <nav class="bawah" id="navBawah" hidden>
@@ -848,6 +906,21 @@ Tiap sekolah berbeda: bisa meliputi tes akademik lanjutan, kesehatan, kebugaran/
 </nav>
 
 <footer class="kaki" id="kakiApp">PRATA — aplikasi belajar seleksi sekolah kedinasan.<br>Soal latihan adalah soal buatan untuk berlatih, bukan soal resmi BKN/panitia.</footer>
+
+<div id="jendelaApung" hidden>
+  <div id="kepalaApung">
+    <span class="judul-apung">🤖 AI PRATA — Mengambang</span>
+    <span class="tombol-apung">
+      <button id="btnApungKecil" title="Kecilkan / besarkan">—</button>
+      <button id="btnApungTutup" title="Tutup">✕</button>
+    </span>
+  </div>
+  <div id="alurApung"></div>
+  <div id="kakiApung">
+    <textarea id="isiApung" rows="2" placeholder="Tanya soal ke AI sambil lihat portal…"></textarea>
+    <button class="btn emas" id="btnApungKirim">Kirim</button>
+  </div>
+</div>
 
 <script>
 "use strict";
@@ -930,21 +1003,56 @@ function hashSandi(nama, sandi) {
   for (var i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; }
   return "h" + (h >>> 0).toString(36);
 }
-var sesiUser = null;
-function dataUser() {
-  var d = ambilJSON("panara_data_" + sesiUser, null);
-  if (!d) {
-    d = { tugas: TUGAS_BAWAAN.map(function (t) { return { t: t.t, selesai: false, sumber: t.sumber }; }), riwayat: [], chat: [], tanda: {}, target: { nama: "", tgl: "" } };
-    simpanJSON("panara_data_" + sesiUser, d);
-  }
-  if (!d.tanda) d.tanda = {};
-  if (!d.target) d.target = { nama: "", tgl: "" };
-  return d;
+/* ===== Backend online PRATA (Supabase) ===== */
+var SB_URL = "https://wyheuxjpusavuiqpymik.supabase.co";
+var SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5aGV1eGpwdXNhdnVpcXB5bWlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwMzY5MzIsImV4cCI6MjEwOTYxMjkzMn0.MMORlb9WDFuLL8vLoq4IAaLvajiw4p4hgED1JfzyDW8";
+var sesiUser = null, sesiId = null, sesiEmail = null, sbToken = null, sbRefresh = null, dataCache = null, timerSinkron = null;
+function sbHeaders() { var h = { "apikey": SB_KEY, "Content-Type": "application/json" }; if (sbToken) h["Authorization"] = "Bearer " + sbToken; return h; }
+function sbSimpanSesi() { try { localStorage.setItem("prata_sesi_online", JSON.stringify({ t: sbToken, r: sbRefresh, id: sesiId, email: sesiEmail, nama: sesiUser })); } catch (e) {} }
+function sbHapusSesi() { try { localStorage.removeItem("prata_sesi_online"); } catch (e) {} sbToken = null; sbRefresh = null; sesiId = null; sesiEmail = null; }
+function sbAuth(path, body) {
+  return fetch(SB_URL + path, { method: "POST", headers: { "apikey": SB_KEY, "Content-Type": "application/json" }, body: JSON.stringify(body) })
+    .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, status: r.status, body: j }; }); });
 }
-function simpanDataUser(d) { simpanJSON("panara_data_" + sesiUser, d); }
+function sbTerapkanSesi(j) {
+  sbToken = j.access_token; sbRefresh = j.refresh_token; sesiId = j.user.id; sesiEmail = j.user.email;
+  sesiUser = (j.user.user_metadata && j.user.user_metadata.nama) || (j.user.email || "").split("@")[0];
+  sbSimpanSesi();
+}
+function dataBawaan() {
+  return { tugas: TUGAS_BAWAAN.map(function (t) { return { t: t.t, selesai: false, sumber: t.sumber }; }), riwayat: [], chat: [], tanda: {}, target: { nama: "", tgl: "" }, modul: null };
+}
+function dataUser() {
+  if (!dataCache) { dataCache = ambilJSON("prata_cache_" + sesiId, null) || dataBawaan(); }
+  if (!dataCache.tanda) dataCache.tanda = {};
+  if (!dataCache.target) dataCache.target = { nama: "", tgl: "" };
+  if (dataCache.modul === undefined) dataCache.modul = null;
+  return dataCache;
+}
+function simpanDataUser(d) {
+  dataCache = d;
+  try { localStorage.setItem("prata_cache_" + sesiId, JSON.stringify(d)); } catch (e) {}
+  if (!sesiId || !sbToken) return;
+  if (timerSinkron) clearTimeout(timerSinkron);
+  timerSinkron = setTimeout(sinkronSekarang, 900);
+}
+function sinkronSekarang() {
+  if (!sesiId || !sbToken || !dataCache) return;
+  fetch(SB_URL + "/rest/v1/data_pengguna", { method: "POST", headers: Object.assign(sbHeaders(), { "Prefer": "resolution=merge-duplicates" }), body: JSON.stringify({ user_id: sesiId, data: dataCache, updated_at: new Date().toISOString() }) }).catch(function () {});
+}
+function muatDataOnline() {
+  return fetch(SB_URL + "/rest/v1/data_pengguna?user_id=eq." + sesiId + "&select=data", { headers: sbHeaders() })
+    .then(function (r) { return r.json(); })
+    .then(function (rows) {
+      if (rows && rows.length && rows[0].data && Object.keys(rows[0].data).length) { dataCache = rows[0].data; }
+      else { dataCache = dataBawaan(); sinkronSekarang(); }
+      try { localStorage.setItem("prata_cache_" + sesiId, JSON.stringify(dataCache)); } catch (e) {}
+    })
+    .catch(function () { dataCache = ambilJSON("prata_cache_" + sesiId, null) || dataBawaan(); });
+}
 
 /* ================= NAVIGASI ================= */
-var SEMUA_TAMPILAN = ["login","daftar","beranda","latihan","kuis","hasil","ai","ceklist","materi","materi-detail","riwayat","bantuan","daftarsoal","portal","flashcard","info"];
+var SEMUA_TAMPILAN = ["login","daftar","beranda","latihan","kuis","hasil","ai","ceklist","materi","materi-detail","riwayat","bantuan","daftarsoal","portal","flashcard","info","modul"];
 function tampil(nama) {
   SEMUA_TAMPILAN.forEach(function (v) {
     var el = document.getElementById("view-" + v);
@@ -966,6 +1074,7 @@ function tampil(nama) {
   if (nama === "materi") gambarMateri();
   if (nama === "riwayat") gambarRiwayat();
   if (nama === "ai") gambarChat();
+  if (nama === "modul") gambarModul();
   window.scrollTo(0, 0);
 }
 function pergi(nama) {
@@ -982,42 +1091,55 @@ document.addEventListener("click", function (e) {
 
 /* ================= LOGIN & DAFTAR ================= */
 function tampilGalat(id, teks) { var g = document.getElementById(id); g.textContent = teks; g.hidden = !teks; }
-function masukBerhasil(nama) {
-  sesiUser = nama;
-  simpanJSON("panara_sesi", nama);
-  document.getElementById("chipNama").textContent = nama;
-  dataUser();
-  tampil("beranda");
+function masukBerhasil() {
+  document.getElementById("chipNama").textContent = sesiUser;
+  muatDataOnline().then(function () { tampil("beranda"); });
 }
 document.getElementById("btnMasuk").addEventListener("click", function () {
-  var nama = document.getElementById("liNama").value.trim();
+  var email = document.getElementById("liEmail").value.trim();
   var sandi = document.getElementById("liSandi").value;
-  var users = ambilJSON("panara_users", {});
-  if (!nama || !sandi) { tampilGalat("liGalat", "Isi nama pengguna dan kata sandi dulu ya."); return; }
-  var kunci = Object.keys(users).filter(function (k) { return k.toLowerCase() === nama.toLowerCase(); })[0];
-  if (!kunci) { tampilGalat("liGalat", "Nama pengguna belum terdaftar. Ketuk 'Daftar gratis' di bawah untuk membuat akun."); return; }
-  if (users[kunci].sandi !== hashSandi(kunci, sandi)) { tampilGalat("liGalat", "Kata sandi salah. Coba lagi ya."); return; }
-  tampilGalat("liGalat", "");
-  masukBerhasil(kunci);
+  var btn = document.getElementById("btnMasuk");
+  if (!email || !sandi) { tampilGalat("liGalat", "Isi email dan kata sandi dulu ya."); return; }
+  btn.disabled = true; btn.textContent = "⏳ Menyambungkan ke server…";
+  sbAuth("/auth/v1/token?grant_type=password", { email: email, password: sandi }).then(function (res) {
+    btn.disabled = false; btn.textContent = "Masuk";
+    if (!res.ok || !res.body.access_token) { tampilGalat("liGalat", "Email atau kata sandi tidak cocok. Kalau belum punya akun online, ketuk 'Daftar gratis' di bawah ya."); return; }
+    tampilGalat("liGalat", "");
+    sbTerapkanSesi(res.body);
+    masukBerhasil();
+  }).catch(function () {
+    btn.disabled = false; btn.textContent = "Masuk";
+    tampilGalat("liGalat", "Tidak bisa menghubungi server. Periksa koneksi internetmu lalu coba lagi.");
+  });
 });
 document.getElementById("btnDaftar").addEventListener("click", function () {
   var nama = document.getElementById("dfNama").value.trim();
+  var email = document.getElementById("dfEmail").value.trim();
   var s1 = document.getElementById("dfSandi").value, s2 = document.getElementById("dfSandi2").value;
-  var users = ambilJSON("panara_users", {});
-  if (nama.length < 3) { tampilGalat("dfGalat", "Nama pengguna minimal 3 karakter."); return; }
-  if (Object.keys(users).some(function (k) { return k.toLowerCase() === nama.toLowerCase(); })) { tampilGalat("dfGalat", "Nama pengguna itu sudah dipakai. Pilih nama lain ya."); return; }
+  var btn = document.getElementById("btnDaftar");
+  if (nama.length < 2) { tampilGalat("dfGalat", "Nama tampilan minimal 2 karakter."); return; }
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { tampilGalat("dfGalat", "Alamat email sepertinya belum benar. Periksa lagi ya."); return; }
   if (s1.length < 6) { tampilGalat("dfGalat", "Kata sandi minimal 6 karakter."); return; }
   if (s1 !== s2) { tampilGalat("dfGalat", "Ulangi kata sandi belum sama. Periksa lagi ya."); return; }
-  users[nama] = { sandi: hashSandi(nama, s1), dibuat: new Date().toISOString() };
-  simpanJSON("panara_users", users);
-  tampilGalat("dfGalat", "");
-  masukBerhasil(nama);
+  btn.disabled = true; btn.textContent = "⏳ Membuat akun online…";
+  sbAuth("/auth/v1/signup", { email: email, password: s1, data: { nama: nama } }).then(function (res) {
+    btn.disabled = false; btn.textContent = "Buat Akun & Masuk";
+    if (res.ok && res.body.access_token) { tampilGalat("dfGalat", ""); sbTerapkanSesi(res.body); masukBerhasil(); return; }
+    var pesan = (res.body && (res.body.msg || res.body.message || (res.body.error_description))) || "";
+    if (/already|registered|exists/i.test(pesan)) { tampilGalat("dfGalat", "Email itu sudah terdaftar. Kembali ke halaman Masuk ya."); return; }
+    tampilGalat("dfGalat", "Pendaftaran belum berhasil (" + (pesan || "server tidak menjawab") + "). Coba lagi sebentar lagi.");
+  }).catch(function () {
+    btn.disabled = false; btn.textContent = "Buat Akun & Masuk";
+    tampilGalat("dfGalat", "Tidak bisa menghubungi server. Periksa koneksi internetmu lalu coba lagi.");
+  });
 });
 document.getElementById("keDaftar").addEventListener("click", function () { tampil("daftar"); });
 document.getElementById("keMasuk").addEventListener("click", function () { tampil("login"); });
 document.getElementById("btnKeluar").addEventListener("click", function () {
+  if (sbToken) { fetch(SB_URL + "/auth/v1/logout", { method: "POST", headers: sbHeaders() }).catch(function () {}); }
+  sbHapusSesi();
   sesiUser = null;
-  try { localStorage.removeItem("panara_sesi"); } catch (e) {}
+  dataCache = null;
   tampil("login");
 });
 ["liSandi","dfSandi2"].forEach(function (id) {
@@ -1151,30 +1273,34 @@ function gambarRiwayat() {
       grafik.appendChild(kolom);
     });
   } else { kartuG.hidden = true; }
-  // Papan peringkat lokal
-  var papan = ambilJSON("panara_papan", {});
-  var namaPapan = Object.keys(papan);
+  // Papan peringkat ONLINE (antar semua pengguna PRATA)
   var kartuP = document.getElementById("kartuPapan");
-  if (namaPapan.length) {
-    kartuP.hidden = false;
-    var wadahP = document.getElementById("daftarPapan");
-    wadahP.innerHTML = "";
-    namaPapan.map(function (n) { return { nama: n, terbaik: papan[n].terbaik || 0, tanggal: papan[n].tanggal || "" }; })
-      .sort(function (a, b) { return b.terbaik - a.terbaik; })
-      .forEach(function (p, i) {
-        var baris = document.createElement("div"); baris.className = "baris-riwayat";
-        var kiri = document.createElement("div");
-        kiri.textContent = (["🥇","🥈","🥉"][i] || (i + 1) + ".") + " " + p.nama + (p.nama === sesiUser ? " (kamu)" : "");
-        kiri.style.fontWeight = p.nama === sesiUser ? "800" : "400";
-        var kanan = document.createElement("div"); kanan.className = "skor"; kanan.textContent = p.terbaik + " poin";
-        baris.appendChild(kiri); baris.appendChild(kanan);
-        wadahP.appendChild(baris);
-      });
-  } else { kartuP.hidden = true; }
+  kartuP.hidden = true;
+  if (sesiId && sbToken) {
+    fetch(SB_URL + "/rest/v1/papan_skor?select=nama,terbaik&order=terbaik.desc&limit=20", { headers: sbHeaders() })
+      .then(function (r) { return r.json(); })
+      .then(function (rows) {
+        if (!rows || !rows.length || document.getElementById("view-riwayat").hidden) return;
+        kartuP.hidden = false;
+        var wadahP = document.getElementById("daftarPapan");
+        wadahP.innerHTML = "";
+        rows.forEach(function (p, i) {
+          var baris = document.createElement("div"); baris.className = "baris-riwayat";
+          var kiri = document.createElement("div");
+          kiri.textContent = (["🥇","🥈","🥉"][i] || (i + 1) + ".") + " " + p.nama + (p.nama === sesiUser ? " (kamu)" : "");
+          kiri.style.fontWeight = p.nama === sesiUser ? "800" : "400";
+          var kanan = document.createElement("div"); kanan.className = "skor"; kanan.textContent = p.terbaik + " poin";
+          baris.appendChild(kiri); baris.appendChild(kanan);
+          wadahP.appendChild(baris);
+        });
+      }).catch(function () {});
+  }
 }
 
 /* ================= MESIN KUIS ================= */
 var kuis = null;
+var BANK_AKTIF = null;
+function bankAktif() { return BANK_AKTIF || SOAL; }
 var timerKuis = null;
 function formatWaktu(detik) {
   var m = Math.floor(detik / 60), s = detik % 60;
@@ -1200,7 +1326,7 @@ function mulaiTimerKuis() {
 }
 function berhentiTimerKuis() { if (timerKuis) { clearInterval(timerKuis); timerKuis = null; } }
 function simpanKuisBerjalan() {
-  if (kuis && sesiUser) simpanJSON("panara_kuisberjalan_" + sesiUser, kuis);
+  if (kuis && sesiUser && !kuis.labelKuis) simpanJSON("panara_kuisberjalan_" + sesiUser, kuis);
 }
 function hapusKuisBerjalan() {
   if (sesiUser) { try { localStorage.removeItem("panara_kuisberjalan_" + sesiUser); } catch (e) {} }
@@ -1235,6 +1361,7 @@ function acak(arr) {
   return a;
 }
 function mulaiKuis(mode, kat) {
+  BANK_AKTIF = SOAL;
   var daftar;
   if (mode === "latihan") {
     daftar = SOAL.map(function (s, i) { return s.k === kat ? i : -1; }).filter(function (i) { return i >= 0; });
@@ -1252,7 +1379,7 @@ document.getElementById("btnBerhentiKuis").addEventListener("click", function ()
 function gambarSoal() {
   if (!kuis) return;
   var idx = kuis.daftar[kuis.posisi];
-  var s = SOAL[idx];
+  var s = bankAktif()[idx];
   var sudahJawab = kuis.jawaban.hasOwnProperty(kuis.posisi);
   document.getElementById("chipKategori").textContent = (kuis.mode === "simulasi" ? "SIMULASI • " : "") + s.k;
   document.getElementById("infoKuis").textContent = teksInfoKuis();
@@ -1266,7 +1393,7 @@ function gambarSoal() {
     if (kuis.jawaban[kuis.posisi] === i) b.classList.add("terpilih");
     if (terkunci) {
       b.disabled = true;
-      if (s.k === "TKP") { if (i === s.j) b.classList.add("benar"); }
+      if (s.j === null || s.j === undefined) { /* soal tanpa kunci terbaca: tanpa pewarnaan benar/salah */ }
       else if (i === s.j) b.classList.add("benar");
       else if (kuis.jawaban[kuis.posisi] === i) b.classList.add("salah");
     }
@@ -1314,27 +1441,31 @@ function selesaiKuis() {
   var perKat = { TWK: { poin: 0, maks: 0, benar: 0, total: 0 }, TIU: { poin: 0, maks: 0, benar: 0, total: 0 }, TKP: { poin: 0, maks: 0, benar: 0, total: 0 } };
   var totalPoin = 0, totalMaks = 0, terjawab = 0;
   kuis.daftar.forEach(function (idx, pos) {
-    var s = SOAL[idx], pil = kuis.jawaban[pos];
+    var s = bankAktif()[idx], pil = kuis.jawaban[pos];
+    if (!perKat[s.k]) perKat[s.k] = { poin: 0, maks: 0, benar: 0, total: 0 };
     var pk = perKat[s.k];
     pk.total++; pk.maks += 5; totalMaks += 5;
     if (pil !== undefined) {
       terjawab++;
-      if (s.k === "TKP") { pk.poin += s.s[pil]; totalPoin += s.s[pil]; if (s.s[pil] === 5) pk.benar++; }
-      else if (pil === s.j) { pk.poin += 5; totalPoin += 5; pk.benar++; }
+      if (s.k === "TKP" && s.s) { pk.poin += s.s[pil]; totalPoin += s.s[pil]; if (s.s[pil] === 5) pk.benar++; }
+      else if (s.j !== null && s.j !== undefined && pil === s.j) { pk.poin += 5; totalPoin += 5; pk.benar++; }
     }
   });
-  var label = kuis.mode === "latihan" ? "Latihan " + kuis.kat : "Simulasi Mini SKD";
+  var label = kuis.mode === "latihan" ? "Latihan " + (kuis.labelKuis || kuis.kat) : "Simulasi Mini SKD";
   var sekarang = new Date();
   var tgl = sekarang.toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) + " • " + sekarang.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
   var d = dataUser();
   d.riwayat.push({ tanggal: tgl, label: label, poin: totalPoin, maks: totalMaks });
   simpanDataUser(d);
-  if (kuis.mode === "simulasi") {
-    var papan = ambilJSON("panara_papan", {});
-    if (!papan[sesiUser] || totalPoin > (papan[sesiUser].terbaik || 0)) {
-      papan[sesiUser] = { terbaik: totalPoin, tanggal: tgl };
-      simpanJSON("panara_papan", papan);
-    }
+  if (kuis.mode === "simulasi" && sesiId && sbToken) {
+    fetch(SB_URL + "/rest/v1/papan_skor?user_id=eq." + sesiId + "&select=terbaik", { headers: sbHeaders() })
+      .then(function (r) { return r.json(); })
+      .then(function (rows) {
+        var lama = (rows && rows.length) ? (rows[0].terbaik || 0) : 0;
+        if (totalPoin > lama) {
+          fetch(SB_URL + "/rest/v1/papan_skor", { method: "POST", headers: Object.assign(sbHeaders(), { "Prefer": "resolution=merge-duplicates" }), body: JSON.stringify({ user_id: sesiId, nama: sesiUser, terbaik: totalPoin, updated_at: new Date().toISOString() }) }).catch(function () {});
+        }
+      }).catch(function () {});
   }
   berhentiTimerKuis();
   hapusKuisBerjalan();
@@ -1369,14 +1500,15 @@ function selesaiKuis() {
   var review = document.getElementById("wadahReview");
   review.innerHTML = "";
   kuis.daftar.forEach(function (idx, pos) {
-    var s = SOAL[idx], pil = kuis.jawaban[pos];
+    var s = bankAktif()[idx], pil = kuis.jawaban[pos];
     var kartu = document.createElement("div"); kartu.className = "kartu";
     var chip = document.createElement("span"); chip.className = "kat-chip"; chip.textContent = s.k + " • Soal " + (pos + 1);
     var t = document.createElement("div"); t.className = "soal-teks"; t.textContent = s.t;
     var jw = document.createElement("div"); jw.className = "sub";
     jw.textContent = pil === undefined ? "Jawabanmu: (tidak dijawab)" : "Jawabanmu: " + "ABCDE"[pil] + " — " + s.o[pil];
     var kn = document.createElement("div"); kn.className = "sub"; kn.style.fontWeight = "700"; kn.style.color = "var(--laut)";
-    kn.textContent = (s.k === "TKP" ? "Pilihan terbaik: " : "Kunci jawaban: ") + "ABCDE"[s.j] + " — " + s.o[s.j] + (s.k === "TKP" && pil !== undefined ? " • Skor kamu: " + s.s[pil] + "/5" : "");
+    if (s.j === null || s.j === undefined) { kn.textContent = "Kunci jawaban: belum tersedia untuk soal ini — lihat pembahasan atau tanyakan ke AI."; }
+    else { kn.textContent = (s.k === "TKP" ? "Pilihan terbaik: " : "Kunci jawaban: ") + "ABCDE"[s.j] + " — " + s.o[s.j] + (s.k === "TKP" && s.s && pil !== undefined ? " • Skor kamu: " + s.s[pil] + "/5" : ""); }
     var bh = document.createElement("div"); bh.className = "bahas";
     var tt = document.createElement("span"); tt.className = "tt"; tt.textContent = "💡 Pembahasan";
     var tb = document.createElement("span"); tb.textContent = s.b;
@@ -1938,11 +2070,352 @@ if ("serviceWorker" in navigator) {
   });
 }
 
+/* ================= AI PENDAMPING & PENCARIAN WEB ================= */
+document.addEventListener("click", function (e) {
+  var b = e.target.closest("[data-aiweb]");
+  if (b) { window.open(b.getAttribute("data-aiweb"), "_blank", "noopener"); }
+});
+document.getElementById("btnCariWeb").addEventListener("click", function () {
+  var q = document.getElementById("cariWeb").value.trim();
+  if (!q) return;
+  var mesin = document.getElementById("mesinCari").value;
+  var url = mesin === "bing" ? "https://www.bing.com/search?q=" : mesin === "ddg" ? "https://duckduckgo.com/?q=" : "https://www.google.com/search?q=";
+  window.open(url + encodeURIComponent(q), "_blank", "noopener");
+});
+document.getElementById("cariWeb").addEventListener("keydown", function (e) { if (e.key === "Enter") document.getElementById("btnCariWeb").click(); });
+
+/* ================= JENDELA AI MENGAMBANG ================= */
+var apungKecil = false;
+function gambarApung() {
+  var alur = document.getElementById("alurApung");
+  if (!alur) return;
+  alur.innerHTML = "";
+  var d = dataUser();
+  var daftar = d.chat.slice(-20);
+  if (!daftar.length) {
+    var g = document.createElement("div"); g.className = "gelembung ai kecil";
+    g.textContent = "Halo! Aku AI PRATA yang mengambang — tanya soal sambil kamu membuka portal. 😊";
+    alur.appendChild(g);
+  }
+  daftar.forEach(function (m) {
+    var b = document.createElement("div"); b.className = "gelembung kecil " + (m.dari === "saya" ? "saya" : "ai"); b.textContent = m.teks;
+    alur.appendChild(b);
+  });
+  alur.scrollTop = alur.scrollHeight;
+}
+document.getElementById("btnApung").addEventListener("click", function () {
+  var j = document.getElementById("jendelaApung");
+  j.hidden = !j.hidden;
+  if (!j.hidden) gambarApung();
+});
+document.getElementById("btnApungTutup").addEventListener("click", function () { document.getElementById("jendelaApung").hidden = true; });
+document.getElementById("btnApungKecil").addEventListener("click", function () {
+  apungKecil = !apungKecil;
+  document.getElementById("alurApung").style.display = apungKecil ? "none" : "";
+  document.getElementById("kakiApung").style.display = apungKecil ? "none" : "";
+  document.getElementById("jendelaApung").style.height = apungKecil ? "auto" : "";
+});
+function kirimApung() {
+  var inp = document.getElementById("isiApung");
+  var teks = inp.value.trim();
+  if (!teks) return;
+  inp.value = "";
+  var d = dataUser();
+  d.chat.push({ dari: "saya", teks: teks });
+  if (d.chat.length > 40) d.chat = d.chat.slice(-40);
+  simpanDataUser(d);
+  gambarApung();
+  var alur = document.getElementById("alurApung");
+  var tunggu = document.createElement("div"); tunggu.className = "gelembung ai kecil";
+  var spanT = document.createElement("span"); spanT.textContent = "AI sedang berpikir ";
+  var titik = document.createElement("span"); titik.className = "titik";
+  titik.innerHTML = "<i></i><i></i><i></i>";
+  tunggu.appendChild(spanT); tunggu.appendChild(titik);
+  alur.appendChild(tunggu);
+  alur.scrollTop = alur.scrollHeight;
+  function selesaiApung(jawaban, sumber) {
+    if (tunggu.parentNode) tunggu.remove();
+    var dd = dataUser();
+    dd.chat.push({ dari: "ai", teks: jawaban, sumber: sumber });
+    if (dd.chat.length > 40) dd.chat = dd.chat.slice(-40);
+    simpanDataUser(dd);
+    gambarApung();
+  }
+  if (mesinAI === "offline") { setTimeout(function () { selesaiApung(cariOffline(teks), "Bank Pembahasan (offline)"); }, 350); return; }
+  tanyaOnline(teks).then(function (jawaban) { selesaiApung(jawaban, "AI gratis (online)"); })
+    .catch(function () { selesaiApung(cariOffline(teks), "Bank Pembahasan (offline) — AI online tidak terjangkau"); });
+}
+document.getElementById("btnApungKirim").addEventListener("click", kirimApung);
+document.getElementById("isiApung").addEventListener("keydown", function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); kirimApung(); } });
+(function pasangSeretApung() {
+  var j = document.getElementById("jendelaApung"), kepala = document.getElementById("kepalaApung");
+  var seret = null;
+  kepala.addEventListener("pointerdown", function (e) {
+    if (e.target.closest("button")) return;
+    var r = j.getBoundingClientRect();
+    j.style.left = r.left + "px"; j.style.top = r.top + "px"; j.style.right = "auto"; j.style.bottom = "auto";
+    seret = { dx: e.clientX - r.left, dy: e.clientY - r.top };
+    try { kepala.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  kepala.addEventListener("pointermove", function (e) {
+    if (!seret) return;
+    j.style.left = Math.max(0, Math.min(window.innerWidth - 80, e.clientX - seret.dx)) + "px";
+    j.style.top = Math.max(0, Math.min(window.innerHeight - 60, e.clientY - seret.dy)) + "px";
+  });
+  kepala.addEventListener("pointerup", function () { seret = null; });
+})();
+
+/* ================= MODUL SAYA (BACA PDF JADI BANK SOAL) ================= */
+var pdfjsSiap = null;
+function muatPdfJs() {
+  if (window.pdfjsLib) return Promise.resolve();
+  if (pdfjsSiap) return pdfjsSiap;
+  pdfjsSiap = new Promise(function (res, rej) {
+    var sc = document.createElement("script");
+    sc.src = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js";
+    sc.onload = function () { window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js"; res(); };
+    sc.onerror = function () { rej(new Error("pdfjs gagal dimuat")); };
+    document.head.appendChild(sc);
+  });
+  return pdfjsSiap;
+}
+function bacaPdfSebagaiTeks(berkas, onProg) {
+  return muatPdfJs().then(function () { return berkas.arrayBuffer(); })
+    .then(function (buf) { return window.pdfjsLib.getDocument({ data: buf }).promise; })
+    .then(function (pdf) {
+      var total = pdf.numPages, halaman = [];
+      var rantai = Promise.resolve();
+      for (var p = 1; p <= total; p++) {
+        (function (no) {
+          rantai = rantai.then(function () {
+            return pdf.getPage(no).then(function (page) { return page.getTextContent(); }).then(function (tc) {
+              var lebar = 595;
+              try { lebar = page.getViewport({ scale: 1 }).width || 595; } catch (e) {}
+              var tengah = lebar / 2;
+              var menyeberang = 0;
+              tc.items.forEach(function (it) { if (it.transform[4] < tengah && it.transform[4] + (it.width || 0) > tengah) menyeberang++; });
+              var duaKolom = tc.items.length > 20 && menyeberang < tc.items.length * 0.25;
+              function bangunBaris(daftar) {
+                var barisMap = {};
+                daftar.forEach(function (it) {
+                  var y = Math.round(it.transform[5] / 3);
+                  if (!barisMap[y]) barisMap[y] = [];
+                  barisMap[y].push({ x: it.transform[4], s: it.str });
+                });
+                var ys = Object.keys(barisMap).map(Number).sort(function (a, b) { return b - a; });
+                return ys.map(function (y) {
+                  return barisMap[y].sort(function (a, b) { return a.x - b.x; }).map(function (o) { return o.s; }).join(" ");
+                });
+              }
+              var barisHalaman;
+              if (duaKolom) {
+                var kiri = tc.items.filter(function (it) { return it.transform[4] < tengah; });
+                var kanan = tc.items.filter(function (it) { return it.transform[4] >= tengah; });
+                barisHalaman = bangunBaris(kiri).concat(bangunBaris(kanan));
+              } else {
+                barisHalaman = bangunBaris(tc.items);
+              }
+              halaman[no - 1] = barisHalaman.join("\n");
+              if (onProg) onProg(no, total);
+            });
+          });
+        })(p);
+      }
+      return rantai.then(function () { return { teks: halaman.join("\n"), halaman: total }; });
+    });
+}
+var PETA_BAGIAN = { "MATEMATIKA": "Matematika", "BAHASA INDONESIA": "Bahasa Indonesia", "BAHASA INGGRIS": "Bahasa Inggris", "PENGETAHUAN UMUM": "Pengetahuan Umum", "WAWASAN KEBANGSAAN": "Wawasan Kebangsaan", "PSIKOLOGI": "Psikologi" };
+function parseModul(teks) {
+  // --- Kumpulkan entri kunci berurutan posisi (buang duplikat tumpang tindih) ---
+  var entriKunci = {};
+  var reK = /KUNCI\s+JAWABAN/gi, mK, posKunci = [];
+  while ((mK = reK.exec(teks))) posKunci.push(mK.index);
+  posKunci.forEach(function (p) {
+    var seg = teks.slice(p, p + 6000);
+    var re = /(\d{1,3})\s*[\.\)]\s*([A-E])(?=[\s\|,;]|$)/g, m;
+    while ((m = re.exec(seg))) {
+      var pos = p + m.index;
+      if (!entriKunci[pos]) entriKunci[pos] = { no: parseInt(m[1], 10), huruf: m[2], pos: pos };
+    }
+  });
+  var reSemua = /No\.\s*1\s+sampai\s+dengan\s+(\d+)\s+jawaban\s+([A-E])\s+semua/gi, mS;
+  while ((mS = reSemua.exec(teks))) {
+    var nS = parseInt(mS[1], 10);
+    for (var q = 1; q <= nS; q++) {
+      var posS = mS.index + q;
+      if (!entriKunci[posS]) entriKunci[posS] = { no: q, huruf: mS[2], pos: posS };
+    }
+  }
+  var kunciUrut = Object.keys(entriKunci).map(function (k) { return entriKunci[k]; }).sort(function (a, b) { return a.pos - b.pos; });
+  // --- Pindai soal per baris ---
+  var baris = teks.split(/\n/);
+  var bagian = "Umum";
+  var kandidat = [], cur = null;
+  function tutupKandidat() { if (cur) { kandidat.push(cur); cur = null; } }
+  baris.forEach(function (ln) {
+    var line = ln.replace(/\s+/g, " ").trim();
+    if (!line) return;
+    var up = line.toUpperCase();
+    if (line.length < 60) {
+      Object.keys(PETA_BAGIAN).forEach(function (b) { if (up.indexOf(b) >= 0) bagian = PETA_BAGIAN[b]; });
+    }
+    var mq = line.match(/^(\d{1,3})[\.\)]\s+(.*)$/);
+    if (mq && mq[2].length >= 4) { tutupKandidat(); cur = { bagian: bagian, no: parseInt(mq[1], 10), buf: mq[2] }; return; }
+    if (cur) { cur.buf += "\n" + line; if (cur.buf.length > 2200) tutupKandidat(); }
+  });
+  tutupKandidat();
+  function rasioAneh(s) {
+    if (!s) return 1;
+    var aneh = (s.match(/[\u0B80-\u0DFF\uE000-\uF8FF\uFFFD]/g) || []).length;
+    return aneh / s.length;
+  }
+  var soal = [], terlihat = {};
+  kandidat.forEach(function (kd) {
+    var buf = kd.buf.replace(/\n/g, " ");
+    var reO = /(?:^|\s)(?:([A-E])[\.\)]|\(([A-E])\))\s+/g, marks = [], mm;
+    while ((mm = reO.exec(buf))) marks.push({ huruf: mm[1] || mm[2], awal: mm.index, isiMulai: reO.lastIndex });
+    if (marks.length < 4) return;
+    var perHuruf = {};
+    for (var i = 0; i < marks.length; i++) {
+      var akhir = (i + 1 < marks.length) ? marks[i + 1].awal : buf.length;
+      if (!(marks[i].huruf in perHuruf)) perHuruf[marks[i].huruf] = buf.slice(marks[i].isiMulai, akhir).replace(/\s+/g, " ").trim().slice(0, 220);
+    }
+    if (!("A" in perHuruf && "B" in perHuruf && "C" in perHuruf && "D" in perHuruf)) return;
+    var teksSoal = buf.slice(0, marks[0].awal).replace(/\s+/g, " ").trim();
+    if (teksSoal.length < 10) return;
+    var opsi = ["A", "B", "C", "D", "E"].filter(function (h) { return h in perHuruf; }).map(function (h) { return perHuruf[h]; });
+    if (opsi.some(function (o) { return !o; })) return;
+    if (rasioAneh(teksSoal + " " + opsi.join(" ")) > 0.12) return;
+    var dedup = teksSoal.slice(0, 60);
+    if (terlihat[dedup]) return;
+    terlihat[dedup] = true;
+    soal.push({ k: kd.bagian, t: teksSoal.slice(0, 800), o: opsi, j: null, b: "", _no: kd.no });
+  });
+  // --- Pasangkan kunci per nomor dalam rentang soal yang berurutan ---
+  function buatRun(arr, ambilNo) {
+    var runs = [], curR = [];
+    arr.forEach(function (x) {
+      var n = ambilNo(x);
+      if (curR.length && n !== ambilNo(curR[curR.length - 1]) + 1) { runs.push(curR); curR = []; }
+      curR.push(x);
+    });
+    if (curR.length) runs.push(curR);
+    return runs;
+  }
+  var runSoal = buatRun(soal, function (s) { return s._no; });
+  var runKunci = buatRun(kunciUrut, function (k) { return k.no; }).filter(function (r) { return r.length >= 5; });
+  var kunciTerpakai = {};
+  runSoal.forEach(function (rs) {
+    var noAwal = rs[0]._no, noAkhir = rs[rs.length - 1]._no;
+    for (var ri = 0; ri < runKunci.length; ri++) {
+      if (kunciTerpakai[ri]) continue;
+      var rk = runKunci[ri];
+      if (rk.length === (noAkhir - noAwal + 1) && rk[0].no === noAwal) {
+        var peta = {};
+        rk.forEach(function (k) { peta[k.no] = k.huruf; });
+        rs.forEach(function (s) { if (peta[s._no]) s.j = "ABCDE".indexOf(peta[s._no]); });
+        kunciTerpakai[ri] = true;
+        break;
+      }
+    }
+  });
+  soal.forEach(function (s) { delete s._no; });
+  soal.forEach(function (s) {
+    s.b = (s.j !== null && s.j !== undefined)
+      ? "Menurut bagian KUNCI JAWABAN modul, jawaban yang benar adalah " + "ABCDE"[s.j] + ". (Kunci dipasangkan otomatis per nomor dari hasil baca — bila terasa janggal, bahas lewat Tanya AI.)"
+      : "Modul tidak menyediakan kunci yang terbaca untuk soal ini. Gunakan Tanya AI untuk membahasnya.";
+  });
+  return { soal: soal, kunciKetemu: kunciUrut.length };
+}
+function gambarModul() {
+  var wadah = document.getElementById("wadahModul");
+  if (!wadah) return;
+  wadah.innerHTML = "";
+  var d = dataUser();
+  var st = document.getElementById("statusModul");
+  if (!d.modul || !d.modul.soal || !d.modul.soal.length) {
+    st.textContent = "Belum ada modul yang terbaca. Pilih berkas PDF modulmu untuk mulai.";
+    return;
+  }
+  st.textContent = "";
+  var m = d.modul;
+  var kartu = document.createElement("div"); kartu.className = "kartu";
+  var judul = document.createElement("h2"); judul.className = "judul-bagian";
+  judul.textContent = "📚 " + (m.judul || "Modul terbaca");
+  kartu.appendChild(judul);
+  var per = {}, berkunci = 0;
+  m.soal.forEach(function (s) { per[s.k] = (per[s.k] || 0) + 1; if (s.j !== null && s.j !== undefined) berkunci++; });
+  var info = document.createElement("p"); info.className = "sub"; info.style.marginBottom = "6px";
+  info.textContent = m.soal.length + " soal berhasil dibaca • " + berkunci + " di antaranya punya kunci dari modul. Hasil baca otomatis dari tata letak buku — soal yang rusak teksnya sudah dibuang, bukan dipaksakan.";
+  kartu.appendChild(info);
+  Object.keys(per).sort().forEach(function (b) {
+    var btn = document.createElement("button"); btn.className = "btn laut lebar"; btn.style.marginTop = "8px";
+    btn.textContent = "▶ Latihan " + b + " (" + per[b] + " soal)";
+    btn.setAttribute("data-modullatihan", b);
+    kartu.appendChild(btn);
+  });
+  var hapus = document.createElement("button"); hapus.className = "btn lebar"; hapus.style.marginTop = "10px";
+  hapus.textContent = "🗑 Hapus Modul dari Akun";
+  hapus.addEventListener("click", function () { var dd = dataUser(); dd.modul = null; simpanDataUser(dd); gambarModul(); });
+  kartu.appendChild(hapus);
+  wadah.appendChild(kartu);
+}
+document.addEventListener("click", function (e) {
+  var b = e.target.closest("[data-modullatihan]");
+  if (!b) return;
+  var bagian = b.getAttribute("data-modullatihan");
+  var d = dataUser();
+  if (!d.modul || !d.modul.soal) return;
+  BANK_AKTIF = d.modul.soal;
+  var daftar = d.modul.soal.map(function (s, i) { return s.k === bagian ? i : -1; }).filter(function (i) { return i >= 0; });
+  if (!daftar.length) return;
+  berhentiTimerKuis();
+  kuis = { mode: "latihan", kat: bagian, labelKuis: "Modul — " + bagian, daftar: daftar, posisi: 0, jawaban: {}, sisaDetik: null };
+  tampil("kuis");
+  gambarSoal();
+});
+document.getElementById("inputModul").addEventListener("change", function () {
+  var berkas = this.files && this.files[0];
+  this.value = "";
+  if (!berkas) return;
+  var st = document.getElementById("statusModul");
+  var batang = document.getElementById("batangModul"), bungkus = document.getElementById("batangModulBungkus");
+  bungkus.hidden = false; batang.style.width = "2%";
+  st.textContent = "⏳ Menyiapkan pembaca PDF…";
+  bacaPdfSebagaiTeks(berkas, function (no, total) {
+    st.textContent = "📖 Membaca modul… halaman " + no + " dari " + total + " (buku besar bisa ±1 menit)";
+    batang.style.width = Math.round(no / total * 100) + "%";
+  }).then(function (hasilB) {
+    st.textContent = "🧠 Mengambil soal & kunci dari " + hasilB.halaman + " halaman…";
+    var hasil = parseModul(hasilB.teks);
+    if (!hasil.soal.length) {
+      st.textContent = "😕 Tidak ada soal yang terbaca bersih dari berkas ini. Fitur ini butuh PDF yang teksnya bisa dipilih (bukan hasil pindai gambar).";
+      bungkus.hidden = true;
+      return;
+    }
+    var d = dataUser();
+    d.modul = { judul: berkas.name.replace(/\.pdf$/i, ""), tanggal: new Date().toISOString(), soal: hasil.soal.slice(0, 800) };
+    simpanDataUser(d);
+    st.textContent = "✅ Selesai! " + d.modul.soal.length + " soal jadi bank soal digital di akunmu.";
+    bungkus.hidden = true;
+    gambarModul();
+  }).catch(function () {
+    st.textContent = "😕 Gagal membaca berkas ini. Pastikan berkasnya PDF yang tidak rusak dan koneksi internet aktif (pembaca PDF dimuat dari internet).";
+    bungkus.hidden = true;
+  });
+});
+
 /* ================= MULAI ================= */
 (function mulai() {
-  var tersimpan = ambilJSON("panara_sesi", null);
-  var users = ambilJSON("panara_users", {});
-  if (tersimpan && users[tersimpan]) { masukBerhasil(tersimpan); }
+  var s = ambilJSON("prata_sesi_online", null);
+  if (s && s.t && s.id) {
+    sbToken = s.t; sbRefresh = s.r; sesiId = s.id; sesiEmail = s.email; sesiUser = s.nama;
+    document.getElementById("chipNama").textContent = sesiUser;
+    sbAuth("/auth/v1/token?grant_type=refresh_token", { refresh_token: s.r }).then(function (res) {
+      if (res.ok && res.body.access_token) sbTerapkanSesi(res.body);
+    }).catch(function () {});
+    masukBerhasil();
+  }
   else { tampil("login"); }
 })();
 </script>
