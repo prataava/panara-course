@@ -688,6 +688,11 @@
         <span class="nm">Pusat Kosakata</span>
         <span class="ds">Kosakata baku yang paling sering keluar di TIU verbal — arti, sinonim, dan antonim, plus mode kartu hafalan.</span>
       </button>
+      <button class="menu-item" data-pergi="jalur">
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="5" r="2.2"/><path d="M8 17.5 16 7"/></svg></span>
+        <span class="nm">Jalur Seleksi</span>
+        <span class="ds">Peta jalur lengkap: 6 sekolah kedinasan (SKD), Kepolisian (Akpol, SIPSS, Bintara, Tamtama), dan TNI (Akmil, AAL, AAU) — tahapan umum dan sumber resmi.</span>
+      </button>
       <button class="menu-item" data-pergi="ceklist">
         <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.5 12.3l2.4 2.4 4.6-5.2"/></svg></span>
         <span class="nm">Checklist Tugas</span>
@@ -965,6 +970,15 @@
       </div>
       <p class="sub" id="posisiKata" style="text-align:center; margin-top:9px;"></p>
     </div>
+  </section>
+
+  <section class="tampilan" id="view-jalur" hidden>
+    <div class="kepala-kuis">
+      <button class="mundur" data-pergi="beranda">&larr; Beranda</button>
+      <span class="info-kuis">Jalur Seleksi</span>
+    </div>
+    <div class="info" style="margin-bottom:12px;">Peta umum jalur seleksi — <b>diperiksa 8 November 2026</b>. Syarat usia/pendidikan, jadwal, dan kuota <b>berubah setiap tahun</b>; yang berlaku selalu pengumuman resmi tahun berjalan di tautan tiap jalur. Halaman ini peta arah, bukan pengumuman.</div>
+    <div id="daftarJalur"></div>
   </section>
 
   <!-- ======== RIWAYAT ======== -->
@@ -1775,7 +1789,7 @@ window.addEventListener("scroll", function () {
 }, { passive: true });
 
 /* ================= NAVIGASI ================= */
-var SEMUA_TAMPILAN = ["login","daftar","sandi-baru","beranda","latihan","kuis","hasil","ai","ceklist","materi","materi-detail","riwayat","bantuan","daftarsoal","portal","flashcard","info","modul","rumus","kosakata"];
+var SEMUA_TAMPILAN = ["login","daftar","sandi-baru","beranda","latihan","kuis","hasil","ai","ceklist","materi","materi-detail","riwayat","bantuan","daftarsoal","portal","flashcard","info","modul","rumus","kosakata","jalur"];
 function tampil(nama) {
   SEMUA_TAMPILAN.forEach(function (v) {
     var el = document.getElementById("view-" + v);
@@ -1798,6 +1812,7 @@ function tampil(nama) {
   if (nama === "materi") gambarMateri();
   if (nama === "rumus") gambarRumus();
   if (nama === "kosakata") gambarKosakata();
+  if (nama === "jalur") gambarJalur();
   if (nama === "riwayat") gambarRiwayat();
   if (nama === "ai") gambarChat();
   if (nama === "modul") gambarModul();
@@ -2029,6 +2044,49 @@ document.getElementById("btnKataAcak").addEventListener("click", function () {
   while (baru === idxKata) baru = Math.floor(Math.random() * daftar.length);
   idxKata = baru; kataTerbalik = false; gambarKartuKata(daftar);
 });
+var JALUR_SELEKSI = [
+  { g: "kedinasan", nama: "PKN STAN", lembaga: "Kementerian Keuangan", ringkas: "Politeknik Keuangan Negara STAN. Program studi di bidang akuntansi, perpajakan, kepabeanan dan cukai, serta manajemen aset dan keuangan negara. Lulusannya diangkat menjadi CPNS sesuai formasi, terutama di lingkungan Kementerian Keuangan.", tahapan: ["Pendaftaran dan seleksi administrasi lewat portal SSCASN Sekolah Kedinasan (dikdin.bkn.go.id).","SKD dengan CAT BKN: TWK 30 soal, TIU 35 soal, TKP 45 soal — dinilai dengan ambang batas (passing grade) sesuai ketentuan tahun berjalan.","Seleksi Kompetensi Bidang / seleksi lanjutan di instansi masing-masing — bentuknya berbeda tiap sekolah, dapat mencakup psikotes, tes kesehatan, dan kebugaran.","Pengumuman kelulusan akhir dan mulai pendidikan."], latihan: "Di PRATA: Simulasi Penuh SKD, Latihan TWK/TIU/TKP, dan Pusat Kosakata langsung relevan untuk jalur ini. Ambang batas yang dipakai penilaianmu diatur di Konfigurasi Passing Grade (Info & Jadwal).", url: "https://pknstan.ac.id", urlLabel: "pknstan.ac.id" },
+  { g: "kedinasan", nama: "IPDN", lembaga: "Kementerian Dalam Negeri", ringkas: "Institut Pemerintahan Dalam Negeri. Mendidik praja menjadi kader pemerintahan; lulusannya diangkat menjadi CPNS dan ditempatkan di pemerintah pusat atau daerah sesuai formasi. Seleksinya dikenal ketat pada aspek kesehatan, psikologi, dan kesamaptaan.", tahapan: ["Pendaftaran dan seleksi administrasi lewat portal SSCASN Sekolah Kedinasan (dikdin.bkn.go.id).","SKD dengan CAT BKN: TWK 30 soal, TIU 35 soal, TKP 45 soal — dinilai dengan ambang batas (passing grade) sesuai ketentuan tahun berjalan.","Seleksi Kompetensi Bidang / seleksi lanjutan di instansi masing-masing — bentuknya berbeda tiap sekolah, dapat mencakup psikotes, tes kesehatan, dan kebugaran.","Pengumuman kelulusan akhir dan mulai pendidikan."], latihan: "Di PRATA: Simulasi Penuh SKD, Latihan TWK/TIU/TKP, dan Pusat Kosakata langsung relevan untuk jalur ini. Ambang batas yang dipakai penilaianmu diatur di Konfigurasi Passing Grade (Info & Jadwal).", url: "https://ipdn.ac.id", urlLabel: "ipdn.ac.id" },
+  { g: "kedinasan", nama: "STIS", lembaga: "Badan Pusat Statistik", ringkas: "Politeknik Statistika STIS. Program studi Statistika dan Komputasi Statistik; lulusannya diangkat menjadi CPNS di Badan Pusat Statistik. Kemampuan matematika dan statistika dasar sangat menentukan di jalur ini.", tahapan: ["Pendaftaran dan seleksi administrasi lewat portal SSCASN Sekolah Kedinasan (dikdin.bkn.go.id).","SKD dengan CAT BKN: TWK 30 soal, TIU 35 soal, TKP 45 soal — dinilai dengan ambang batas (passing grade) sesuai ketentuan tahun berjalan.","Seleksi Kompetensi Bidang / seleksi lanjutan di instansi masing-masing — bentuknya berbeda tiap sekolah, dapat mencakup psikotes, tes kesehatan, dan kebugaran.","Pengumuman kelulusan akhir dan mulai pendidikan."], latihan: "Di PRATA: Simulasi Penuh SKD, Latihan TWK/TIU/TKP, dan Pusat Kosakata langsung relevan untuk jalur ini. Ambang batas yang dipakai penilaianmu diatur di Konfigurasi Passing Grade (Info & Jadwal).", url: "https://stis.ac.id", urlLabel: "stis.ac.id" },
+  { g: "kedinasan", nama: "STIN", lembaga: "Badan Intelijen Negara", ringkas: "Sekolah Tinggi Intelijen Negara. Mendidik calon aparatur intelijen negara; proses seleksinya bersifat khusus dan sebagian tahapannya tidak diumumkan terbuka seperti jalur lain.", tahapan: ["Pendaftaran dan seleksi administrasi lewat portal SSCASN Sekolah Kedinasan (dikdin.bkn.go.id).","SKD dengan CAT BKN: TWK 30 soal, TIU 35 soal, TKP 45 soal — dinilai dengan ambang batas (passing grade) sesuai ketentuan tahun berjalan.","Seleksi Kompetensi Bidang / seleksi lanjutan di instansi masing-masing — bentuknya berbeda tiap sekolah, dapat mencakup psikotes, tes kesehatan, dan kebugaran.","Pengumuman kelulusan akhir dan mulai pendidikan."], latihan: "Di PRATA: Simulasi Penuh SKD, Latihan TWK/TIU/TKP, dan Pusat Kosakata langsung relevan untuk jalur ini. Ambang batas yang dipakai penilaianmu diatur di Konfigurasi Passing Grade (Info & Jadwal).", url: "https://stin.ac.id", urlLabel: "stin.ac.id" },
+  { g: "kedinasan", nama: "STMKG", lembaga: "BMKG", ringkas: "Sekolah Tinggi Meteorologi Klimatologi dan Geofisika. Program studi Meteorologi, Klimatologi, Geofisika, dan Instrumentasi; lulusannya diangkat menjadi CPNS di BMKG. Latar belakang IPA dan matematika yang kuat sangat membantu.", tahapan: ["Pendaftaran dan seleksi administrasi lewat portal SSCASN Sekolah Kedinasan (dikdin.bkn.go.id).","SKD dengan CAT BKN: TWK 30 soal, TIU 35 soal, TKP 45 soal — dinilai dengan ambang batas (passing grade) sesuai ketentuan tahun berjalan.","Seleksi Kompetensi Bidang / seleksi lanjutan di instansi masing-masing — bentuknya berbeda tiap sekolah, dapat mencakup psikotes, tes kesehatan, dan kebugaran.","Pengumuman kelulusan akhir dan mulai pendidikan."], latihan: "Di PRATA: Simulasi Penuh SKD, Latihan TWK/TIU/TKP, dan Pusat Kosakata langsung relevan untuk jalur ini. Ambang batas yang dipakai penilaianmu diatur di Konfigurasi Passing Grade (Info & Jadwal).", url: "https://stmkg.ac.id", urlLabel: "stmkg.ac.id" },
+  { g: "kedinasan", nama: "Poltek SSN", lembaga: "Badan Siber dan Sandi Negara", ringkas: "Politeknik Siber dan Sandi Negara. Program studi di bidang rekayasa keamanan siber dan rekayasa perangkat keras kriptografi; lulusannya diangkat menjadi CPNS di BSSN.", tahapan: ["Pendaftaran dan seleksi administrasi lewat portal SSCASN Sekolah Kedinasan (dikdin.bkn.go.id).","SKD dengan CAT BKN: TWK 30 soal, TIU 35 soal, TKP 45 soal — dinilai dengan ambang batas (passing grade) sesuai ketentuan tahun berjalan.","Seleksi Kompetensi Bidang / seleksi lanjutan di instansi masing-masing — bentuknya berbeda tiap sekolah, dapat mencakup psikotes, tes kesehatan, dan kebugaran.","Pengumuman kelulusan akhir dan mulai pendidikan."], latihan: "Di PRATA: Simulasi Penuh SKD, Latihan TWK/TIU/TKP, dan Pusat Kosakata langsung relevan untuk jalur ini. Ambang batas yang dipakai penilaianmu diatur di Konfigurasi Passing Grade (Info & Jadwal).", url: "https://poltekssn.ac.id", urlLabel: "poltekssn.ac.id" },
+  { g: "polri", nama: "Akpol", lembaga: "Kepolisian Negara RI", ringkas: "Akademi Kepolisian. Pendidikan selama 4 tahun membentuk perwira pertama Polri; umumnya untuk lulusan SMA/MA sederajat berusia muda. Jalur paling kompetitif di Polri, dengan tes akademik tersendiri.", tahapan: ["Pendaftaran daring di penerimaan.polri.go.id, lalu verifikasi dan penyerahan berkas.","Pemeriksaan administrasi awal.","Tes kesehatan tahap I.","Tes psikologi.","Tes akademik — terutama untuk Akpol dan SIPSS: Bahasa Indonesia, Bahasa Inggris, Matematika, dan Pengetahuan Umum (wawasan kebangsaan).","Tes kesamaptaan jasmani.","Tes kesehatan tahap II dan penelusuran mental kepribadian (PMK).","Sidang penetapan kelulusan, lalu mengikuti pendidikan."], catatan: "Urutan dan rincian tahapan dapat berbeda menurut jalur dan tahun penerimaan — ikuti pengumuman resmi yang berlaku. Seleksi Polri TIDAK memakai SKD BKN; tes akademiknya diselenggarakan sendiri oleh Polri.", latihan: "Di PRATA: TIU melatih kemampuan numerik dan penalaran, TWK melatih wawasan kebangsaan, dan Pusat Kosakata melatih kemampuan verbal — ketiganya fondasi yang berguna untuk tes akademik jalur ini, yang bentuk resminya mengikuti kisi-kisi pengumuman tahun berjalan.", url: "https://penerimaan.polri.go.id", urlLabel: "penerimaan.polri.go.id" },
+  { g: "polri", nama: "SIPSS", lembaga: "Kepolisian Negara RI", ringkas: "Sekolah Inspektur Polisi Sumber Sarjana. Untuk lulusan S1 atau D4 dari jurusan yang dibutuhkan Polri; pendidikan membentuk perwira pertama Polri dengan waktu lebih singkat dari Akpol.", tahapan: ["Pendaftaran daring di penerimaan.polri.go.id, lalu verifikasi dan penyerahan berkas.","Pemeriksaan administrasi awal.","Tes kesehatan tahap I.","Tes psikologi.","Tes akademik — terutama untuk Akpol dan SIPSS: Bahasa Indonesia, Bahasa Inggris, Matematika, dan Pengetahuan Umum (wawasan kebangsaan).","Tes kesamaptaan jasmani.","Tes kesehatan tahap II dan penelusuran mental kepribadian (PMK).","Sidang penetapan kelulusan, lalu mengikuti pendidikan."], catatan: "Urutan dan rincian tahapan dapat berbeda menurut jalur dan tahun penerimaan — ikuti pengumuman resmi yang berlaku. Seleksi Polri TIDAK memakai SKD BKN; tes akademiknya diselenggarakan sendiri oleh Polri.", latihan: "Di PRATA: TIU melatih kemampuan numerik dan penalaran, TWK melatih wawasan kebangsaan, dan Pusat Kosakata melatih kemampuan verbal — ketiganya fondasi yang berguna untuk tes akademik jalur ini, yang bentuk resminya mengikuti kisi-kisi pengumuman tahun berjalan.", url: "https://penerimaan.polri.go.id", urlLabel: "penerimaan.polri.go.id" },
+  { g: "polri", nama: "Bintara Polri", lembaga: "Kepolisian Negara RI", ringkas: "Untuk lulusan SMA sederajat; membentuk bintara Polri. Selain jalur umum, ada Bintara Kompetensi Khusus untuk keahlian tertentu sesuai kebutuhan tahun berjalan.", tahapan: ["Pendaftaran daring di penerimaan.polri.go.id, lalu verifikasi dan penyerahan berkas.","Pemeriksaan administrasi awal.","Tes kesehatan tahap I.","Tes psikologi.","Tes akademik — terutama untuk Akpol dan SIPSS: Bahasa Indonesia, Bahasa Inggris, Matematika, dan Pengetahuan Umum (wawasan kebangsaan).","Tes kesamaptaan jasmani.","Tes kesehatan tahap II dan penelusuran mental kepribadian (PMK).","Sidang penetapan kelulusan, lalu mengikuti pendidikan."], catatan: "Urutan dan rincian tahapan dapat berbeda menurut jalur dan tahun penerimaan — ikuti pengumuman resmi yang berlaku. Seleksi Polri TIDAK memakai SKD BKN; tes akademiknya diselenggarakan sendiri oleh Polri.", latihan: "Di PRATA: TIU melatih kemampuan numerik dan penalaran, TWK melatih wawasan kebangsaan, dan Pusat Kosakata melatih kemampuan verbal — ketiganya fondasi yang berguna untuk tes akademik jalur ini, yang bentuk resminya mengikuti kisi-kisi pengumuman tahun berjalan.", url: "https://penerimaan.polri.go.id", urlLabel: "penerimaan.polri.go.id" },
+  { g: "polri", nama: "Tamtama Polri", lembaga: "Kepolisian Negara RI", ringkas: "Untuk lulusan SMA sederajat; membentuk tamtama Polri, umumnya untuk satuan tertentu seperti Brimob dan Polair sesuai kebutuhan tahun berjalan.", tahapan: ["Pendaftaran daring di penerimaan.polri.go.id, lalu verifikasi dan penyerahan berkas.","Pemeriksaan administrasi awal.","Tes kesehatan tahap I.","Tes psikologi.","Tes akademik — terutama untuk Akpol dan SIPSS: Bahasa Indonesia, Bahasa Inggris, Matematika, dan Pengetahuan Umum (wawasan kebangsaan).","Tes kesamaptaan jasmani.","Tes kesehatan tahap II dan penelusuran mental kepribadian (PMK).","Sidang penetapan kelulusan, lalu mengikuti pendidikan."], catatan: "Urutan dan rincian tahapan dapat berbeda menurut jalur dan tahun penerimaan — ikuti pengumuman resmi yang berlaku. Seleksi Polri TIDAK memakai SKD BKN; tes akademiknya diselenggarakan sendiri oleh Polri.", latihan: "Di PRATA: TIU melatih kemampuan numerik dan penalaran, TWK melatih wawasan kebangsaan, dan Pusat Kosakata melatih kemampuan verbal — ketiganya fondasi yang berguna untuk tes akademik jalur ini, yang bentuk resminya mengikuti kisi-kisi pengumuman tahun berjalan.", url: "https://penerimaan.polri.go.id", urlLabel: "penerimaan.polri.go.id" },
+  { g: "tni", nama: "Akmil", lembaga: "TNI Angkatan Darat", ringkas: "Akademi Militer di Magelang. Pendidikan 4 tahun membentuk perwira TNI AD. Seleksinya menekankan kesehatan, jasmani, psikologi, dan akademik secara berimbang.", tahapan: ["Pendaftaran daring di rekrutmen-tni.mil.id.","Seleksi administrasi.","Tes kesehatan.","Tes kesamaptaan jasmani.","Tes psikologi.","Tes akademik (umumnya Matematika, Bahasa Indonesia, Bahasa Inggris, Pengetahuan Umum) dan pemeriksaan mental ideologi.","Pantukhir (panitia penentu akhir) tingkat daerah, lalu tingkat pusat.","Pendidikan di akademi selama 4 tahun."], catatan: "Urutan dan rincian tahapan dapat berbeda menurut matra dan tahun penerimaan — ikuti pengumuman resmi yang berlaku. Seleksi TNI TIDAK memakai SKD BKN.", latihan: "Di PRATA: TIU melatih kemampuan numerik dan penalaran, TWK melatih wawasan kebangsaan, dan Pusat Kosakata melatih kemampuan verbal — ketiganya fondasi yang berguna untuk tes akademik jalur ini, yang bentuk resminya mengikuti kisi-kisi pengumuman tahun berjalan.", url: "https://rekrutmen-tni.mil.id", urlLabel: "rekrutmen-tni.mil.id" },
+  { g: "tni", nama: "AAL", lembaga: "TNI Angkatan Laut", ringkas: "Akademi Angkatan Laut di Surabaya. Pendidikan 4 tahun membentuk perwira TNI AL, termasuk korps pelaut, teknik, elektronika, suplai, dan marinir sesuai kebutuhan.", tahapan: ["Pendaftaran daring di rekrutmen-tni.mil.id.","Seleksi administrasi.","Tes kesehatan.","Tes kesamaptaan jasmani.","Tes psikologi.","Tes akademik (umumnya Matematika, Bahasa Indonesia, Bahasa Inggris, Pengetahuan Umum) dan pemeriksaan mental ideologi.","Pantukhir (panitia penentu akhir) tingkat daerah, lalu tingkat pusat.","Pendidikan di akademi selama 4 tahun."], catatan: "Urutan dan rincian tahapan dapat berbeda menurut matra dan tahun penerimaan — ikuti pengumuman resmi yang berlaku. Seleksi TNI TIDAK memakai SKD BKN.", latihan: "Di PRATA: TIU melatih kemampuan numerik dan penalaran, TWK melatih wawasan kebangsaan, dan Pusat Kosakata melatih kemampuan verbal — ketiganya fondasi yang berguna untuk tes akademik jalur ini, yang bentuk resminya mengikuti kisi-kisi pengumuman tahun berjalan.", url: "https://rekrutmen-tni.mil.id", urlLabel: "rekrutmen-tni.mil.id" },
+  { g: "tni", nama: "AAU", lembaga: "TNI Angkatan Udara", ringkas: "Akademi Angkatan Udara di Yogyakarta. Pendidikan 4 tahun membentuk perwira TNI AU. Ketelitian dan kemampuan akademik yang stabil sangat menentukan di jalur ini.", tahapan: ["Pendaftaran daring di rekrutmen-tni.mil.id.","Seleksi administrasi.","Tes kesehatan.","Tes kesamaptaan jasmani.","Tes psikologi.","Tes akademik (umumnya Matematika, Bahasa Indonesia, Bahasa Inggris, Pengetahuan Umum) dan pemeriksaan mental ideologi.","Pantukhir (panitia penentu akhir) tingkat daerah, lalu tingkat pusat.","Pendidikan di akademi selama 4 tahun."], catatan: "Urutan dan rincian tahapan dapat berbeda menurut matra dan tahun penerimaan — ikuti pengumuman resmi yang berlaku. Seleksi TNI TIDAK memakai SKD BKN.", latihan: "Di PRATA: TIU melatih kemampuan numerik dan penalaran, TWK melatih wawasan kebangsaan, dan Pusat Kosakata melatih kemampuan verbal — ketiganya fondasi yang berguna untuk tes akademik jalur ini, yang bentuk resminya mengikuti kisi-kisi pengumuman tahun berjalan.", url: "https://rekrutmen-tni.mil.id", urlLabel: "rekrutmen-tni.mil.id" }
+];
+function gambarJalur() {
+  var wadah = document.getElementById("daftarJalur");
+  if (!wadah || wadah.dataset.sudah) return;
+  wadah.dataset.sudah = "1";
+  var grup = [["kedinasan", "Sekolah Kedinasan — lewat SSCASN & SKD BKN"], ["polri", "Kepolisian — rekrutmen Polri (bukan SKD BKN)"], ["tni", "TNI — akademi militer (bukan SKD BKN)"]];
+  grup.forEach(function (gr) {
+    var h = document.createElement("h2");
+    h.className = "judul-bagian"; h.style.margin = "16px 0 10px"; h.textContent = gr[1];
+    wadah.appendChild(h);
+    JALUR_SELEKSI.filter(function (j) { return j.g === gr[0]; }).forEach(function (j) {
+      var k = document.createElement("div"); k.className = "kartu"; k.style.marginBottom = "11px";
+      var judul = document.createElement("div");
+      judul.innerHTML = "<b style='font-size:16px;'>" + j.nama + "</b> <span class='chip'>" + j.lembaga + "</span>";
+      var ringkas = document.createElement("p"); ringkas.className = "sub"; ringkas.style.marginTop = "5px"; ringkas.textContent = j.ringkas;
+      var sub = document.createElement("p"); sub.style.marginTop = "9px"; sub.style.fontWeight = "700"; sub.style.fontSize = "13.5px"; sub.textContent = "Tahapan umum:";
+      var ol = document.createElement("ol"); ol.style.margin = "4px 0 0 18px"; ol.style.fontSize = "13.5px"; ol.style.lineHeight = "1.55";
+      j.tahapan.forEach(function (t) { var li = document.createElement("li"); li.textContent = t; ol.appendChild(li); });
+      k.appendChild(judul); k.appendChild(ringkas); k.appendChild(sub); k.appendChild(ol);
+      if (j.catatan) { var ct = document.createElement("p"); ct.className = "sub"; ct.style.marginTop = "8px"; ct.textContent = j.catatan; k.appendChild(ct); }
+      var lt = document.createElement("p"); lt.className = "sub"; lt.style.marginTop = "8px"; lt.textContent = j.latihan; k.appendChild(lt);
+      var a = document.createElement("a");
+      a.href = j.url; a.target = "_blank"; a.rel = "noopener"; a.className = "btn garis lebar";
+      a.style.marginTop = "10px"; a.style.textDecoration = "none"; a.textContent = "Sumber resmi: " + j.urlLabel;
+      k.appendChild(a);
+      wadah.appendChild(k);
+    });
+  });
+}
 function pergi(nama) {
   if (!sesiUser && nama !== "login" && nama !== "daftar") { tampil("login"); return; }
   if (nama === "simulasi") { tampil("latihan"); return; }
@@ -4478,7 +4536,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v36";
+var VERSI_APP = "prata-v37";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
