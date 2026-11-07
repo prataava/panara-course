@@ -2399,6 +2399,8 @@ function tutupDurasiKuis() {
   kuis.tampilSejak = null;
 }
 function selesaiKuis() {
+  if (!kuis || kuis.selesaiDicatat) return;
+  kuis.selesaiDicatat = true;
   tutupDurasiKuis();
   var perKat = { TWK: { poin: 0, maks: 0, benar: 0, total: 0 }, TIU: { poin: 0, maks: 0, benar: 0, total: 0 }, TKP: { poin: 0, maks: 0, benar: 0, total: 0 } };
   var perSub = {};
@@ -2463,8 +2465,12 @@ function selesaiKuis() {
   document.getElementById("judulHasil").textContent = "Hasil — " + label;
   document.getElementById("skorBesar").textContent = totalPoin;
   var ket = "";
-  if (kuis.mode === "latihan" && kuis.kat !== "TKP") {
+  if (kuis.mode === "latihan" && kuis.kat !== "TKP" && perKat[kuis.kat]) {
     ket = "Benar " + perKat[kuis.kat].benar + " dari " + perKat[kuis.kat].total + " soal • Dijawab " + terjawab + " dari " + kuis.daftar.length + " soal";
+  } else if (kuis.mode === "latihan" && !perKat[kuis.kat]) {
+    var benarSemua = 0, totalSemua = 0;
+    Object.keys(perKat).forEach(function (k) { benarSemua += perKat[k].benar; totalSemua += perKat[k].total; });
+    ket = "Benar " + benarSemua + " dari " + totalSemua + " soal campuran • Dijawab " + terjawab + " dari " + kuis.daftar.length + " soal";
   } else if (kuis.mode === "latihan") {
     ket = "Rata-rata skor TKP kamu " + (perKat.TKP.total ? (perKat.TKP.poin / perKat.TKP.total).toFixed(1) : "0") + " dari 5 per soal • Dijawab " + terjawab + " dari " + kuis.daftar.length + " soal";
   } else {
@@ -2473,7 +2479,7 @@ function selesaiKuis() {
   document.getElementById("skorKeterangan").textContent = ket;
   var rincian = document.getElementById("rincianHasil");
   rincian.innerHTML = "";
-  var kats = kuis.mode === "latihan" ? [kuis.kat] : ["TWK", "TIU", "TKP"];
+  var kats = kuis.mode === "latihan" ? (perKat[kuis.kat] ? [kuis.kat] : Object.keys(perKat).filter(function (k) { return perKat[k].total > 0; })) : ["TWK", "TIU", "TKP"];
   kats.forEach(function (k) {
     var sel = document.createElement("div"); sel.className = "sel";
     var v = document.createElement("div"); v.className = "v"; v.textContent = perKat[k].poin + "/" + perKat[k].maks;
@@ -3268,7 +3274,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v24";
+var VERSI_APP = "prata-v241";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
