@@ -15,12 +15,12 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <style>
   :root{
-    --laut:#14264c; --laut2:#1d3565; --laut3:#0d1930;
-    --emas:#e9a13b; --emas2:#f5bc63;
-    --kertas:#f5f3ee; --kartu:#ffffff;
-    --tinta:#1c2333; --redup:#68707f;
-    --garis:#e4e0d5; --baik:#1d7a4f; --buruk:#b3402e;
-    --radius:16px;
+    --laut:#16305c; --laut2:#1d3565; --laut3:#0d1930; --laut-dalam:#12264a;
+    --emas:#c08c2d; --emas2:#d9a94f;
+    --kertas:#f6f5f1; --kartu:#ffffff;
+    --tinta:#1b2230; --redup:#626b7a;
+    --garis:#e3e1d8; --baik:#1d7a4f; --buruk:#b3402e;
+    --radius:14px;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -36,10 +36,9 @@
 
   /* ---------- Bilah atas ---------- */
   header.bilah{
-    background:linear-gradient(135deg,var(--laut2),var(--laut) 55%,var(--laut3));
-    color:#fff; padding:14px 16px 12px;
+    background:var(--laut-dalam);
+    color:#fff; padding:13px 16px 11px;
     display:flex; align-items:center; gap:11px;
-    box-shadow:0 3px 14px rgba(13,25,48,.35);
     position:sticky; top:0; z-index:5;
   }
   .logoapp{
@@ -84,7 +83,7 @@
   .btn:active{transform:translateY(1px);}
   .btn.emas{background:var(--emas); border-color:var(--emas); color:#23160a;}
   .btn.emas:hover{background:var(--emas2);}
-  .btn.laut{background:var(--laut); border-color:var(--laut); color:#fff;}
+  .btn.laut{background:var(--laut-dalam); border-color:var(--laut-dalam); color:#fff;}
   .btn.lebar{width:100%;}
   .btn.kecil{min-height:40px; padding:8px 13px; font-size:13px;}
   .btn:disabled{opacity:.55; cursor:default;}
@@ -93,7 +92,7 @@
   .kotak-login{max-width:430px; margin:26px auto 0;}
   .logo-besar{
     width:72px;height:72px;border-radius:20px; margin:4px auto 12px;
-    background:linear-gradient(135deg,var(--laut2),var(--laut3));
+    background:var(--laut-dalam);
     display:flex;align-items:center;justify-content:center;
     font-size:30px; font-weight:800; color:var(--emas2);
     box-shadow:0 8px 22px rgba(13,25,48,.28);
@@ -104,7 +103,7 @@
   label.lbl{display:block; font-size:12.5px; font-weight:700; margin:13px 0 6px; color:var(--laut);}
   input.isi, textarea.isi{
     width:100%; padding:12px 13px; font-size:15px; color:var(--tinta);
-    border:1.5px solid var(--garis); border-radius:12px; background:#fcfbF8; outline:none;
+    border:1.5px solid var(--garis); border-radius:12px; background:#ffffff; outline:none;
   }
   input.isi:focus, textarea.isi:focus{border-color:var(--emas); background:#fff;}
   .galat{
@@ -112,7 +111,7 @@
     font-size:13px; border-radius:10px; padding:10px 12px; margin-top:13px; line-height:1.5;
   }
   .info{
-    background:#eef4ff; border:1px solid #cfddf5; color:#274069;
+    background:#edf1f8; border:1px solid #cfddf5; color:#274069;
     font-size:12.5px; border-radius:10px; padding:10px 12px; margin-top:13px; line-height:1.55;
   }
   .ganti-mode{text-align:center; font-size:13.5px; margin-top:15px; color:var(--redup);}
@@ -127,7 +126,7 @@
   .menu-item .ikon{font-size:24px; display:block; margin-bottom:8px;}
   .menu-item .nm{font-size:15px; font-weight:800; display:block;}
   .menu-item .ds{font-size:12px; color:var(--redup); display:block; margin-top:3px; line-height:1.45;}
-  .menu-item.utama{grid-column:1 / -1; background:linear-gradient(135deg,var(--laut2),var(--laut3)); color:#fff; border:none;}
+  .menu-item.utama{grid-column:1 / -1; background:var(--laut-dalam); color:#fff; border:none;}
   .menu-item.utama .ds{color:rgba(255,255,255,.82);}
   .menu-item.utama .nm{color:#fff;}
   .cincin{display:flex; align-items:center; gap:14px;}
@@ -140,7 +139,7 @@
   .kepala-kuis .mundur{background:#fff; border:1px solid var(--garis); border-radius:10px; padding:8px 12px; font-weight:700; font-size:13px;}
   .kepala-kuis .info-kuis{font-size:13px; color:var(--redup); font-weight:600;}
   .soal-teks{font-size:16px; line-height:1.65; margin:2px 0 14px; white-space:pre-wrap;}
-  .kat-chip{display:inline-block; font-size:11px; font-weight:800; letter-spacing:.6px; padding:4px 9px; border-radius:99px; background:#eef4ff; color:var(--laut); margin-bottom:10px;}
+  .kat-chip{display:inline-block; font-size:11px; font-weight:800; letter-spacing:.6px; padding:4px 9px; border-radius:99px; background:#edf1f8; color:var(--laut); margin-bottom:10px;}
   .opsi{
     display:flex; gap:11px; width:100%; text-align:left; align-items:flex-start;
     border:1.5px solid var(--garis); background:#fff; border-radius:13px;
@@ -150,7 +149,7 @@
     flex:0 0 auto; width:26px; height:26px; border-radius:8px; background:#f0ecdf;
     display:flex; align-items:center; justify-content:center; font-weight:800; font-size:13px; color:var(--laut);
   }
-  .opsi.terpilih{border-color:var(--emas); background:#fdf6e7;}
+  .opsi.terpilih{border-color:var(--laut); background:#edf1f8;}
   .opsi.benar{border-color:var(--baik); background:#eafaf2;}
   .opsi.salah{border-color:var(--buruk); background:#fdeeea;}
   .opsi:disabled{cursor:default; opacity:.92;}
@@ -166,7 +165,7 @@
     width:36px; height:36px; border-radius:10px; border:1px solid var(--garis);
     background:#fff; font-weight:700; font-size:12.5px;
   }
-  .nomor-grid button.terjawab{background:var(--laut); color:#fff; border-color:var(--laut);}
+  .nomor-grid button.terjawab{background:var(--laut-dalam); color:#fff; border-color:var(--laut-dalam);}
   .nomor-grid button.aktif{outline:2px solid var(--emas);}
   .skor-besar{font-size:38px; font-weight:800; color:var(--laut); text-align:center; margin:6px 0 2px;}
   .rincian{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:12px;}
@@ -178,7 +177,7 @@
   .alur-chat{display:flex; flex-direction:column; gap:10px; margin-bottom:12px;}
   .gelembung{max-width:88%; padding:11px 13px; border-radius:15px; font-size:14px; line-height:1.6; white-space:pre-wrap; word-wrap:break-word;}
   .gelembung.ai{background:#fff; border:1px solid var(--garis); align-self:flex-start; border-bottom-left-radius:5px;}
-  .gelembung.saya{background:var(--laut); color:#fff; align-self:flex-end; border-bottom-right-radius:5px;}
+  .gelembung.saya{background:var(--laut-dalam); color:#fff; align-self:flex-end; border-bottom-right-radius:5px;}
   .gelembung .sumber{display:block; font-size:10.5px; font-weight:800; letter-spacing:.5px; opacity:.65; margin-bottom:5px;}
   .bar-kirim{display:flex; gap:9px; align-items:flex-end;}
   .bar-kirim textarea{flex:1; resize:none; max-height:110px;}
@@ -187,7 +186,7 @@
     border:1.5px solid var(--garis); background:#fff; border-radius:999px;
     padding:8px 14px; font-size:13px; font-weight:700;
   }
-  .segmen button.aktif{background:var(--laut); color:#fff; border-color:var(--laut);}
+  .segmen button.aktif{background:var(--laut-dalam); color:#fff; border-color:var(--laut-dalam);}
 
   /* ---------- Checklist ---------- */
   .tugas{display:flex; gap:11px; align-items:flex-start; padding:11px 4px; border-bottom:1px solid var(--garis);}
@@ -221,7 +220,7 @@
     display:flex; flex-direction:column; align-items:center; gap:3px;
   }
   nav.bawah button .ic{font-size:19px; line-height:1;}
-  nav.bawah button.aktif{color:var(--laut); background:#eef4ff;}
+  nav.bawah button.aktif{color:var(--laut); background:#edf1f8;}
   footer.kaki{text-align:center; color:var(--redup); font-size:11.5px; padding:0 16px 18px; line-height:1.6;}
   @media (max-width:480px){ .grid-menu{grid-template-columns:1fr 1fr;} .rincian{grid-template-columns:1fr 1fr 1fr;} }
 
@@ -252,7 +251,7 @@
     display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.55;
   }
   .item-soal .kepala .no{
-    flex:0 0 auto; background:#eef4ff; color:var(--laut); font-weight:800; font-size:12px;
+    flex:0 0 auto; background:#edf1f8; color:var(--laut); font-weight:800; font-size:12px;
     border-radius:8px; padding:3px 8px; margin-top:1px;
   }
   .item-soal .panel{padding:0 14px 14px; font-size:13.5px; line-height:1.65;}
@@ -281,8 +280,7 @@
     border:1.5px solid var(--garis); background:var(--kartu); color:var(--tinta);
     border-radius:999px; padding:9px 14px; font-size:13px; font-weight:700;
   }
-  .tab-portal button.aktif{background:var(--laut); color:#fff; border-color:var(--laut);}
-  body.gelap .tab-portal button.aktif{color:#0d1930;}
+  .tab-portal button.aktif{background:var(--laut-dalam); color:#fff; border-color:var(--laut-dalam);}
   .bingkai-portal{
     position:relative; border:1px solid var(--garis); border-radius:14px; overflow:hidden;
     background:#fff; height:62vh; min-height:380px;
@@ -295,10 +293,10 @@
   .bar-alat-portal .btn{min-height:42px; padding:8px 13px; font-size:13px;}
 
   .flashcard{
-    background:linear-gradient(135deg,var(--laut2),var(--laut3)); color:#fff;
-    border-radius:18px; padding:24px 20px; min-height:230px; cursor:pointer;
+    background:var(--laut-dalam); color:#fff;
+    border-radius:16px; padding:24px 20px; min-height:230px; cursor:pointer;
     display:flex; flex-direction:column; justify-content:center; gap:12px;
-    box-shadow:0 10px 26px rgba(13,25,48,.3); text-align:left; width:100%; border:none;
+    box-shadow:0 8px 20px rgba(13,25,48,.20); text-align:left; width:100%; border:none;
   }
   .flashcard .depan{font-size:16.5px; line-height:1.65; white-space:pre-wrap;}
   .flashcard .petunjuk{font-size:11.5px; opacity:.75; font-weight:700; letter-spacing:.5px;}
@@ -306,14 +304,14 @@
 
   .grafik{display:flex; align-items:flex-end; gap:7px; height:130px; padding-top:8px;}
   .grafik .kolom{flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; height:100%; justify-content:flex-end;}
-  .grafik .balok{width:100%; max-width:38px; background:var(--emas); border-radius:7px 7px 3px 3px; min-height:5px;}
+  .grafik .balok{width:100%; max-width:38px; background:var(--laut); border-radius:7px 7px 3px 3px; min-height:5px;}
   .grafik .lbl{font-size:9.5px; color:var(--redup); text-align:center; line-height:1.3;}
   .bintang{
     background:none; border:none; font-size:19px; padding:2px 4px; line-height:1;
   }
   textarea.catatan{
     width:100%; margin-top:9px; padding:10px 11px; font-size:13.5px; border:1.5px solid var(--garis);
-    border-radius:11px; background:#fcfbf8; color:var(--tinta); resize:vertical; min-height:56px;
+    border-radius:11px; background:#ffffff; color:var(--tinta); resize:vertical; min-height:56px;
   }
   body.gelap textarea.catatan{background:#232a38;}
   @media (max-width:480px){
@@ -325,33 +323,27 @@
 
   /* ---------- v4: poles profesional PRATA ---------- */
   body{-webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;}
-  ::selection{background:#f5bc63; color:#23160a;}
-  header.bilah{border-bottom:3px solid var(--emas);}
-  .merekapp .nm{letter-spacing:1.2px;}
-  .kartu{border-radius:18px; box-shadow:0 2px 10px rgba(20,38,76,.07), 0 1px 3px rgba(20,38,76,.05);}
+  ::selection{background:#d9a94f; color:#221806;}
+  header.bilah{border-bottom:2px solid var(--emas);}
+  .merekapp .nm{letter-spacing:.8px;}
+  .kartu{border-radius:var(--radius); box-shadow:0 1px 2px rgba(20,38,76,.04);}
   h2.judul-bagian{letter-spacing:.2px;}
   .btn{transition:transform .05s ease, background .15s ease, box-shadow .15s ease;}
-  .btn.emas{box-shadow:0 4px 14px rgba(233,161,59,.35);}
-  .btn.laut{box-shadow:0 4px 14px rgba(20,38,76,.22);}
   button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible{outline:2px solid var(--emas); outline-offset:2px;}
-  input.isi:focus, textarea.isi:focus{box-shadow:0 0 0 4px rgba(233,161,59,.18);}
-  .menu-item{box-shadow:0 2px 8px rgba(20,38,76,.06); transition:transform .06s ease, box-shadow .15s ease;}
+  input.isi:focus, textarea.isi:focus{box-shadow:0 0 0 4px rgba(192,140,45,.16);}
+  .menu-item{box-shadow:0 1px 2px rgba(20,38,76,.04); transition:transform .06s ease, border-color .15s ease;}
   .menu-item:active{transform:scale(.985);}
   .menu-item .ikon{
     display:flex; align-items:center; justify-content:center;
     width:46px; height:46px; border-radius:14px; font-size:23px;
-    background:#eef4ff; margin-bottom:10px;
+    background:#edf1f8; margin-bottom:10px;
   }
   .menu-item.utama .ikon{background:rgba(255,255,255,.16);}
   body.gelap .menu-item .ikon{background:#2c3547;}
   .pahlawan{
-    background:linear-gradient(130deg,var(--laut2),var(--laut) 52%,var(--laut3));
-    color:#fff; border-radius:20px; padding:20px 18px 17px; margin-bottom:14px;
-    box-shadow:0 12px 28px rgba(13,25,48,.28); position:relative; overflow:hidden;
-  }
-  .pahlawan::after{
-    content:""; position:absolute; right:-46px; top:-46px; width:150px; height:150px;
-    border-radius:50%; border:22px solid rgba(233,161,59,.16);
+    background:var(--laut-dalam);
+    color:#fff; border-radius:16px; padding:20px 18px 17px; margin-bottom:14px;
+    box-shadow:0 8px 20px rgba(13,25,48,.18); position:relative; overflow:hidden;
   }
   .pahlawan .sapa-kecil{font-size:10.5px; font-weight:800; letter-spacing:2.2px; color:var(--emas2);}
   .pahlawan h1.sapa{font-size:24px; margin:5px 0 3px; color:#fff;}
@@ -361,53 +353,55 @@
     background:rgba(255,255,255,.13); border:1px solid rgba(255,255,255,.24);
     font-size:11.5px; font-weight:700; padding:6px 11px; border-radius:999px;
   }
-  .kotak-login .kartu{box-shadow:0 16px 38px rgba(13,25,48,.14);}
-  .logo-besar{border:2px solid rgba(233,161,59,.55);}
-  nav.bawah{box-shadow:0 -6px 20px rgba(20,38,76,.09);}
+  .kotak-login .kartu{box-shadow:0 10px 26px rgba(13,25,48,.10);}
+  nav.bawah{box-shadow:0 -2px 10px rgba(20,38,76,.05);}
   nav.bawah button{transition:background .15s ease, color .15s ease;}
   .opsi{transition:border-color .12s ease, background .12s ease;}
   .item-soal{box-shadow:0 1px 4px rgba(20,38,76,.05);}
   /* ===== v5: online, AI pendamping, jendela mengambang, modul ===== */
   select.isi { appearance: auto; }
-  #jendelaApung { position: fixed; right: 14px; bottom: 86px; width: min(360px, 92vw); height: min(480px, 74dvh); background: var(--kartu); border: 1.5px solid #d8e2f2; border-radius: 18px; box-shadow: 0 18px 50px rgba(8, 24, 56, .35); z-index: 70; display: flex; flex-direction: column; overflow: hidden; }
-  body.gelap #jendelaApung { border-color: #33507e; }
-  #kepalaApung { background: linear-gradient(135deg, var(--laut), #0d2a55); color: #fff; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; cursor: move; touch-action: none; user-select: none; }
+  #jendelaApung { position: fixed; right: 14px; bottom: 86px; width: min(360px, 92vw); height: min(480px, 74dvh); background: var(--kartu); border: 1.5px solid var(--garis); border-radius: 18px; box-shadow: 0 18px 50px rgba(8, 24, 56, .35); z-index: 70; display: flex; flex-direction: column; overflow: hidden; }
+  body.gelap #jendelaApung { border-color: #3a4a6b; }
+  #kepalaApung { background: var(--laut-dalam); color: #fff; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; cursor: move; touch-action: none; user-select: none; }
   .judul-apung { font-weight: 800; font-size: 13.5px; }
   .tombol-apung button { background: rgba(255, 255, 255, .16); color: #fff; border: 0; width: 28px; height: 28px; border-radius: 8px; font-size: 14px; cursor: pointer; margin-left: 5px; }
-  #alurApung { flex: 1; overflow-y: auto; min-height: 0; padding: 12px; display: flex; flex-direction: column; gap: 8px; background: var(--latar); }
-  .gelembung.kecil { max-width: 92%; font-size: 13.5px; padding: 8px 11px; }
-  #kakiApung { display: flex; gap: 8px; padding: 10px; border-top: 1px solid #e3e9f4; align-items: flex-end; }
-  body.gelap #kakiApung { border-top-color: #2c4470; }
-  #isiApung { flex: 1; border: 1.5px solid #d8e2f2; border-radius: 12px; padding: 9px 11px; font: inherit; font-size: 14px; resize: none; background: var(--kartu); color: var(--teks); }
-  body.gelap #isiApung { border-color: #33507e; }
   #jendelaApung.besar { width: min(430px, 94vw); height: min(600px, 82dvh); }
-  #tabApung { display: flex; gap: 6px; padding: 8px 10px; overflow-x: auto; background: var(--latar); border-bottom: 1px solid #e3e9f4; }
+  #tabApung { display: flex; gap: 6px; padding: 8px 10px; overflow-x: auto; background: var(--kertas); border-bottom: 1px solid var(--garis); }
   body.gelap #tabApung { border-bottom-color: #2c4470; }
-  #tabApung button { flex: 0 0 auto; border: 1.5px solid #d8e2f2; background: var(--kartu); color: var(--teks); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; }
-  body.gelap #tabApung button { border-color: #33507e; }
-  #tabApung button.aktif { background: var(--laut); border-color: var(--laut); color: #fff; }
-  #badanChatApung { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  #tabApung button { flex: 0 0 auto; border: 1.5px solid var(--garis); background: var(--kartu); color: var(--tinta); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+  body.gelap #tabApung button { border-color: #3a4a6b; }
+  #tabApung button.aktif { background: var(--laut-dalam); border-color: var(--laut-dalam); color: #fff; }
   #bingkaiApungBungkus { flex: 1; display: flex; flex-direction: column; min-height: 0; }
-  .bar-bingkai { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; background: var(--latar); }
+  .bar-bingkai { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; background: var(--kertas); }
   .bar-bingkai span { font-weight: 800; font-size: 13px; }
   .bar-bingkai .btn { padding: 7px 12px; font-size: 12.5px; }
   #bingkaiApung { flex: 1; width: 100%; border: 0; background: #fff; min-height: 0; }
   .catatan-bingkai { font-size: 11.5px; color: var(--redup); padding: 8px 12px; line-height: 1.45; }
-  #badanChatApung[hidden], #bingkaiApungBungkus[hidden] { display: none !important; }
+  #bingkaiApungBungkus[hidden] { display: none !important; }
   #jendelaApung.ciut { height: auto; }
-  #jendelaApung.ciut #tabApung, #jendelaApung.ciut #badanChatApung, #jendelaApung.ciut #bingkaiApungBungkus { display: none; }
+  #jendelaApung.ciut #tabApung, #jendelaApung.ciut #bingkaiApungBungkus { display: none; }
   /* ===== v6: penampil buku modul ===== */
   #penampilBuku { position: fixed; inset: 0; background: #10151d; z-index: 90; display: flex; flex-direction: column; }
-  #kepalaBuku { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: #0d2a55; color: #fff; }
+  #kepalaBuku { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--laut-dalam); color: #fff; }
   #judulBuku { flex: 1; font-weight: 800; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   #kepalaBuku button { background: rgba(255, 255, 255, .16); color: #fff; border: 0; min-width: 34px; height: 34px; border-radius: 9px; font-size: 16px; cursor: pointer; padding: 0 8px; }
   #alatBuku { display: flex; gap: 6px; }
   #badanBuku { flex: 1; overflow: auto; display: flex; align-items: flex-start; justify-content: center; padding: 10px; position: relative; touch-action: pan-y; }
   #kanvasBuku { background: #fff; border-radius: 6px; box-shadow: 0 10px 34px rgba(0, 0, 0, .5); }
   #muatBuku { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, .75); color: #fff; padding: 7px 14px; border-radius: 999px; font-size: 13px; white-space: nowrap; }
-  #kakiBuku { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: #0d2a55; }
+  #kakiBuku { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: var(--laut-dalam); }
   #infoHalaman { color: #fff; font-weight: 700; font-size: 13.5px; }
   #kakiBuku .btn { background: rgba(255, 255, 255, .14); color: #fff; }
+  /* ===== v9: profesional — ikon SVG, tipografi konsisten ===== */
+  .menu-item .ikon{color:var(--laut);}
+  .menu-item .ikon svg{width:23px; height:23px; display:block;}
+  .menu-item.utama .ikon{color:#ffffff;}
+  body.gelap .menu-item .ikon{color:#cfe0ff;}
+  nav.bawah button .ic{display:flex; align-items:center; justify-content:center;}
+  nav.bawah button .ic svg{width:20px; height:20px; display:block;}
+  body.gelap .opsi.terpilih{background:#2a3852; border-color:#8fb4ff;}
+  h1.sapa{letter-spacing:-.01em;}
+  h2.judul-bagian{letter-spacing:-.01em;}
 </style>
 </head>
 <body>
@@ -497,62 +491,62 @@
 
     <div class="grid-menu">
       <button class="menu-item utama" data-pergi="latihan">
-        <span class="ikon">📝</span>
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.6 3.6a2.1 2.1 0 0 1 3 3L8 18.2l-4.2 1.1L4.9 15 16.6 3.6z"/></svg></span>
         <span class="nm">Latihan Soal Kedinasan</span>
         <span class="ds">Bank soal SKD — TWK, TIU, TKP — lengkap dengan kunci &amp; pembahasan setiap soal.</span>
       </button>
       <button class="menu-item" data-pergi="simulasi">
-        <span class="ikon">🎯</span>
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none"/></svg></span>
         <span class="nm">Simulasi Mini</span>
         <span class="ds">36 soal campuran seperti urutan SKD asli, dinilai per kategori.</span>
       </button>
       <button class="menu-item" data-pergi="ai">
-        <span class="ikon">🤖</span>
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l1.7 4.6 4.8 1.4-4.8 1.4L12 16l-1.7-4.6L5.5 10l4.8-1.4L12 4z"/></svg></span>
         <span class="nm">Tanya AI Gratis</span>
         <span class="ds">Tanya soal kedinasan apa pun — dibantu AI gratis &amp; bank pembahasan bawaan.</span>
       </button>
       <button class="menu-item" data-pergi="materi">
-        <span class="ikon">📚</span>
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span>
         <span class="nm">Materi Ringkas</span>
         <span class="ds">Ringkasan TWK, TIU, TKP yang padat dan gampang diulang.</span>
       </button>
       <button class="menu-item" data-pergi="ceklist">
-        <span class="ikon">✅</span>
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.5 12.3l2.4 2.4 4.6-5.2"/></svg></span>
         <span class="nm">Checklist Tugas</span>
         <span class="ds">Daftar tugas persiapanmu — tersimpan otomatis per akun.</span>
       </button>
       <button class="menu-item" data-pergi="riwayat">
-        <span class="ikon">📈</span>
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21h16"/><path d="M7 21v-6"/><path d="M12 21V6"/><path d="M17 21v-9"/></svg></span>
         <span class="nm">Riwayat Skor</span>
         <span class="ds">Hasil latihan &amp; simulasimu dari waktu ke waktu.</span>
       </button>
       <button class="menu-item" data-pergi="bantuan">
-        <span class="ikon">🛠️</span>
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7h7"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 15.5h.01M12 15.5h.01M15.5 15.5h.01"/></svg></span>
         <span class="nm">Bantuan Jawab</span>
         <span class="ds">Kotak alat bantu menjawab: hitung persen, diskon, rata-rata, pola deret — lengkap dengan langkahnya.</span>
       </button>
       <button class="menu-item" data-pergi="daftarsoal">
-        <span class="ikon">📋</span>
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg></span>
         <span class="nm">Daftar Soal Lengkap</span>
         <span class="ds">Semua 36 soal bisa dicari &amp; dibuka kunci + pembahasannya.</span>
       </button>
       <button class="menu-item" data-pergi="modul">
-        <span class="ikon">📖</span>
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5.5C5 4.2 8 4.2 12 6c4-1.8 7-1.8 9.5-.5v13C18.5 17.2 15.5 17.2 12 19c-3.5-1.8-6.5-1.8-9.5-.5v-13z"/><path d="M12 6v13"/></svg></span>
         <span class="nm">Modul Saya</span>
         <span class="ds">Unggah PDF modul belajarmu — aplikasi membaca &amp; mengambil soalnya jadi bank soal digital.</span>
       </button>
       <button class="menu-item" data-pergi="flashcard">
-        <span class="ikon">🃏</span>
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 21 8l-9 4.5L3 8l9-4.5z"/><path d="M3.8 12.5 12 16.6l8.2-4.1"/></svg></span>
         <span class="nm">Flashcard</span>
         <span class="ds">Kartu hafalan soal &amp; fakta penting — ketuk untuk membalik jawabannya.</span>
       </button>
       <button class="menu-item" data-pergi="info">
-        <span class="ikon">📅</span>
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17"/><path d="M8 3v4M16 3v4"/></svg></span>
         <span class="nm">Info &amp; Jadwal</span>
         <span class="ds">Hitung mundur target seleksimu + info tahapan &amp; berkas kedinasan.</span>
       </button>
       <button class="menu-item" data-pergi="portal" style="grid-column:1 / -1;">
-        <span class="ikon">🌐</span>
+        <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></span>
         <span class="nm">Portal Gabungan (Panara + NF)</span>
         <span class="ds">Login Panara Course &amp; SIP Nurul Fikri dalam satu tempat — bisa tab atau split view, ada zoom &amp; muat ulang cepat.</span>
       </button>
@@ -562,7 +556,7 @@
   <!-- ======== PILIH LATIHAN ======== -->
   <section class="tampilan" id="view-latihan" hidden>
     <div class="kartu" id="kartuLanjut" hidden style="border-color:var(--emas); background:#fdf6e7;">
-      <h2 class="judul-bagian">⏸️ Ada sesi yang belum selesai</h2>
+      <h2 class="judul-bagian">Ada sesi yang belum selesai</h2>
       <p class="sub" id="teksLanjut" style="margin-bottom:11px;">Sesi kuis terakhir kamu tersimpan otomatis.</p>
       <div style="display:flex; gap:9px; flex-wrap:wrap;">
         <button class="btn emas" id="btnLanjutkanKuis">Lanjutkan Sesi</button>
@@ -574,14 +568,14 @@
       <span class="info-kuis">Pilih kategori latihan</span>
     </div>
     <div class="kartu">
-      <h2 class="judul-bagian">📝 Latihan per Kategori</h2>
+      <h2 class="judul-bagian">Latihan per Kategori</h2>
       <p class="sub" style="margin-bottom:13px;">Setiap soal langsung dibahas setelah kamu menjawab, jadi kamu belajar sambil mengerjakan.</p>
       <button class="btn laut lebar" data-mulai-latihan="TWK" style="margin-bottom:9px;">🇮🇩 TWK — Tes Wawasan Kebangsaan (12 soal)</button>
       <button class="btn laut lebar" data-mulai-latihan="TIU" style="margin-bottom:9px;">🧮 TIU — Tes Intelegensia Umum (12 soal)</button>
       <button class="btn laut lebar" data-mulai-latihan="TKP">🧭 TKP — Tes Karakteristik Pribadi (12 soal)</button>
     </div>
     <div class="kartu">
-      <h2 class="judul-bagian">🎯 Simulasi Mini SKD</h2>
+      <h2 class="judul-bagian">Simulasi Mini SKD</h2>
       <p class="sub" style="margin-bottom:13px;">36 soal campuran (TWK + TIU + TKP) tanpa pembahasan di tengah — pembahasan dibuka di akhir, dinilai per kategori seperti SKD sungguhan.</p>
       <button class="btn emas lebar" id="btnMulaiSimulasi">Mulai Simulasi Mini</button>
     </div>
@@ -699,12 +693,12 @@
       <span class="info-kuis">Riwayat Skor</span>
     </div>
     <div class="kartu" id="kartuGrafik" hidden>
-      <h2 class="judul-bagian">📊 Grafik Progres Skor</h2>
+      <h2 class="judul-bagian">Grafik Progres Skor</h2>
       <div class="grafik" id="grafikSkor"></div>
       <p class="sub">Sepuluh sesi terakhirmu — makin tinggi baloknya, makin besar skornya.</p>
     </div>
     <div class="kartu" id="kartuPapan" hidden>
-      <h2 class="judul-bagian">🏆 Peringkat di Perangkat Ini</h2>
+      <h2 class="judul-bagian">Peringkat Online — Semua Pengguna</h2>
       <div id="daftarPapan"></div>
       <p class="sub" style="margin-top:8px;">Berdasarkan skor Simulasi Mini terbaik tiap akun yang terdaftar di perangkat ini.</p>
     </div>
@@ -719,7 +713,7 @@
     </div>
 
     <div class="kartu">
-      <h2 class="judul-bagian">🔎 Cari Soal di Bank Soal</h2>
+      <h2 class="judul-bagian">Cari Soal di Bank Soal</h2>
       <p class="sub" style="margin-bottom:11px;">Ketik kata kunci (mis. "persen", "Pancasila", "deret") — soal yang cocok akan ditampilkan lengkap dengan kunci &amp; pembahasannya.</p>
       <div class="bar-tambah" style="margin-top:0;">
         <input class="isi" id="cariCepat" type="text" placeholder="Kata kunci soal…">
@@ -728,7 +722,7 @@
     </div>
 
     <div class="kartu">
-      <h2 class="judul-bagian">🧮 Alat Persen</h2>
+      <h2 class="judul-bagian">Alat Persen</h2>
       <div class="alat-grid">
         <input class="isi" id="alPersenA" type="number" inputmode="decimal" placeholder="Persen (mis. 15)">
         <input class="isi" id="alPersenB" type="number" inputmode="decimal" placeholder="Dari nilai (mis. 240)">
@@ -738,7 +732,7 @@
     </div>
 
     <div class="kartu">
-      <h2 class="judul-bagian">🏷️ Alat Diskon</h2>
+      <h2 class="judul-bagian">Alat Diskon</h2>
       <div class="alat-grid">
         <input class="isi" id="alDiskonHarga" type="number" inputmode="numeric" placeholder="Harga awal (Rp)">
         <input class="isi" id="alDiskonPersen" type="number" inputmode="decimal" placeholder="Diskon % (mis. 25)">
@@ -748,14 +742,14 @@
     </div>
 
     <div class="kartu">
-      <h2 class="judul-bagian">📊 Alat Rata-Rata</h2>
+      <h2 class="judul-bagian">Alat Rata-Rata</h2>
       <input class="isi" id="alRataInput" type="text" placeholder="Tulis angka dipisah koma — mis. 6, 7, 8, 9, 10">
       <button class="btn laut lebar" id="btnAlRata" style="margin-top:10px;">Hitung Rata-Rata</button>
       <div class="hasil-alat" id="hasilRata" hidden></div>
     </div>
 
     <div class="kartu">
-      <h2 class="judul-bagian">🔢 Alat Pola Deret</h2>
+      <h2 class="judul-bagian">Alat Pola Deret</h2>
       <p class="sub" style="margin-bottom:11px;">Tulis deret angka (dipisah koma), alat ini menebak polanya dan memberi angka berikutnya beserta alasannya.</p>
       <input class="isi" id="alDeretInput" type="text" placeholder="Mis. 2, 6, 12, 20, 30">
       <button class="btn laut lebar" id="btnAlDeret" style="margin-top:10px;">Cek Pola Deret</button>
@@ -763,7 +757,7 @@
     </div>
 
     <div class="kartu">
-      <h2 class="judul-bagian">🎯 Kalkulator Skor SKD</h2>
+      <h2 class="judul-bagian">Kalkulator Skor SKD</h2>
       <p class="sub" style="margin-bottom:11px;">Hitung skor SKD dari jumlah jawaban benar (TWK &amp; TIU: 5 poin per soal benar) dan poin TKP, lalu bandingkan dengan passing grade yang umum diberlakukan BKN (TWK 65 • TIU 80 • TKP 166).</p>
       <div class="alat-grid">
         <input class="isi" id="skdTwk" type="number" inputmode="numeric" placeholder="Benar TWK (dari 30)">
@@ -775,7 +769,7 @@
     </div>
 
     <div class="kartu">
-      <h2 class="judul-bagian">⚡ Daftar Cepat</h2>
+      <h2 class="judul-bagian">Daftar Cepat</h2>
       <div id="daftarCepat"></div>
     </div>
   </section>
@@ -817,10 +811,10 @@
       <button class="btn" id="btnPortalZoomPlus">🔍＋ Zoom</button>
       <button class="btn" id="btnPortalPenuh">⛶ Layar Penuh</button>
       <button class="btn" id="btnPortalTabBaru">↗ Buka di Tab Baru</button>
-      <button class="btn emas" id="btnApung">🤖 AI Mengambang</button>
+      <button class="btn emas" id="btnApung">AI Mengambang</button>
     </div>
     <div class="kartu" style="padding:14px;">
-      <div style="font-weight:800; font-size:14px; margin-bottom:4px;">🤖 AI Pendamping &amp; Pencarian Web</div>
+      <div style="font-weight:800; font-size:14px; margin-bottom:4px;">AI Pendamping &amp; Pencarian Web</div>
       <p class="sub" style="margin-bottom:10px;">Pilih AI favoritmu — terbuka sebagai jendela pendamping di samping portal, bisa dipakai bersamaan (situs AI besar melarang ditanam di dalam aplikasi lain, jadi mereka dibuka berdampingan). Untuk memakai AI tanpa meninggalkan portal, pakai tombol emas “AI Mengambang” di atas: konsol AI melayang di atas portal (bisa digeser) dan berisi situs-situs AI yang bisa kamu pilih tabnya.</p>
       <div class="tab-portal" style="margin-bottom:10px;">
         <button data-aiweb="https://chatgpt.com">ChatGPT</button>
@@ -882,7 +876,7 @@
       <span class="info-kuis">Info &amp; Jadwal Kedinasan</span>
     </div>
     <div class="kartu">
-      <h2 class="judul-bagian">🎯 Target Seleksiku</h2>
+      <h2 class="judul-bagian">Target Seleksiku</h2>
       <label class="lbl" for="targetNama">Nama seleksi / sekolah kedinasan</label>
       <input class="isi" id="targetNama" type="text" placeholder="Mis. STAN — SKD 2027">
       <label class="lbl" for="targetTgl">Tanggal ujian (perkiraan)</label>
@@ -892,7 +886,7 @@
       <div class="sub" style="text-align:center;" id="hitungMundurTeks">Atur targetmu untuk melihat hitung mundur di sini.</div>
     </div>
     <div class="kartu">
-      <h2 class="judul-bagian">🧭 Tahapan Seleksi (Gambaran Umum)</h2>
+      <h2 class="judul-bagian">Tahapan Seleksi (Gambaran Umum)</h2>
       <div class="materi-isi">1. PENDAFTARAN &amp; SELEKSI ADMINISTRASI
 Daftar lewat portal SSCASN (sscasn.bkn.go.id) atau portal resmi sekolah kedinasan tujuan; unggah berkas sesuai syarat (KTP, KK, ijazah/rapor, pasfoto, dan syarat khusus tiap sekolah).
 
@@ -914,17 +908,17 @@ Tiap sekolah berbeda: bisa meliputi tes akademik lanjutan, kesehatan, kebugaran/
       <span class="info-kuis">Modul Saya — Baca PDF Jadi Bank Soal</span>
     </div>
     <div class="kartu">
-      <h2 class="judul-bagian">📖 Baca Modul dari Perangkatmu</h2>
+      <h2 class="judul-bagian">Baca Modul dari Perangkatmu</h2>
       <p class="sub" style="margin-bottom:11px;">Pilih berkas PDF modul belajarmu. Aplikasi membaca isinya di perangkatmu, mengambil soal-soal bernomor beserta opsinya, mencocokkan kunci dari bagian “KUNCI JAWABAN” bila ada, lalu menjadikannya bank soal digital yang bisa langsung dilatih. Hasil bacaan tersimpan di akun onlinemu.</p>
-      <label class="btn emas lebar" for="inputModul" style="margin:0;">📄 Pilih Berkas PDF Modul</label>
+      <label class="btn emas lebar" for="inputModul" style="margin:0;">Pilih Berkas PDF Modul</label>
       <input type="file" id="inputModul" accept="application/pdf" hidden>
       <div class="sub" id="statusModul" style="margin-top:11px;"></div>
       <div class="batang" id="batangModulBungkus" hidden style="margin-top:9px;"><i id="batangModul" style="width:0%"></i></div>
     </div>
     <div class="kartu">
-      <h2 class="judul-bagian">📚 Buku Modul</h2>
+      <h2 class="judul-bagian">Buku Modul</h2>
       <p class="sub" style="margin-bottom:11px;">Buka berkas bukunya langsung di aplikasi dan baca seperti e-book — halamannya bisa digeser. Berkas buku tersimpan di perangkat ini (terlalu besar untuk server gratis); yang tersimpan di akun onlinemu adalah soal-soal hasil bacaannya.</p>
-      <button class="btn laut lebar" id="btnBukaBuku">📖 Buka Buku Modul</button>
+      <button class="btn laut lebar" id="btnBukaBuku">Buka Buku Modul</button>
       <div class="sub" id="statusBuku" style="margin-top:9px;"></div>
     </div>
     <div id="wadahModul"></div>
@@ -932,11 +926,11 @@ Tiap sekolah berbeda: bisa meliputi tes akademik lanjutan, kesehatan, kebugaran/
 </main>
 
 <nav class="bawah" id="navBawah" hidden>
-  <button data-pergi="beranda"><span class="ic">🏠</span>Beranda</button>
-  <button data-pergi="latihan"><span class="ic">📝</span>Latihan</button>
-  <button data-pergi="ai"><span class="ic">🤖</span>Tanya AI</button>
-  <button data-pergi="ceklist"><span class="ic">✅</span>Tugas</button>
-  <button data-pergi="materi"><span class="ic">📚</span>Materi</button>
+  <button data-pergi="beranda"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.8 12 3l9 7.8"/><path d="M5.5 9.5V21h13V9.5"/></svg></span>Beranda</button>
+  <button data-pergi="latihan"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.6 3.6a2.1 2.1 0 0 1 3 3L8 18.2l-4.2 1.1L4.9 15 16.6 3.6z"/></svg></span>Latihan</button>
+  <button data-pergi="ai"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 21l2-5.6A8.5 8.5 0 1 1 21 11.5z"/></svg></span>Tanya AI</button>
+  <button data-pergi="ceklist"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.5 12.3l2.4 2.4 4.6-5.2"/></svg></span>Tugas</button>
+  <button data-pergi="materi"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span>Materi</button>
 </nav>
 
 <footer class="kaki" id="kakiApp">PRATA — aplikasi belajar seleksi sekolah kedinasan.<br>Soal latihan adalah soal buatan untuk berlatih, bukan soal resmi BKN/panitia.</footer>
@@ -963,7 +957,7 @@ Tiap sekolah berbeda: bisa meliputi tes akademik lanjutan, kesehatan, kebugaran/
 
 <div id="jendelaApung" hidden>
   <div id="kepalaApung">
-    <span class="judul-apung">🤖 Konsol AI — Mengambang</span>
+    <span class="judul-apung">Konsol AI — Mengambang</span>
     <span class="tombol-apung">
       <button id="btnApungKecil" title="Kecilkan / besarkan">—</button>
       <button id="btnApungTutup" title="Tutup">✕</button>
@@ -1109,17 +1103,37 @@ function simpanDataUser(d) {
 }
 function sinkronSekarang() {
   if (!sesiId || !sbToken || !dataCache) return;
-  fetch(SB_URL + "/rest/v1/data_pengguna", { method: "POST", headers: Object.assign(sbHeaders(), { "Prefer": "resolution=merge-duplicates" }), body: JSON.stringify({ user_id: sesiId, data: dataCache, updated_at: new Date().toISOString() }) }).catch(function () {});
+  fetch(SB_URL + "/rest/v1/data_pengguna", { method: "POST", keepalive: true, headers: Object.assign(sbHeaders(), { "Prefer": "resolution=merge-duplicates" }), body: JSON.stringify({ user_id: sesiId, data: dataCache, updated_at: new Date().toISOString() }) }).catch(function () {});
+}
+window.addEventListener("pagehide", function () {
+  if (timerSinkron) { clearTimeout(timerSinkron); timerSinkron = null; sinkronSekarang(); }
+});
+function sbSegarkanToken() {
+  if (!sbRefresh) return Promise.resolve(false);
+  return sbAuth("/auth/v1/token?grant_type=refresh_token", { refresh_token: sbRefresh }).then(function (res) {
+    if (res.ok && res.body.access_token) { sbTerapkanSesi(res.body); return true; }
+    return false;
+  }).catch(function () { return false; });
+}
+function ambilDataServer() {
+  return fetch(SB_URL + "/rest/v1/data_pengguna?user_id=eq." + sesiId + "&select=data", { headers: sbHeaders() })
+    .then(function (r) {
+      if (r.status === 401) return "kedaluwarsa";
+      return r.json().then(function (rows) {
+        if (rows && rows.length && rows[0].data && Object.keys(rows[0].data).length) { dataCache = rows[0].data; }
+        else { dataCache = dataBawaan(); sinkronSekarang(); }
+        try { localStorage.setItem("prata_cache_" + sesiId, JSON.stringify(dataCache)); } catch (e) {}
+        return "ok";
+      });
+    })
+    .catch(function () { dataCache = ambilJSON("prata_cache_" + sesiId, null) || dataBawaan(); return "ok"; });
 }
 function muatDataOnline() {
-  return fetch(SB_URL + "/rest/v1/data_pengguna?user_id=eq." + sesiId + "&select=data", { headers: sbHeaders() })
-    .then(function (r) { return r.json(); })
-    .then(function (rows) {
-      if (rows && rows.length && rows[0].data && Object.keys(rows[0].data).length) { dataCache = rows[0].data; }
-      else { dataCache = dataBawaan(); sinkronSekarang(); }
-      try { localStorage.setItem("prata_cache_" + sesiId, JSON.stringify(dataCache)); } catch (e) {}
-    })
-    .catch(function () { dataCache = ambilJSON("prata_cache_" + sesiId, null) || dataBawaan(); });
+  return ambilDataServer().then(function (status) {
+    if (status === "kedaluwarsa") {
+      return sbSegarkanToken().then(function (ok) { if (ok) return ambilDataServer(); });
+    }
+  });
 }
 
 /* ================= NAVIGASI ================= */
@@ -1196,6 +1210,13 @@ document.getElementById("btnDaftar").addEventListener("click", function () {
   sbAuth("/auth/v1/signup", { email: email, password: s1, data: { nama: nama } }).then(function (res) {
     btn.disabled = false; btn.textContent = "Buat Akun & Masuk";
     if (res.ok && res.body.access_token) { tampilGalat("dfGalat", ""); sbTerapkanSesi(res.body); masukBerhasil(); return; }
+    if (res.ok && res.body && res.body.user) {
+      // Akun terbuat tetapi sesi tidak langsung diberikan — coba masuk otomatis.
+      return sbAuth("/auth/v1/token?grant_type=password", { email: email, password: s1 }).then(function (res2) {
+        if (res2.ok && res2.body.access_token) { tampilGalat("dfGalat", ""); sbTerapkanSesi(res2.body); masukBerhasil(); return; }
+        tampilGalat("dfGalat", "Akunmu sudah terbuat. Kembali ke halaman Masuk dan masuk dengan email tadi ya.");
+      });
+    }
     var pesan = (res.body && (res.body.msg || res.body.message || (res.body.error_description))) || "";
     if (/already|registered|exists/i.test(pesan)) { tampilGalat("dfGalat", "Email itu sudah terdaftar. Kembali ke halaman Masuk ya."); return; }
     tampilGalat("dfGalat", "Pendaftaran belum berhasil (" + (pesan || "server tidak menjawab") + "). Coba lagi sebentar lagi.");
@@ -1351,7 +1372,7 @@ function gambarRiwayat() {
     fetch(SB_URL + "/rest/v1/papan_skor?select=nama,terbaik&order=terbaik.desc&limit=20", { headers: sbHeaders() })
       .then(function (r) { return r.json(); })
       .then(function (rows) {
-        if (!rows || !rows.length || document.getElementById("view-riwayat").hidden) return;
+        if (!Array.isArray(rows) || !rows.length || document.getElementById("view-riwayat").hidden) return;
         kartuP.hidden = false;
         var wadahP = document.getElementById("daftarPapan");
         wadahP.innerHTML = "";
@@ -2501,7 +2522,7 @@ document.getElementById("btnBukaBuku").addEventListener("click", function () {
   idbAmbil("modulPdf").then(function (rec) {
     if (!rec || !rec.blob) { st.textContent = "Buku belum tersimpan di perangkat ini — pilih berkas PDF modulnya sekali lewat tombol “Pilih Berkas PDF Modul” di atas."; return; }
     document.getElementById("penampilBuku").hidden = false;
-    document.getElementById("judulBuku").textContent = "📚 " + (rec.nama || "Buku Modul").replace(/\.pdf$/i, "");
+    document.getElementById("judulBuku").textContent = (rec.nama || "Buku Modul").replace(/\.pdf$/i, "");
     var muat = document.getElementById("muatBuku");
     muat.hidden = false; muat.textContent = "⏳ Memuat buku…";
     muatPdfJs().then(function () { return rec.blob.arrayBuffer(); })
@@ -2582,9 +2603,7 @@ document.getElementById("btnZoomKurang").addEventListener("click", function () {
   if (s && s.t && s.id) {
     sbToken = s.t; sbRefresh = s.r; sesiId = s.id; sesiEmail = s.email; sesiUser = s.nama;
     document.getElementById("chipNama").textContent = sesiUser;
-    sbAuth("/auth/v1/token?grant_type=refresh_token", { refresh_token: s.r }).then(function (res) {
-      if (res.ok && res.body.access_token) sbTerapkanSesi(res.body);
-    }).catch(function () {});
+    sbSegarkanToken();
     masukBerhasil();
   }
   else { tampil("login"); }
