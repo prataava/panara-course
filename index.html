@@ -821,7 +821,7 @@
     </div>
     <div class="kartu" style="padding:14px;">
       <div style="font-weight:800; font-size:14px; margin-bottom:4px;">🤖 AI Pendamping &amp; Pencarian Web</div>
-      <p class="sub" style="margin-bottom:10px;">Pilih AI favoritmu — terbuka sebagai jendela pendamping di samping portal, bisa dipakai bersamaan (situs AI besar melarang ditanam di dalam aplikasi lain, jadi mereka dibuka berdampingan). Untuk bertanya tanpa meninggalkan portal, pakai tombol emas “AI Mengambang” di atas: jendela AI PRATA melayang di atas portal dan bisa digeser.</p>
+      <p class="sub" style="margin-bottom:10px;">Pilih AI favoritmu — terbuka sebagai jendela pendamping di samping portal, bisa dipakai bersamaan (situs AI besar melarang ditanam di dalam aplikasi lain, jadi mereka dibuka berdampingan). Untuk memakai AI tanpa meninggalkan portal, pakai tombol emas “AI Mengambang” di atas: konsol AI melayang di atas portal (bisa digeser) dan berisi situs-situs AI yang bisa kamu pilih tabnya.</p>
       <div class="tab-portal" style="margin-bottom:10px;">
         <button data-aiweb="https://chatgpt.com">ChatGPT</button>
         <button data-aiweb="https://gemini.google.com">Gemini</button>
@@ -970,28 +970,23 @@ Tiap sekolah berbeda: bisa meliputi tes akademik lanjutan, kesehatan, kebugaran/
     </span>
   </div>
   <div id="tabApung">
-    <button data-tabapung="prata" class="aktif">AI PRATA</button>
+    <button data-tabapung="kimi" class="aktif">Kimi</button>
+    <button data-tabapung="deepseek">DeepSeek</button>
+    <button data-tabapung="you">You.com</button>
+    <button data-tabapung="yuanbao">Yuanbao</button>
     <button data-tabapung="chatgpt">ChatGPT</button>
     <button data-tabapung="gemini">Gemini</button>
     <button data-tabapung="claude">Claude</button>
-    <button data-tabapung="deepseek">DeepSeek</button>
     <button data-tabapung="perplexity">Perplexity</button>
     <button data-tabapung="copilot">Copilot</button>
   </div>
-  <div id="badanChatApung">
-    <div id="alurApung"></div>
-    <div id="kakiApung">
-      <textarea id="isiApung" rows="2" placeholder="Tanya soal ke AI sambil lihat portal…"></textarea>
-      <button class="btn emas" id="btnApungKirim">Kirim</button>
-    </div>
-  </div>
-  <div id="bingkaiApungBungkus" hidden>
+  <div id="bingkaiApungBungkus">
     <div class="bar-bingkai">
-      <span id="namaBingkaiApung">Situs AI</span>
+      <span id="namaBingkaiApung">Kimi</span>
       <button class="btn emas" id="btnBingkaiBuka">↗ Buka sebagai Jendela</button>
     </div>
     <iframe id="bingkaiApung" title="Situs AI dalam bingkai mengambang" loading="lazy" referrerpolicy="no-referrer"></iframe>
-    <p class="catatan-bingkai">Bila bingkai di atas kosong atau ditolak, itu kunci resmi dari situsnya (mereka hanya mengizinkan situsnya sendiri membingkai halamannya — terbukti dari server ChatGPT). Pakai tombol ↗: situsnya terbuka sebagai jendela pendamping yang sama-sama bisa kamu pakai bersamaan dengan portal.</p>
+    <p class="catatan-bingkai">Kimi, You.com, dan Yuanbao mengizinkan situsnya tampil di dalam bingkai ini (sudah diperiksa langsung dari server mereka) — pilih tabnya dan situsnya tampil di sini. ChatGPT, Gemini, Claude, dan beberapa lainnya mengunci situsnya sehingga bingkainya pasti ditolak browser; untuk yang itu pakai tombol ↗ di atas.</p>
   </div>
 </div>
 
@@ -2160,62 +2155,29 @@ document.getElementById("btnCariWeb").addEventListener("click", function () {
 });
 document.getElementById("cariWeb").addEventListener("keydown", function (e) { if (e.key === "Enter") document.getElementById("btnCariWeb").click(); });
 
-/* ================= JENDELA AI MENGAMBANG ================= */
+/* ================= KONSOL AI MENGAMBANG (SITUS AI DALAM BINGKAI) ================= */
 var apungKecil = false;
-function gambarApung() {
-  var alur = document.getElementById("alurApung");
-  if (!alur) return;
-  alur.innerHTML = "";
-  var d = dataUser();
-  var daftar = d.chat.slice(-20);
-  if (!daftar.length) {
-    var g = document.createElement("div"); g.className = "gelembung ai kecil";
-    g.textContent = "Halo! Aku AI PRATA yang mengambang — tanya soal sambil kamu membuka portal. 😊";
-    alur.appendChild(g);
-  }
-  daftar.forEach(function (m) {
-    var b = document.createElement("div"); b.className = "gelembung kecil " + (m.dari === "saya" ? "saya" : "ai"); b.textContent = m.teks;
-    alur.appendChild(b);
-  });
-  alur.scrollTop = alur.scrollHeight;
-}
-document.getElementById("btnApung").addEventListener("click", function () {
-  var j = document.getElementById("jendelaApung");
-  j.hidden = !j.hidden;
-  if (!j.hidden) gambarApung();
-});
-document.getElementById("btnApungTutup").addEventListener("click", function () { document.getElementById("jendelaApung").hidden = true; });
-document.getElementById("btnApungKecil").addEventListener("click", function () {
-  apungKecil = !apungKecil;
-  document.getElementById("jendelaApung").classList.toggle("ciut", apungKecil);
-});
 var APUNG_AI = {
+  kimi: { nama: "Kimi", url: "https://www.kimi.com" },
+  deepseek: { nama: "DeepSeek", url: "https://chat.deepseek.com" },
+  you: { nama: "You.com", url: "https://you.com" },
+  yuanbao: { nama: "Yuanbao", url: "https://yuanbao.tencent.com" },
   chatgpt: { nama: "ChatGPT", url: "https://chatgpt.com" },
   gemini: { nama: "Gemini", url: "https://gemini.google.com" },
   claude: { nama: "Claude", url: "https://claude.ai" },
-  deepseek: { nama: "DeepSeek", url: "https://chat.deepseek.com" },
   perplexity: { nama: "Perplexity", url: "https://www.perplexity.ai" },
   copilot: { nama: "Copilot", url: "https://copilot.microsoft.com" }
 };
-var tabApungAktif = "prata";
+var tabApungAktif = "kimi";
 function pilihTabApung(kunci) {
+  var ai = APUNG_AI[kunci];
+  if (!ai) return;
   tabApungAktif = kunci;
   document.querySelectorAll("#tabApung button").forEach(function (b) { b.classList.toggle("aktif", b.getAttribute("data-tabapung") === kunci); });
-  var j = document.getElementById("jendelaApung");
-  if (kunci === "prata") {
-    document.getElementById("badanChatApung").hidden = false;
-    document.getElementById("bingkaiApungBungkus").hidden = true;
-    j.classList.remove("besar");
-    gambarApung();
-  } else {
-    var ai = APUNG_AI[kunci];
-    document.getElementById("badanChatApung").hidden = true;
-    document.getElementById("bingkaiApungBungkus").hidden = false;
-    j.classList.add("besar");
-    document.getElementById("namaBingkaiApung").textContent = ai.nama;
-    var fr = document.getElementById("bingkaiApung");
-    if (fr.getAttribute("data-aktif") !== kunci) { fr.setAttribute("data-aktif", kunci); fr.src = ai.url; }
-  }
+  document.getElementById("jendelaApung").classList.add("besar");
+  document.getElementById("namaBingkaiApung").textContent = ai.nama;
+  var fr = document.getElementById("bingkaiApung");
+  if (fr.getAttribute("data-aktif") !== kunci) { fr.setAttribute("data-aktif", kunci); fr.src = ai.url; }
 }
 document.getElementById("tabApung").addEventListener("click", function (e) {
   var b = e.target.closest("[data-tabapung]");
@@ -2225,38 +2187,16 @@ document.getElementById("btnBingkaiBuka").addEventListener("click", function () 
   var ai = APUNG_AI[tabApungAktif];
   if (ai) window.open(ai.url, "_blank", "noopener");
 });
-function kirimApung() {
-  var inp = document.getElementById("isiApung");
-  var teks = inp.value.trim();
-  if (!teks) return;
-  inp.value = "";
-  var d = dataUser();
-  d.chat.push({ dari: "saya", teks: teks });
-  if (d.chat.length > 40) d.chat = d.chat.slice(-40);
-  simpanDataUser(d);
-  gambarApung();
-  var alur = document.getElementById("alurApung");
-  var tunggu = document.createElement("div"); tunggu.className = "gelembung ai kecil";
-  var spanT = document.createElement("span"); spanT.textContent = "AI sedang berpikir ";
-  var titik = document.createElement("span"); titik.className = "titik";
-  titik.innerHTML = "<i></i><i></i><i></i>";
-  tunggu.appendChild(spanT); tunggu.appendChild(titik);
-  alur.appendChild(tunggu);
-  alur.scrollTop = alur.scrollHeight;
-  function selesaiApung(jawaban, sumber) {
-    if (tunggu.parentNode) tunggu.remove();
-    var dd = dataUser();
-    dd.chat.push({ dari: "ai", teks: jawaban, sumber: sumber });
-    if (dd.chat.length > 40) dd.chat = dd.chat.slice(-40);
-    simpanDataUser(dd);
-    gambarApung();
-  }
-  if (mesinAI === "offline") { setTimeout(function () { selesaiApung(cariOffline(teks), "Bank Pembahasan (offline)"); }, 350); return; }
-  tanyaOnline(teks).then(function (jawaban) { selesaiApung(jawaban, "AI gratis (online)"); })
-    .catch(function () { selesaiApung(cariOffline(teks), "Bank Pembahasan (offline) — AI online tidak terjangkau"); });
-}
-document.getElementById("btnApungKirim").addEventListener("click", kirimApung);
-document.getElementById("isiApung").addEventListener("keydown", function (e) { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); kirimApung(); } });
+document.getElementById("btnApung").addEventListener("click", function () {
+  var j = document.getElementById("jendelaApung");
+  j.hidden = !j.hidden;
+  if (!j.hidden) pilihTabApung(tabApungAktif);
+});
+document.getElementById("btnApungTutup").addEventListener("click", function () { document.getElementById("jendelaApung").hidden = true; });
+document.getElementById("btnApungKecil").addEventListener("click", function () {
+  apungKecil = !apungKecil;
+  document.getElementById("jendelaApung").classList.toggle("ciut", apungKecil);
+});
 (function pasangSeretApung() {
   var j = document.getElementById("jendelaApung"), kepala = document.getElementById("kepalaApung");
   var seret = null;
