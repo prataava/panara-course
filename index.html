@@ -427,6 +427,9 @@
   #kanvasCoret{position:absolute; left:0; top:0; border-radius:6px; touch-action:none; pointer-events:none;}
   #kanvasCoret.aktif{pointer-events:auto; cursor:crosshair;}
   #panelCatatanBuku{background:var(--buku-panel); padding:10px 12px; border-top:1px solid var(--buku-garis-2);}
+  #panelPenanda{background:var(--buku-panel); padding:10px 12px; border-top:1px solid var(--buku-garis-2);}
+  #daftarPenanda .baris-penanda{display:flex; align-items:center; justify-content:space-between; gap:8px; padding:7px 0; border-bottom:1px solid var(--buku-garis-2);}
+  #daftarPenanda .baris-penanda span{color:var(--putih); font-weight:700; font-size:13.5px;}
   #panelCatatanBuku[hidden]{display:none !important;}
   .kepala-catatan{display:flex; justify-content:space-between; gap:10px; color:var(--teks-terang); font-size:12.5px; font-weight:700; margin-bottom:7px;}
   #catatanStatus{color:var(--teks-tersimpan); font-weight:600;}
@@ -590,6 +593,26 @@
       <p class="sub" id="teksFokus" style="margin-bottom:11px;">Berdasarkan rata-rata skormu sejauh ini.</p>
       <button class="btn laut" id="btnFokusLatihan">Mulai Latihan Fokus</button>
     </div>
+    <div class="kartu" id="kartuTantangan">
+      <h2 class="judul-bagian">Tantangan Harian</h2>
+      <p class="sub" id="teksTantangan" style="margin-bottom:11px;">Lima soal acak pilihan hari ini dari seluruh bank soal.</p>
+      <button class="btn emas" id="btnTantangan">Mulai Tantangan Hari Ini</button>
+    </div>
+    <div class="kartu" id="kartuTimerFokus">
+      <h2 class="judul-bagian">Timer Fokus</h2>
+      <p class="sub" style="margin-bottom:9px;">Satu sesi belajar tanpa gangguan. Timer memakai tenggat waktu asli, jadi tetap akurat walau layar HP mati di tengah sesi.</p>
+      <div id="tampilFokus" style="font-size:34px; font-weight:800; text-align:center; letter-spacing:1px; margin:4px 0 9px;">25:00</div>
+      <div class="segmen" id="segmenFokus" style="margin-bottom:10px;">
+        <button data-fokus="15">15 mnt</button>
+        <button data-fokus="25" class="aktif">25 mnt</button>
+        <button data-fokus="50">50 mnt</button>
+      </div>
+      <div style="display:flex; gap:9px; flex-wrap:wrap;">
+        <button class="btn laut" id="btnFokusMulai">Mulai Fokus</button>
+        <button class="btn" id="btnFokusReset">Atur Ulang</button>
+      </div>
+      <p class="sub" id="statusFokus" style="margin-top:9px;"></p>
+    </div>
 
     <div class="grid-menu">
       <button class="menu-item utama" data-pergi="latihan">
@@ -630,7 +653,7 @@
       <button class="menu-item" data-pergi="daftarsoal">
         <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg></span>
         <span class="nm">Daftar Soal Lengkap</span>
-        <span class="ds">Semua 72 soal bisa dicari &amp; dibuka kunci + pembahasannya.</span>
+        <span class="ds">Semua soal di bank bisa dicari &amp; dibuka kunci + pembahasannya.</span>
       </button>
       <button class="menu-item" data-pergi="modul">
         <span class="ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5.5C5 4.2 8 4.2 12 6c4-1.8 7-1.8 9.5-.5v13C18.5 17.2 15.5 17.2 12 19c-3.5-1.8-6.5-1.8-9.5-.5v-13z"/><path d="M12 6v13"/></svg></span>
@@ -831,6 +854,11 @@
       <div id="daftarAnalitik"></div>
       <p class="sub" style="margin-top:8px;">Diurutkan dari yang paling perlu dilatih. Persentase dari soal yang dijawab; waktu adalah rata-rata per soal.</p>
     </div>
+    <div class="kartu" id="kartuLencana">
+      <h2 class="judul-bagian">Lencana Pencapaian</h2>
+      <p class="sub" id="ringkasLencana" style="margin-bottom:10px;"></p>
+      <div id="daftarLencana" style="display:grid; grid-template-columns:1fr 1fr; gap:9px;"></div>
+    </div>
     <div class="kartu" id="kartuPapan" hidden>
       <h2 class="judul-bagian">Peringkat Online — Semua Pengguna</h2>
       <div id="daftarPapan"></div>
@@ -938,6 +966,7 @@
         <button data-katsoal="TIU">TIU</button>
         <button data-katsoal="TKP">TKP</button>
         <button data-katsoal="TANDA">★ Ditandai</button>
+        <button data-katsoal="SALAH">Pernah Salah</button>
       </div>
     </div>
     <div id="wadahDaftarSoal"></div>
@@ -1107,6 +1136,7 @@ Catatan: info di atas adalah gambaran umum untuk persiapan, bukan pengumuman res
     <span id="alatBuku">
       <button id="btnModeCoret" aria-label="Mode coret-coret" title="Coret-coret & anotasi halaman"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.6 3.6a2.1 2.1 0 0 1 3 3L8 18.2l-4.2 1.1L4.9 15 16.6 3.6z"/></svg></button>
       <button id="btnPanelCatatan" title="Catatan halaman ini" style="font-size:13px; width:auto;">Catatan</button>
+      <button id="btnPanelPenanda" title="Penanda halaman" style="font-size:13px; width:auto;">Penanda</button>
       <button id="btnZoomKurang" aria-label="Perkecil" title="Perkecil">−</button>
       <button id="btnZoomTambah" aria-label="Perbesar" title="Perbesar">+</button>
     </span>
@@ -1128,6 +1158,11 @@ Catatan: info di atas adalah gambaran umum untuk persiapan, bukan pengumuman res
   <div id="panelCatatanBuku" hidden>
     <div class="kepala-catatan"><span>Catatan — Halaman <span id="catatanHalKe">–</span></span><span id="catatanStatus"></span></div>
     <textarea id="isiCatatanBuku" rows="3" placeholder="Catat di sini: jawabanmu untuk soal di halaman ini, rumus penting, bagian yang belum paham, dan lain-lain. Tersimpan otomatis di perangkat ini."></textarea>
+  </div>
+  <div id="panelPenanda" hidden>
+    <div class="kepala-catatan"><span>Penanda Halaman</span><span id="penandaStatus"></span></div>
+    <button class="btn kecil" id="btnTandaiHalIni" style="margin-bottom:6px;">Tandai halaman ini</button>
+    <div id="daftarPenanda"></div>
   </div>
   <div id="kakiBuku">
     <button class="btn" id="btnHalSebelum">‹ Sebelumnya</button>
@@ -1336,7 +1371,7 @@ function sbTerapkanSesi(j) {
   sbSimpanSesi();
 }
 function dataBawaan() {
-  return { tugas: TUGAS_BAWAAN.map(function (t) { return { t: t.t, selesai: false, sumber: t.sumber }; }), riwayat: [], riwayatDetail: [], chat: [], tanda: {}, kesalahan: {}, target: { nama: "", tgl: "" }, modul: null };
+  return { tugas: TUGAS_BAWAAN.map(function (t) { return { t: t.t, selesai: false, sumber: t.sumber }; }), riwayat: [], riwayatDetail: [], chat: [], tanda: {}, kesalahan: {}, tantangan: null, statistik: { leitnerTuntas: 0, penuhLulus: false, fokusSesi: 0, fokusMenit: 0, tantanganSelesai: 0 }, target: { nama: "", tgl: "" }, modul: null };
 }
 function dataUser() {
   if (!dataCache) { dataCache = ambilJSON("prata_cache_" + sesiId, null) || dataBawaan(); }
@@ -1346,6 +1381,8 @@ function dataUser() {
   if (!Array.isArray(dataCache.chat)) dataCache.chat = [];
   if (!dataCache.tanda) dataCache.tanda = {};
   if (!dataCache.kesalahan || typeof dataCache.kesalahan !== "object") dataCache.kesalahan = {};
+  if (!("tantangan" in dataCache)) dataCache.tantangan = null;
+  if (!dataCache.statistik || typeof dataCache.statistik !== "object") dataCache.statistik = { leitnerTuntas: 0, penuhLulus: false, fokusSesi: 0, fokusMenit: 0, tantanganSelesai: 0 };
   if (!dataCache.target) dataCache.target = { nama: "", tgl: "" };
   if (dataCache.modul === undefined) dataCache.modul = null;
   return dataCache;
@@ -1446,6 +1483,16 @@ function gabungData(lokal, server, tsLokal, tsServer) {
   Object.keys(server.kesalahan || {}).forEach(function (k) { kesalahan[k] = server.kesalahan[k]; });
   Object.keys(lokal.kesalahan || {}).forEach(function (k) { if (!(k in kesalahan) || lokalBaru) kesalahan[k] = lokal.kesalahan[k]; });
   hasil.kesalahan = kesalahan;
+  // Statistik & tantangan: penghitung monotonik diambil nilai terbesarnya; tantangan dimenangkan yang terbaru.
+  var stL = lokal.statistik || {}, stS = server.statistik || {};
+  hasil.statistik = {
+    leitnerTuntas: Math.max(stL.leitnerTuntas || 0, stS.leitnerTuntas || 0),
+    penuhLulus: !!(stL.penuhLulus || stS.penuhLulus),
+    fokusSesi: Math.max(stL.fokusSesi || 0, stS.fokusSesi || 0),
+    fokusMenit: Math.max(stL.fokusMenit || 0, stS.fokusMenit || 0),
+    tantanganSelesai: Math.max(stL.tantanganSelesai || 0, stS.tantanganSelesai || 0)
+  };
+  hasil.tantangan = (lokal.tantangan && server.tantangan) ? (((lokal.tantangan.ts || 0) >= (server.tantangan.ts || 0)) ? lokal.tantangan : server.tantangan) : (lokal.tantangan || server.tantangan || null);
   // Tugas: gabung per teks tugas; status selesai dari sisi yang lebih baru.
   var tugas = [], idxT = {};
   (server.tugas || []).forEach(function (t) { idxT[t.t] = tugas.length; tugas.push(Object.assign({}, t)); });
@@ -1691,6 +1738,11 @@ function segarkanBeranda() {
   document.getElementById("persenCek").textContent = persen + "%";
   document.getElementById("batangCek").style.width = persen + "%";
   document.getElementById("ringkasanCek").textContent = total ? (selesai + " dari " + total + " tugas selesai. " + (persen === 100 ? "Luar biasa, semua tuntas!" : "Sedikit lagi, tetap semangat!")) : "Belum ada tugas — tambahkan lewat menu Checklist.";
+  var sudahT = d.tantangan && d.tantangan.tanggal === kunciHariIni();
+  document.getElementById("teksTantangan").textContent = sudahT ? "Selesai hari ini — kamu menjawab benar " + d.tantangan.benar + " dari " + d.tantangan.total + " soal. Tantangan baru muncul besok; sementara itu lanjutkan lewat Latihan atau Ulangi Kesalahan." : "Lima soal acak pilihan hari ini dari seluruh bank soal. Soal yang salah otomatis masuk Kotak Leitner untuk diulang terjadwal.";
+  document.getElementById("btnTantangan").hidden = !!sudahT;
+  var stF = d.statistik || {};
+  if (!fokusTimer.jalan) document.getElementById("statusFokus").textContent = (stF.fokusSesi || 0) > 0 ? "Total sesi fokus selesai: " + stF.fokusSesi + " sesi (" + (stF.fokusMenit || 0) + " menit)." : "Belum ada sesi fokus yang selesai — mulai dari 15 menit dulu.";
 }
 document.getElementById("btnKeCekRingkas").addEventListener("click", function () { pergi("ceklist"); });
 document.getElementById("btnFokusLatihan").addEventListener("click", function () {
@@ -1880,6 +1932,25 @@ function gambarRiwayat() {
       daftarA.appendChild(baris);
     });
   }
+  // Lencana pencapaian (dihitung dari data nyata pengguna)
+  var wadahL = document.getElementById("daftarLencana");
+  var terbukaL = 0;
+  wadahL.innerHTML = "";
+  LENCANA.forEach(function (L) {
+    var dapat = false;
+    try { dapat = !!L.cek(d); } catch (e) {}
+    if (dapat) terbukaL++;
+    var sel = document.createElement("div");
+    sel.style.cssText = "border:1px solid var(--garis);border-radius:12px;padding:10px 11px;" + (dapat ? "" : "opacity:.55;");
+    var nm = document.createElement("b"); nm.textContent = L.nama;
+    var st = document.createElement("div");
+    st.style.cssText = "font-size:11px;font-weight:800;letter-spacing:.4px;margin:3px 0;color:" + (dapat ? "var(--baik)" : "var(--buruk)") + ";";
+    st.textContent = dapat ? "✓ TERBUKA" : "TERKUNCI";
+    var ds = document.createElement("div"); ds.className = "sub"; ds.textContent = L.desc;
+    sel.appendChild(nm); sel.appendChild(st); sel.appendChild(ds);
+    wadahL.appendChild(sel);
+  });
+  document.getElementById("ringkasLencana").textContent = terbukaL + " dari " + LENCANA.length + " lencana sudah terbuka — terus kumpulkan semuanya.";
   // Papan peringkat ONLINE (antar semua pengguna PRATA)
   var kartuP = document.getElementById("kartuPapan");
   kartuP.hidden = true;
@@ -2066,6 +2137,133 @@ function mulaiSimulasiPenuh() {
   mulaiTimerKuis();
 }
 document.getElementById("btnMulaiSimulasiPenuh").addEventListener("click", mulaiSimulasiPenuh);
+
+/* ================= v24: LENCANA PENCAPAIAN ================= */
+function totalSoalTerjawab(d) {
+  return (d.riwayatDetail || []).reduce(function (a, r) {
+    return a + Object.keys(r.perSub || {}).reduce(function (x, k) { return x + (r.perSub[k].t || 0); }, 0);
+  }, 0);
+}
+function hitungRentetan(d) {
+  var aktif = {};
+  (d.riwayat || []).forEach(function (r) {
+    var t = capWaktuRiwayat(r);
+    if (!t) return;
+    var dt = new Date(t);
+    aktif[dt.getFullYear() + "-" + dt.getMonth() + "-" + dt.getDate()] = true;
+  });
+  var streak = 0, cek = new Date();
+  if (!aktif[cek.getFullYear() + "-" + cek.getMonth() + "-" + cek.getDate()]) cek.setDate(cek.getDate() - 1);
+  while (aktif[cek.getFullYear() + "-" + cek.getMonth() + "-" + cek.getDate()]) { streak++; cek.setDate(cek.getDate() - 1); }
+  return streak;
+}
+var LENCANA = [
+  { id: "pertama", nama: "Langkah Pertama", desc: "Selesaikan kuis pertamamu", cek: function (d) { return (d.riwayat || []).length >= 1; } },
+  { id: "soal50", nama: "Pemanasan", desc: "Jawab 50 soal yang terekam di analitik", cek: function (d) { return totalSoalTerjawab(d) >= 50; } },
+  { id: "soal250", nama: "Mesin Latihan", desc: "Jawab 250 soal yang terekam di analitik", cek: function (d) { return totalSoalTerjawab(d) >= 250; } },
+  { id: "streak7", nama: "Rentetan Membara", desc: "Belajar 7 hari berurutan", cek: function (d) { return hitungRentetan(d) >= 7; } },
+  { id: "penuh", nama: "Pejuang 110", desc: "Selesaikan satu Simulasi Penuh (110 soal)", cek: function (d) { return (d.riwayat || []).some(function (r) { return r.label === "Simulasi Penuh SKD"; }); } },
+  { id: "luluspenuh", nama: "Lulus Simulasi Penuh", desc: "Lulus passing grade semua mapel di Simulasi Penuh", cek: function (d) { return !!(d.statistik && d.statistik.penuhLulus); } },
+  { id: "leitner10", nama: "Pembasmi Kesalahan", desc: "Tuntaskan 10 soal dari Kotak Leitner", cek: function (d) { return ((d.statistik || {}).leitnerTuntas || 0) >= 10; } },
+  { id: "tantangan7", nama: "Raja Tantangan", desc: "Selesaikan Tantangan Harian 7 kali", cek: function (d) { return ((d.statistik || {}).tantanganSelesai || 0) >= 7; } },
+  { id: "fokus5", nama: "Fokus Mendalam", desc: "Selesaikan 5 sesi Timer Fokus", cek: function (d) { return ((d.statistik || {}).fokusSesi || 0) >= 5; } },
+  { id: "bintang10", nama: "Kolektor Bintang", desc: "Tandai 10 soal dengan bintang", cek: function (d) { return Object.keys(d.tanda || {}).filter(function (k) { return d.tanda[k].bintang; }).length >= 10; } },
+  { id: "sempurna", nama: "Sesi Sempurna", desc: "Raih skor penuh dalam satu sesi (maks minimal 50 poin)", cek: function (d) { return (d.riwayat || []).some(function (r) { return r.maks >= 50 && r.poin === r.maks; }); } },
+  { id: "modul", nama: "Penjelajah Modul", desc: "Pasang modul belajarmu sendiri", cek: function (d) { return !!d.modul; } }
+];
+
+/* ================= v24: TANTANGAN HARIAN ================= */
+function kunciHariIni() { var n = new Date(); return n.getFullYear() + "-" + (n.getMonth() + 1) + "-" + n.getDate(); }
+function daftarTantanganHarian() {
+  var seed = 7;
+  var kh = kunciHariIni();
+  for (var i = 0; i < kh.length; i++) seed = (seed * 31 + kh.charCodeAt(i)) >>> 0;
+  var rnd = function () { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+  var pool = SOAL.map(function (_, i) { return i; });
+  var hasil = [];
+  while (hasil.length < 5 && pool.length) { var p = Math.floor(rnd() * pool.length); hasil.push(pool.splice(p, 1)[0]); }
+  return hasil;
+}
+function mulaiTantangan() {
+  var d = dataUser();
+  if (d.tantangan && d.tantangan.tanggal === kunciHariIni()) return;
+  BANK_AKTIF = SOAL;
+  berhentiTimerKuis();
+  kuis = { mode: "latihan", kat: "Campuran", labelKuis: "Tantangan Harian", tantangan: true, daftar: daftarTantanganHarian(), posisi: 0, jawaban: {}, sisaDetik: null };
+  tampil("kuis");
+  gambarSoal();
+}
+document.getElementById("btnTantangan").addEventListener("click", mulaiTantangan);
+
+/* ================= v24: TIMER FOKUS ================= */
+var fokusTimer = { menit: 25, tenggat: null, sisaJeda: null, jalan: false, interval: null };
+function gambarTimerFokus() {
+  var el = document.getElementById("tampilFokus");
+  if (!el) return;
+  var sisa = fokusTimer.jalan ? Math.max(0, Math.round((fokusTimer.tenggat - Date.now()) / 1000)) : (fokusTimer.sisaJeda != null ? fokusTimer.sisaJeda : fokusTimer.menit * 60);
+  el.textContent = formatWaktu(sisa);
+  document.getElementById("btnFokusMulai").textContent = fokusTimer.jalan ? "Jeda" : (fokusTimer.sisaJeda != null ? "Lanjutkan" : "Mulai Fokus");
+}
+function bunyiFokusSelesai() {
+  try {
+    var ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [0, 0.3, 0.6].forEach(function (jeda) {
+      var o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = 880;
+      var t0 = ctx.currentTime + jeda;
+      g.gain.setValueAtTime(0.001, t0);
+      g.gain.exponentialRampToValueAtTime(0.18, t0 + 0.03);
+      g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.22);
+      o.start(t0); o.stop(t0 + 0.24);
+    });
+  } catch (e) {}
+}
+function fokusSelesai() {
+  clearInterval(fokusTimer.interval); fokusTimer.interval = null;
+  fokusTimer.jalan = false; fokusTimer.sisaJeda = null; fokusTimer.tenggat = null;
+  bunyiFokusSelesai();
+  var d = dataUser();
+  if (!d.statistik) d.statistik = { leitnerTuntas: 0, penuhLulus: false, fokusSesi: 0, fokusMenit: 0, tantanganSelesai: 0 };
+  d.statistik.fokusSesi = (d.statistik.fokusSesi || 0) + 1;
+  d.statistik.fokusMenit = (d.statistik.fokusMenit || 0) + fokusTimer.menit;
+  simpanDataUser(d);
+  document.getElementById("statusFokus").textContent = "Sesi fokus " + fokusTimer.menit + " menit selesai 🎉 Total sesi selesai: " + d.statistik.fokusSesi + " (" + d.statistik.fokusMenit + " menit).";
+  gambarTimerFokus();
+}
+function langkahTimerFokus() {
+  if (!fokusTimer.jalan) return;
+  if (Date.now() >= fokusTimer.tenggat) { fokusSelesai(); return; }
+  gambarTimerFokus();
+}
+document.getElementById("btnFokusMulai").addEventListener("click", function () {
+  if (fokusTimer.jalan) {
+    fokusTimer.sisaJeda = Math.max(0, Math.round((fokusTimer.tenggat - Date.now()) / 1000));
+    fokusTimer.jalan = false;
+    clearInterval(fokusTimer.interval); fokusTimer.interval = null;
+  } else {
+    var sisa = fokusTimer.sisaJeda != null ? fokusTimer.sisaJeda : fokusTimer.menit * 60;
+    fokusTimer.tenggat = Date.now() + sisa * 1000;
+    fokusTimer.jalan = true;
+    if (fokusTimer.interval) clearInterval(fokusTimer.interval);
+    fokusTimer.interval = setInterval(langkahTimerFokus, 500);
+  }
+  gambarTimerFokus();
+});
+document.getElementById("btnFokusReset").addEventListener("click", function () {
+  clearInterval(fokusTimer.interval); fokusTimer.interval = null;
+  fokusTimer.jalan = false; fokusTimer.sisaJeda = null; fokusTimer.tenggat = null;
+  gambarTimerFokus();
+});
+document.getElementById("segmenFokus").addEventListener("click", function (e) {
+  var b = e.target.closest("[data-fokus]");
+  if (!b || fokusTimer.jalan) return;
+  fokusTimer.menit = parseInt(b.getAttribute("data-fokus"), 10) || 25;
+  fokusTimer.sisaJeda = null;
+  document.querySelectorAll("#segmenFokus button").forEach(function (x) { x.classList.toggle("aktif", x === b); });
+  gambarTimerFokus();
+});
+document.addEventListener("visibilitychange", function () { if (!document.hidden) langkahTimerFokus(); });
 document.getElementById("btnBerhentiKuis").addEventListener("click", function () { berhentiTimerKuis(); hapusKuisBerjalan(); kuis = null; tampil("latihan"); });
 
 function gambarSoal() {
@@ -2169,7 +2367,12 @@ function catatHasilSoal(d, kunciSoal, snapshot, benar) {
   var kini = Date.now();
   if (benar) {
     if (!e) return;
-    if (e.kotak >= 5) { delete d.kesalahan[kunciSoal]; return; }
+    if (e.kotak >= 5) {
+      if (!d.statistik) d.statistik = { leitnerTuntas: 0, penuhLulus: false, fokusSesi: 0, fokusMenit: 0, tantanganSelesai: 0 };
+      d.statistik.leitnerTuntas = (d.statistik.leitnerTuntas || 0) + 1;
+      delete d.kesalahan[kunciSoal];
+      return;
+    }
     e.kotak++;
     e.jatuh = kini + (INTERVAL_KOTAK[e.kotak] || 7) * 86400000;
     e.terakhir = new Date(kini).toISOString();
@@ -2235,6 +2438,14 @@ function selesaiKuis() {
     d.riwayatDetail.push({ tanggal: tgl, label: label, perSub: perSub });
     if (d.riwayatDetail.length > 100) d.riwayatDetail = d.riwayatDetail.slice(-100);
   }
+  if (!d.statistik) d.statistik = { leitnerTuntas: 0, penuhLulus: false, fokusSesi: 0, fokusMenit: 0, tantanganSelesai: 0 };
+  if (kuis.tantangan) {
+    var benarT = 0;
+    Object.keys(perKat).forEach(function (k) { benarT += perKat[k].benar; });
+    d.tantangan = { tanggal: kunciHariIni(), ts: Date.now(), benar: benarT, total: kuis.daftar.length };
+    d.statistik.tantanganSelesai = (d.statistik.tantanganSelesai || 0) + 1;
+  }
+  if (kuis.penuh && perKat.TWK.poin >= 65 && perKat.TIU.poin >= 80 && perKat.TKP.poin >= 166) d.statistik.penuhLulus = true;
   simpanDataUser(d);
   if (kuis.mode === "simulasi" && !kuis.penuh && sesiId && sbToken) {
     fetch(SB_URL + "/rest/v1/papan_skor?user_id=eq." + sesiId + "&select=terbaik", { headers: sbHeaders() })
@@ -2566,11 +2777,13 @@ function gambarDaftarSoal() {
   if (sumberDaftar === "modul") { gambarDaftarModul(wadah, cari); return; }
   document.querySelector("#view-daftarsoal .info-kuis").textContent = "Daftar Soal Lengkap (" + SOAL.length + " soal)";
   var tandaUser = dataUser().tanda;
+  var kesalahanUser = dataUser().kesalahan || {};
   var nomorPerKat = { TWK: 0, TIU: 0, TKP: 0 };
   var tampilCount = 0;
   SOAL.forEach(function (s, idxAsli) {
     nomorPerKat[s.k]++;
     if (katSoalAktif === "TANDA") { if (!(tandaUser[idxAsli] && tandaUser[idxAsli].bintang)) return; }
+    else if (katSoalAktif === "SALAH") { if (!kesalahanUser["B" + idxAsli]) return; }
     else if (katSoalAktif !== "SEMUA" && s.k !== katSoalAktif) return;
     if (cari && (s.t + " " + s.b + " " + s.o.join(" ")).toLowerCase().indexOf(cari) < 0) return;
     tampilCount++;
@@ -3055,7 +3268,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v23";
+var VERSI_APP = "prata-v24";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
@@ -3591,6 +3804,7 @@ function gambarHalamanBuku() {
     document.getElementById("badanBuku").scrollTop = 0;
     muatCoretanHal();
     if (!document.getElementById("panelCatatanBuku").hidden) perbaruiPanelCatatan();
+    if (!document.getElementById("panelPenanda").hidden) gambarPenanda();
   }).catch(function () {
     if (ke === bukuRenderKe) muat.textContent = "Halaman gagal dimuat.";
   });
@@ -3743,7 +3957,64 @@ document.getElementById("btnPanelCatatan").addEventListener("click", function ()
   var p = document.getElementById("panelCatatanBuku");
   p.hidden = !p.hidden;
   this.classList.toggle("aktif", !p.hidden);
-  if (!p.hidden) perbaruiPanelCatatan();
+  if (!p.hidden) { document.getElementById("panelPenanda").hidden = true; document.getElementById("btnPanelPenanda").classList.remove("aktif"); perbaruiPanelCatatan(); }
+});
+/* ================= v24: PENANDA HALAMAN BUKU ================= */
+function ambilPenanda() { try { var a = JSON.parse(localStorage.getItem("prata_buku_penanda") || "[]"); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
+function simpanPenanda(a) { try { localStorage.setItem("prata_buku_penanda", JSON.stringify(a)); } catch (e) {} }
+function gambarPenanda() {
+  var daftar = ambilPenanda();
+  var btn = document.getElementById("btnTandaiHalIni");
+  var sudah = daftar.indexOf(bukuHal) >= 0;
+  btn.textContent = sudah ? "Hapus tanda halaman ini (" + bukuHal + ")" : "Tandai halaman ini (" + bukuHal + ")";
+  document.getElementById("penandaStatus").textContent = daftar.length ? daftar.length + " halaman ditandai" : "";
+  var wadah = document.getElementById("daftarPenanda");
+  wadah.innerHTML = "";
+  if (!daftar.length) {
+    var kosong = document.createElement("p");
+    kosong.className = "sub"; kosong.style.color = "var(--teks-terang)";
+    kosong.textContent = "Belum ada penanda. Tandai halaman penting agar bisa loncat kembali ke sini kapan saja.";
+    wadah.appendChild(kosong);
+    return;
+  }
+  daftar.slice().sort(function (a, b) { return a - b; }).forEach(function (h) {
+    var baris = document.createElement("div");
+    baris.className = "baris-penanda";
+    var nm = document.createElement("span"); nm.textContent = "Halaman " + h + (h === bukuHal ? " (sedang dibuka)" : "");
+    var aksi = document.createElement("span");
+    aksi.style.cssText = "display:flex;gap:6px;";
+    var bBuka = document.createElement("button"); bBuka.className = "btn kecil"; bBuka.textContent = "Buka"; bBuka.setAttribute("data-buka-penanda", h);
+    var bHapus = document.createElement("button"); bHapus.className = "btn kecil"; bHapus.textContent = "✕"; bHapus.setAttribute("aria-label", "Hapus penanda halaman " + h); bHapus.setAttribute("data-hapus-penanda", h);
+    aksi.appendChild(bBuka); aksi.appendChild(bHapus);
+    baris.appendChild(nm); baris.appendChild(aksi);
+    wadah.appendChild(baris);
+  });
+}
+document.getElementById("btnPanelPenanda").addEventListener("click", function () {
+  var p = document.getElementById("panelPenanda");
+  p.hidden = !p.hidden;
+  this.classList.toggle("aktif", !p.hidden);
+  if (!p.hidden) { document.getElementById("panelCatatanBuku").hidden = true; document.getElementById("btnPanelCatatan").classList.remove("aktif"); gambarPenanda(); }
+});
+document.getElementById("btnTandaiHalIni").addEventListener("click", function () {
+  var daftar = ambilPenanda();
+  var i = daftar.indexOf(bukuHal);
+  if (i >= 0) daftar.splice(i, 1); else daftar.push(bukuHal);
+  simpanPenanda(daftar);
+  gambarPenanda();
+});
+document.getElementById("daftarPenanda").addEventListener("click", function (e) {
+  var bBuka = e.target.closest("[data-buka-penanda]");
+  var bHapus = e.target.closest("[data-hapus-penanda]");
+  if (bBuka) {
+    var h = parseInt(bBuka.getAttribute("data-buka-penanda"), 10);
+    if (bukuDoc && h >= 1 && h <= bukuDoc.numPages && h !== bukuHal) { bukuHal = h; gambarHalamanBuku(); }
+    gambarPenanda();
+  } else if (bHapus) {
+    var hh = parseInt(bHapus.getAttribute("data-hapus-penanda"), 10);
+    simpanPenanda(ambilPenanda().filter(function (x) { return x !== hh; }));
+    gambarPenanda();
+  }
 });
 document.getElementById("isiCatatanBuku").addEventListener("input", function () {
   var teks = this.value, hal = bukuHal;
