@@ -712,6 +712,31 @@
       <p class="sub" id="teksSalah" style="margin-bottom:11px;">Soal yang pernah kamu jawab salah tersimpan di sini dan muncul lagi terjadwal: kotak 1 besok, lalu 2, 4, sampai 7 hari. Menjawab benar menaikkan kotak; lulus kotak 5 berarti soal itu tuntas.</p>
       <button class="btn emas lebar" id="btnUlangiSalah" hidden>Mulai Ulangi Kesalahan</button>
     </div>
+    <div class="kartu" id="kartuGenerator">
+      <h2 class="judul-bagian">Buat Soal Latihan dengan AI</h2>
+      <p class="sub" style="margin-bottom:11px;">AI menyusun soal baru sesuai mapel, sub-materi, dan tingkat kesulitan pilihanmu. Soal TIDAK langsung masuk bank: periksa dulu di pratinjau, dan yang disimpan masuk <b>Bank Soal AI</b> yang terpisah dan berlabel jelas — tidak bercampur dengan Bank PRATA. Kunci buatan AI bisa saja keliru, jadi periksa pembahasannya sebelum menyimpan. Fitur ini memakai kunci Vikey &amp; model yang sama dengan Tanya AI.</p>
+      <label class="lbl" for="genMapel">Mapel</label>
+      <select class="isi" id="genMapel">
+        <option value="TWK">TWK — Wawasan Kebangsaan</option>
+        <option value="TIU">TIU — Intelegensia Umum</option>
+        <option value="TKP">TKP — Karakteristik Pribadi</option>
+      </select>
+      <label class="lbl" for="genSub">Sub-materi</label>
+      <select class="isi" id="genSub"></select>
+      <label class="lbl" for="genSulit">Tingkat kesulitan</label>
+      <select class="isi" id="genSulit">
+        <option>Mudah</option>
+        <option selected>Sedang</option>
+        <option>Sulit</option>
+      </select>
+      <button class="btn emas lebar" id="btnBuatSoalAI" style="margin-top:13px;">Buat 5 Soal dengan AI</button>
+      <div class="sub" id="statusGen" style="margin-top:9px;"></div>
+      <div id="pratinjauAI"></div>
+      <div style="display:flex; gap:9px; flex-wrap:wrap; margin-top:11px;">
+        <button class="btn laut" id="btnLatihanBankAI">Latihan Bank AI</button>
+        <span class="sub" id="infoBankAI" style="align-self:center;"></span>
+      </div>
+    </div>
     <div class="kartu">
       <h2 class="judul-bagian">Simulasi SKD</h2>
       <p class="sub" style="margin-bottom:13px;">Mini: 36 soal campuran, ±33 menit, untuk pemanasan cepat. Penuh: 110 soal (TWK 30, TIU 35, TKP 45) dalam 100 menit persis aturan SKD asli — hasilmu dinilai dengan status passing grade per mapel (ambangnya bisa diatur di Info & Jadwal). Keduanya tanpa pembahasan di tengah; pembahasan dibuka di akhir.</p>
@@ -980,6 +1005,7 @@
     <div class="segmen" id="segmenSumber" style="margin-bottom:12px;">
       <button data-sumber="bank" class="aktif">Bank PRATA</button>
       <button data-sumber="modul">Modul Saya</button>
+      <button data-sumber="ai">Bank AI</button>
     </div>
     <div class="kartu">
       <input class="isi" id="cariSoal" type="text" placeholder="Cari soal… (kata kunci, mis. 'diskon' atau 'Pasal')">
@@ -1415,7 +1441,7 @@ function sbTerapkanSesi(j) {
   sbSimpanSesi();
 }
 function dataBawaan() {
-  return { tugas: TUGAS_BAWAAN.map(function (t) { return { t: t.t, selesai: false, sumber: t.sumber }; }), riwayat: [], riwayatDetail: [], chat: [], tanda: {}, kesalahan: {}, laporan: [], tantangan: null, pg: null, statistik: { leitnerTuntas: 0, penuhLulus: false, fokusSesi: 0, fokusMenit: 0, tantanganSelesai: 0 }, target: { nama: "", tgl: "" }, modul: null };
+  return { tugas: TUGAS_BAWAAN.map(function (t) { return { t: t.t, selesai: false, sumber: t.sumber }; }), riwayat: [], riwayatDetail: [], chat: [], tanda: {}, kesalahan: {}, laporan: [], soalAI: [], tantangan: null, pg: null, statistik: { leitnerTuntas: 0, penuhLulus: false, fokusSesi: 0, fokusMenit: 0, tantanganSelesai: 0 }, target: { nama: "", tgl: "" }, modul: null };
 }
 function dataUser() {
   if (!dataCache) { dataCache = ambilJSON("prata_cache_" + sesiId, null) || dataBawaan(); }
@@ -1428,6 +1454,7 @@ function dataUser() {
   if (!("tantangan" in dataCache)) dataCache.tantangan = null;
   if (!("pg" in dataCache)) dataCache.pg = null;
   if (!("laporan" in dataCache)) dataCache.laporan = [];
+  if (!("soalAI" in dataCache)) dataCache.soalAI = [];
   if (!dataCache.statistik || typeof dataCache.statistik !== "object") dataCache.statistik = { leitnerTuntas: 0, penuhLulus: false, fokusSesi: 0, fokusMenit: 0, tantanganSelesai: 0 };
   if (!dataCache.target) dataCache.target = { nama: "", tgl: "" };
   if (dataCache.modul === undefined) dataCache.modul = null;
@@ -1548,6 +1575,13 @@ function gabungData(lokal, server, tsLokal, tsServer) {
   });
   lap.sort(function (a, b) { return capWaktuRiwayat(a) - capWaktuRiwayat(b); });
   hasil.laporan = lap.slice(-100);
+  // Bank Soal AI: gabung per teks soal ternormalisasi, anti-dobel.
+  var sudahAI = {}, gabAI = [];
+  (server.soalAI || []).concat(lokal.soalAI || []).forEach(function (q) {
+    var kq = (q.t || "").replace(/\s+/g, " ").trim().toLowerCase();
+    if (!kq || sudahAI[kq]) return; sudahAI[kq] = 1; gabAI.push(q);
+  });
+  hasil.soalAI = gabAI.slice(0, 100);
   // Tugas: gabung per teks tugas; status selesai dari sisi yang lebih baru.
   var tugas = [], idxT = {};
   (server.tugas || []).forEach(function (t) { idxT[t.t] = tugas.length; tugas.push(Object.assign({}, t)); });
@@ -1624,7 +1658,7 @@ function tampil(nama) {
   if (nama === "beranda") segarkanBeranda();
   if (nama === "ceklist") gambarTugas();
   if (nama === "latihan" || nama === "beranda") cekSesiKuisTersimpan();
-  if (nama === "latihan") segarkanKartuSalah();
+  if (nama === "latihan") { segarkanKartuSalah(); segarkanBankAI(); if (!document.getElementById("genSub").options.length) isiSubGenerator(); }
   if (nama === "flashcard") gambarFlash();
   if (nama === "info") gambarInfo();
   if (nama === "bantuan") gambarDaftarCepat();
@@ -1871,7 +1905,7 @@ function gambarTugas() {
     var isi = document.createElement("div"); isi.className = "isi-tugas";
     isi.textContent = t.t;
     var kecil = document.createElement("small");
-    kecil.textContent = t.sumber === "otomatis" ? "Dibuat otomatis oleh PRATA" : "Ditambahkan sendiri";
+    kecil.textContent = t.sumber === "otomatis" ? "Dibuat otomatis oleh PRATA" : (t.sumber === "rencana" ? "Dari Rencana Belajar" : "Ditambahkan sendiri");
     isi.appendChild(kecil);
     var hapus = document.createElement("button"); hapus.className = "hapus"; hapus.textContent = "🗑"; hapus.title = "Hapus tugas";
     hapus.addEventListener("click", function () {
@@ -2325,6 +2359,11 @@ function lanjutkanKuisTersimpan() {
     if (!utuhSalah) { hapusKuisBerjalan(); cekSesiKuisTersimpan(); return; }
     BANK_AKTIF = tersimpan.kunciDaftar.map(function (k) { return dk.kesalahan[k].soal; });
   }
+  if (tersimpan.bankAI) {
+    var dai = dataUser();
+    if (!dai.soalAI || !dai.soalAI.length) { hapusKuisBerjalan(); cekSesiKuisTersimpan(); return; }
+    BANK_AKTIF = dai.soalAI;
+  }
   if (tersimpan.bankModul) {
     var dd = dataUser();
     if (!dd.modul || !dd.modul.soal || !dd.modul.soal.length) { hapusKuisBerjalan(); cekSesiKuisTersimpan(); return; }
@@ -2724,8 +2763,8 @@ function selesaiKuis() {
         perSulit[s.d].t++;
         if (benarSoal) perSulit[s.d].b++;
       }
-      var kunciSoal = kuis.bankSalah ? kuis.kunciDaftar[pos] : (kuis.bankModul ? "M" + idx : "B" + idx);
-      var snapshot = { k: s.k, t: s.t, o: s.o, j: s.j, b: s.b, asal: kuis.bankModul ? "modul" : "bank" };
+      var kunciSoal = kuis.bankSalah ? kuis.kunciDaftar[pos] : (kuis.bankModul ? "M" + idx : (kuis.bankAI ? "A" + idx : "B" + idx));
+      var snapshot = { k: s.k, t: s.t, o: s.o, j: s.j, b: s.b, asal: kuis.bankModul ? "modul" : (kuis.bankAI ? "ai" : "bank") };
       if (s.s) snapshot.s = s.s;
       if (s.m) snapshot.m = s.m;
       if (s.g) snapshot.g = s.g;
@@ -3083,12 +3122,182 @@ function gambarDaftarCepat() {
 }
 
 var katSoalAktif = "SEMUA";
+/* ================= v29: AI QUESTION GENERATOR (Vikey, bank terpisah) ================= */
+var SUB_GENERATOR = {
+  TWK: ["Campuran", "Pancasila", "UUD 1945", "Sejarah Perjuangan", "NKRI & Bhinneka Tunggal Ika"],
+  TIU: ["Campuran", "Deret & Pola Bilangan", "Aritmatika Dasar", "Verbal: Sinonim & Antonim", "Verbal: Analogi", "Logika & Silogisme"],
+  TKP: ["Campuran", "Pelayanan Publik", "Jejaring Kerja", "Anti Korupsi", "Teknologi Informasi & Komunikasi", "Profesionalisme"]
+};
+function isiSubGenerator() {
+  var selM = document.getElementById("genMapel"), sel = document.getElementById("genSub");
+  if (!selM || !sel) return;
+  sel.innerHTML = "";
+  (SUB_GENERATOR[selM.value] || []).forEach(function (x) { var o = document.createElement("option"); o.textContent = x; sel.appendChild(o); });
+}
+document.getElementById("genMapel").addEventListener("change", isiSubGenerator);
+function validasiSoalAI(teksMentah, mapel) {
+  var hasil = { valid: [], ditolak: 0 };
+  if (typeof teksMentah !== "string") return hasil;
+  var awal = teksMentah.indexOf("["), akhir = teksMentah.lastIndexOf("]");
+  if (awal < 0 || akhir <= awal) return hasil;
+  var arr;
+  try { arr = JSON.parse(teksMentah.slice(awal, akhir + 1)); } catch (e) { return hasil; }
+  if (!Array.isArray(arr)) return hasil;
+  var teksBank = {};
+  SOAL.forEach(function (q) { teksBank[(q.t || "").replace(/\s+/g, " ").trim().toLowerCase()] = 1; });
+  (dataUser().soalAI || []).forEach(function (q) { teksBank[(q.t || "").replace(/\s+/g, " ").trim().toLowerCase()] = 1; });
+  arr.forEach(function (it) {
+    if (!it || typeof it.t !== "string" || it.t.trim().length < 10 || !Array.isArray(it.o) || it.o.length !== 5) { hasil.ditolak++; return; }
+    if (it.o.some(function (o) { return typeof o !== "string" || !o.trim(); })) { hasil.ditolak++; return; }
+    if (typeof it.b !== "string" || it.b.trim().length < 5) { hasil.ditolak++; return; }
+    var kunciTeks = it.t.replace(/\s+/g, " ").trim().toLowerCase();
+    if (teksBank[kunciTeks]) { hasil.ditolak++; return; }
+    var soal = { k: mapel, t: it.t.trim(), o: it.o.map(function (o) { return o.trim(); }), b: it.b.trim() };
+    if (mapel === "TKP") {
+      if (!Array.isArray(it.s) || it.s.length !== 5 || it.s.some(function (x) { return !(x >= 1 && x <= 5); })) { hasil.ditolak++; return; }
+      soal.s = it.s.slice();
+      soal.j = soal.s.indexOf(Math.max.apply(null, soal.s));
+      if (soal.s[soal.j] !== 5) { hasil.ditolak++; return; }
+    } else {
+      if (!Number.isInteger(it.j) || it.j < 0 || it.j > 4) { hasil.ditolak++; return; }
+      soal.j = it.j;
+    }
+    teksBank[kunciTeks] = 1;
+    hasil.valid.push(soal);
+  });
+  return hasil;
+}
+var kandidatAI = null;
+function gambarPratinjauAI() {
+  var wadah = document.getElementById("pratinjauAI");
+  if (!wadah) return;
+  wadah.innerHTML = "";
+  if (!kandidatAI || !kandidatAI.soal.length) return;
+  var info = document.createElement("p"); info.className = "sub"; info.style.marginTop = "10px";
+  info.textContent = "Pratinjau: " + kandidatAI.soal.length + " soal lolos validasi format" + (kandidatAI.ditolak ? " (" + kandidatAI.ditolak + " ditolak: format rusak, duplikat, atau kunci tidak sah)" : "") + ". Periksa kunci & pembahasannya — yang tidak layak, hapus sebelum menyimpan.";
+  wadah.appendChild(info);
+  kandidatAI.soal.forEach(function (q, i) {
+    var blok = document.createElement("div");
+    blok.style.cssText = "border:1px solid var(--garis); border-radius:12px; padding:10px 12px; margin-top:9px;";
+    var judul = document.createElement("b"); judul.textContent = (i + 1) + ". [" + q.k + " • " + q.m + " • " + q.d + "] " + q.t;
+    blok.appendChild(judul);
+    q.o.forEach(function (o, oi) {
+      var baris = document.createElement("div"); baris.className = "sub";
+      baris.textContent = "ABCDE"[oi] + ". " + o + (q.s ? " (skor " + q.s[oi] + ")" : "") + (oi === q.j ? " ← kunci" : "");
+      blok.appendChild(baris);
+    });
+    var pb = document.createElement("div"); pb.className = "sub"; pb.textContent = "Pembahasan: " + q.b;
+    blok.appendChild(pb);
+    var hapus = document.createElement("button"); hapus.className = "btn kecil"; hapus.textContent = "Hapus soal ini"; hapus.style.marginTop = "7px";
+    hapus.addEventListener("click", function () { kandidatAI.soal.splice(i, 1); gambarPratinjauAI(); });
+    blok.appendChild(hapus);
+    wadah.appendChild(blok);
+  });
+  var barisBtn = document.createElement("div");
+  barisBtn.style.cssText = "display:flex; gap:9px; flex-wrap:wrap; margin-top:11px;";
+  var simpan = document.createElement("button"); simpan.className = "btn emas"; simpan.textContent = "Simpan ke Bank Soal AI";
+  simpan.addEventListener("click", function () {
+    var d = dataUser();
+    if (!Array.isArray(d.soalAI)) d.soalAI = [];
+    kandidatAI.soal.forEach(function (q) { d.soalAI.push(q); });
+    var n = kandidatAI.soal.length;
+    kandidatAI = null;
+    simpanDataUser(d);
+    document.getElementById("pratinjauAI").innerHTML = "";
+    document.getElementById("statusGen").textContent = n + " soal tersimpan di Bank Soal AI ✓ — lihat di Daftar Soal (sumber: Bank AI) atau langsung latihan dari kartu ini.";
+    segarkanBankAI();
+  });
+  var buang = document.createElement("button"); buang.className = "btn"; buang.textContent = "Buang Semua";
+  buang.addEventListener("click", function () { kandidatAI = null; gambarPratinjauAI(); document.getElementById("statusGen").textContent = "Pratinjau dibuang — tidak ada yang disimpan."; });
+  barisBtn.appendChild(simpan); barisBtn.appendChild(buang);
+  wadah.appendChild(barisBtn);
+}
+document.getElementById("btnBuatSoalAI").addEventListener("click", function () {
+  var status = document.getElementById("statusGen");
+  var mapel = document.getElementById("genMapel").value;
+  var sub = document.getElementById("genSub").value || "Campuran";
+  var sulit = document.getElementById("genSulit").value;
+  var btn = this;
+  btn.disabled = true;
+  status.textContent = "AI sedang menyusun 5 soal " + mapel + "… (memakai kunci & model Tanya AI-mu)";
+  var subTeks = sub === "Campuran" ? "campuran dari semua sub-materi " + mapel : sub;
+  var prompt = "Kamu pembuat soal SKD (Seleksi Kompetensi Dasar CPNS/sekolah kedinasan) Indonesia. Buat tepat 5 soal pilihan ganda mapel " + mapel + ", sub-materi " + subTeks + ", tingkat kesulitan " + sulit + ".\nAturan ketat:\n- Bahasa Indonesia baku; setiap soal punya tepat 5 opsi jawaban.\n" +
+    (mapel === "TKP"
+      ? "- Soal TKP berbentuk situasi kerja ASN. Setiap opsi diberi skor 1-5; tepat satu opsi berskor 5 (paling tepat) dan j adalah indeks opsi berskor 5 itu. Sertakan bidang \"s\" berisi skor tiap opsi.\n"
+      : "- Tepat satu jawaban benar; j adalah indeks jawaban benar (0-4).\n") +
+    "- Sertakan pembahasan singkat 1-2 kalimat yang membuktikan kunci / skor tertingginya.\n- Buat soal BARU yang orisinal, bukan menyalin soal yang sudah terkenal.\n- Balas HANYA JSON array tanpa teks lain, format: [{\"t\":\"teks soal\",\"o\":[\"opsi 1\",\"opsi 2\",\"opsi 3\",\"opsi 4\",\"opsi 5\"],\"j\":0,\"b\":\"pembahasan\"" + (mapel === "TKP" ? ",\"s\":[5,3,2,1,4]" : "") + "}]";
+  panggilVikeyAI(prompt).then(function (teks) {
+    btn.disabled = false;
+    var v = validasiSoalAI(teks, mapel);
+    if (!v.valid.length) {
+      status.textContent = "Jawaban AI tidak menghasilkan soal yang lolos validasi (" + v.ditolak + " ditolak). Coba lagi — kadang model perlu diarahkan ulang.";
+      return;
+    }
+    v.valid.forEach(function (q) { q.m = sub === "Campuran" ? "Buatan AI" : sub; q.d = sulit; q.ai = true; });
+    kandidatAI = { soal: v.valid, ditolak: v.ditolak };
+    status.textContent = "";
+    gambarPratinjauAI();
+  }).catch(function (err) {
+    btn.disabled = false;
+    status.textContent = (err && err.message) || "AI tidak bisa dihubungi — periksa kunci Vikey di Tanya AI.";
+  });
+});
+function segarkanBankAI() {
+  var d = dataUser();
+  var n = (d.soalAI || []).length;
+  var btn = document.getElementById("btnLatihanBankAI"), info = document.getElementById("infoBankAI");
+  if (!btn || !info) return;
+  btn.disabled = !n;
+  info.textContent = n ? n + " soal tersimpan di Bank Soal AI." : "Bank Soal AI masih kosong — buat soal pertamamu di atas.";
+}
+document.getElementById("btnLatihanBankAI").addEventListener("click", function () {
+  var d = dataUser();
+  if (!(d.soalAI || []).length) return;
+  BANK_AKTIF = d.soalAI;
+  berhentiTimerKuis();
+  kuis = { mode: "latihan", kat: "Campuran", labelKuis: "Bank Soal AI", bankAI: true, daftar: d.soalAI.map(function (_, i) { return i; }), posisi: 0, jawaban: {}, sisaDetik: null };
+  tampil("kuis");
+  gambarSoal();
+});
+function gambarDaftarAI(wadah, cari) {
+  var d = dataUser();
+  document.querySelector("#view-daftarsoal .info-kuis").textContent = "Bank Soal AI (" + (d.soalAI || []).length + " soal)";
+  var daftar = (d.soalAI || []).map(function (q, i) { return { q: q, i: i }; }).filter(function (x) { return !cari || (x.q.t + " " + x.q.k + " " + (x.q.m || "")).toLowerCase().indexOf(cari) >= 0; });
+  if (!daftar.length) {
+    wadah.innerHTML = "<div class='kartu'><div class='kosong'>" + ((d.soalAI || []).length ? "Tidak ada soal AI yang cocok dengan pencarianmu." : "Bank Soal AI masih kosong. Buat soal pertamamu lewat kartu Buat Soal Latihan dengan AI di menu Latihan. Soal di sini berlabel AI dan terpisah dari Bank PRATA.") + "</div></div>";
+    return;
+  }
+  daftar.forEach(function (x) {
+    var q = x.q;
+    var item = document.createElement("div"); item.className = "kartu"; item.style.marginBottom = "10px";
+    var judul = document.createElement("b"); judul.textContent = "[AI] " + q.k + " • " + (q.m || "Buatan AI") + " • " + (q.d || "Sedang") + " — " + q.t;
+    item.appendChild(judul);
+    q.o.forEach(function (o, oi) {
+      var baris = document.createElement("div"); baris.className = "sub";
+      baris.textContent = "ABCDE"[oi] + ". " + o + (q.s ? " (skor " + q.s[oi] + ")" : "") + (oi === q.j ? " ✓ kunci" : "");
+      item.appendChild(baris);
+    });
+    var pb = document.createElement("div"); pb.className = "sub"; pb.textContent = "Pembahasan: " + q.b;
+    item.appendChild(pb);
+    var hapus = document.createElement("button"); hapus.className = "btn kecil"; hapus.textContent = "Hapus dari Bank AI"; hapus.style.marginTop = "7px";
+    hapus.addEventListener("click", function () {
+      var dd = dataUser();
+      dd.soalAI.splice(x.i, 1);
+      simpanDataUser(dd);
+      gambarDaftarSoal();
+    });
+    item.appendChild(hapus);
+    wadah.appendChild(item);
+  });
+}
+
 var sumberDaftar = "bank";
 function gambarDaftarSoal() {
   var cari = (document.getElementById("cariSoal").value || "").toLowerCase();
   var wadah = document.getElementById("wadahDaftarSoal");
   wadah.innerHTML = "";
   if (sumberDaftar === "modul") { gambarDaftarModul(wadah, cari); gambarLaporanSaya(); return; }
+  if (sumberDaftar === "ai") { gambarDaftarAI(wadah, cari); gambarLaporanSaya(); return; }
   document.querySelector("#view-daftarsoal .info-kuis").textContent = "Daftar Soal Lengkap (" + SOAL.length + " soal)";
   var tandaUser = dataUser().tanda;
   var kesalahanUser = dataUser().kesalahan || {};
@@ -3264,7 +3473,7 @@ document.getElementById("segmenSumber").addEventListener("click", function (e) {
   if (!b) return;
   sumberDaftar = b.getAttribute("data-sumber");
   document.querySelectorAll("#segmenSumber button").forEach(function (x) { x.classList.toggle("aktif", x === b); });
-  document.getElementById("segmenKategori").style.display = sumberDaftar === "modul" ? "none" : "";
+  document.getElementById("segmenKategori").style.display = sumberDaftar === "bank" ? "" : "none";
   gambarDaftarSoal();
 });
 document.getElementById("segmenKategori").addEventListener("click", function (e) {
@@ -3667,7 +3876,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v28";
+var VERSI_APP = "prata-v29";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
