@@ -909,8 +909,12 @@
     </div>
     <div class="kartu" id="kartuPapan" hidden>
       <h2 class="judul-bagian">Peringkat Online — Semua Pengguna</h2>
+      <div class="segmen" id="segmenPapan" style="margin-bottom:10px;">
+        <button data-papan="semua" class="aktif">Semua Waktu</button>
+        <button data-papan="minggu">Minggu Ini</button>
+      </div>
       <div id="daftarPapan"></div>
-      <p class="sub" style="margin-top:8px;">Berdasarkan skor Simulasi Mini terbaik tiap akun yang terdaftar di perangkat ini.</p>
+      <p class="sub" id="catatanPapan" style="margin-top:8px;">Berdasarkan skor Simulasi Mini terbaik tiap akun di server PRATA.</p>
     </div>
     <button class="btn garis lebar" id="btnEkspor" style="margin-bottom:9px;">Unduh Progres Saya (JSON)</button>
     <label class="btn garis lebar" for="inputImpor" style="margin:0 0 12px;">Impor Progres (JSON)</label>
@@ -1150,6 +1154,19 @@ Tiap sekolah berbeda: bisa meliputi tes akademik lanjutan, kesehatan, kebugaran/
 
 Catatan: info di atas adalah gambaran umum untuk persiapan, bukan pengumuman resmi. Jadwal, syarat, dan passing grade yang sah selalu yang terbit di sscasn.bkn.go.id dan situs resmi sekolah kedinasan tujuan.</div>
       <button class="btn laut lebar" data-pergi="ceklist" style="margin-top:13px;">Buka Checklist Berkas &amp; Tugas</button>
+    </div>
+    <div class="kartu">
+      <h2 class="judul-bagian">Sekilas Sekolah Kedinasan Populer</h2>
+      <div class="materi-isi">Semua sekolah di bawah ini memakai SKD CAT BKN (TWK • TIU • TKP) sebagai salah satu tahap seleksinya; yang membedakan adalah instansi penyelenggara dan tahap lanjutannya (kesehatan, jasmani/kebugaran, psikologi, akademik khusus, wawancara).
+
+• PKN STAN — Kementerian Keuangan. Bidang: akuntansi, perpajakan, kepabeanan &amp; cukai, manajemen keuangan negara.
+• IPDN — Kementerian Dalam Negeri. Bidang: kepamongprajaan dan pemerintahan daerah.
+• STIS — Badan Pusat Statistik. Bidang: statistika dan komputasi statistik.
+• STIN — Badan Intelijen Negara. Bidang: intelijen.
+• STMKG — BMKG. Bidang: meteorologi, klimatologi, geofisika, dan instrumentasi.
+• Poltek SSN — Badan Siber dan Sandi Negara. Bidang: keamanan siber dan persandian.
+
+Catatan kejujuran: keterangan di atas adalah gambaran umum bidang &amp; penyelenggara, diperiksa 7 November 2026 — BUKAN jadwal, kuota, ataupun syarat resmi. Pendaftaran &amp; pengumuman sah selalu terbit lewat portal resmi BKN (sscasn.bkn.go.id) dan situs resmi masing-masing sekolah. Waspadai calo dan "jalur khusus" berbayar — tidak ada jalur resmi seperti itu.</div>
     </div>
   </section>
 
@@ -2267,26 +2284,51 @@ function gambarRiwayat() {
   var kartuP = document.getElementById("kartuPapan");
   kartuP.hidden = true;
   if (sesiId && sbToken) {
-    fetch(SB_URL + "/rest/v1/papan_skor?select=nama,terbaik&order=terbaik.desc&limit=20", { headers: sbHeaders() })
+    fetch(SB_URL + "/rest/v1/papan_skor?select=nama,terbaik,updated_at&order=terbaik.desc&limit=50", { headers: sbHeaders() })
       .then(function (r) { return r.json(); })
       .then(function (rows) {
         if (!Array.isArray(rows) || !rows.length || document.getElementById("view-riwayat").hidden) return;
+        papanBarisCache = rows;
         kartuP.hidden = false;
-        var wadahP = document.getElementById("daftarPapan");
-        wadahP.innerHTML = "";
-        rows.forEach(function (p, i) {
-          var baris = document.createElement("div"); baris.className = "baris-riwayat";
-          var kiri = document.createElement("div");
-          kiri.textContent = (i + 1) + ". " + p.nama + (p.nama === sesiUser ? " (kamu)" : "");
-          kiri.style.fontWeight = p.nama === sesiUser ? "800" : "400";
-          var kanan = document.createElement("div"); kanan.className = "skor"; kanan.textContent = p.terbaik + " poin";
-          baris.appendChild(kiri); baris.appendChild(kanan);
-          wadahP.appendChild(baris);
-        });
+        gambarPapan();
       }).catch(function () {});
   }
   gambarPerbandingan();
 }
+var modePapan = "semua", papanBarisCache = [];
+function gambarPapan() {
+  var wadahP = document.getElementById("daftarPapan"), catatan = document.getElementById("catatanPapan");
+  if (!wadahP) return;
+  var rows = papanBarisCache.slice();
+  if (modePapan === "minggu") {
+    var batas = Date.now() - 7 * 86400000;
+    rows = rows.filter(function (p) { return p.updated_at && new Date(p.updated_at).getTime() >= batas; });
+    if (catatan) catatan.textContent = "Menampilkan akun yang mencetak skor terbaiknya (Simulasi Mini) dalam 7 hari terakhir.";
+  } else {
+    if (catatan) catatan.textContent = "Berdasarkan skor Simulasi Mini terbaik tiap akun di server PRATA.";
+  }
+  wadahP.innerHTML = "";
+  if (!rows.length) {
+    wadahP.innerHTML = "<div class='kosong'>Belum ada skor baru minggu ini — selesaikan Simulasi Mini dan jadilah yang pertama di papan minggu ini.</div>";
+    return;
+  }
+  rows.slice(0, 20).forEach(function (p, i) {
+    var baris = document.createElement("div"); baris.className = "baris-riwayat";
+    var kiri = document.createElement("div");
+    kiri.textContent = (i + 1) + ". " + p.nama + (p.nama === sesiUser ? " (kamu)" : "");
+    kiri.style.fontWeight = p.nama === sesiUser ? "800" : "400";
+    var kanan = document.createElement("div"); kanan.className = "skor"; kanan.textContent = p.terbaik + " poin";
+    baris.appendChild(kiri); baris.appendChild(kanan);
+    wadahP.appendChild(baris);
+  });
+}
+document.getElementById("segmenPapan").addEventListener("click", function (e) {
+  var b = e.target.closest("[data-papan]");
+  if (!b) return;
+  modePapan = b.getAttribute("data-papan");
+  document.querySelectorAll("#segmenPapan button").forEach(function (x) { x.classList.toggle("aktif", x === b); });
+  gambarPapan();
+});
 
 /* ================= MESIN KUIS ================= */
 var kuis = null;
@@ -3919,7 +3961,7 @@ if ("serviceWorker" in navigator) {
 }
 /* Cek versi baru: bandingkan NAMA_CACHE di sw.js repositori (di luar jangkauan
    service worker agar tidak membaca salinan lama) dengan versi yang sedang berjalan. */
-var VERSI_APP = "prata-v291";
+var VERSI_APP = "prata-v30";
 var cekVersiTerakhir = 0;
 function cekVersiBaru() {
   var kini = Date.now();
