@@ -380,20 +380,12 @@
   .judul-apung { font-weight: 800; font-size: 13.5px; }
   .tombol-apung button { background: rgba(255, 255, 255, .16); color: var(--putih); border: 0; width: 28px; height: 28px; border-radius: 8px; font-size: 14px; cursor: pointer; margin-left: 5px; }
   #jendelaApung.besar { width: min(430px, 94vw); height: min(600px, 82dvh); }
-  #tabApung { display: flex; gap: 6px; padding: 8px 10px; overflow-x: auto; background: var(--kertas); border-bottom: 1px solid var(--garis); }
-  body.gelap #tabApung { border-bottom-color: var(--garis-lembut-gelap); }
-  #tabApung button { flex: 0 0 auto; border: 1.5px solid var(--garis); background: var(--kartu); color: var(--tinta); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; }
-  body.gelap #tabApung button { border-color: var(--garis-konsol-gelap); }
-  #tabApung button.aktif { background: var(--laut-dalam); border-color: var(--laut-dalam); color: var(--putih); }
-  #bingkaiApungBungkus { flex: 1; display: flex; flex-direction: column; min-height: 0; }
   .bar-bingkai { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; background: var(--kertas); }
   .bar-bingkai span { font-weight: 800; font-size: 13px; }
   .bar-bingkai .btn { padding: 7px 12px; font-size: 12.5px; }
-  #bingkaiApung { flex: 1; width: 100%; border: 0; background: var(--putih); min-height: 0; }
   .catatan-bingkai { font-size: 11.5px; color: var(--redup); padding: 8px 12px; line-height: 1.45; }
-  #bingkaiApungBungkus[hidden] { display: none !important; }
   #jendelaApung.ciut { height: auto; }
-  #jendelaApung.ciut #tabApung, #jendelaApung.ciut #bingkaiApungBungkus { display: none; }
+  #jendelaApung.ciut #badanApung { display: none; }
   /* ===== v6: penampil buku modul ===== */
   #penampilBuku { position: fixed; inset: 0; background: var(--buku-latar); z-index: 90; display: flex; flex-direction: column; }
   #kepalaBuku { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--laut-dalam); color: var(--putih); }
@@ -419,7 +411,6 @@
   .btn-tampilan{display:inline-flex; align-items:center; justify-content:center; min-width:34px;}
   .btn-tampilan svg{width:16px; height:16px; display:block;}
   .memuat-portal{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:var(--kertas); color:var(--redup); font-size:13px; font-weight:600; z-index:2; text-align:center; padding:12px;}
-  #bingkaiApungBungkus{position:relative;}
   /* ===== v10: coretan & catatan buku ===== */
   #kepalaBuku button svg{width:16px; height:16px; display:block;}
   #kepalaBuku button.aktif{background:var(--emas); color:var(--teks-di-emas);}
@@ -437,6 +428,9 @@
   .kepala-catatan{display:flex; justify-content:space-between; gap:10px; color:var(--teks-terang); font-size:12.5px; font-weight:700; margin-bottom:7px;}
   #catatanStatus{color:var(--teks-tersimpan); font-weight:600;}
   #isiCatatanBuku{width:100%; background:var(--buku-input); color:var(--putih); border:1px solid var(--buku-garis); border-radius:10px; padding:10px 11px; font:inherit; font-size:14px; line-height:1.55; resize:vertical;}
+  /* ===== v12: konsol AI = peluncur ChatGPT & Gemini ===== */
+  #badanApung { padding: 14px; overflow-y: auto; }
+  #jendelaApung { height: auto; max-height: 82vh; }
   /* ===== v11: sistem gerak, ungkap, aksesibilitas gerak ===== */
   .kartu-aksen{border-color:var(--emas); background:var(--tint-emas);}
   header.bilah.berbayang{box-shadow:0 6px 18px rgba(13,25,48,.25);}
@@ -884,14 +878,10 @@
     </div>
     <div class="kartu" style="padding:14px;">
       <div style="font-weight:800; font-size:14px; margin-bottom:4px;">AI Pendamping &amp; Pencarian Web</div>
-      <p class="sub" style="margin-bottom:10px;">Pilih AI favoritmu — terbuka sebagai jendela pendamping di samping portal, bisa dipakai bersamaan (situs AI besar melarang ditanam di dalam aplikasi lain, jadi mereka dibuka berdampingan). Untuk memakai AI tanpa meninggalkan portal, pakai tombol emas “AI Mengambang” di atas: konsol AI melayang di atas portal (bisa digeser) dan berisi situs-situs AI yang bisa kamu pilih tabnya.</p>
+      <p class="sub" style="margin-bottom:10px;">Pilih AI favoritmu — terbuka sebagai jendela pendamping di samping portal, bisa dipakai bersamaan (situs AI besar melarang ditanam di dalam aplikasi lain, jadi mereka dibuka berdampingan). Tombol emas “AI Mengambang” di atas membuka panel pendamping yang sama — melayang di atas portal dan bisa digeser.</p>
       <div class="tab-portal" style="margin-bottom:10px;">
         <button data-aiweb="https://chatgpt.com">ChatGPT</button>
         <button data-aiweb="https://gemini.google.com">Gemini</button>
-        <button data-aiweb="https://claude.ai">Claude</button>
-        <button data-aiweb="https://chat.deepseek.com">DeepSeek</button>
-        <button data-aiweb="https://www.perplexity.ai">Perplexity</button>
-        <button data-aiweb="https://copilot.microsoft.com">Copilot</button>
       </div>
       <div class="bar-tambah" style="margin-top:0;">
         <input class="isi" id="cariWeb" type="text" placeholder="Cari di web…">
@@ -1043,31 +1033,16 @@ Catatan: info di atas adalah gambaran umum untuk persiapan, bukan pengumuman res
 
 <div id="jendelaApung" hidden>
   <div id="kepalaApung">
-    <span class="judul-apung">Konsol AI — Mengambang</span>
+    <span class="judul-apung">AI Pendamping — ChatGPT &amp; Gemini</span>
     <span class="tombol-apung">
       <button id="btnApungKecil" aria-label="Kecilkan atau besarkan konsol" title="Kecilkan / besarkan">—</button>
       <button id="btnApungTutup" aria-label="Tutup konsol" title="Tutup">✕</button>
     </span>
   </div>
-  <div id="tabApung">
-    <button data-tabapung="kimi" class="aktif">Kimi</button>
-    <button data-tabapung="deepseek">DeepSeek</button>
-    <button data-tabapung="you">You.com</button>
-    <button data-tabapung="yuanbao">Yuanbao</button>
-    <button data-tabapung="chatgpt">ChatGPT</button>
-    <button data-tabapung="gemini">Gemini</button>
-    <button data-tabapung="claude">Claude</button>
-    <button data-tabapung="perplexity">Perplexity</button>
-    <button data-tabapung="copilot">Copilot</button>
-  </div>
-  <div id="bingkaiApungBungkus">
-    <div class="memuat-portal" id="selubungApung" hidden>Memuat situs…</div>
-    <div class="bar-bingkai">
-      <span id="namaBingkaiApung">Kimi</span>
-      <button class="btn emas" id="btnBingkaiBuka">↗ Buka sebagai Jendela</button>
-    </div>
-    <iframe id="bingkaiApung" title="Situs AI dalam bingkai mengambang" loading="lazy" referrerpolicy="no-referrer"></iframe>
-    <p class="catatan-bingkai">Kimi, You.com, dan Yuanbao mengizinkan situsnya tampil di dalam bingkai ini (sudah diperiksa langsung dari server mereka) — pilih tabnya dan situsnya tampil di sini. ChatGPT, Gemini, Claude, dan beberapa lainnya mengunci situsnya sehingga bingkainya pasti ditolak browser; untuk yang itu pakai tombol ↗ di atas.</p>
+  <div id="badanApung">
+    <p class="sub" style="margin:0 0 11px;">ChatGPT dan Gemini melarang situsnya ditanam di dalam aplikasi lain — server mereka menolak bingkai dari situs mana pun. Karena itu tombol di bawah membukanya sebagai <b>jendela pendamping</b>: jendela terpisah di samping PRATA yang bisa dipakai bersamaan.</p>
+    <button class="btn laut lebar" id="btnApungChatGPT" style="margin-bottom:9px;">Buka ChatGPT &#8599;</button>
+    <button class="btn emas lebar" id="btnApungGemini">Buka Gemini &#8599;</button>
   </div>
 </div>
 
@@ -2384,47 +2359,14 @@ document.getElementById("cariWeb").addEventListener("keydown", function (e) { if
 
 /* ================= KONSOL AI MENGAMBANG (SITUS AI DALAM BINGKAI) ================= */
 var apungKecil = false;
-var APUNG_AI = {
-  kimi: { nama: "Kimi", url: "https://www.kimi.com" },
-  deepseek: { nama: "DeepSeek", url: "https://chat.deepseek.com" },
-  you: { nama: "You.com", url: "https://you.com" },
-  yuanbao: { nama: "Yuanbao", url: "https://yuanbao.tencent.com" },
-  chatgpt: { nama: "ChatGPT", url: "https://chatgpt.com" },
-  gemini: { nama: "Gemini", url: "https://gemini.google.com" },
-  claude: { nama: "Claude", url: "https://claude.ai" },
-  perplexity: { nama: "Perplexity", url: "https://www.perplexity.ai" },
-  copilot: { nama: "Copilot", url: "https://copilot.microsoft.com" }
-};
-var tabApungAktif = "kimi";
-function pilihTabApung(kunci) {
-  var ai = APUNG_AI[kunci];
-  if (!ai) return;
-  tabApungAktif = kunci;
-  document.querySelectorAll("#tabApung button").forEach(function (b) { b.classList.toggle("aktif", b.getAttribute("data-tabapung") === kunci); });
-  document.getElementById("jendelaApung").classList.add("besar");
-  document.getElementById("namaBingkaiApung").textContent = ai.nama;
-  var fr = document.getElementById("bingkaiApung");
-  if (fr.getAttribute("data-aktif") !== kunci) {
-    fr.setAttribute("data-aktif", kunci);
-    document.getElementById("selubungApung").hidden = false;
-    fr.src = ai.url;
-  }
+function bukaPendampingAI(url) {
+  window.open(url, "_blank", "width=460,height=780,noopener");
 }
-document.getElementById("tabApung").addEventListener("click", function (e) {
-  var b = e.target.closest("[data-tabapung]");
-  if (b) pilihTabApung(b.getAttribute("data-tabapung"));
-});
-document.getElementById("bingkaiApung").addEventListener("load", function () {
-  document.getElementById("selubungApung").hidden = true;
-});
-document.getElementById("btnBingkaiBuka").addEventListener("click", function () {
-  var ai = APUNG_AI[tabApungAktif];
-  if (ai) window.open(ai.url, "_blank", "noopener");
-});
+document.getElementById("btnApungChatGPT").addEventListener("click", function () { bukaPendampingAI("https://chatgpt.com"); });
+document.getElementById("btnApungGemini").addEventListener("click", function () { bukaPendampingAI("https://gemini.google.com"); });
 document.getElementById("btnApung").addEventListener("click", function () {
   var j = document.getElementById("jendelaApung");
   j.hidden = !j.hidden;
-  if (!j.hidden) pilihTabApung(tabApungAktif);
 });
 document.getElementById("btnApungTutup").addEventListener("click", function () { document.getElementById("jendelaApung").hidden = true; });
 document.getElementById("btnApungKecil").addEventListener("click", function () {
