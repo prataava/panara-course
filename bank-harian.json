@@ -1,6 +1,6 @@
 {
  "versi": 1,
- "diperbarui": "2026-11-08",
+ "diperbarui": "2026-11-09",
  "batch": [
   {
    "tanggal": "2026-11-08",
@@ -8,6 +8,13 @@
    "lulus": 20,
    "ditolak": 0,
    "sumber": "Riset konsep kisi SKD (TWK/TIU/TKP) — soal original, bukan salinan soal berhak cipta."
+  },
+  {
+   "tanggal": "2026-11-09",
+   "dibuat": 20,
+   "lulus": 20,
+   "ditolak": 0,
+   "sumber": "Mesin Soal Otonom — riset konsep kisi SKD, soal original"
   }
  ],
  "soal": [
@@ -574,6 +581,568 @@
    "b": "Adaptasi terhadap perubahan adalah kompetensi ASN: menjadi pengguna awal yang konsisten sekaligus agen perubahan yang membantu tim ikut beralih — bukan menghindar, menghukum, atau memonopoli pekerjaan.",
    "sumber": "Disusun dari kompetensi adaptasi & agen perubahan — kisi TKP adaptasi.",
    "tgl": "2026-11-08",
+   "status": "lolos"
+  },
+  {
+   "id": "H021",
+   "k": "TWK",
+   "m": "Bahasa Indonesia",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 55,
+   "t": "Penulisan gabungan kata berikut yang sesuai dengan kaidah bahasa Indonesia baku adalah …",
+   "o": [
+    "tanggungjawab",
+    "olah raga",
+    "kerjasama",
+    "tanda tangan",
+    "matapelajaran"
+   ],
+   "j": 3,
+   "b": "Menurut kaidah EYD, “tanda tangan” ditulis terpisah karena gabungan kata yang unsur-unsurnya masih dapat berdiri sendiri. Yang baku dari pilihan lain adalah “tanggung jawab”, “olahraga”, “kerja sama”, dan “mata pelajaran”.",
+   "po": [
+    "Salah — yang baku ditulis terpisah: tanggung jawab.",
+    "Salah — yang baku ditulis serangkai: olahraga.",
+    "Salah — yang baku ditulis terpisah: kerja sama.",
+    "Benar — tanda tangan ditulis terpisah sesuai kaidah EYD.",
+    "Salah — yang baku ditulis terpisah: mata pelajaran."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H022",
+   "k": "TWK",
+   "m": "Bahasa Indonesia",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 55,
+   "t": "Penggunaan tanda koma yang tepat terdapat pada kalimat …",
+   "o": [
+    "Ibu membeli sayur, buah dan daging di pasar.",
+    "Rapat akan dimulai pukul 09.00, di ruang sidang utama.",
+    "Karena hujan deras, upacara ditunda.",
+    "Ayah, berangkat ke kantor pagi ini.",
+    "Mereka yang hadir, adalah perwakilan daerah."
+   ],
+   "j": 2,
+   "b": "Koma dipakai sesudah anak kalimat yang mendahului induk kalimat, seperti “Karena hujan deras, upacara ditunda.” Pilihan lain salah menaruh koma: sebelum kata “dan” pada rincian, sesudah keterangan waktu, atau memisahkan subjek dan predikat.",
+   "po": [
+    "Salah — rincian terakhir ditulis “buah, dan daging”.",
+    "Salah — tidak perlu koma sesudah keterangan waktu.",
+    "Benar — koma sesudah anak kalimat di awal kalimat.",
+    "Salah — koma tidak memisahkan subjek dan predikat.",
+    "Salah — koma tidak boleh memisahkan subjek dan predikat."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H023",
+   "k": "TWK",
+   "m": "Integritas",
+   "d": "Mudah",
+   "jenis": "PG",
+   "waktu": 55,
+   "t": "Seorang pegawai menerima bingkisan dari perusahaan rekanan tidak lama setelah perusahaan itu memenangkan tender di instansinya. Sikap yang paling mencerminkan integritas adalah …",
+   "o": [
+    "Menerima bingkisan itu karena tender sudah selesai",
+    "Menolak bingkisan dan melaporkannya sesuai aturan gratifikasi",
+    "Menerima bingkisan lalu membagikannya kepada rekan kerja",
+    "Menyimpan bingkisan tanpa memberi tahu siapa pun",
+    "Mengembalikan bingkisan setelah memakainya sebagian"
+   ],
+   "j": 1,
+   "b": "Gratifikasi tetap wajib ditolak atau dilaporkan meski tender sudah selesai, karena pemberian dari rekanan dapat memengaruhi objektivitas pegawai. Menerima, membagi, atau menyembunyikannya sama-sama melanggar prinsip integritas.",
+   "po": [
+    "Salah — selesainya tender tidak menghapus sifat gratifikasi.",
+    "Benar — menolak dan melaporkan sesuai aturan adalah sikap berintegritas.",
+    "Salah — membagi tidak mengubah pemberian itu menjadi sah.",
+    "Salah — menyembunyikan justru menambah pelanggaran.",
+    "Salah — memakai sebagian tetap berarti menerima gratifikasi."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H024",
+   "k": "TWK",
+   "m": "Integritas",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 55,
+   "t": "Atasanmu memintamu mengubah angka pada laporan kinerja agar capaian unit terlihat lebih baik dari keadaan sebenarnya. Tindakan yang paling tepat adalah …",
+   "o": [
+    "Mengubah angka sesuai perintah karena itu tugas dari atasan",
+    "Menolak mengubah data dan menyampaikan keadaan sebenarnya dengan bukti yang ada",
+    "Mengubah sebagian angka agar tidak terlalu mencolok",
+    "Membiarkan laporan apa adanya tanpa memberi tahu siapa pun",
+    "Meminta rekan lain yang mengubah angka tersebut"
+   ],
+   "j": 1,
+   "b": "Integritas berarti jujur terhadap data apa pun risikonya. Mengubah angka laporan adalah pemalsuan; sikap benar adalah menolak dan menyampaikan fakta disertai bukti, bukan mengalihkan atau menyembunyikan masalah.",
+   "po": [
+    "Salah — perintah atasan tidak membenarkan pemalsuan data.",
+    "Benar — menolak pemalsuan dan menyampaikan fakta dengan bukti.",
+    "Salah — mengubah sebagian tetap pemalsuan.",
+    "Salah — diam membiarkan laporan salah tetap merugikan.",
+    "Salah — mengalihkan perbuatan salah kepada orang lain."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H025",
+   "k": "TWK",
+   "m": "Pilar Negara",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 55,
+   "t": "Empat pilar kebangsaan yang menjadi fondasi kehidupan berbangsa dan bernegara di Indonesia adalah …",
+   "o": [
+    "Pancasila, UUD 1945, NKRI, dan Bhinneka Tunggal Ika",
+    "Pancasila, Sumpah Pemuda, NKRI, dan Proklamasi",
+    "UUD 1945, Garuda Pancasila, NKRI, dan Bahasa Indonesia",
+    "Pancasila, UUD 1945, Bhinneka Tunggal Ika, dan Piagam Jakarta",
+    "NKRI, Proklamasi, Sumpah Pemuda, dan Bhinneka Tunggal Ika"
+   ],
+   "j": 0,
+   "b": "Empat pilar kebangsaan terdiri atas Pancasila sebagai dasar negara, UUD 1945 sebagai konstitusi, NKRI sebagai bentuk negara, dan Bhinneka Tunggal Ika sebagai semboyan persatuan dalam keberagaman.",
+   "po": [
+    "Benar — keempat unsur itulah empat pilar kebangsaan.",
+    "Salah — Sumpah Pemuda dan Proklamasi bukan pilar kebangsaan.",
+    "Salah — Garuda Pancasila dan Bahasa Indonesia bukan pilar kebangsaan.",
+    "Salah — Piagam Jakarta bukan salah satu dari empat pilar.",
+    "Salah — Proklamasi dan Sumpah Pemuda bukan pilar kebangsaan."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H026",
+   "k": "TWK",
+   "m": "NKRI & Bhinneka Tunggal Ika",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 55,
+   "t": "Makna semboyan Bhinneka Tunggal Ika bagi kehidupan berbangsa yang beragam suku, agama, dan budaya adalah …",
+   "o": [
+    "Semua perbedaan harus diseragamkan menjadi satu",
+    "Berbeda-beda tetapi tetap satu sebagai bangsa Indonesia",
+    "Setiap daerah berhak mengatur negaranya sendiri",
+    "Persatuan hanya berlaku bagi suku mayoritas",
+    "Keberagaman cukup diakui tanpa perlu dijaga"
+   ],
+   "j": 1,
+   "b": "Bhinneka Tunggal Ika berarti berbeda-beda tetapi tetap satu jua: keberagaman suku, agama, dan budaya diakui sekaligus diikat dalam persatuan Indonesia, bukan diseragamkan atau dibiarkan terpecah.",
+   "po": [
+    "Salah — persatuan tidak berarti menyeragamkan perbedaan.",
+    "Benar — itulah arti Bhinneka Tunggal Ika.",
+    "Salah — itu bertentangan dengan negara kesatuan.",
+    "Salah — persatuan berlaku bagi seluruh warga negara.",
+    "Salah — keberagaman harus dijaga, bukan sekadar diakui."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H027",
+   "k": "TIU",
+   "m": "Geometri",
+   "d": "Mudah",
+   "jenis": "Numerik",
+   "waktu": 60,
+   "t": "Sebuah lapangan berbentuk persegi panjang dengan panjang 24 m dan lebar 18 m. Keliling lapangan tersebut adalah …",
+   "o": [
+    "72 m",
+    "78 m",
+    "84 m",
+    "96 m",
+    "108 m"
+   ],
+   "j": 2,
+   "b": "Keliling persegi panjang = 2 × (panjang + lebar) = 2 × (24 + 18) = 2 × 42 = 84 m.",
+   "po": [
+    "Itu hasil 3 × 24, bukan keliling.",
+    "Itu hasil 24 + 18 + 36 yang keliru.",
+    "Benar — 2 × (24 + 18) = 84 m.",
+    "Itu hasil 4 × 24, bukan keliling persegi panjang.",
+    "Itu hasil 6 × 18, bukan keliling."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H028",
+   "k": "TIU",
+   "m": "Geometri",
+   "d": "Sedang",
+   "jenis": "Numerik",
+   "waktu": 70,
+   "t": "Gambar berikut menunjukkan sebuah lingkaran dengan jari-jari seperti tertera. Keliling lingkaran tersebut adalah …",
+   "o": [
+    "44 cm",
+    "66 cm",
+    "88 cm",
+    "132 cm",
+    "154 cm"
+   ],
+   "j": 2,
+   "g": "<svg viewBox=\"0 0 220 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Lingkaran dengan jari-jari 14 cm\"><circle cx=\"110\" cy=\"100\" r=\"70\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"110\" y1=\"100\" x2=\"180\" y2=\"100\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"110\" cy=\"100\" r=\"3\" fill=\"currentColor\"/><text x=\"145\" y=\"92\" font-size=\"13\" text-anchor=\"middle\" fill=\"currentColor\">14 cm</text></svg>",
+   "b": "Keliling lingkaran = 2 × π × r. Dengan π = 22 per 7 dan r = 14 cm, hasilnya 2 × 22 per 7 × 14 = 88 cm.",
+   "po": [
+    "Itu hasil π × r saja, bukan keliling penuh.",
+    "Tidak sesuai perhitungan keliling lingkaran.",
+    "Benar — 2 × 22 per 7 × 14 = 88 cm.",
+    "Itu hasil 3 × 44 yang keliru.",
+    "Itu hasil 11 × 14 yang keliru."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H029",
+   "k": "TIU",
+   "m": "Verbal: Analogi",
+   "d": "Mudah",
+   "jenis": "PG",
+   "waktu": 45,
+   "t": "PENA : MENULIS = KUAS : …",
+   "o": [
+    "MELUKIS",
+    "MEMOTONG",
+    "MENGUKUR",
+    "MEMASAK",
+    "MENIMBANG"
+   ],
+   "j": 0,
+   "b": "Pena adalah alat untuk menulis, sebagaimana kuas adalah alat untuk melukis. Hubungan keduanya sama-sama alat dan kegunaan utamanya.",
+   "po": [
+    "Benar — kuas dipakai untuk melukis seperti pena untuk menulis.",
+    "Salah — memotong bukan kegunaan utama kuas.",
+    "Salah — mengukur bukan kegunaan kuas.",
+    "Salah — memasak bukan kegunaan kuas.",
+    "Salah — menimbang bukan kegunaan kuas."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H030",
+   "k": "TIU",
+   "m": "Verbal: Analogi",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 45,
+   "t": "AIR : HAUS = MAKANAN : …",
+   "o": [
+    "LAPAR",
+    "KENYANG",
+    "GIZI",
+    "ENAK",
+    "BANYAK"
+   ],
+   "j": 0,
+   "b": "Air menghilangkan rasa haus, sebagaimana makanan menghilangkan rasa lapar. Hubungannya adalah sesuatu yang memenuhi kebutuhan yang sedang dirasakan.",
+   "po": [
+    "Benar — makanan menghilangkan lapar seperti air menghilangkan haus.",
+    "Salah — kenyang adalah akibat, bukan kebutuhan yang dipenuhi.",
+    "Salah — gizi adalah kandungan, bukan rasa yang dihilangkan.",
+    "Salah — enak adalah sifat rasa, bukan kebutuhan.",
+    "Salah — banyak adalah jumlah, bukan hubungan maknanya."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H031",
+   "k": "TIU",
+   "m": "Logika & Silogisme",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 70,
+   "t": "Semua guru di sekolah itu mengikuti pelatihan. Sebagian peserta pelatihan adalah guru baru. Simpulan yang pasti benar adalah …",
+   "o": [
+    "Semua guru baru mengikuti pelatihan",
+    "Sebagian guru baru mengikuti pelatihan",
+    "Tidak ada guru baru yang mengikuti pelatihan",
+    "Semua peserta pelatihan adalah guru",
+    "Guru baru tidak mengikuti pelatihan"
+   ],
+   "j": 1,
+   "b": "Sebagian peserta pelatihan adalah guru baru, artinya ada guru baru yang menjadi peserta pelatihan. Jadi simpulan yang pasti benar hanyalah bahwa sebagian guru baru mengikuti pelatihan; simpulan yang lain tidak dapat dipastikan dari premis yang ada.",
+   "po": [
+    "Salah — premis hanya menyebut sebagian peserta, bukan semua guru baru.",
+    "Benar — ada guru baru yang menjadi peserta pelatihan.",
+    "Salah — bertentangan dengan premis kedua.",
+    "Salah — peserta pelatihan bisa berasal dari luar guru.",
+    "Salah — bertentangan dengan premis kedua."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H032",
+   "k": "TIU",
+   "m": "Logika & Silogisme",
+   "d": "Sulit",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Jika hari hujan, maka jalanan basah. Diketahui jalanan tidak basah. Simpulan yang tepat adalah …",
+   "o": [
+    "Hari sedang hujan",
+    "Hari tidak hujan",
+    "Jalanan basah karena disiram",
+    "Hujan turun tetapi jalanan tetap kering",
+    "Tidak ada simpulan yang dapat ditarik"
+   ],
+   "j": 1,
+   "b": "Ini penalaran modus tollens: jika P maka Q; Q tidak terjadi, maka P tidak terjadi. Karena jalanan tidak basah, maka dapat dipastikan hari tidak hujan.",
+   "po": [
+    "Salah — itu justru kebalikan dari simpulan yang sah.",
+    "Benar — modus tollens: jalanan tidak basah berarti tidak hujan.",
+    "Salah — premis menyatakan jalanan tidak basah.",
+    "Salah — bertentangan dengan premis dan simpulan.",
+    "Salah — modus tollens memberikan simpulan yang pasti."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H033",
+   "k": "TIU",
+   "m": "Figural",
+   "d": "Sedang",
+   "jenis": "Figural",
+   "waktu": 80,
+   "t": "Perhatikan deret gambar berikut. Setiap bangun datar pada deret bertambah satu sisi dari bangun sebelumnya. Bangun yang tepat untuk melanjutkan deret adalah …",
+   "o": [
+    "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Segilima\"><polygon points=\"50,15 82,40 70,80 30,80 18,40\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"/></svg>",
+    "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Segitujuh\"><polygon points=\"50,15 78,28 88,55 72,82 38,88 15,68 16,35\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"/></svg>",
+    "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Segienam\"><polygon points=\"50,15 80,32 80,68 50,85 20,68 20,32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"/></svg>",
+    "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Segidelapan\"><polygon points=\"35,15 65,15 85,35 85,65 65,85 35,85 15,65 15,35\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"/></svg>",
+    "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Segitiga\"><polygon points=\"50,20 80,80 20,80\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"/></svg>"
+   ],
+   "j": 2,
+   "g": "<svg viewBox=\"0 0 400 100\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Deret bangun datar: segitiga, segiempat, segilima, lalu tanda tanya\"><g transform=\"translate(0 0)\"><polygon points=\"50,20 80,80 20,80\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"/></g><g transform=\"translate(100 0)\"><polygon points=\"25,25 75,25 75,75 25,75\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"/></g><g transform=\"translate(200 0)\"><polygon points=\"50,15 82,40 70,80 30,80 18,40\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"/></g><g transform=\"translate(300 0)\"><text x=\"50\" y=\"62\" font-size=\"34\" text-anchor=\"middle\" fill=\"currentColor\">?</text></g></svg>",
+   "b": "Deret menunjukkan segitiga (3 sisi), segiempat (4 sisi), lalu segilima (5 sisi). Polanya bertambah satu sisi setiap langkah, jadi bangun berikutnya harus bersisi 6, yaitu segienam.",
+   "po": [
+    "Salah — segilima sudah muncul sebagai bangun ketiga.",
+    "Salah — segitujuh melompat dua sisi dari segilima.",
+    "Benar — segienam bersisi 6, kelanjutan pola 3, 4, 5, 6.",
+    "Salah — segidelapan melompat tiga sisi dari segilima.",
+    "Salah — segitiga adalah bangun pertama, bukan kelanjutannya."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H034",
+   "k": "TKP",
+   "m": "Sosial Budaya",
+   "d": "Mudah",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Kamu ditugaskan bekerja sama dalam satu tim dengan rekan dari suku dan agama yang berbeda denganmu. Sikap terbaik adalah …",
+   "o": [
+    "Menghindari interaksi di luar urusan tugas",
+    "Mempelajari dan menghormati kebiasaan rekan kerjamu",
+    "Mengajak rekan mengikuti kebiasaan dan caramu",
+    "Membicarakan perbedaan rekan di belakangnya",
+    "Bersikap biasa saja tanpa peduli pada perbedaan"
+   ],
+   "j": 1,
+   "s": [
+    2,
+    5,
+    3,
+    1,
+    2
+   ],
+   "b": "Kerja sama lintas budaya berhasil bila perbedaan dihormati dan dipelajari, bukan dihindari atau diseragamkan. Sikap terbuka membangun kepercayaan tim dan mencegah kesalahpahaman.",
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H035",
+   "k": "TKP",
+   "m": "Sosial Budaya",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Di lingkungan kerjamu ada tradisi gotong royong membersihkan lingkungan setiap hari Jumat. Sikap terbaik terhadap tradisi itu adalah …",
+   "o": [
+    "Tidak ikut karena itu bukan bagian dari tugasmu",
+    "Ikut serta dan membantu mengoordinasikan kegiatan",
+    "Ikut sesekali bila sedang tidak sibuk",
+    "Membayar orang lain untuk menggantikan kehadiranmu",
+    "Mengusulkan agar kegiatan itu dihapus saja"
+   ],
+   "j": 1,
+   "s": [
+    1,
+    5,
+    3,
+    2,
+    2
+   ],
+   "b": "Gotong royong adalah wujud kebersamaan dan kepedulian pada lingkungan kerja. Ikut serta secara aktif, bahkan membantu mengoordinasikannya, menunjukkan sikap sosial budaya yang paling baik.",
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H036",
+   "k": "TKP",
+   "m": "Teknologi Informasi & Komunikasi",
+   "d": "Mudah",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Kamu menerima surel dari alamat tidak dikenal yang memintamu mengklik tautan untuk memperbarui data kepegawaian. Tindakan terbaik adalah …",
+   "o": [
+    "Mengklik tautan karena surel itu terlihat resmi",
+    "Memeriksa alamat pengirim dan melaporkannya tanpa mengklik tautan",
+    "Meneruskan surel itu ke rekan agar mereka berhati-hati",
+    "Mengabaikan dan langsung menghapus surel itu",
+    "Membalas surel untuk menanyakan keasliannya"
+   ],
+   "j": 1,
+   "s": [
+    1,
+    5,
+    3,
+    2,
+    2
+   ],
+   "b": "Tautan dari pengirim tak dikenal berisiko phising dan pencurian data. Tindakan paling aman adalah tidak mengklik, memeriksa keaslian pengirim, dan melaporkannya ke bagian terkait agar ditindaklanjuti.",
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H037",
+   "k": "TKP",
+   "m": "Teknologi Informasi & Komunikasi",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Karena praktis, kamu menyimpan dokumen penting kantor di layanan penyimpanan awan akun pribadimu. Tindakan terbaik adalah …",
+   "o": [
+    "Membiarkannya karena penyimpanan awan pribadi praktis",
+    "Memindahkan dokumen ke penyimpanan resmi kantor dan menghapus salinan pribadi",
+    "Membagikan tautan dokumen itu ke tim agar mudah diakses",
+    "Mengganti kata sandi akun pribadimu saja",
+    "Mengunduh salinan dokumen ke ponsel pribadimu"
+   ],
+   "j": 1,
+   "s": [
+    1,
+    5,
+    3,
+    2,
+    2
+   ],
+   "b": "Dokumen kantor adalah aset instansi yang wajib disimpan di media resmi agar terlindungi dan dapat diaudit. Menyimpannya di akun pribadi berisiko bocor dan sulit dipertanggungjawabkan.",
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H038",
+   "k": "TKP",
+   "m": "Jejaring Kerja",
+   "d": "Mudah",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Kamu baru bergabung di sebuah unit kerja dan belum mengenal banyak rekan. Langkah terbaik untuk membangun jejaring kerja adalah …",
+   "o": [
+    "Menunggu rekan menyapamu terlebih dahulu",
+    "Memperkenalkan diri dan aktif berdiskusi tentang pekerjaan",
+    "Bekerja sendiri tanpa berinteraksi dengan siapa pun",
+    "Hanya berinteraksi dengan atasan langsung",
+    "Menghindari rapat agar tidak merasa canggung"
+   ],
+   "j": 1,
+   "s": [
+    2,
+    5,
+    1,
+    3,
+    2
+   ],
+   "b": "Jejaring kerja dibangun dengan inisiatif: memperkenalkan diri dan aktif berdiskusi membuatmu dikenal, mempercepat adaptasi, dan membuka jalur kerja sama dengan berbagai pihak.",
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H039",
+   "k": "TKP",
+   "m": "Jejaring Kerja",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Sebuah proyek membutuhkan kerja sama tiga unit yang sebelumnya jarang berkoordinasi. Langkah terbaik untuk memulai kerja sama itu adalah …",
+   "o": [
+    "Mengerjakan bagianmu saja tanpa berkoordinasi",
+    "Mengusulkan pertemuan bersama untuk menyepakati peran dan jadwal",
+    "Menyerahkan koordinasi sepenuhnya kepada unit lain",
+    "Mengirim satu surel lalu menunggu balasan",
+    "Meminta atasan memaksa unit lain bekerja sama"
+   ],
+   "j": 1,
+   "s": [
+    2,
+    5,
+    3,
+    1,
+    2
+   ],
+   "b": "Kerja sama antarunit dimulai dari kesepakatan bersama tentang peran, jadwal, dan cara berkomunikasi. Pertemuan bersama menyamakan pemahaman dan mencegah tumpang tindih pekerjaan.",
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
+   "status": "lolos"
+  },
+  {
+   "id": "H040",
+   "k": "TKP",
+   "m": "Anti Korupsi",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Seorang vendor menawarkan komisi pribadi kepadamu agar kamu memilih perusahaannya dalam pengadaan barang kantor. Tindakan terbaik adalah …",
+   "o": [
+    "Menerima komisi karena nilainya kecil",
+    "Menolak tawaran dan melaporkannya melalui kanal resmi",
+    "Menerima komisi lalu menggunakannya untuk keperluan kantor",
+    "Menolak secara lisan tanpa melaporkannya",
+    "Meminta vendor menaikkan tawaran komisinya"
+   ],
+   "j": 1,
+   "s": [
+    1,
+    5,
+    2,
+    3,
+    1
+   ],
+   "b": "Komisi dari vendor adalah suap yang merusak objektivitas pengadaan, berapa pun nilainya. Menolak saja tidak cukup; laporan melalui kanal resmi mencegah vendor mengulangi tawaran kepada pegawai lain.",
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-09",
    "status": "lolos"
   }
  ],
