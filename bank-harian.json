@@ -577,9 +577,9 @@
   }
  ],
  "otomatis": {
-  "aktif": false,
+  "aktif": true,
   "jadwal": "02.00 WIB",
   "targetHarian": 20,
-  "catatan": "Scheduler sedang dipasang — status menjadi AKTIF begitu cron harian terpasang & teruji."
+  "catatan": "Scheduler aktif — cron harian Muse."
  }
 }
