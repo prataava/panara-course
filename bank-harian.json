@@ -1,6 +1,6 @@
 {
  "versi": 1,
- "diperbarui": "2026-11-09",
+ "diperbarui": "2026-11-10",
  "batch": [
   {
    "tanggal": "2026-11-08",
@@ -29,6 +29,13 @@
    "lulus": 10,
    "ditolak": 0,
    "sumber": "Ekspansi gelombang 2 (Intelijen Soal) — 10 soal lintas mata pelajaran dengan peta jenis kesalahan distraktor."
+  },
+  {
+   "tanggal": "2026-11-10",
+   "dibuat": 20,
+   "lulus": 20,
+   "ditolak": 0,
+   "sumber": "Mesin Soal Otonom — riset konsep kisi SKD, soal original"
   }
  ],
  "soal": [
@@ -3451,6 +3458,685 @@
    "tgl": "2026-11-09",
    "status": "lolos",
    "sumber": "Ekspansi Bank PRATA gelombang 2 (Intelijen Soal) 2026-11-09 — soal lintas mata pelajaran orisinal; kunci numerik dihitung ulang secara programatis."
+  },
+  {
+   "b": "UUD 1945 mengatur simbol negara secara berurutan: Pasal 35 bendera negara Sang Merah Putih, Pasal 36 bahasa negara Bahasa Indonesia, Pasal 36A lambang negara Garuda Pancasila dengan semboyan Bhinneka Tunggal Ika, dan Pasal 36B lagu kebangsaan Indonesia Raya. Pemisahan pasal ini menegaskan setiap simbol memiliki kedudukan konstitusional sendiri.",
+   "d": "Sedang",
+   "id": "H111",
+   "j": 1,
+   "jenis": "PG",
+   "k": "TWK",
+   "lvl": "C4",
+   "m": "Pilar Negara",
+   "o": [
+    "Keempat simbol negara itu diatur dalam satu pasal yang sama, yaitu Pasal 35",
+    "Bendera diatur Pasal 35, bahasa negara Pasal 36, lambang negara Pasal 36A, dan lagu kebangsaan Pasal 36B",
+    "Lambang negara diatur Pasal 35, sedangkan bendera diatur Pasal 36A",
+    "Lagu kebangsaan diatur Pasal 36, sedangkan bahasa negara diatur Pasal 36B",
+    "Pengaturan simbol negara tidak terdapat dalam UUD 1945, melainkan hanya dalam undang-undang"
+   ],
+   "po": [
+    "Salah — keempat simbol diatur dalam pasal yang berbeda-beda.",
+    "Benar — urutan pasal simbol negara memang 35, 36, 36A, dan 36B.",
+    "Salah — Pasal 35 mengatur bendera, bukan lambang negara.",
+    "Salah — lagu kebangsaan diatur Pasal 36B, bukan Pasal 36.",
+    "Salah — simbol negara diatur langsung dalam UUD 1945."
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari bunyi Pasal 35, 36, 36A, dan 36B UUD 1945.",
+   "t": "Dalam sebuah diskusi kelas, seorang siswa bertanya mengapa bendera, bahasa, lambang negara, dan lagu kebangsaan diatur dalam pasal-pasal yang berbeda di UUD 1945. Pernyataan berikut yang paling tepat untuk menjawab pertanyaan itu adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Turunan H002 — dari hafalan satu pasal lambang negara menjadi analisis keempat simbol negara sekaligus.",
+   "waktu": 60
+  },
+  {
+   "b": "Pasal 7C UUD 1945 menegaskan Presiden tidak dapat membubarkan Dewan Perwakilan Rakyat. Ketentuan ini lahir dari amandemen UUD 1945 untuk menjaga keseimbangan kekuasaan: Presiden sebagai pemegang kekuasaan eksekutif tidak boleh membubarkan lembaga legislatif. Pasal 7A mengatur pemberhentian Presiden oleh MPR, Pasal 7B mengatur usul pemberhentian oleh DPR, dan Pasal 8 mengatur kekosongan jabatan Presiden.",
+   "d": "Mudah",
+   "id": "H112",
+   "j": 2,
+   "jenis": "PG",
+   "k": "TWK",
+   "lvl": "C2",
+   "m": "Pilar Negara",
+   "o": [
+    "Pasal 7A",
+    "Pasal 7B",
+    "Pasal 7C",
+    "Pasal 7",
+    "Pasal 8"
+   ],
+   "po": [
+    "Pasal 7A mengatur pemberhentian Presiden oleh MPR.",
+    "Pasal 7B mengatur usul pemberhentian Presiden oleh DPR.",
+    "Benar — Pasal 7C melarang Presiden membubarkan DPR.",
+    "Pasal 7 mengatur masa jabatan Presiden.",
+    "Pasal 8 mengatur kekosongan jabatan Presiden dan Wakil Presiden."
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari bunyi Pasal 7C UUD 1945.",
+   "t": "Ketentuan bahwa Presiden tidak dapat membubarkan Dewan Perwakilan Rakyat tercantum dalam UUD 1945 pada …",
+   "tgl": "2026-11-10",
+   "turunan": "Turunan H001 — dari kedudukan Pancasila sebagai sumber hukum ke kewenangan lembaga negara.",
+   "waktu": 45
+  },
+  {
+   "b": "Pasangan kata baku: atlet (bukan atlit) dan risiko (bukan resiko). Pasangan lain mengandung kata tidak baku: apotek bukan apotik, izin bukan ijin, sekadar bukan sekedar, nasihat bukan nasehat, praktik bukan praktek, kualitas bukan kwalitas, dan aktivitas bukan aktifitas.",
+   "d": "Sedang",
+   "id": "H113",
+   "j": 2,
+   "jenis": "PG",
+   "k": "TWK",
+   "lvl": "C3",
+   "m": "Bahasa Indonesia",
+   "o": [
+    "apotik – ijin",
+    "sekedar – nasehat",
+    "atlet – risiko",
+    "praktek – kwalitas",
+    "aktifitas – atlit"
+   ],
+   "po": [
+    "Apotik dan ijin sama-sama tidak baku.",
+    "Sekedar dan nasehat sama-sama tidak baku.",
+    "Benar — atlet dan risiko keduanya baku.",
+    "Praktek dan kwalitas sama-sama tidak baku.",
+    "Aktifitas dan atlit sama-sama tidak baku."
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari kaidah kata baku KBBI.",
+   "t": "Pasangan kata berikut yang keduanya sudah baku menurut KBBI adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Turunan H004 — dari kalimat berk kata baku ke pasangan kata baku.",
+   "waktu": 60
+  },
+  {
+   "b": "Integritas berarti jujur dan konsisten pada aturan meski ada godaan. Menolak gratifikasi, memberi penjelasan yang adil kepada pemohon, dan melaporkannya melalui saluran resmi menunjukkan integritas yang utuh. Menerima uang dalam bentuk apa pun, meski tidak memengaruhi antrean, tetap melanggar aturan dan merusak kepercayaan publik.",
+   "d": "Sedang",
+   "id": "H114",
+   "integrasi": "TWK × TKP (pelayanan publik berintegritas)",
+   "j": 1,
+   "jenis": "PG",
+   "k": "TWK",
+   "lvl": "C5",
+   "m": "Integritas",
+   "o": [
+    "Menerima uang itu lalu mendahulukan berkas pemohon tersebut",
+    "Menolak uang itu dengan sopan, menjelaskan bahwa antrean berlaku sama untuk semua, dan melaporkan tawaran itu kepada atasan",
+    "Menerima uang itu tetapi tetap melayani sesuai nomor antrean",
+    "Mengabaikan tawaran itu dan melayani seperti biasa tanpa mencatat apa pun",
+    "Meminta uang yang lebih besar agar tawaran itu tidak dilaporkan"
+   ],
+   "po": [
+    "Salah — menerima uang untuk mendahulukan berkas adalah suap.",
+    "Benar — menolak, menjelaskan, dan melaporkan menunjukkan integritas utuh.",
+    "Salah — menerima uang tetap gratifikasi meski antrean tidak berubah.",
+    "Salah — tawaran suap harus dicatat dan dilaporkan, bukan diabaikan.",
+    "Salah — memeras pemohon adalah pelanggaran yang lebih berat."
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari nilai dasar ASN BerAKHLAK — integritas dan antikorupsi.",
+   "t": "Seorang petugas loket pelayanan perizinan ditawari uang oleh pemohon agar berkasnya didahulukan, padahal antrean masih panjang. Tindakan petugas yang paling mencerminkan integritas adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Turunan H006 — dari definisi integritas ke penilaian tindakan petugas dalam kasus gratifikasi.",
+   "waktu": 70
+  },
+  {
+   "b": "Bhinneka Tunggal Ika berarti berbeda-beda tetapi tetap satu. Bahasa Indonesia mempersatukan seluruh warga dalam urusan resmi, sementara bahasa daerah tetap dihormati dalam kehidupan adat. Keduanya berjalan bersama: persatuan tidak menuntut penyeragaman, dan keberagaman tidak menghalangi persatuan.",
+   "d": "Sedang",
+   "id": "H115",
+   "j": 0,
+   "jenis": "PG",
+   "k": "TWK",
+   "lvl": "C5",
+   "m": "NKRI & Bhinneka Tunggal Ika",
+   "o": [
+    "Semboyan Bhinneka Tunggal Ika",
+    "Paham primordialisme yang mengutamakan suku sendiri",
+    "Sentralisasi yang menghapus seluruh kekhasan daerah",
+    "Nasionalisme sempit yang menolak perbedaan",
+    "Sistem kasta yang membedakan warga berdasarkan asal suku"
+   ],
+   "po": [
+    "Benar — persatuan dijaga tanpa menghapus keberagaman.",
+    "Salah — primordialisme justru mengutamakan suku sendiri.",
+    "Salah — menghapus kekhasan daerah bertentangan dengan Bhinneka Tunggal Ika.",
+    "Salah — nasionalisme sempit menolak perbedaan, bukan merawatnya.",
+    "Salah — sistem kasta bertentangan dengan kesetaraan warga negara."
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari makna semboyan Bhinneka Tunggal Ika dan Pasal 36 UUD 1945.",
+   "t": "Sebuah kabupaten dihuni warga dari lima suku dengan bahasa daerah yang berbeda-beda. Pemerintah daerah menetapkan bahasa Indonesia sebagai bahasa pengantar rapat resmi, tetapi tetap mengizinkan bahasa daerah dipakai dalam musyawarah adat. Sikap pemerintah daerah tersebut paling sejalan dengan …",
+   "tgl": "2026-11-10",
+   "turunan": "Turunan H003 — dari bunyi pasal bentuk negara ke analisis kebijakan bahasa daerah.",
+   "waktu": 70
+  },
+  {
+   "b": "Sila pertama Pancasila menjamin penghormatan terhadap keyakinan setiap warga, dan Pasal 29 ayat (2) UUD 1945 menjamin kemerdekaan tiap-tiap penduduk untuk memeluk agamanya dan beribadat menurut agamanya. Pembatasan kegiatan ibadah atas dasar suara mayoritas bertentangan dengan jaminan konstitusional itu. Peraturan daerah juga tidak boleh bertentangan dengan UUD 1945 sebagai hukum yang lebih tinggi.",
+   "d": "Sulit",
+   "id": "H116",
+   "j": 2,
+   "jenis": "PG",
+   "k": "TWK",
+   "lvl": "C6",
+   "m": "Pancasila",
+   "o": [
+    "Usulan itu sah karena ketertiban umum lebih tinggi daripada kebebasan beragama",
+    "Peraturan daerah boleh membatasi ibadah bila disetujui mayoritas warga",
+    "Usulan itu bertentangan dengan sila Ketuhanan Yang Maha Esa dan jaminan kebebasan beragama, sehingga tidak boleh diteruskan",
+    "Peraturan daerah itu dapat berlaku sementara sampai ada putusan Mahkamah Konstitusi",
+    "Pembatasan ibadah cukup diatur peraturan daerah tanpa perlu melihat UUD 1945"
+   ],
+   "po": [
+    "Salah — kebebasan beragama adalah hak konstitusional, bukan di bawah ketertiban semata.",
+    "Salah — hak minoritas tidak ditentukan oleh suara mayoritas.",
+    "Benar — usulan itu melanggar sila pertama dan Pasal 29 UUD 1945.",
+    "Salah — peraturan yang bertentangan dengan UUD tidak boleh diberlakukan sementara.",
+    "Salah — peraturan daerah wajib tunduk pada UUD 1945."
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari sila pertama Pancasila dan Pasal 29 UUD 1945.",
+   "t": "Seorang anggota DPRD mengusulkan peraturan daerah yang membatasi kegiatan ibadah kelompok minoritas dengan alasan menjaga ketertiban umum. Tinjauan yang paling tepat atas usulan itu berdasarkan sila pertama Pancasila dan Pasal 29 UUD 1945 adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Turunan H001 — dari kedudukan Pancasila sebagai sumber hukum ke penilaian usulan peraturan daerah.",
+   "waktu": 80
+  },
+  {
+   "b": "Payung adalah alat yang melindungi dari hujan; jaket adalah pakaian yang melindungi dari dingin. Hubungannya sama-sama alat pelindung terhadap suatu kondisi. Pilihan lain memasangkan alat dengan bagian tubuh, bukan dengan kondisi yang dilindungi.",
+   "d": "Mudah",
+   "id": "H117",
+   "j": 1,
+   "jenis": "PG",
+   "k": "TIU",
+   "lvl": "C3",
+   "m": "Verbal: Analogi",
+   "o": [
+    "Kacamata : Mata",
+    "Jaket : Dingin",
+    "Sepatu : Kaki",
+    "Topi : Kepala",
+    "Sarung tangan : Tangan"
+   ],
+   "po": [
+    "Mata adalah bagian tubuh, bukan kondisi yang dilindungi.",
+    "Benar — jaket melindungi dari dingin seperti payung dari hujan.",
+    "Kaki adalah bagian tubuh, bukan kondisi yang dilindungi.",
+    "Kepala adalah bagian tubuh, bukan kondisi yang dilindungi.",
+    "Tangan adalah bagian tubuh, bukan kondisi yang dilindungi."
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari pola analogi alat pelindung terhadap kondisi — kisi TIU verbal.",
+   "t": "PAYUNG : HUJAN = … : …",
+   "tgl": "2026-11-10",
+   "turunan": "Turunan H011 — dari analogi pelaku dan alat kendali ke analogi alat pelindung dan kondisi.",
+   "waktu": 50
+  },
+  {
+   "b": "Arbitrer berarti berdasarkan kehendak sendiri tanpa berpegang pada aturan yang berlaku, sehingga sinonimnya adalah sewenang-wenang. Lawan katanya justru adil, teratur, dan objektif, sedangkan bijaksana berkaitan dengan kebijaksanaan, bukan kesewenang-wenangan.",
+   "d": "Sedang",
+   "id": "H118",
+   "j": 2,
+   "jenis": "PG",
+   "k": "TIU",
+   "lvl": "C3",
+   "m": "Verbal: Sinonim & Antonim",
+   "o": [
+    "Adil",
+    "Teratur",
+    "Sewenang-wenang",
+    "Bijaksana",
+    "Objektif"
+   ],
+   "po": [
+    "Adil adalah antonim arbitrer.",
+    "Teratur adalah antonim arbitrer.",
+    "Benar — arbitrer berarti sewenang-wenang.",
+    "Bijaksana tidak sama maknanya dengan arbitrer.",
+    "Objektif adalah antonim arbitrer."
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari makna kata arbitrer menurut KBBI — kisi TIU verbal.",
+   "t": "Sinonim kata arbitrer yang paling tepat adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Orisinal — Verbal: Sinonim & Antonim.",
+   "waktu": 55
+  },
+  {
+   "b": "Luas taman = 24 × 18 = 432 m². Jari-jari kolam = 14 dibagi 2 = 7 m, sehingga luas kolam = 22 per 7 × 7 × 7 = 154 m². Luas yang tersisa = 432 − 154 = 278 m². Kesalahan umum adalah memakai diameter sebagai jari-jari atau lupa mengurangkan luas kolam dari luas taman.",
+   "d": "Sedang",
+   "id": "H119",
+   "j": 1,
+   "jenis": "Numerik",
+   "jenisSalah": {
+    "0": "hitung",
+    "2": "hitung",
+    "3": "konsep",
+    "4": "konsep"
+   },
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Geometri",
+   "o": [
+    "250 m²",
+    "278 m²",
+    "310 m²",
+    "290 m²",
+    "154 m²"
+   ],
+   "po": [
+    "Salah hitung — bukan hasil 432 dikurangi 154.",
+    "Benar — 432 dikurangi 154 sama dengan 278.",
+    "Salah hitung — melebihi selisih luas yang benar.",
+    "Salah konsep — hasil ini memakai jari-jari yang keliru.",
+    "Itu luas kolam saja, belum dikurangkan dari luas taman."
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari konsep luas persegi panjang dan lingkaran — kisi TIU geometri.",
+   "t": "Sebuah taman berbentuk persegi panjang berukuran 24 m × 18 m. Di tengah taman dibuat kolam berbentuk lingkaran berdiameter 14 m. Luas taman yang tersisa di luar kolam, dengan nilai π dua puluh dua per tujuh, adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Orisinal — Geometri.",
+   "waktu": 75
+  },
+  {
+   "b": "Premis pertama memastikan seluruh anggota tim A, termasuk mereka yang berasal dari divisi pemasaran, lulus ujian. Premis kedua memastikan sebagian anggota tim A memang berasal dari divisi pemasaran. Gabungan keduanya memastikan sebagian anggota divisi pemasaran lulus ujian. Kesimpulan yang memakai kata semua tidak pasti karena premis kedua hanya menyebut sebagian.",
+   "d": "Sedang",
+   "id": "H120",
+   "j": 2,
+   "jenis": "PG",
+   "jenisSalah": {
+    "0": "logika",
+    "1": "logika",
+    "3": "logika",
+    "4": "logika"
+   },
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Logika & Silogisme",
+   "o": [
+    "Semua anggota divisi pemasaran lulus ujian sertifikasi",
+    "Semua anggota tim A berasal dari divisi pemasaran",
+    "Sebagian anggota divisi pemasaran lulus ujian sertifikasi",
+    "Tidak ada anggota divisi pemasaran yang lulus ujian sertifikasi",
+    "Sebagian anggota tim A tidak lulus ujian sertifikasi"
+   ],
+   "po": [
+    "Tidak pasti — premis hanya menyebut sebagian anggota tim A.",
+    "Salah — premis kedua hanya menyebut sebagian, bukan semua.",
+    "Benar — gabungan kedua premis memastikan kesimpulan ini.",
+    "Bertentangan dengan premis pertama.",
+    "Bertentangan dengan premis pertama."
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari kaidah silogisme kategorik (semua–sebagian) — kisi TIU logika.",
+   "t": "Semua anggota tim A lulus ujian sertifikasi. Sebagian anggota tim A berasal dari divisi pemasaran. Kesimpulan yang PASTI benar adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Turunan H010 — dari silogisme atlet dan pelatihan ke silogisme tim kerja dan divisi.",
+   "waktu": 70
+  },
+  {
+   "b": "Titik hitam bergerak searah jarum jam: sudut kiri atas, lalu kanan atas, lalu kanan bawah. Langkah berikutnya adalah sudut kiri bawah. Hanya pilihan ketiga yang menempatkan titik di sudut kiri bawah, sehingga deret berlanjut dengan benar.",
+   "d": "Sedang",
+   "g": "<svg viewBox=\"0 0 260 80\" role=\"img\" aria-label=\"Deret tiga gambar: titik hitam di sudut kiri atas, kanan atas, lalu kanan bawah\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"25\" cy=\"25\" r=\"8\" fill=\"currentColor\"/><rect x=\"90\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"135\" cy=\"25\" r=\"8\" fill=\"currentColor\"/><rect x=\"170\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"215\" cy=\"55\" r=\"8\" fill=\"currentColor\"/></svg>",
+   "gb": "<svg viewBox=\"0 0 340 80\" role=\"img\" aria-label=\"Urutan lengkap: titik bergerak kiri atas, kanan atas, kanan bawah, lalu kiri bawah\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"25\" cy=\"25\" r=\"8\" fill=\"currentColor\"/><rect x=\"90\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"135\" cy=\"25\" r=\"8\" fill=\"currentColor\"/><rect x=\"170\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"215\" cy=\"55\" r=\"8\" fill=\"currentColor\"/><rect x=\"250\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"265\" cy=\"55\" r=\"8\" fill=\"currentColor\"/></svg>",
+   "id": "H121",
+   "j": 2,
+   "jenis": "Figural",
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Figural",
+   "o": [
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Kotak dengan titik hitam di sudut kiri atas\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"25\" cy=\"25\" r=\"8\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Kotak dengan titik hitam di sudut kanan atas\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"55\" cy=\"25\" r=\"8\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Kotak dengan titik hitam di sudut kiri bawah\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"25\" cy=\"55\" r=\"8\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Kotak dengan titik hitam di sudut kanan bawah\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"55\" cy=\"55\" r=\"8\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Kotak dengan titik hitam di tengah\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"40\" cy=\"40\" r=\"8\" fill=\"currentColor\"/></svg>"
+   ],
+   "po": [
+    "Itu posisi langkah pertama, bukan kelanjutannya.",
+    "Itu posisi langkah kedua, bukan kelanjutannya.",
+    "Benar — titik bergerak ke sudut kiri bawah mengikuti arah jarum jam.",
+    "Itu posisi langkah ketiga yang sudah dilewati.",
+    "Titik di tengah tidak pernah muncul dalam deret ini."
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari pola perpindahan posisi figural searah jarum jam — kisi TIU figural.",
+   "t": "Perhatikan deret gambar berikut. Titik hitam berpindah dari satu sudut ke sudut berikutnya searah jarum jam. Gambar yang tepat untuk melanjutkan deret adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Turunan H012 — pola perpindahan satu titik disederhanakan menjadi satu elemen dengan opsi bergambar.",
+   "waktu": 80
+  },
+  {
+   "b": "Pola deret ini: setiap suku sama dengan suku sebelumnya dikali dua lalu ditambah satu. 5 × 2 + 1 = 11, 11 × 2 + 1 = 23, 23 × 2 + 1 = 47, dan 47 × 2 + 1 = 95. Suku berikutnya = 95 × 2 + 1 = 191.",
+   "d": "Sedang",
+   "id": "H122",
+   "j": 2,
+   "jenis": "Numerik",
+   "jenisSalah": {
+    "0": "rumus",
+    "1": "hitung",
+    "3": "hitung",
+    "4": "konsep"
+   },
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Deret & Pola Bilangan",
+   "o": [
+    "185",
+    "189",
+    "191",
+    "193",
+    "197"
+   ],
+   "po": [
+    "Itu hasil bila pola dianggap kali dua tanpa ditambah satu.",
+    "Itu hasil bila penambahnya dianggap kurang dari satu.",
+    "Benar — pola kali dua tambah satu: 95 × 2 + 1.",
+    "Itu hasil bila penambahnya dianggap lebih dari satu.",
+    "Terlalu besar; tidak mengikuti pola kali dua tambah satu."
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari pola deret kali dua tambah satu — kisi TIU numerik.",
+   "t": "Perhatikan deret bilangan berikut: 5, 11, 23, 47, 95, … Bilangan yang tepat untuk melanjutkan deret tersebut adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Turunan H007 — dari pola selisih berjenjang ke pola kali dua tambah satu.",
+   "waktu": 60
+  },
+  {
+   "b": "Dari diagram: dana desa tahun 2024 = 150 juta dan tahun 2025 = 180 juta. Kenaikannya = 180 − 150 = 30 juta. Persentase kenaikan dihitung dari nilai awal: 30 dibandingkan 150 sama dengan 20 persen. Pilihan 30 juta adalah kenaikan mutlak, bukan persentase.",
+   "d": "Sedang",
+   "g": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Diagram batang dana desa 2023 sampai 2026: 120, 150, 180, dan 210 juta rupiah\"><line x1=\"30\" y1=\"150\" x2=\"300\" y2=\"150\" stroke=\"currentColor\" stroke-width=\"2\"/><rect x=\"40\" y=\"78\" width=\"40\" height=\"72\" fill=\"currentColor\"/><rect x=\"110\" y=\"60\" width=\"40\" height=\"90\" fill=\"currentColor\"/><rect x=\"180\" y=\"42\" width=\"40\" height=\"108\" fill=\"currentColor\"/><rect x=\"250\" y=\"24\" width=\"40\" height=\"126\" fill=\"currentColor\"/><text x=\"60\" y=\"70\" text-anchor=\"middle\" fill=\"currentColor\">120</text><text x=\"130\" y=\"52\" text-anchor=\"middle\" fill=\"currentColor\">150</text><text x=\"200\" y=\"34\" text-anchor=\"middle\" fill=\"currentColor\">180</text><text x=\"270\" y=\"16\" text-anchor=\"middle\" fill=\"currentColor\">210</text><text x=\"60\" y=\"168\" text-anchor=\"middle\" fill=\"currentColor\">2023</text><text x=\"130\" y=\"168\" text-anchor=\"middle\" fill=\"currentColor\">2024</text><text x=\"200\" y=\"168\" text-anchor=\"middle\" fill=\"currentColor\">2025</text><text x=\"270\" y=\"168\" text-anchor=\"middle\" fill=\"currentColor\">2026</text></svg>",
+   "gb": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Penekanan batang 2024 dan 2025: naik 30 dari 150 sama dengan 20 persen\"><line x1=\"30\" y1=\"150\" x2=\"300\" y2=\"150\" stroke=\"currentColor\" stroke-width=\"2\"/><rect x=\"110\" y=\"60\" width=\"40\" height=\"90\" fill=\"currentColor\"/><rect x=\"180\" y=\"42\" width=\"40\" height=\"108\" fill=\"currentColor\"/><text x=\"130\" y=\"52\" text-anchor=\"middle\" fill=\"currentColor\">150</text><text x=\"200\" y=\"34\" text-anchor=\"middle\" fill=\"currentColor\">180</text><text x=\"145\" y=\"100\" text-anchor=\"middle\" fill=\"currentColor\">naik 30</text><text x=\"215\" y=\"100\" text-anchor=\"middle\" fill=\"currentColor\">20 persen</text><text x=\"60\" y=\"168\" text-anchor=\"middle\" fill=\"currentColor\">2024</text><text x=\"200\" y=\"168\" text-anchor=\"middle\" fill=\"currentColor\">2025</text></svg>",
+   "id": "H123",
+   "integrasi": "TIU × TWK (anggaran desa)",
+   "j": 2,
+   "jenis": "Numerik",
+   "jenisSalah": {
+    "0": "baca data",
+    "1": "hitung",
+    "3": "hitung",
+    "4": "konsep"
+   },
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Aritmatika Dasar",
+   "o": [
+    "10%",
+    "15%",
+    "20%",
+    "25%",
+    "30 juta"
+   ],
+   "po": [
+    "Tidak sesuai perhitungan dari nilai awal 150.",
+    "Tidak sesuai perhitungan dari nilai awal 150.",
+    "Benar — 30 dari 150 sama dengan 20 persen.",
+    "Itu hasil bila pembaginya dianggap 120.",
+    "30 juta adalah kenaikan mutlak, bukan persentase."
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari keterampilan membaca diagram batang dan persen — kisi TIU numerik.",
+   "t": "Diagram batang berikut menunjukkan realisasi dana desa sebuah kecamatan dalam juta rupiah selama empat tahun. Kenaikan dana desa dari tahun 2024 ke tahun 2025 adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Turunan H009 — dari diagram kelulusan seleksi ke diagram dana desa dengan hitung persentase kenaikan.",
+   "waktu": 75
+  },
+  {
+   "b": "Pelayanan prima memperhatikan kelompok rentan. Loket prioritas dan bantuan pengisian formulir menunjukkan empati sekaligus tetap menjaga ketertiban antrean. Melayani sesuai antrean saja mengabaikan kesulitan warga, sedangkan menyuruh menunggu atau melemparkan urusan ke keluarga menunjukkan pelayanan yang buruk.",
+   "d": "Sedang",
+   "id": "H124",
+   "j": 0,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C5",
+   "m": "Pelayanan Publik",
+   "o": [
+    "Mengarahkan warga itu ke loket prioritas, membantunya mengisi formulir, lalu memproses berkasnya",
+    "Tetap melayaninya sesuai nomor antrean, tetapi membantunya mengisi formulir",
+    "Melayaninya sesuai nomor antrean tanpa bantuan tambahan",
+    "Meminta keluarga yang mengantar untuk mengurus seluruh prosesnya",
+    "Memintanya menunggu di luar karena loket sedang penuh"
+   ],
+   "po": [
+    "Paling tepat — loket prioritas dan bantuan nyata bagi warga rentan.",
+    "Baik tetapi kurang — bantuan formulir ada, namun antrean panjang tetap membebani.",
+    "Kurang peka — mengabaikan kesulitan warga lanjut usia.",
+    "Tidak bertanggung jawab — melemparkan tugas pelayanan ke keluarga.",
+    "Sangat buruk — menolak melayani warga yang membutuhkan."
+   ],
+   "s": [
+    5,
+    4,
+    3,
+    2,
+    1
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari prinsip pelayanan prima bagi kelompok rentan — kisi TKP.",
+   "t": "Seorang warga lanjut usia yang memakai kursi roda datang ke loket layanan administrasi. Antrean sedang panjang dan ia tampak kesulitan mengisi formulir. Sikap Anda sebagai petugas yang paling tepat adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Orisinal — Pelayanan Publik.",
+   "waktu": 70
+  },
+  {
+   "b": "Keluhan adalah masukan berharga. Menanggapi dengan sopan, meminta rincian, dan menindaklanjuti menunjukkan akuntabilitas dan keinginan memperbaiki layanan. Mengabaikan keluhan atau membalas dengan defensif justru merusak kepercayaan publik.",
+   "d": "Mudah",
+   "id": "H125",
+   "j": 0,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C3",
+   "m": "Pelayanan Publik",
+   "o": [
+    "Menanggapi dengan sopan, meminta rincian keluhan, dan menindaklanjutinya ke bagian terkait",
+    "Meminta warga itu datang langsung ke kantor untuk menyampaikan keluhan",
+    "Menjawab bahwa keluhan itu akan dicatat dan menunggu giliran",
+    "Tidak menanggapi karena keluhan di media sosial bukan saluran resmi",
+    "Membalas dengan nada membela diri bahwa petugas sudah bekerja keras"
+   ],
+   "po": [
+    "Paling tepat — sopan, meminta rincian, dan menindaklanjuti.",
+    "Cukup baik tetapi menambah beban warga yang sudah mengeluh.",
+    "Kurang responsif — warga tidak tahu kapan keluhannya ditangani.",
+    "Buruk — mengabaikan keluhan merusak kepercayaan publik.",
+    "Sangat buruk — membela diri menutup peluang perbaikan."
+   ],
+   "s": [
+    5,
+    4,
+    3,
+    2,
+    1
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari prinsip penanganan pengaduan pelayanan publik — kisi TKP.",
+   "t": "Seorang warga menulis keluhan di media sosial bahwa layanan di kantor Anda lambat. Sebagai pegawai yang menangani pengaduan, tanggapan Anda yang paling tepat adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Orisinal — Pelayanan Publik.",
+   "waktu": 55
+  },
+  {
+   "b": "Manipulasi laporan dinas adalah tindak korupsi. Menolak saja tidak cukup: temuan perlu didokumentasikan dan dilaporkan agar praktik itu berhenti dan tidak terulang. Diam atau ikut serta sama-sama melanggar integritas dan dapat menjerat Anda secara hukum.",
+   "d": "Sulit",
+   "id": "H126",
+   "j": 0,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C6",
+   "m": "Anti Korupsi",
+   "o": [
+    "Menolak ajakan itu, mendokumentasikan temuan, dan melaporkannya melalui saluran pengaduan resmi",
+    "Menolak ajakan itu tetapi tidak melaporkan karena menjaga hubungan kerja",
+    "Menegur rekan itu secara pribadi tanpa mengambil langkah lain",
+    "Diam saja karena bukan urusan Anda",
+    "Menerima tawaran itu karena tidak merugikan Anda secara langsung"
+   ],
+   "po": [
+    "Paling tepat — menolak, mendokumentasikan, dan melaporkan.",
+    "Baik tetapi tidak cukup — praktik korupsi tetap berjalan.",
+    "Kurang tegas — teguran pribadi tidak menghentikan praktik itu.",
+    "Buruk — membiarkan korupsi sama dengan membenarkannya.",
+    "Sangat buruk — ikut serta dalam tindak korupsi."
+   ],
+   "s": [
+    5,
+    4,
+    3,
+    2,
+    1
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari prinsip antikorupsi dan pelaporan pelanggaran — kisi TKP.",
+   "t": "Anda menemukan rekan kerja memanipulasi laporan perjalanan dinas agar mendapat uang saku lebih besar. Rekan itu meminta Anda diam dan berjanji membagi hasilnya. Langkah Anda yang paling tepat adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Orisinal — Anti Korupsi.",
+   "waktu": 80
+  },
+  {
+   "b": "Hadiah dari penyedia menjelang tender adalah gratifikasi yang dilarang, berapa pun nilainya. Menolak dan melaporkan adalah sikap yang paling benar karena melindungi proses tender dari pengaruh dan menjaga kepercayaan publik.",
+   "d": "Mudah",
+   "id": "H127",
+   "j": 0,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C3",
+   "m": "Anti Korupsi",
+   "o": [
+    "Menolak hadiah itu dan melaporkannya kepada atasan atau unit pengawas",
+    "Menolak hadiah itu tetapi tidak melaporkannya kepada siapa pun",
+    "Menerima hadiah itu setelah proses tender selesai",
+    "Menerima hadiah itu karena nilainya kecil dan tidak memengaruhi keputusan",
+    "Meminta hadiah yang lebih besar sebagai ganti kerahasiaan"
+   ],
+   "po": [
+    "Paling tepat — menolak gratifikasi dan melaporkannya.",
+    "Baik tetapi tidak cukup — penyedia bisa mencoba lagi ke pegawai lain.",
+    "Salah — waktu penerimaan tidak mengubah sifat gratifikasi.",
+    "Salah — gratifikasi dilarang berapa pun nilainya.",
+    "Sangat buruk — memeras penyedia adalah pelanggaran berat."
+   ],
+   "s": [
+    5,
+    4,
+    3,
+    2,
+    1
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari aturan gratifikasi dalam pengadaan barang dan jasa — kisi TKP.",
+   "t": "Seorang penyedia barang menawarkan hadiah berupa bingkisan mahal kepada Anda menjelang proses pemilihan pemenang tender. Sikap Anda yang paling tepat adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Orisinal — Anti Korupsi.",
+   "waktu": 55
+  },
+  {
+   "b": "Kerja sama lintas unit menuntut komunikasi, bukan saling menyalahkan. Menghubungi langsung, memahami kendala, dan menyusun ulang jadwal bersama menyelesaikan akar masalah sekaligus menjaga hubungan kerja. Teguran resmi atau laporan sepihak tanpa dialog justru memperburuk kerja sama.",
+   "d": "Sedang",
+   "id": "H128",
+   "j": 0,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C5",
+   "m": "Jejaring Kerja",
+   "o": [
+    "Menghubungi penanggung jawab bagian itu, menanyakan kendalanya, dan menyusun jadwal baru bersama",
+    "Mengirim surat teguran resmi kepada pimpinan bagian itu",
+    "Mengerjakan sendiri data yang tertunda agar jadwal tetap berjalan",
+    "Melaporkan keterlambatan itu ke pimpinan tanpa menghubungi bagian terkait",
+    "Membiarkan jadwal molor dan menyalahkan bagian itu dalam laporan"
+   ],
+   "po": [
+    "Paling tepat — komunikasi langsung dan solusi bersama.",
+    "Kurang efektif — teguran tanpa dialog tidak menyelesaikan kendala.",
+    "Kurang tepat — mengambil alih tugas unit lain melemahkan kerja sama.",
+    "Buruk — laporan sepihak merusak kepercayaan antarunit.",
+    "Sangat buruk — menyalahkan orang lain tanpa upaya penyelesaian."
+   ],
+   "s": [
+    5,
+    4,
+    3,
+    2,
+    1
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari prinsip kerja sama lintas unit — kisi TKP.",
+   "t": "Anda memimpin proyek lintas unit yang melibatkan tiga bagian. Satu bagian terlambat mengirim data penting hingga dua kali, sehingga jadwal proyek terancam. Tindakan Anda yang paling tepat adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Orisinal — Jejaring Kerja.",
+   "waktu": 70
+  },
+  {
+   "b": "Data pribadi warga harus dilindungi. Melaporkan temuan kepada atasan dan tim keamanan serta membantu membatasi akses adalah langkah yang paling bertanggung jawab. Mengubah sistem sendiri tanpa koordinasi berisiko menimbulkan masalah baru, dan menyalin data justru memperluas kebocoran.",
+   "d": "Sedang",
+   "id": "H129",
+   "j": 0,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C3",
+   "m": "Teknologi Informasi & Komunikasi",
+   "o": [
+    "Segera melaporkannya kepada atasan dan tim keamanan sistem, lalu membantu membatasi aksesnya",
+    "Mengubah sendiri pengaturan akses tanpa memberi tahu siapa pun",
+    "Mengingatkan rekan kerja agar tidak membuka berkas itu",
+    "Membiarkannya karena Anda bukan petugas keamanan sistem",
+    "Menyalin berkas itu sebagai bukti sebelum melaporkannya"
+   ],
+   "po": [
+    "Paling tepat — melapor dan membantu membatasi akses.",
+    "Berisiko — perubahan tanpa koordinasi bisa menimbulkan masalah baru.",
+    "Kurang efektif — peringatan lisan tidak menutup celah akses.",
+    "Buruk — membiarkan data pribadi tidak terlindungi.",
+    "Sangat buruk — menyalin data justru memperluas kebocoran."
+   ],
+   "s": [
+    5,
+    4,
+    3,
+    2,
+    1
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari prinsip perlindungan data pribadi — kisi TKP.",
+   "t": "Saat memeriksa sistem, Anda menemukan data pribadi warga tersimpan dalam berkas yang dapat diakses semua pegawai tanpa kata sandi. Tindakan Anda yang paling tepat adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Orisinal — Teknologi Informasi & Komunikasi.",
+   "waktu": 65
+  },
+  {
+   "b": "Menghormati hari besar agama rekan kerja adalah wujud toleransi dalam keberagaman. Ucapan selamat yang tulus memperkuat hubungan kerja tanpa memaksa siapa pun mengikuti keyakinan orang lain.",
+   "d": "Mudah",
+   "id": "H130",
+   "j": 0,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C2",
+   "m": "Sosial Budaya",
+   "o": [
+    "Mengucapkan selamat dan menghormati perayaannya",
+    "Bersikap biasa saja tanpa mengucapkan apa pun",
+    "Menanyakan makna perayaan itu dengan sopan bila ada kesempatan",
+    "Menghindari rekan itu selama masa perayaan",
+    "Menganggap perayaan itu tidak penting bagi lingkungan kerja"
+   ],
+   "po": [
+    "Paling tepat — menghormati dan mengucapkan selamat.",
+    "Netral tetapi kurang hangat dalam keberagaman.",
+    "Baik — rasa ingin tahu yang sopan menunjukkan penghargaan.",
+    "Buruk — menghindari rekan merusak hubungan kerja.",
+    "Sangat buruk — meremehkan keyakinan orang lain."
+   ],
+   "s": [
+    5,
+    4,
+    3,
+    2,
+    1
+   ],
+   "status": "lolos",
+   "sumber": "Disusun dari prinsip toleransi dan keberagaman — kisi TKP.",
+   "t": "Rekan kerja Anda yang berbeda agama sedang merayakan hari besar keagamaannya. Sikap Anda yang paling tepat adalah …",
+   "tgl": "2026-11-10",
+   "turunan": "Orisinal — Sosial Budaya.",
+   "waktu": 50
   }
  ],
  "otomatis": {
