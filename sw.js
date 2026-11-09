@@ -1,7 +1,7 @@
 /* PRATA — service worker: simpan kulit aplikasi agar terbuka
    sekejap dan tetap bisa dibuka saat jaringan lambat.
    Data akun & progres tersimpan lokal (localStorage), bukan di sini. */
-var NAMA_CACHE = "prata-v83";
+var NAMA_CACHE = "prata-v84";
 var BERKAS_KULIT = [
   "./",
   "./index.html",
