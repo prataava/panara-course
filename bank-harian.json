@@ -1,6 +1,6 @@
 {
  "versi": 1,
- "diperbarui": "2026-11-12",
+ "diperbarui": "2026-11-13",
  "batch": [
   {
    "tanggal": "2026-11-08",
@@ -46,6 +46,13 @@
   },
   {
    "tanggal": "2026-11-12",
+   "dibuat": 20,
+   "lulus": 20,
+   "ditolak": 0,
+   "sumber": "Mesin Soal Otonom — riset konsep kisi SKD, soal original"
+  },
+  {
+   "tanggal": "2026-11-13",
    "dibuat": 20,
    "lulus": 20,
    "ditolak": 0,
@@ -5506,6 +5513,678 @@
    "tgl": "2026-11-12",
    "lvl": "C3",
    "turunan": "Turunan H018 — dari tugas mendesak di luar keahlian ke laporan bulanan dengan data belum lengkap.",
+   "status": "lolos"
+  },
+  {
+   "id": "H171",
+   "k": "TWK",
+   "m": "Bahasa Indonesia",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 65,
+   "t": "Perhatikan kalimat berikut: (1) Rumah di mana ia tinggal berada di ujung desa. (2) Di mana letak kantor kecamatan itu? (3) Acara di mana semua warga diundang akan digelar Sabtu. (4) Di mana pun ia berada, ia selalu pulang kampung tiap tahun. Penggunaan kata ‘di mana’ yang BENAR terdapat pada kalimat …",
+   "o": [
+    "1 saja",
+    "2 saja",
+    "2 dan 4",
+    "1, 2, dan 4",
+    "3 dan 4"
+   ],
+   "j": 2,
+   "b": "Kata ‘di mana’ benar dipakai sebagai kata tanya (kalimat 2) dan sebagai kata ganti tempat tak tentu ‘di mana pun’ (kalimat 4). Pada kalimat 1 dan 3, ‘di mana’ dipakai sebagai penghubung yang tidak tepat; bentuk yang benar memakai ‘tempat’ atau ‘yang’, misalnya ‘Rumah tempat ia tinggal’ dan ‘Acara yang mengundang semua warga’.",
+   "po": [
+    "Salah — kalimat 2 juga memakai ‘di mana’ dengan benar.",
+    "Salah — kalimat 4 juga memakai ‘di mana pun’ dengan benar.",
+    "Benar — ‘di mana’ sebagai kata tanya dan ‘di mana pun’ sebagai tempat tak tentu.",
+    "Salah — kalimat 1 memakai ‘di mana’ sebagai penghubung yang tidak tepat.",
+    "Salah — kalimat 3 memakai ‘di mana’ sebagai penghubung yang tidak tepat."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C4",
+   "turunan": "Turunan E024 — dari pengumuman resmi berisi kata tidak baku ke analisis pemakaian kata ‘di mana’ dalam empat kalimat.",
+   "status": "lolos"
+  },
+  {
+   "id": "H172",
+   "k": "TWK",
+   "m": "Bahasa Indonesia",
+   "d": "Mudah",
+   "jenis": "PG",
+   "waktu": 50,
+   "t": "Di antara kalimat berikut, yang tidak mengandung satu pun kata tidak baku adalah …",
+   "o": [
+    "Kantor itu memberikan nasehat gratis kepada para nasabahnya.",
+    "Sekedar informasi, jadwal itu sudah dirubah sejak kemarin.",
+    "Para atlit itu berlatih di lapangan dengan penuh semangat.",
+    "Risiko itu harus diantisipasi agar tidak merugikan perusahaan.",
+    "Kwalitas pelayanan itu dinilai sangat memuaskan oleh pelanggan."
+   ],
+   "j": 3,
+   "b": "Kata baku menurut KBBI: nasihat (bukan nasehat), sekadar (bukan sekedar), diubah (bukan dirubah), atlet (bukan atlit), risiko (bukan resiko), dan kualitas (bukan kwalitas). Hanya kalimat keempat yang seluruh katanya sudah baku.",
+   "po": [
+    "Mengandung nasehat — bentuk bakunya nasihat.",
+    "Mengandung sekedar dan dirubah — bentuk bakunya sekadar dan diubah.",
+    "Mengandung atlit — bentuk bakunya atlet.",
+    "Benar — risiko, diantisipasi, merugikan, dan perusahaan semuanya baku.",
+    "Mengandung kwalitas — bentuk bakunya kualitas."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C3",
+   "turunan": "Turunan H004 — dari memilih kalimat baku ke kalimat baku dengan kosakata berbeda (nasihat, sekadar, atlet, risiko, kualitas).",
+   "status": "lolos"
+  },
+  {
+   "id": "H173",
+   "k": "TWK",
+   "m": "Integritas",
+   "d": "Sulit",
+   "jenis": "PG",
+   "waktu": 75,
+   "t": "Kamu diminta menandatangani berita acara serah terima barang yang jumlahnya tidak sesuai dengan barang yang benar-benar kamu terima. Atasanmu berkata itu hanya formalitas dan semua orang sudah menandatanganinya. Sikap yang paling mencerminkan integritas adalah …",
+   "o": [
+    "Menandatangani karena sudah menjadi perintah atasan dan bersifat formalitas",
+    "Menolak menandatangani, mencatat ketidaksesuaian itu secara tertulis, dan melaporkannya melalui saluran resmi",
+    "Menandatangani tetapi menyimpan salinan berita acara sebagai bukti untuk berjaga-jaga",
+    "Meminta rekan lain yang menandatangani agar kamu tidak terlibat",
+    "Menandatangani dengan catatan kecil di bawah tanda tangan tanpa memberi tahu siapa pun"
+   ],
+   "j": 1,
+   "b": "Menandatangani berita acara yang isinya tidak sesuai kenyataan berarti ikut memalsukan dokumen, sekalipun atas perintah atasan dan sekalipun semua orang melakukannya. Integritas menuntutmu menolak, mencatat ketidaksesuaian itu secara tertulis, dan melaporkannya melalui saluran resmi agar ada jejak yang dapat dipertanggungjawabkan.",
+   "po": [
+    "Salah — perintah atasan tidak membenarkan penandatanganan dokumen yang tidak benar.",
+    "Benar — menolak, mencatat, dan melaporkan menunjukkan integritas yang utuh.",
+    "Salah — menyimpan salinan tidak mengubah fakta bahwa kamu menandatangani dokumen palsu.",
+    "Salah — melempar tanggung jawab kepada rekan lain bukan sikap berintegritas.",
+    "Salah — catatan tersembunyi tanpa pelaporan resmi tidak menyelesaikan masalah."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C5",
+   "turunan": "Turunan H024 — dari atasan yang meminta mengubah angka laporan ke diminta menandatangani berita acara yang tidak sesuai kenyataan.",
+   "status": "lolos"
+  },
+  {
+   "id": "H174",
+   "k": "TWK",
+   "m": "Integritas",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Seminggu sebelum pengadaan barang di unitmu diputuskan, sebuah perusahaan peserta lelang mengundangmu ke seminar di luar kota dengan seluruh biaya ditanggung, termasuk penginapan dan uang saku. Sikap yang paling tepat adalah …",
+   "o": [
+    "Mengikuti seminar itu karena undangan bersifat pendidikan, bukan uang tunai",
+    "Menolak undangan itu dan melaporkan tawaran tersebut kepada atasan atau unit pengawas internal",
+    "Mengikuti seminar tetapi membayar sendiri biaya penginapan agar tidak terikat",
+    "Mengikuti seminar itu dan tidak menceritakannya kepada siapa pun",
+    "Meminta perusahaan itu mengirimkan materi seminar saja tanpa kehadiranmu"
+   ],
+   "j": 1,
+   "b": "Undangan seminar dengan seluruh biaya ditanggung peserta lelang, seminggu sebelum keputusan pengadaan, adalah gratifikasi dalam bentuk fasilitas. Menerimanya menciptakan benturan kepentingan dan kesan bahwa keputusan pengadaan dapat dipengaruhi. Sikap yang benar adalah menolak dan melaporkan tawaran itu kepada atasan atau unit pengawas internal.",
+   "po": [
+    "Salah — fasilitas yang ditanggung peserta lelang tetap gratifikasi, sekalipun berbentuk pendidikan.",
+    "Benar — menolak dan melaporkan tawaran dari peserta lelang sebelum keputusan pengadaan.",
+    "Salah — hadir dengan biaya sendiri pun tetap menimbulkan kesan kedekatan dengan peserta lelang.",
+    "Salah — menyembunyikan undangan justru memperbesar dugaan benturan kepentingan.",
+    "Salah — meminta materi tidak menyelesaikan kewajiban melaporkan tawaran dari peserta lelang."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C4",
+   "turunan": "Turunan H023 — dari bingkisan perusahaan rekanan ke undangan seminar berfasilitas dari peserta lelang sebelum keputusan pengadaan.",
+   "status": "lolos"
+  },
+  {
+   "id": "H175",
+   "k": "TWK",
+   "m": "Pilar Negara",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 65,
+   "t": "Sebuah RUU telah disetujui bersama oleh DPR dan Presiden. Namun, Presiden tidak menandatanganinya dalam waktu 30 hari sejak persetujuan bersama itu. Status RUU tersebut menurut UUD 1945 adalah …",
+   "o": [
+    "Gugur dan harus diajukan kembali pada masa sidang berikutnya",
+    "Menjadi undang-undang dan wajib diundangkan",
+    "Berlaku sebagai peraturan pemerintah pengganti undang-undang",
+    "Dikembalikan ke DPR untuk disahkan ulang",
+    "Menunggu keputusan Mahkamah Konstitusi sebelum berlaku"
+   ],
+   "j": 1,
+   "b": "Pasal 20 ayat (5) UUD 1945 menyatakan bahwa RUU yang telah disetujui bersama oleh DPR dan Presiden, bila dalam 30 hari Presiden tidak mengesahkannya, sah menjadi undang-undang dan wajib diundangkan. Ketentuan ini mencegah RUU yang sudah disepakati bersama menggantung tanpa kepastian hukum.",
+   "po": [
+    "Salah — RUU yang sudah disetujui bersama tidak gugur hanya karena tidak ditandatangani.",
+    "Benar — Pasal 20 ayat (5) UUD 1945: sah menjadi undang-undang dan wajib diundangkan.",
+    "Salah — peraturan pemerintah pengganti undang-undang diterbitkan dalam keadaan mendesak, bukan untuk kasus ini.",
+    "Salah — persetujuan bersama sudah terjadi, tidak perlu pengesahan ulang oleh DPR.",
+    "Salah — Mahkamah Konstitusi tidak terlibat dalam pengesahan RUU yang sudah disetujui bersama."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C4",
+   "turunan": "Turunan E038 — dari kedudukan MPR pasca-amandemen ke status RUU yang tidak ditandatangani Presiden dalam 30 hari.",
+   "status": "lolos"
+  },
+  {
+   "id": "H176",
+   "k": "TWK",
+   "m": "NKRI & Bhinneka Tunggal Ika",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 65,
+   "t": "Di sebuah desa, warga pendatang dan warga asli berselisih soal pemanfaatan lahan kosong milik desa. Warga asli mengklaim lahan itu hanya untuk mereka, sedangkan pendatang merasa juga berhak karena sama-sama warga desa. Penyelesaian yang paling sejalan dengan wawasan nusantara dan Bhinneka Tunggal Ika adalah …",
+   "o": [
+    "Menyerahkan lahan itu sepenuhnya kepada warga asli karena mereka lebih dulu tinggal di desa",
+    "Membagi lahan secara adil melalui musyawarah yang melibatkan kedua kelompok dan pemerintah desa",
+    "Meminta pendatang pindah ke desa lain agar konflik tidak berlanjut",
+    "Membiarkan kedua kelompok menyelesaikan sendiri tanpa campur tangan pemerintah desa",
+    "Menutup lahan itu agar tidak dipakai siapa pun"
+   ],
+   "j": 1,
+   "b": "Wawasan nusantara memandang seluruh warga sebagai satu kesatuan bangsa tanpa membedakan asal-usul. Perselisihan soal lahan desa diselesaikan dengan musyawarah yang melibatkan kedua kelompok dan pemerintah desa, sehingga pembagiannya adil dan diterima bersama, bukan dengan mengutamakan satu kelompok atau mengusir kelompok lain.",
+   "po": [
+    "Salah — mengutamakan warga asli berdasarkan lama tinggal bertentangan dengan kesetaraan warga desa.",
+    "Benar — musyawarah yang melibatkan kedua kelompok mencerminkan persatuan dan keadilan.",
+    "Salah — mengusir pendatang bertentangan dengan persatuan dan hak warga desa yang sama.",
+    "Salah — membiarkan konflik tanpa mediasi membiarkan perselisihan membesar.",
+    "Salah — menutup lahan tidak menyelesaikan akar perselisihan dan merugikan semua pihak."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C4",
+   "turunan": "Turunan E035 — dari daerah yang menuntut memisahkan diri ke perselisihan warga asli dan pendatang soal lahan desa.",
+   "status": "lolos"
+  },
+  {
+   "id": "H177",
+   "k": "TIU",
+   "m": "Verbal: Sinonim & Antonim",
+   "d": "Mudah",
+   "jenis": "PG",
+   "waktu": 50,
+   "t": "Sikapnya yang plin-plan membuat tim kehilangan arah setiap kali keputusan harus diambil. Sinonim kata PLIN-PLAN dalam kalimat itu adalah …",
+   "o": [
+    "teguh pendirian",
+    "bimbang",
+    "tegas",
+    "apatis",
+    "disiplin"
+   ],
+   "j": 1,
+   "b": "Plin-plan berarti tidak tetap pendirian dan mudah berubah-ubah, sehingga sepadan dengan bimbang. Teguh pendirian dan tegas justru berlawanan maknanya, sedangkan apatis berarti tidak peduli dan disiplin berarti taat aturan, keduanya tidak sepadan dengan plin-plan.",
+   "po": [
+    "Salah — teguh pendirian justru berlawanan dengan plin-plan.",
+    "Benar — plin-plan berarti tidak tetap pendirian, sepadan dengan bimbang.",
+    "Salah — tegas berarti mantap dalam bersikap, berlawanan dengan plin-plan.",
+    "Salah — apatis berarti tidak peduli, bukan tidak tetap pendirian.",
+    "Salah — disiplin berarti taat aturan, bukan lawan maupun sinonim plin-plan."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C3",
+   "turunan": "Turunan E020 — dari sinonim PREMATUR dalam kalimat ke sinonim PLIN-PLAN dalam kalimat.",
+   "status": "lolos"
+  },
+  {
+   "id": "H178",
+   "k": "TIU",
+   "m": "Verbal: Sinonim & Antonim",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Lawan kata dari EKSPLISIT adalah …",
+   "o": [
+    "jelas",
+    "tersurat",
+    "tersirat",
+    "terbuka",
+    "nyata"
+   ],
+   "j": 2,
+   "b": "Eksplisit berarti dinyatakan secara jelas dan terus terang. Lawan katanya adalah tersirat, yaitu makna yang tidak dinyatakan secara langsung melainkan terkandung di balik ujaran. Tersurat justru dekat maknanya dengan eksplisit karena sama-sama dinyatakan secara tertulis, sedangkan jelas, terbuka, dan nyata bukan lawan kata eksplisit.",
+   "po": [
+    "Salah — jelas justru sepadan maknanya dengan eksplisit.",
+    "Salah — tersurat berarti dinyatakan secara tertulis, dekat maknanya dengan eksplisit.",
+    "Benar — tersirat berarti tidak dinyatakan langsung, lawan dari eksplisit.",
+    "Salah — terbuka berarti tidak tertutup, bukan lawan kata eksplisit.",
+    "Salah — nyata berarti benar-benar ada, bukan lawan kata eksplisit."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C4",
+   "turunan": "Turunan E019 — dari antonim KONVERGEN ke antonim EKSPLISIT dengan jebakan kata tersurat.",
+   "status": "lolos"
+  },
+  {
+   "id": "H179",
+   "k": "TIU",
+   "m": "Verbal: Analogi",
+   "d": "Mudah",
+   "jenis": "PG",
+   "waktu": 50,
+   "t": "HEMAT : BOROS = … : …",
+   "o": [
+    "Rajin : Malas",
+    "Giat : Tekun",
+    "Cepat : Kilat",
+    "Besar : Raksasa",
+    "Dingin : Sejuk"
+   ],
+   "j": 0,
+   "b": "Hemat berlawanan dengan boros, sehingga pasangan yang sejajar adalah rajin yang berlawanan dengan malas. Giat dan tekun, cepat dan kilat, besar dan raksasa, serta dingin dan sejuk semuanya bermakna mirip, bukan berlawanan.",
+   "po": [
+    "Benar — rajin berlawanan dengan malas, sejajar hemat berlawanan boros.",
+    "Salah — giat dan tekun bermakna mirip, bukan berlawanan.",
+    "Salah — cepat dan kilat bermakna mirip, bukan berlawanan.",
+    "Salah — besar dan raksasa bermakna mirip, bukan berlawanan.",
+    "Salah — dingin dan sejuk bermakna mirip, bukan berlawanan."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C3",
+   "turunan": "Turunan H011 — dari analogi pelaku–kendaraan (PILOT : PESAWAT) ke analogi berlawanan makna.",
+   "status": "lolos"
+  },
+  {
+   "id": "H180",
+   "k": "TIU",
+   "m": "Geometri",
+   "d": "Sedang",
+   "jenis": "Numerik",
+   "waktu": 80,
+   "t": "Sebuah taman berbentuk persegi panjang berukuran 30 m × 20 m. Di tengah taman dibuat kolam berbentuk lingkaran berdiameter 14 m. Luas bagian taman di luar kolam adalah …",
+   "o": [
+    "426 m²",
+    "436 m²",
+    "446 m²",
+    "456 m²",
+    "466 m²"
+   ],
+   "j": 2,
+   "b": "Luas taman = 30 × 20 = 600 meter persegi. Jari-jari kolam = 14 dibagi 2 = 7 m, sehingga luas kolam = 22 per 7 × 7 × 7 = 154 meter persegi. Luas taman di luar kolam = 600 − 154 = 446 meter persegi.",
+   "po": [
+    "Salah — keliru menghitung luas kolam.",
+    "Salah — keliru memakai nilai π atau jari-jari kolam.",
+    "Benar — 600 dikurangi 154 sama dengan 446 meter persegi.",
+    "Salah — keliru mengurangkan luas kolam dari luas taman.",
+    "Salah — hasil perhitungan tidak sesuai dengan luas taman dan kolam."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C4",
+   "turunan": "Turunan H013 — dari luas dan keliling segitiga siku-siku ke luas taman persegi panjang dikurangi kolam lingkaran.",
+   "jenisSalah": {
+    "0": "hitung",
+    "1": "rumus",
+    "3": "konsep",
+    "4": "hitung"
+   },
+   "status": "lolos"
+  },
+  {
+   "id": "H181",
+   "k": "TIU",
+   "m": "Logika & Silogisme",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 70,
+   "t": "Jika sebuah program bantuan tidak didata dengan benar, maka bantuan itu tidak tepat sasaran. Diketahui bahwa bantuan di Desa Mekar tepat sasaran. Simpulan yang tepat adalah …",
+   "o": [
+    "Program bantuan di Desa Mekar didata dengan benar",
+    "Program bantuan di Desa Mekar tidak didata dengan benar",
+    "Semua desa yang bantuannya tepat sasaran pasti desa yang kaya",
+    "Bantuan di Desa Mekar tidak tepat sasaran",
+    "Tidak ada desa yang bantuannya tepat sasaran"
+   ],
+   "j": 0,
+   "b": "Ini modus tollens: jika P maka Q; bila Q tidak terjadi, maka P pun tidak terjadi. Bantuan yang tepat sasaran berarti akibat ‘tidak tepat sasaran’ tidak terjadi, sehingga sebabnya pun tidak terjadi: program bantuan di Desa Mekar didata dengan benar.",
+   "po": [
+    "Benar — modus tollens: tepat sasaran berarti pendataan bantuan dilakukan dengan benar.",
+    "Salah — kesimpulan ini membalik arah modus tollens.",
+    "Salah — ketepatan sasaran bantuan tidak ada hubungannya dengan kekayaan desa.",
+    "Salah — bertentangan dengan fakta yang diketahui, yaitu bantuan tepat sasaran.",
+    "Salah — fakta menunjukkan ada desa yang bantuannya tepat sasaran, yaitu Desa Mekar."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C4",
+   "turunan": "Turunan H032 — dari modus tollens hujan–jalanan basah ke modus tollens pendataan bantuan–tepat sasaran.",
+   "jenisSalah": {
+    "1": "logika",
+    "2": "logika",
+    "3": "baca data",
+    "4": "logika"
+   },
+   "integrasi": "TIU × TWK (pengelolaan bantuan dan anggaran desa)",
+   "status": "lolos"
+  },
+  {
+   "id": "H182",
+   "k": "TIU",
+   "m": "Figural",
+   "d": "Sedang",
+   "jenis": "Figural",
+   "waktu": 80,
+   "t": "Perhatikan deret gambar berikut. Sebuah lingkaran dibagi menjadi empat juring yang sama besar. Satu juring diarsir dan berpindah dua langkah searah jarum jam pada setiap langkah. Juring yang diarsir mula-mula berada di kanan atas. Setelah tiga langkah, juring yang diarsir berada di …",
+   "o": [
+    "<svg viewBox=\"0 0 60 60\" role=\"img\" aria-label=\"Juring diarsir di kanan atas\"><circle cx=\"30\" cy=\"30\" r=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M30,30 L30,6 A24,24 0 0 1 54,30 Z\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 60 60\" role=\"img\" aria-label=\"Juring diarsir di kanan bawah\"><circle cx=\"30\" cy=\"30\" r=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M30,30 L54,30 A24,24 0 0 1 30,54 Z\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 60 60\" role=\"img\" aria-label=\"Juring diarsir di kiri bawah\"><circle cx=\"30\" cy=\"30\" r=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M30,30 L30,54 A24,24 0 0 1 6,30 Z\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 60 60\" role=\"img\" aria-label=\"Juring diarsir di kiri atas\"><circle cx=\"30\" cy=\"30\" r=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M30,30 L6,30 A24,24 0 0 1 30,6 Z\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 60 60\" role=\"img\" aria-label=\"Dua juring diarsir\"><circle cx=\"30\" cy=\"30\" r=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M30,30 L30,6 A24,24 0 0 1 54,30 Z\" fill=\"currentColor\"/><path d=\"M30,30 L30,54 A24,24 0 0 1 6,30 Z\" fill=\"currentColor\"/></svg>"
+   ],
+   "j": 2,
+   "b": "Juring diarsir berpindah dua langkah searah jarum jam: kanan atas → kiri bawah pada langkah pertama, kembali ke kanan atas pada langkah kedua, lalu ke kiri bawah pada langkah ketiga. Polanya berulang setiap dua langkah, sehingga setelah tiga langkah juring yang diarsir berada di kiri bawah.",
+   "po": [
+    "Salah — itu posisi awal, sebelum juring berpindah.",
+    "Salah — juring tidak pernah berhenti di kanan bawah karena loncatannya dua langkah.",
+    "Benar — kanan atas, kiri bawah, kanan atas, lalu kiri bawah setelah tiga langkah.",
+    "Salah — juring tidak pernah berhenti di kiri atas karena loncatannya dua langkah.",
+    "Salah — hanya satu juring yang diarsir pada setiap langkah."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C4",
+   "turunan": "Turunan H012 — dari lingkaran hitam yang berpindah satu sudut ke juring diarsir yang berpindah dua langkah.",
+   "g": "<svg viewBox=\"0 0 360 100\" role=\"img\" aria-label=\"Deret juring diarsir: kanan atas, kiri bawah, kanan atas\"><circle cx=\"50\" cy=\"42\" r=\"30\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M50,42 L50,12 A30,30 0 0 1 80,42 Z\" fill=\"currentColor\"/><text x=\"50\" y=\"92\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">Langkah 0</text><circle cx=\"180\" cy=\"42\" r=\"30\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M180,42 L180,72 A30,30 0 0 1 150,42 Z\" fill=\"currentColor\"/><text x=\"180\" y=\"92\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">Langkah 1</text><circle cx=\"310\" cy=\"42\" r=\"30\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M310,42 L310,12 A30,30 0 0 1 340,42 Z\" fill=\"currentColor\"/><text x=\"310\" y=\"92\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">Langkah 2</text><text x=\"108\" y=\"50\" font-size=\"18\" fill=\"currentColor\">→</text><text x=\"238\" y=\"50\" font-size=\"18\" fill=\"currentColor\">→</text></svg>",
+   "gb": "<svg viewBox=\"0 0 460 100\" role=\"img\" aria-label=\"Siklus juring diarsir: kanan atas, kiri bawah, kanan atas, kiri bawah\"><circle cx=\"35\" cy=\"38\" r=\"26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M35,38 L35,12 A26,26 0 0 1 61,38 Z\" fill=\"currentColor\"/><text x=\"35\" y=\"82\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">Langkah 0</text><circle cx=\"145\" cy=\"38\" r=\"26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M145,38 L145,64 A26,26 0 0 1 119,38 Z\" fill=\"currentColor\"/><text x=\"145\" y=\"82\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">Langkah 1</text><circle cx=\"255\" cy=\"38\" r=\"26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M255,38 L255,12 A26,26 0 0 1 281,38 Z\" fill=\"currentColor\"/><text x=\"255\" y=\"82\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">Langkah 2</text><circle cx=\"365\" cy=\"38\" r=\"26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M365,38 L365,64 A26,26 0 0 1 339,38 Z\" fill=\"currentColor\"/><text x=\"365\" y=\"82\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">Langkah 3</text><text x=\"88\" y=\"46\" font-size=\"18\" fill=\"currentColor\">→</text><text x=\"198\" y=\"46\" font-size=\"18\" fill=\"currentColor\">→</text><text x=\"308\" y=\"46\" font-size=\"18\" fill=\"currentColor\">→</text></svg>",
+   "status": "lolos"
+  },
+  {
+   "id": "H183",
+   "k": "TIU",
+   "m": "Aritmatika Dasar",
+   "d": "Sulit",
+   "jenis": "Numerik",
+   "waktu": 90,
+   "t": "Diagram batang berikut menunjukkan jumlah pengunjung perpustakaan desa selama lima hari: Senin 120 orang, Selasa 90 orang, Rabu 150 orang, Kamis 60 orang, dan Jumat 180 orang. Rata-rata jumlah pengunjung per hari adalah …",
+   "o": [
+    "100 orang",
+    "110 orang",
+    "120 orang",
+    "130 orang",
+    "140 orang"
+   ],
+   "j": 2,
+   "b": "Jumlahkan kelima batang: 120 + 90 + 150 + 60 + 180 = 600 orang. Rata-rata pengunjung per hari = 600 dibagi 5 = 120 orang.",
+   "po": [
+    "Salah — jumlah kelima batang tidak sama dengan 500 orang.",
+    "Salah — jumlah kelima batang tidak sama dengan 550 orang.",
+    "Benar — jumlah 600 orang dibagi 5 hari sama dengan 120 orang per hari.",
+    "Salah — keliru membaca nilai salah satu batang diagram.",
+    "Salah — itu hasil bila jumlah pengunjung dibagi 4 hari, bukan 5 hari."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C5",
+   "turunan": "Turunan H009 — dari diagram batang kelulusan seleksi ke rata-rata pengunjung perpustakaan dari diagram batang.",
+   "jenisSalah": {
+    "0": "hitung",
+    "1": "hitung",
+    "3": "baca data",
+    "4": "konsep"
+   },
+   "g": "<svg viewBox=\"0 0 440 230\" role=\"img\" aria-label=\"Diagram batang pengunjung perpustakaan desa selama lima hari\"><text x=\"220\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\">Pengunjung perpustakaan desa (orang)</text><line x1=\"20\" y1=\"190\" x2=\"420\" y2=\"190\" stroke=\"currentColor\" stroke-width=\"2\"/><rect x=\"35\" y=\"106\" width=\"50\" height=\"84\" fill=\"currentColor\"/><text x=\"60\" y=\"100\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">120</text><text x=\"60\" y=\"208\" text-anchor=\"middle\" font-size=\"10\" fill=\"currentColor\">Senin</text><rect x=\"115\" y=\"127\" width=\"50\" height=\"63\" fill=\"currentColor\"/><text x=\"140\" y=\"121\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">90</text><text x=\"140\" y=\"208\" text-anchor=\"middle\" font-size=\"10\" fill=\"currentColor\">Selasa</text><rect x=\"195\" y=\"85\" width=\"50\" height=\"105\" fill=\"currentColor\"/><text x=\"220\" y=\"79\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">150</text><text x=\"220\" y=\"208\" text-anchor=\"middle\" font-size=\"10\" fill=\"currentColor\">Rabu</text><rect x=\"275\" y=\"148\" width=\"50\" height=\"42\" fill=\"currentColor\"/><text x=\"300\" y=\"142\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">60</text><text x=\"300\" y=\"208\" text-anchor=\"middle\" font-size=\"10\" fill=\"currentColor\">Kamis</text><rect x=\"355\" y=\"64\" width=\"50\" height=\"126\" fill=\"currentColor\"/><text x=\"380\" y=\"58\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">180</text><text x=\"380\" y=\"208\" text-anchor=\"middle\" font-size=\"10\" fill=\"currentColor\">Jumat</text></svg>",
+   "gb": "<svg viewBox=\"0 0 440 115\" role=\"img\" aria-label=\"Jumlah pengunjung 600 orang dibagi lima hari sama dengan rata-rata 120 orang\"><text x=\"220\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\">Jumlah: 120 + 90 + 150 + 60 + 180 = 600 orang</text><text x=\"220\" y=\"42\" text-anchor=\"middle\" font-size=\"13\" fill=\"currentColor\">Rata-rata: 600 dibagi 5 = 120 orang per hari</text><rect x=\"20\" y=\"60\" width=\"80\" height=\"24\" fill=\"currentColor\"/><rect x=\"100\" y=\"60\" width=\"80\" height=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><rect x=\"180\" y=\"60\" width=\"80\" height=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><rect x=\"260\" y=\"60\" width=\"80\" height=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><rect x=\"340\" y=\"60\" width=\"80\" height=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><text x=\"60\" y=\"104\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">120</text><text x=\"140\" y=\"104\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">120</text><text x=\"220\" y=\"104\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">120</text><text x=\"300\" y=\"104\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">120</text><text x=\"380\" y=\"104\" text-anchor=\"middle\" font-size=\"11\" fill=\"currentColor\">120</text></svg>",
+   "status": "lolos"
+  },
+  {
+   "id": "H184",
+   "k": "TKP",
+   "m": "Sosial Budaya",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Sebuah keluarga di desamu akan mengadakan hajatan adat yang menurut tradisi setempat mengharuskan jalan desa ditutup seharian. Jalan itu adalah satu-satunya akses menuju puskesmas. Sikapmu sebagai perangkat desa yang paling tepat adalah …",
+   "o": [
+    "Melarang hajatan adat itu karena jalan desa adalah fasilitas umum yang tidak boleh ditutup",
+    "Membiarkan jalan ditutup seharian penuh tanpa pengaturan apa pun",
+    "Bermusyawarah dengan keluarga dan tokoh adat untuk membatasi waktu penutupan dan menyiapkan jalur alternatif menuju puskesmas",
+    "Meminta keluarga itu memindahkan hajatan ke balai desa tanpa berdiskusi dengan tokoh adat",
+    "Menutup jalan desa tetapi tidak memberi tahu warga lain yang membutuhkan akses puskesmas"
+   ],
+   "s": [
+    2,
+    1,
+    5,
+    3,
+    1
+   ],
+   "j": 2,
+   "b": "Hajatan adat adalah bagian dari budaya setempat yang patut dihormati, tetapi satu-satunya akses ke puskesmas juga menyangkut keselamatan warga. Jalan tengahnya adalah musyawarah dengan keluarga dan tokoh adat: batasi waktu penutupan jalan dan siapkan jalur alternatif menuju puskesmas, sehingga tradisi tetap berjalan dan layanan kesehatan tidak terganggu.",
+   "po": [
+    "Kurang tepat — melarang tanpa musyawarah mengabaikan tradisi yang dihormati warga desa.",
+    "Buruk — menutup satu-satunya akses puskesmas seharian membahayakan warga yang membutuhkan layanan kesehatan.",
+    "Paling tepat — musyawarah membatasi penutupan dan menjaga akses puskesmas tetap terbuka.",
+    "Cukup — memindahkan lokasi menyelesaikan soal jalan, tetapi tanpa musyawarah dapat menyinggung warga.",
+    "Buruk — menutup akses tanpa pemberitahuan membahayakan warga yang membutuhkan layanan darurat."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C4",
+   "turunan": "Turunan E046 — dari warga dusun yang menolak pembangunan balai layanan di tanah adat ke hajatan adat yang menutup satu-satunya jalan ke puskesmas.",
+   "status": "lolos"
+  },
+  {
+   "id": "H185",
+   "k": "TKP",
+   "m": "Sosial Budaya",
+   "d": "Mudah",
+   "jenis": "PG",
+   "waktu": 55,
+   "t": "Seorang warga lanjut usia datang ke loketmu dan hanya bisa berbahasa daerah, sehingga ia kesulitan memahami penjelasanmu tentang syarat dokumen. Sikapmu yang paling tepat adalah …",
+   "o": [
+    "Menjelaskan dengan bahasa Indonesia sederhana secara sabar dan, bila perlu, meminta bantuan anggota keluarganya atau penerjemah lokal",
+    "Memintanya pulang dan kembali bersama anaknya lain kali",
+    "Mengabaikannya dan melayaninya seadanya karena antrean sudah panjang",
+    "Menyuruhnya belajar bahasa Indonesia terlebih dahulu",
+    "Memberinya brosur syarat dokumen dan memintanya membacanya sendiri di rumah"
+   ],
+   "s": [
+    5,
+    2,
+    1,
+    1,
+    3
+   ],
+   "j": 0,
+   "b": "Warga lanjut usia yang hanya berbahasa daerah tetap berhak mendapat pelayanan yang sama. Cara terbaik adalah menjelaskan dengan bahasa Indonesia yang sederhana dan sabar, serta meminta bantuan anggota keluarga atau penerjemah lokal bila diperlukan, agar warga itu benar-benar memahami syarat dokumennya.",
+   "po": [
+    "Paling tepat — bahasa sederhana dan bantuan penerjemah menunjukkan pelayanan yang ramah dan inklusif.",
+    "Kurang tepat — menyuruh pulang tanpa membantu menunda pelayanan yang sebenarnya bisa dibantu saat itu juga.",
+    "Buruk — mengabaikan warga karena keterbatasan bahasa bertentangan dengan pelayanan publik yang adil.",
+    "Buruk — menyuruh warga belajar bahasa terlebih dahulu bukan tugas pelayanan loket.",
+    "Cukup — brosur membantu, tetapi warga tetap membutuhkan penjelasan langsung yang ia pahami."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C3",
+   "turunan": "Turunan H034 — dari bekerja sama dalam tim lintas suku dan agama ke melayani warga lanjut usia yang hanya berbahasa daerah.",
+   "status": "lolos"
+  },
+  {
+   "id": "H186",
+   "k": "TKP",
+   "m": "Teknologi Informasi & Komunikasi",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Saat bekerja dari rumah, kamu perlu memeriksa data warga pada sistem kantor. Satu-satunya jaringan yang tersedia adalah Wi-Fi publik di sebuah kafe. Sikapmu yang paling tepat adalah …",
+   "o": [
+    "Mengakses sistem itu langsung lewat Wi-Fi publik karena pekerjaan harus segera selesai",
+    "Tidak mengakses data warga lewat Wi-Fi publik dan menggunakan jaringan resmi atau menunda sampai terhubung ke jaringan yang aman",
+    "Mengakses sistem itu tetapi hanya melihat data tanpa mengubah apa pun",
+    "Meminta kata sandi Wi-Fi kafe lalu mengakses sistem karena kata sandinya sudah diketahui",
+    "Mengunduh data warga ke ponsel pribadi agar bisa dikerjakan tanpa jaringan"
+   ],
+   "s": [
+    1,
+    5,
+    2,
+    3,
+    1
+   ],
+   "j": 1,
+   "b": "Wi-Fi publik tidak aman untuk data sensitif: lalu lintasnya dapat disadap dan data warga dapat dicuri. Pekerjaan yang mendesak tidak membenarkan risiko itu. Sikap yang benar adalah tidak mengakses sistem berisi data warga lewat Wi-Fi publik, melainkan memakai jaringan resmi kantor atau menunda sampai terhubung ke jaringan yang aman.",
+   "po": [
+    "Buruk — Wi-Fi publik mudah disadap dan data warga dapat dicuri saat dikirim lewat jaringan itu.",
+    "Paling tepat — data warga tidak boleh lewat jaringan publik; gunakan jaringan resmi atau tunda sampai aman.",
+    "Kurang tepat — sekadar melihat pun sudah mengirim data warga lewat jaringan publik yang berisiko.",
+    "Cukup — kata sandi Wi-Fi menghalangi pengguna lain, tetapi jaringan publik tetap berisiko disadap.",
+    "Buruk — menyalin data warga ke perangkat pribadi melanggar keamanan data dan sulit dipertanggungjawabkan."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C4",
+   "turunan": "Turunan E048 — dari kabar hoaks di grup warga ke risiko mengakses data warga lewat Wi-Fi publik.",
+   "status": "lolos"
+  },
+  {
+   "id": "H187",
+   "k": "TKP",
+   "m": "Teknologi Informasi & Komunikasi",
+   "d": "Sulit",
+   "jenis": "PG",
+   "waktu": 70,
+   "t": "Seorang warga mengirimkan foto KTP-nya lewat pesan pribadi dan memintamu mengurus dokumennya tanpa datang ke kantor, dengan alasan ia sedang sakit. Sikapmu yang paling tepat adalah …",
+   "o": [
+    "Menyimpan foto KTP itu dan mengurus dokumennya sebagai bentuk pelayanan yang cepat",
+    "Menolak menyimpan foto KTP, menjelaskan risiko penyalahgunaan data pribadi, dan mengarahkannya ke layanan resmi seperti loket, kunjungan petugas, atau layanan daring resmi",
+    "Meneruskan foto KTP itu ke grup kerja agar rekan lain bisa membantu mengurusnya",
+    "Menghapus pesan itu tanpa memberi jawaban apa pun",
+    "Meminta warga mengirim foto dokumen lain juga agar pengurusan lebih lengkap"
+   ],
+   "s": [
+    2,
+    5,
+    1,
+    2,
+    1
+   ],
+   "j": 1,
+   "b": "Foto KTP adalah data pribadi yang sangat sensitif: bila bocor, dapat dipakai untuk penipuan atas nama warga itu. Pesan pribadi bukan saluran resmi pengurusan dokumen. Sikap yang benar adalah menolak menyimpan foto itu, menjelaskan risikonya, dan mengarahkan warga ke layanan resmi — loket, kunjungan petugas ke rumah bila ia sakit, atau layanan daring resmi.",
+   "po": [
+    "Kurang tepat — menyimpan foto KTP di pesan pribadi berisiko bocor dan sulit dipertanggungjawabkan.",
+    "Paling tepat — lindungi data pribadi warga dan arahkan ke saluran layanan resmi yang aman.",
+    "Buruk — meneruskan foto KTP ke grup memperluas penyebaran data pribadi warga.",
+    "Kurang tepat — menghapus tanpa jawaban membuat warga tidak tahu harus berbuat apa.",
+    "Buruk — meminta lebih banyak dokumen pribadi lewat pesan justru memperbesar risiko kebocoran data."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C5",
+   "turunan": "Turunan E048 — dari kabar hoaks yang meminta warga mengirim foto KTP ke nomor pribadi ke warga yang mengirim foto KTP langsung kepadamu.",
+   "status": "lolos"
+  },
+  {
+   "id": "H188",
+   "k": "TKP",
+   "m": "Jejaring Kerja",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Sebuah laporan gabungan harus disusun unitmu bersama unit lain. Kedua belah pihak saling menunggu: unitmu menunggu angka dari unit lain, sementara unit lain menunggu draf kerangka dari unitmu. Tenggat tinggal tiga hari. Langkahmu yang paling tepat adalah …",
+   "o": [
+    "Mengambil inisiatif menghubungi penanggung jawab unit lain, menyepakati siapa mengirim apa dan kapan, lalu mencatat kesepakatan itu bersama",
+    "Menunggu unit lain bergerak lebih dulu karena angka itu memang menjadi tanggung jawab mereka",
+    "Melaporkan unit lain ke pimpinan sebagai pihak yang menghambat program",
+    "Mengerjakan laporan itu sendiri tanpa angka dari unit lain",
+    "Mengirim surat resmi yang menuntut unit lain segera mengirim angka"
+   ],
+   "s": [
+    5,
+    2,
+    1,
+    2,
+    3
+   ],
+   "j": 0,
+   "b": "Lingkaran saling menunggu hanya terputus bila ada yang mengambil inisiatif. Langkah yang tepat adalah menghubungi penanggung jawab unit lain, menyepakati pembagian tugas dan jadwal pengiriman, lalu mencatat kesepakatan itu bersama. Dengan begitu kedua belah pihak tahu apa yang ditunggu dan kapan, dan tenggat tiga hari masih dapat dikejar.",
+   "po": [
+    "Paling tepat — inisiatif dan kesepakatan tertulis memutus lingkaran saling menunggu.",
+    "Kurang tepat — menunggu tanpa bergerak membuat tenggat tiga hari hampir pasti terlewat.",
+    "Buruk — melaporkan sebelum mencoba berkoordinasi merusak hubungan kerja antarunit.",
+    "Kurang tepat — laporan gabungan tanpa angka unit lain tidak lengkap dan tidak dapat dipertanggungjawabkan.",
+    "Cukup — surat resmi memberi tekanan, tetapi tanpa dialog kesepakatan kerja sama tetap rapuh."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C4",
+   "turunan": "Turunan E057 — dari instansi yang enggan berbagi data ke dua unit yang saling menunggu kiriman.",
+   "status": "lolos"
+  },
+  {
+   "id": "H189",
+   "k": "TKP",
+   "m": "Anti Korupsi",
+   "d": "Sulit",
+   "jenis": "PG",
+   "waktu": 70,
+   "t": "Rekan kerjamu mengajakmu ‘mengatur’ laporan perjalanan dinas agar kalian berdua mendapat uang saku lebih besar dari yang sebenarnya, dengan alasan selisihnya kecil dan tidak akan ketahuan. Sikapmu yang paling tepat adalah …",
+   "o": [
+    "Menolak ajakan itu dan melaporkan tawaran tersebut melalui saluran resmi",
+    "Menolak ikut serta tetapi membiarkan rekanmu melakukannya tanpa melapor",
+    "Ikut serta karena selisihnya kecil dan tidak merugikan siapa pun",
+    "Ikut serta sekali ini saja lalu tidak mengulanginya lagi",
+    "Meminta rekanmu membagi selisih itu secara adil agar tidak ada yang dirugikan"
+   ],
+   "s": [
+    5,
+    3,
+    1,
+    1,
+    1
+   ],
+   "j": 0,
+   "b": "Menggelembungkan laporan perjalanan dinas adalah korupsi, sekalipun selisihnya kecil dan sekalipun tidak ketahuan. Uang negara yang diambil tanpa hak tetap merugikan keuangan negara. Sikap yang benar adalah menolak ajakan itu dan melaporkannya melalui saluran resmi, agar pelanggaran itu dihentikan dan tidak berulang.",
+   "po": [
+    "Paling tepat — menolak dan melaporkan ajakan memalsukan laporan perjalanan dinas.",
+    "Cukup — menolak itu benar, tetapi membiarkan pelanggaran tanpa melapor tidak menghentikannya.",
+    "Buruk — menggelembungkan laporan perjalanan dinas adalah korupsi, sekecil apa pun selisihnya.",
+    "Buruk — pelanggaran sekali pun tetap pelanggaran dan membuka jalan bagi pelanggaran berikutnya.",
+    "Buruk — membagi hasil penggelembungan laporan tetap ikut menikmati uang negara yang tidak berhak."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C5",
+   "turunan": "Turunan H019 — dari dompet tergeletak di parkir kantor ke ajakan menggelembungkan laporan perjalanan dinas.",
+   "status": "lolos"
+  },
+  {
+   "id": "H190",
+   "k": "TKP",
+   "m": "Pelayanan Publik",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 60,
+   "t": "Seorang warga datang mengurus dokumen dengan membawa fotokopi lengkap, tetapi dokumen aslinya tertinggal di rumah. Ia menunjukkan foto dokumen asli itu di ponselnya dan memohon agar urusannya tetap dilayani hari itu juga. Sikapmu yang paling tepat adalah …",
+   "o": [
+    "Menolak mentah-mentah dan menyuruhnya pulang mengambil dokumen asli",
+    "Melayani dengan memverifikasi fotokopi dan foto dokumen di ponsel, mencatatnya, dan meminta dokumen asli ditunjukkan saat pengambilan hasil",
+    "Melayani tanpa verifikasi apa pun karena warga sudah memohon dengan sungguh-sungguh",
+    "Memproses dokumen itu sebagai sudah lengkap tanpa mencatat kekurangan apa pun",
+    "Menunda pengurusan sampai warga membawa dokumen asli, tanpa memberi kepastian jadwal"
+   ],
+   "s": [
+    2,
+    5,
+    1,
+    2,
+    3
+   ],
+   "j": 1,
+   "b": "Pelayanan publik yang baik menyeimbangkan ketertiban administrasi dengan kemudahan bagi warga. Fotokopi lengkap ditambah foto dokumen asli di ponsel dapat diverifikasi saat itu juga, dengan catatan kekurangan dan kewajiban menunjukkan dokumen asli saat pengambilan hasil. Cara ini melayani warga hari itu juga tanpa mengorbankan ketertiban.",
+   "po": [
+    "Kurang tepat — menolak tanpa mempertimbangkan verifikasi yang tersedia membuat pelayanan kaku dan memberatkan warga.",
+    "Paling tepat — verifikasi berlapis melayani warga hari itu juga tanpa mengorbankan ketertiban administrasi.",
+    "Buruk — melayani tanpa verifikasi membuka peluang pemalsuan dokumen.",
+    "Kurang tepat — tidak mencatat kekurangan berarti menghilangkan jejak yang diperlukan saat pemeriksaan.",
+    "Cukup — menunda menjaga ketertiban, tetapi tanpa kepastian jadwal dan tanpa memanfaatkan verifikasi yang tersedia, pelayanan menjadi lambat."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "tgl": "2026-11-13",
+   "lvl": "C4",
+   "turunan": "Turunan H014 — dari berkas kurang satu syarat ke dokumen asli tertinggal tetapi fotokopi lengkap dan foto di ponsel.",
    "status": "lolos"
   }
  ],
