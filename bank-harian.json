@@ -1,6 +1,6 @@
 {
  "versi": 1,
- "diperbarui": "2026-11-15",
+ "diperbarui": "2026-11-16",
  "batch": [
   {
    "tanggal": "2026-11-08",
@@ -67,6 +67,13 @@
   },
   {
    "tanggal": "2026-11-15",
+   "dibuat": 20,
+   "lulus": 20,
+   "ditolak": 0,
+   "sumber": "Mesin Soal Otonom — riset konsep kisi SKD, soal original"
+  },
+  {
+   "tanggal": "2026-11-16",
    "dibuat": 20,
    "lulus": 20,
    "ditolak": 0,
@@ -7519,6 +7526,685 @@
     "Kurang tepat — mengusir warga miskin adalah sikap yang tidak manusiawi."
    ],
    "turunan": "Turunan H207 — kewajiban mengikuti upacara adat diganti menjadi beban sumbangan hajatan bagi keluarga miskin; level tetap C5."
+  },
+  {
+   "id": "H231",
+   "k": "TWK",
+   "m": "Pilar Negara",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 90,
+   "lvl": "C5",
+   "t": "Sebuah sekolah mengusulkan agar pendidikan kebangsaan hanya mengajarkan Pancasila dan UUD 1945, dengan alasan Bhinneka Tunggal Ika dan NKRI sudah terlalu abstrak bagi siswa. Sikap yang paling tepat menurut konsep Empat Pilar Kebangsaan adalah …",
+   "o": [
+    "Mendukung usulan itu karena Pancasila dan UUD 1945 sudah cukup sebagai dasar negara",
+    "Menolak usulan itu karena keempat pilar merupakan satu kesatuan yang saling melengkapi dan tidak dapat dipisahkan",
+    "Menerima usulan itu dengan syarat NKRI tetap diajarkan pada mata pelajaran sejarah",
+    "Menyetujui usulan itu agar beban belajar siswa menjadi lebih ringan",
+    "Menunda keputusan sampai ada petunjuk resmi dari dinas pendidikan"
+   ],
+   "j": 1,
+   "b": "Empat Pilar Kebangsaan — Pancasila, UUD 1945, NKRI, dan Bhinneka Tunggal Ika — adalah satu kesatuan konsepsi yang utuh dan saling melengkapi; menghilangkan satu pilar meruntuhkan pemahaman kebangsaan secara keseluruhan. Bhinneka Tunggal Ika justru memberi makna persatuan dalam keberagaman yang menjadi jiwa NKRI, sehingga tidak boleh dihilangkan dari pendidikan kebangsaan.",
+   "po": [
+    "Salah — dua pilar saja tidak membentuk konsepsi kebangsaan yang utuh.",
+    "Benar — keempat pilar satu kesatuan yang tidak dapat dipisahkan.",
+    "Salah — NKRI bukan pelengkap yang bisa dipindah ke mata pelajaran lain.",
+    "Salah — meringankan beban bukan alasan menghilangkan pilar kebangsaan.",
+    "Salah — menunggu petunjuk bukan sikap yang menyelesaikan masalah konsep."
+   ],
+   "sumber": "Riset konsep Empat Pilar Kebangsaan — soal original (turunan H191).",
+   "turunan": "Turunan H191 — dari pendapat bahwa empat pilar dapat dipisahkan menjadi kasus kebijakan sekolah yang mengabaikan satu pilar; level naik ke C5.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H232",
+   "k": "TWK",
+   "m": "Bahasa Indonesia",
+   "d": "Mudah",
+   "jenis": "PG",
+   "waktu": 60,
+   "lvl": "C3",
+   "t": "Di antara lima kalimat di bawah ini, manakah yang tidak mengandung satu pun kata tidak baku?",
+   "o": [
+    "Permohonan ijin cuti harus diajukan melalui atasan langsung.",
+    "Jadwal kegiatan akan diumumkan setelah rapat koordinasi selesai.",
+    "Petugas apotik melayani pasien dengan ramah setiap hari.",
+    "Hasil survey menunjukkan kepuasan masyarakat meningkat.",
+    "Kegiatan itu membutuhkan biaya besar, tetapi tetap harus efesien."
+   ],
+   "j": 1,
+   "b": "Kata baku menurut KBBI: izin (bukan ijin), apotek (bukan apotik), survei (bukan survey), dan efisien (bukan efesien). Hanya kalimat kedua yang seluruh katanya baku, sehingga kalimat itulah yang tepat.",
+   "po": [
+    "Salah — bentuk bakunya adalah izin, bukan ijin.",
+    "Benar — jadwal, kegiatan, rapat, dan koordinasi semuanya baku.",
+    "Salah — bentuk bakunya adalah apotek, bukan apotik.",
+    "Salah — bentuk bakunya adalah survei, bukan survey.",
+    "Salah — bentuk bakunya adalah efisien, bukan efesien."
+   ],
+   "sumber": "Riset kaidah kata baku KBBI — soal original (turunan H212).",
+   "turunan": "Turunan H212 — dari satu kalimat baku menjadi lima kalimat dengan jebakan kata tidak baku yang berbeda; level tetap C3.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H233",
+   "k": "TWK",
+   "m": "Integritas",
+   "d": "Sulit",
+   "jenis": "PG",
+   "waktu": 90,
+   "lvl": "C5",
+   "t": "Anda menjadi bendahara sebuah kegiatan di instansi. Seorang rekan meminta Anda mencatat pengeluaran fiktif sebesar Rp500.000,00 untuk menutup kekurangan dana kegiatan yang sebenarnya dipakai rekan itu untuk keperluan pribadinya. Tindakan Anda yang paling mencerminkan integritas adalah …",
+   "o": [
+    "Mencatat pengeluaran itu karena jumlahnya kecil dan tidak merugikan siapa pun",
+    "Menolak mencatat pengeluaran fiktif dan melaporkan temuan itu melalui saluran resmi",
+    "Mencatat pengeluaran itu tetapi menyimpan buktinya sebagai jaminan bila nanti diperiksa",
+    "Meminta rekan mengganti dana itu diam-diam tanpa mencatat apa pun",
+    "Menunda pencatatan sampai rekan itu menyelesaikan urusan pribadinya"
+   ],
+   "j": 1,
+   "b": "Integritas berarti jujur dan konsisten pada aturan, berapa pun jumlahnya: mencatat pengeluaran fiktif adalah pemalsuan laporan keuangan, meskipun nilainya kecil. Menolak sekaligus melaporkannya melalui saluran resmi menunjukkan integritas yang utuh, sedangkan menyimpan bukti tanpa melapor atau mengganti diam-diam sama saja membiarkan pelanggaran terjadi.",
+   "po": [
+    "Salah — jumlah kecil tidak mengubah pemalsuan menjadi benar.",
+    "Benar — menolak dan melaporkan melalui saluran resmi.",
+    "Salah — menyimpan bukti tanpa melapor berarti membiarkan pelanggaran.",
+    "Salah — mengganti diam-diam menutupi kesalahan, bukan menyelesaikannya.",
+    "Salah — menunda hanya memberi waktu pelanggaran berlanjut."
+   ],
+   "sumber": "Riset nilai dasar ASN BerAKHLAK — soal original (turunan H213).",
+   "turunan": "Turunan H213 — dari rekan panitia yang membocorkan lelang menjadi bendahara yang diminta mencatat pengeluaran fiktif; level tetap C5.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H234",
+   "k": "TWK",
+   "m": "NKRI & Bhinneka Tunggal Ika",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 90,
+   "lvl": "C5",
+   "t": "Di kantor tempat Anda bertugas, beredar pesan berantai yang mengajak pegawai menolak rekan baru dari daerah lain dengan alasan budaya mereka berbeda. Sebagai ASN, sikap yang paling tepat adalah …",
+   "o": [
+    "Membiarkan pesan itu karena tidak ditujukan langsung kepada Anda",
+    "Menyebarkan pesan itu agar rekan baru tersebut merasa tidak diterima",
+    "Menolak ajakan itu dan mengingatkan bahwa Bhinneka Tunggal Ika mengharuskan penghormatan terhadap keberagaman",
+    "Meminta rekan baru itu menyesuaikan diri sepenuhnya dan meninggalkan budayanya",
+    "Mengusulkan agar rekan dari daerah lain ditempatkan di unit yang terpisah"
+   ],
+   "j": 2,
+   "b": "NKRI menjamin persamaan kedudukan setiap warga negara sebagaimana diatur Pasal 27 UUD 1945, dan Bhinneka Tunggal Ika menegaskan persatuan dalam keberagaman; menolak seseorang karena asal daerahnya bertentangan dengan keduanya. ASN wajib menjadi perekat persatuan, bukan penyebar perpecahan, sehingga ajakan seperti itu harus ditolak dan diluruskan.",
+   "po": [
+    "Salah — diam berarti membiarkan perpecahan menyebar.",
+    "Salah — menyebarkan ajakan itu justru memperparah perpecahan.",
+    "Benar — menolak ajakan dan mengingatkan makna Bhinneka Tunggal Ika.",
+    "Salah — keberagaman dihormati, bukan dihapus dengan pemaksaan.",
+    "Salah — pemisahan berdasarkan asal daerah bertentangan dengan persatuan."
+   ],
+   "sumber": "Riset konsep NKRI dan Bhinneka Tunggal Ika — soal original (turunan H214).",
+   "turunan": "Turunan H214 — dari ajakan menolak pendatang di media sosial menjadi ajakan menolak rekan kerja baru di kantor; level tetap C5.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H235",
+   "k": "TWK",
+   "m": "Sejarah Perjuangan",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 75,
+   "lvl": "C4",
+   "t": "Setelah Proklamasi 17 Agustus 1945, Indonesia menempuh jalur diplomasi untuk memperoleh pengakuan kedaulatan. Perundingan berikut yang menghasilkan pengakuan kedaulatan Indonesia oleh Belanda adalah …",
+   "o": [
+    "Perundingan Linggarjati",
+    "Perjanjian Renville",
+    "Perundingan Roem–Royen",
+    "Konferensi Meja Bundar",
+    "Perjanjian Bongaya"
+   ],
+   "j": 3,
+   "b": "Konferensi Meja Bundar pada 23 Agustus sampai 2 November 1949 menghasilkan penyerahan kedaulatan dari Belanda kepada Republik Indonesia Serikat pada 27 Desember 1949. Perundingan Linggarjati hanya mengakui RI secara de facto atas Jawa, Madura, dan Sumatra; Perjanjian Renville justru merugikan RI; Perundingan Roem–Royen hanya membuka jalan menuju KMB.",
+   "po": [
+    "Salah — Linggarjati hanya pengakuan de facto, bukan kedaulatan penuh.",
+    "Salah — Renville justru mempersempit wilayah RI.",
+    "Salah — Roem–Royen baru membuka jalan menuju KMB.",
+    "Benar — KMB menghasilkan penyerahan kedaulatan 27 Desember 1949.",
+    "Salah — Perjanjian Bongaya terjadi pada masa VOC, jauh sebelum proklamasi."
+   ],
+   "sumber": "Riset sejarah diplomasi pasca-proklamasi — soal original (turunan H196).",
+   "turunan": "Turunan H196 — dari upaya diplomasi pasca-proklamasi secara umum menjadi perbandingan empat perundingan dan hasilnya; level naik ke C4.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H236",
+   "k": "TWK",
+   "m": "Pancasila",
+   "d": "Sulit",
+   "jenis": "PG",
+   "waktu": 90,
+   "lvl": "C5",
+   "t": "Sebuah perusahaan menawarkan beasiswa bagi siswa berprestasi di desa Anda, tetapi hanya bagi siswa dari satu kelompok agama tertentu. Ditinjau dari sila pertama dan kedua Pancasila, penilaian yang tepat adalah …",
+   "o": [
+    "Dapat diterima karena dana itu milik perusahaan dan boleh diatur sesuka hati",
+    "Dapat diterima karena kelompok yang dipilih adalah mayoritas di desa itu",
+    "Tidak sejalan dengan Pancasila karena sila pertama menjamin kebebasan beragama dan sila kedua menuntut perlakuan adil tanpa diskriminasi",
+    "Dapat diterima asalkan jumlah beasiswanya diperbesar",
+    "Tidak sejalan dengan Pancasila karena perusahaan dilarang memberi beasiswa"
+   ],
+   "j": 2,
+   "b": "Sila pertama, Ketuhanan Yang Maha Esa, menjamin kebebasan setiap warga memeluk agama dan beribadah menurut keyakinannya, sedangkan sila kedua, Kemanusiaan yang adil dan beradab, menuntut perlakuan yang adil tanpa membedakan agama. Bantuan yang membatasi penerima berdasarkan agama bertentangan dengan kedua sila itu, meskipun dananya berasal dari pihak swasta.",
+   "po": [
+    "Salah — dana swasta tidak membenarkan diskriminasi atas dasar agama.",
+    "Salah — mayoritas bukan alasan untuk membedakan perlakuan.",
+    "Benar — melanggar jaminan kebebasan beragama dan tuntutan adil.",
+    "Salah — memperbesar jumlah tidak menghapus sifat diskriminatifnya.",
+    "Salah — perusahaan boleh memberi beasiswa; yang salah adalah syarat diskriminatifnya."
+   ],
+   "sumber": "Riset pengamalan sila pertama dan kedua Pancasila — soal original (turunan H215).",
+   "turunan": "Turunan H215 — dari bantuan bersyarat lembaga keagamaan menjadi beasiswa perusahaan yang dibatasi satu kelompok agama; level tetap C5.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H237",
+   "k": "TIU",
+   "m": "Deret & Pola Bilangan",
+   "d": "Sedang",
+   "jenis": "Numerik",
+   "waktu": 90,
+   "lvl": "C5",
+   "t": "Jumlah peserta pelatihan di sebuah balai latihan selama lima minggu berturut-turut adalah 5, 9, 15, 25, 41, … Jika pola pertambahannya berlanjut, jumlah peserta pada minggu keenam adalah …",
+   "o": [
+    "61",
+    "63",
+    "65",
+    "67",
+    "69"
+   ],
+   "j": 3,
+   "b": "Selisih antar minggu adalah 4, 6, 10, dan 16. Setiap selisih merupakan jumlah dua selisih sebelumnya: 4 ditambah 6 sama dengan 10, dan 6 ditambah 10 sama dengan 16. Selisih berikutnya adalah 10 ditambah 16 sama dengan 26, sehingga jumlah peserta minggu keenam adalah 41 ditambah 26 sama dengan 67.",
+   "po": [
+    "Salah — 61 diperoleh bila selisih berikutnya dianggap 20.",
+    "Salah — 63 tidak mengikuti pola jumlah dua selisih sebelumnya.",
+    "Salah — 65 diperoleh bila selisih dianggap naik 2 setiap minggu.",
+    "Benar — pola selisih 4, 6, 10, 16, lalu 26.",
+    "Salah — 69 diperoleh bila selisih berikutnya dianggap 28."
+   ],
+   "jenisSalah": {
+    "0": "hitung",
+    "1": "logika",
+    "2": "konsep",
+    "4": "hitung"
+   },
+   "sumber": "Riset pola deret bertingkat — soal original (turunan H221).",
+   "turunan": "Turunan H221 — dari jumlah pengunjung perpustakaan menjadi jumlah peserta pelatihan dengan pola selisih Fibonacci; level naik ke C5.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H238",
+   "k": "TIU",
+   "m": "Aritmatika Dasar",
+   "d": "Sulit",
+   "jenis": "Numerik",
+   "waktu": 120,
+   "lvl": "C5",
+   "t": "Diagram batang berikut menunjukkan alokasi Dana Desa tahun ini (dalam juta rupiah) untuk lima program. Total Dana Desa tahun ini adalah 900 juta rupiah. Persentase alokasi untuk program Pendidikan adalah …",
+   "g": "<svg viewBox=\"0 0 400 200\" role=\"img\" aria-label=\"Diagram batang alokasi Dana Desa: Jalan 240, Air Bersih 150, Pendidikan 180, Kesehatan 120, Pertanian 210 juta rupiah\"><line x1=\"20\" y1=\"160\" x2=\"380\" y2=\"160\" stroke=\"currentColor\" stroke-width=\"2\"/><rect x=\"40\" y=\"40\" width=\"36\" height=\"120\" fill=\"currentColor\"/><rect x=\"110\" y=\"85\" width=\"36\" height=\"75\" fill=\"currentColor\"/><rect x=\"180\" y=\"70\" width=\"36\" height=\"90\" fill=\"currentColor\"/><rect x=\"250\" y=\"100\" width=\"36\" height=\"60\" fill=\"currentColor\"/><rect x=\"320\" y=\"55\" width=\"36\" height=\"105\" fill=\"currentColor\"/><text x=\"58\" y=\"32\" font-size=\"11\" text-anchor=\"middle\" fill=\"currentColor\">240</text><text x=\"128\" y=\"77\" font-size=\"11\" text-anchor=\"middle\" fill=\"currentColor\">150</text><text x=\"198\" y=\"62\" font-size=\"11\" text-anchor=\"middle\" fill=\"currentColor\">180</text><text x=\"268\" y=\"92\" font-size=\"11\" text-anchor=\"middle\" fill=\"currentColor\">120</text><text x=\"338\" y=\"47\" font-size=\"11\" text-anchor=\"middle\" fill=\"currentColor\">210</text><text x=\"58\" y=\"178\" font-size=\"10\" text-anchor=\"middle\" fill=\"currentColor\">Jalan</text><text x=\"128\" y=\"178\" font-size=\"10\" text-anchor=\"middle\" fill=\"currentColor\">Air</text><text x=\"198\" y=\"178\" font-size=\"10\" text-anchor=\"middle\" fill=\"currentColor\">Pendidikan</text><text x=\"268\" y=\"178\" font-size=\"10\" text-anchor=\"middle\" fill=\"currentColor\">Kesehatan</text><text x=\"338\" y=\"178\" font-size=\"10\" text-anchor=\"middle\" fill=\"currentColor\">Pertanian</text></svg>",
+   "o": [
+    "15%",
+    "18%",
+    "20%",
+    "25%",
+    "30%"
+   ],
+   "j": 2,
+   "b": "Dari diagram, alokasi Pendidikan adalah 180 juta rupiah. Total Dana Desa adalah 900 juta rupiah, sehingga persentasenya adalah 180 dibandingkan 900, sama dengan 20 persen. Kesalahan umum adalah membandingkan dengan jumlah empat program lain atau salah membaca nilai batang.",
+   "po": [
+    "Salah — 15 persen diperoleh bila nilai Pendidikan salah dibaca 135.",
+    "Salah — 18 persen tidak sesuai dengan hitungan 180 dari 900.",
+    "Benar — 180 dari 900 sama dengan 20 persen.",
+    "Salah — 25 persen diperoleh bila pembaginya dianggap 720.",
+    "Salah — 30 persen diperoleh bila nilai Pendidikan dianggap 270."
+   ],
+   "jenisSalah": {
+    "0": "baca data",
+    "1": "hitung",
+    "3": "konsep",
+    "4": "baca data"
+   },
+   "integrasi": "TIU × TWK (Dana Desa)",
+   "gb": "<svg viewBox=\"0 0 400 200\" role=\"img\" aria-label=\"Pembahasan: Pendidikan 180 dari total 900 sama dengan 20 persen\"><text x=\"200\" y=\"16\" font-size=\"12\" text-anchor=\"middle\" fill=\"currentColor\">Pendidikan 180 dari total 900 = 20%</text><line x1=\"20\" y1=\"160\" x2=\"380\" y2=\"160\" stroke=\"currentColor\" stroke-width=\"2\"/><rect x=\"40\" y=\"40\" width=\"36\" height=\"120\" fill=\"currentColor\"/><rect x=\"110\" y=\"85\" width=\"36\" height=\"75\" fill=\"currentColor\"/><rect x=\"180\" y=\"70\" width=\"36\" height=\"90\" fill=\"currentColor\"/><rect x=\"250\" y=\"100\" width=\"36\" height=\"60\" fill=\"currentColor\"/><rect x=\"320\" y=\"55\" width=\"36\" height=\"105\" fill=\"currentColor\"/><rect x=\"176\" y=\"66\" width=\"44\" height=\"98\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-dasharray=\"4 3\"/><text x=\"58\" y=\"32\" font-size=\"11\" text-anchor=\"middle\" fill=\"currentColor\">240</text><text x=\"128\" y=\"77\" font-size=\"11\" text-anchor=\"middle\" fill=\"currentColor\">150</text><text x=\"198\" y=\"62\" font-size=\"11\" text-anchor=\"middle\" fill=\"currentColor\">180</text><text x=\"268\" y=\"92\" font-size=\"11\" text-anchor=\"middle\" fill=\"currentColor\">120</text><text x=\"338\" y=\"47\" font-size=\"11\" text-anchor=\"middle\" fill=\"currentColor\">210</text><text x=\"58\" y=\"178\" font-size=\"10\" text-anchor=\"middle\" fill=\"currentColor\">Jalan</text><text x=\"128\" y=\"178\" font-size=\"10\" text-anchor=\"middle\" fill=\"currentColor\">Air</text><text x=\"198\" y=\"178\" font-size=\"10\" text-anchor=\"middle\" fill=\"currentColor\">Pendidikan</text><text x=\"268\" y=\"178\" font-size=\"10\" text-anchor=\"middle\" fill=\"currentColor\">Kesehatan</text><text x=\"338\" y=\"178\" font-size=\"10\" text-anchor=\"middle\" fill=\"currentColor\">Pertanian</text></svg>",
+   "sumber": "Riset keterampilan membaca diagram batang — soal original (turunan H223).",
+   "turunan": "Turunan H223 — dari rata-rata pendaftar layanan menjadi persentase alokasi Dana Desa dengan data baru; level tetap C5.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H239",
+   "k": "TIU",
+   "m": "Verbal: Sinonim & Antonim",
+   "d": "Mudah",
+   "jenis": "PG",
+   "waktu": 60,
+   "lvl": "C3",
+   "t": "Kata yang paling dekat maknanya dengan kata LUGAS dalam kalimat 'Penyampaiannya lugas sehingga mudah dipahami' adalah …",
+   "o": [
+    "Berbelit-belit",
+    "Jelas dan tegas",
+    "Berlebihan",
+    "Lembut dan halus",
+    "Membingungkan"
+   ],
+   "j": 1,
+   "b": "Lugas berarti langsung, jelas, dan tidak berbelit-belit dalam menyampaikan sesuatu. Padanan terdekatnya adalah jelas dan tegas, sedangkan berbelit-belit dan membingungkan justru berlawanan maknanya.",
+   "po": [
+    "Salah — berbelit-belit adalah lawan dari lugas.",
+    "Benar — lugas berarti jelas dan tegas.",
+    "Salah — berlebihan tidak berhubungan dengan makna lugas.",
+    "Salah — lembut dan halus menyangkut nada, bukan kejelasan.",
+    "Salah — membingungkan adalah lawan dari lugas."
+   ],
+   "sumber": "Riset kosakata bahasa Indonesia — soal original (turunan H219).",
+   "turunan": "Turunan H219 — dari kata MANGKUS menjadi kata LUGAS dengan konteks kalimat baru; level tetap C3.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H240",
+   "k": "TIU",
+   "m": "Verbal: Analogi",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 60,
+   "lvl": "C5",
+   "t": "KOKI : MASAKAN = … : …",
+   "o": [
+    "Pelukis : Kuas",
+    "Penulis : Buku",
+    "Guru : Kelas",
+    "Dokter : Rumah sakit",
+    "Petani : Cangkul"
+   ],
+   "j": 1,
+   "b": "Hubungannya adalah pelaku dengan hasil karyanya: koki menghasilkan masakan, penulis menghasilkan buku. Pilihan lain memasangkan pelaku dengan alat yang dipakai (kuas, cangkul) atau tempat bekerja (kelas, rumah sakit), sehingga tidak sejajar dengan hubungan pada pasangan pertama.",
+   "po": [
+    "Salah — kuas adalah alat, bukan hasil karya pelukis.",
+    "Benar — penulis menghasilkan buku seperti koki menghasilkan masakan.",
+    "Salah — kelas adalah tempat, bukan hasil karya guru.",
+    "Salah — rumah sakit adalah tempat, bukan hasil karya dokter.",
+    "Salah — cangkul adalah alat, bukan hasil karya petani."
+   ],
+   "sumber": "Riset pola analogi pelaku dan hasil karya — soal original (turunan H217).",
+   "turunan": "Turunan H217 — dari pasangan ARSIPARIS dan ARSIP menjadi pasangan pelaku dan hasil karya yang berbeda; level tetap C5.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H241",
+   "k": "TIU",
+   "m": "Logika & Silogisme",
+   "d": "Sulit",
+   "jenis": "PG",
+   "waktu": 120,
+   "lvl": "C6",
+   "t": "Empat relawan — Andi, Budi, Citra, dan Dewi — masing-masing mengerjakan tepat satu tugas: pendataan, logistik, humas, dan dokumentasi. Diketahui: Andi tidak mengerjakan pendataan maupun logistik; Budi mengerjakan humas atau dokumentasi, tetapi bukan dokumentasi; Citra mengerjakan pendataan; Dewi tidak mengerjakan dokumentasi. Tugas Andi adalah …",
+   "o": [
+    "Pendataan",
+    "Logistik",
+    "Humas",
+    "Dokumentasi",
+    "Tidak dapat ditentukan"
+   ],
+   "j": 3,
+   "b": "Citra sudah pasti mengerjakan pendataan. Budi mengerjakan humas atau dokumentasi, tetapi bukan dokumentasi, sehingga Budi pasti humas. Andi tidak boleh mengerjakan pendataan atau logistik, dan humas sudah diambil Budi, sehingga Andi pasti dokumentasi; Dewi mengerjakan sisanya, yaitu logistik. Rangkaian ini satu-satunya yang memenuhi semua syarat.",
+   "po": [
+    "Salah — pendataan sudah pasti dikerjakan Citra.",
+    "Salah — Andi dilarang mengerjakan logistik.",
+    "Salah — humas sudah pasti dikerjakan Budi.",
+    "Benar — setelah Budi humas, Andi hanya bisa dokumentasi.",
+    "Salah — semua syarat cukup untuk menentukan tugas Andi."
+   ],
+   "jenisSalah": {
+    "0": "logika",
+    "1": "logika",
+    "2": "logika",
+    "4": "logika"
+   },
+   "integrasi": "TIU × TKP (penempatan pegawai)",
+   "sumber": "Riset penalaran logika deduktif — soal original (turunan H220).",
+   "turunan": "Turunan H220 — dari empat pegawai dan empat jabatan menjadi empat relawan dan empat tugas dengan syarat baru; level tetap C6.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H242",
+   "k": "TIU",
+   "m": "Figural",
+   "d": "Sedang",
+   "jenis": "Figural",
+   "waktu": 90,
+   "lvl": "C4",
+   "t": "Perhatikan deret gambar berikut. Sebuah anak panah di dalam lingkaran mula-mula menunjuk ke atas. Pada setiap langkah, anak panah berputar 90 derajat searah jarum jam. Gambar keempat dalam deret adalah …",
+   "g": "<svg viewBox=\"0 0 260 80\" role=\"img\" aria-label=\"Deret tiga gambar: anak panah menunjuk ke atas, ke kanan, lalu ke bawah\"><circle cx=\"40\" cy=\"40\" r=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"40\" y1=\"52\" x2=\"40\" y2=\"28\" stroke=\"currentColor\" stroke-width=\"3\"/><polygon points=\"40,18 33,32 47,32\" fill=\"currentColor\"/><circle cx=\"130\" cy=\"40\" r=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"118\" y1=\"40\" x2=\"142\" y2=\"40\" stroke=\"currentColor\" stroke-width=\"3\"/><polygon points=\"152,40 138,33 138,47\" fill=\"currentColor\"/><circle cx=\"220\" cy=\"40\" r=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"220\" y1=\"28\" x2=\"220\" y2=\"52\" stroke=\"currentColor\" stroke-width=\"3\"/><polygon points=\"220,62 213,48 227,48\" fill=\"currentColor\"/></svg>",
+   "o": [
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Lingkaran dengan anak panah menunjuk ke atas\"><circle cx=\"40\" cy=\"40\" r=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"40\" y1=\"52\" x2=\"40\" y2=\"28\" stroke=\"currentColor\" stroke-width=\"3\"/><polygon points=\"40,18 33,32 47,32\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Lingkaran dengan anak panah menunjuk ke kanan\"><circle cx=\"40\" cy=\"40\" r=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"28\" y1=\"40\" x2=\"52\" y2=\"40\" stroke=\"currentColor\" stroke-width=\"3\"/><polygon points=\"62,40 48,33 48,47\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Lingkaran dengan anak panah menunjuk ke bawah\"><circle cx=\"40\" cy=\"40\" r=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"40\" y1=\"28\" x2=\"40\" y2=\"52\" stroke=\"currentColor\" stroke-width=\"3\"/><polygon points=\"40,62 33,48 47,48\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Lingkaran dengan anak panah menunjuk ke kiri\"><circle cx=\"40\" cy=\"40\" r=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"52\" y1=\"40\" x2=\"28\" y2=\"40\" stroke=\"currentColor\" stroke-width=\"3\"/><polygon points=\"18,40 32,33 32,47\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Lingkaran dengan anak panah menunjuk ke kanan atas\"><circle cx=\"40\" cy=\"40\" r=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"30\" y1=\"50\" x2=\"48\" y2=\"32\" stroke=\"currentColor\" stroke-width=\"3\"/><polygon points=\"56,24 44,28 52,38\" fill=\"currentColor\"/></svg>"
+   ],
+   "j": 3,
+   "b": "Anak panah berputar 90 derajat searah jarum jam pada setiap langkah: gambar pertama menunjuk ke atas, gambar kedua ke kanan, gambar ketiga ke bawah, sehingga gambar keempat menunjuk ke kiri. Arah diagonal bukan bagian dari urutan putaran 90 derajat ini.",
+   "po": [
+    "Salah — itu arah gambar pertama, bukan gambar keempat.",
+    "Salah — itu arah gambar kedua, bukan gambar keempat.",
+    "Salah — itu arah gambar ketiga, bukan gambar keempat.",
+    "Benar — setelah bawah, putaran berikutnya menunjuk ke kiri.",
+    "Salah — arah diagonal tidak muncul dalam putaran 90 derajat."
+   ],
+   "gb": "<svg viewBox=\"0 0 340 80\" role=\"img\" aria-label=\"Urutan lengkap: anak panah menunjuk ke atas, ke kanan, ke bawah, lalu ke kiri\"><circle cx=\"40\" cy=\"40\" r=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"40\" y1=\"52\" x2=\"40\" y2=\"28\" stroke=\"currentColor\" stroke-width=\"3\"/><polygon points=\"40,18 33,32 47,32\" fill=\"currentColor\"/><circle cx=\"125\" cy=\"40\" r=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"113\" y1=\"40\" x2=\"137\" y2=\"40\" stroke=\"currentColor\" stroke-width=\"3\"/><polygon points=\"147,40 133,33 133,47\" fill=\"currentColor\"/><circle cx=\"210\" cy=\"40\" r=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"210\" y1=\"28\" x2=\"210\" y2=\"52\" stroke=\"currentColor\" stroke-width=\"3\"/><polygon points=\"210,62 203,48 217,48\" fill=\"currentColor\"/><circle cx=\"295\" cy=\"40\" r=\"28\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"307\" y1=\"40\" x2=\"283\" y2=\"40\" stroke=\"currentColor\" stroke-width=\"3\"/><polygon points=\"273,40 287,33 287,47\" fill=\"currentColor\"/></svg>",
+   "sumber": "Riset pola rotasi figural — soal original (turunan H222).",
+   "turunan": "Turunan H222 — dari segitiga yang berputar di dalam kotak menjadi anak panah yang berputar di dalam lingkaran; level tetap C4.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H243",
+   "k": "TIU",
+   "m": "Geometri",
+   "d": "Sulit",
+   "jenis": "Numerik",
+   "waktu": 120,
+   "lvl": "C5",
+   "t": "Sebuah lapangan berbentuk persegi panjang berukuran panjang 40 m dan lebar 30 m. Di tengah lapangan dibuat kolam berbentuk lingkaran dengan diameter 14 m. Luas lapangan yang tersisa di luar kolam adalah … (gunakan π = 22 per 7)",
+   "o": [
+    "1.046 m²",
+    "1.054 m²",
+    "1.100 m²",
+    "1.154 m²",
+    "1.200 m²"
+   ],
+   "j": 0,
+   "b": "Luas lapangan adalah 40 dikali 30 sama dengan 1.200 m². Jari-jari kolam adalah 14 dibagi 2 sama dengan 7 m, sehingga luas kolam adalah 22 per 7 dikali 7 dikali 7 sama dengan 154 m². Luas lapangan yang tersisa adalah 1.200 dikurangi 154 sama dengan 1.046 m².",
+   "po": [
+    "Benar — 1.200 dikurangi luas kolam 154 sama dengan 1.046.",
+    "Salah — hasil ini muncul bila jari-jari kolam salah dihitung.",
+    "Salah — 1.100 diperoleh bila luas kolam dianggap 100.",
+    "Salah — hasil ini muncul bila rumus luas lingkaran salah dipakai.",
+    "Salah — itu luas lapangan utuh, kolam belum dikurangkan."
+   ],
+   "jenisSalah": {
+    "1": "hitung",
+    "2": "konsep",
+    "3": "rumus",
+    "4": "konsep"
+   },
+   "sumber": "Riset luas bangun gabungan — soal original (turunan H218).",
+   "turunan": "Turunan H218 — dari taman lingkaran dengan kolam menjadi lapangan persegi panjang dengan kolam lingkaran; level tetap C5.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H244",
+   "k": "TKP",
+   "m": "Pelayanan Publik",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 75,
+   "lvl": "C5",
+   "t": "Seorang warga datang ke loket dengan berkas permohonan yang sudah lengkap, tetapi sistem antrean sedang gangguan sehingga nomor antreannya tidak tercatat. Warga itu sudah menunggu dua jam dan harus segera kembali bekerja. Tindakan Anda yang paling tepat adalah …",
+   "o": [
+    "Meminta warga itu mengambil nomor antrean baru dan menunggu dari awal",
+    "Mencatat data warga itu secara manual, memproses berkasnya, dan memberinya tanda terima resmi",
+    "Meminta warga itu datang lagi besok dengan nomor antrean baru",
+    "Memproses berkasnya tanpa tanda terima agar cepat selesai",
+    "Meminta warga itu menghubungi atasan Anda untuk meminta pengecualian"
+   ],
+   "j": 1,
+   "s": [
+    2,
+    5,
+    1,
+    3,
+    2
+   ],
+   "b": "Gangguan sistem tidak boleh merugikan warga yang sudah antre dan berkasnya lengkap; pencatatan manual ditambah tanda terima resmi menjaga kepastian layanan sekaligus akuntabilitas. Meminta antre ulang atau datang besok mengabaikan waktu warga, sedangkan memproses tanpa tanda terima menghilangkan bukti layanan.",
+   "po": [
+    "Kurang tepat — warga sudah menunggu dua jam dan berkasnya lengkap.",
+    "Paling tepat — layanan tetap berjalan dengan bukti resmi.",
+    "Kurang tepat — menunda layanan yang sebenarnya bisa diproses hari itu.",
+    "Kurang tepat — tanpa tanda terima, layanan kehilangan bukti dan kepastian.",
+    "Kurang tepat — pengecualian dari atasan bukan jalan keluar untuk gangguan sistem."
+   ],
+   "sumber": "Riset standar pelayanan publik — soal original (turunan H228).",
+   "turunan": "Turunan H228 — dari antrean panjang dan warga lanjut usia menjadi gangguan sistem antrean dan warga yang sudah menunggu lama; level naik ke C5.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H245",
+   "k": "TKP",
+   "m": "Jejaring Kerja",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 75,
+   "lvl": "C4",
+   "t": "Anda diminta menjadi penghubung antara unit Anda dan sebuah instansi mitra untuk program vaksinasi. Instansi mitra mengubah jadwal kegiatan mendadak tanpa memberi tahu Anda, sehingga warga sudah telanjur datang. Langkah Anda yang paling tepat adalah …",
+   "o": [
+    "Menyalahkan instansi mitra di hadapan warga agar unit Anda tidak disalahkan",
+    "Menenangkan warga, menjelaskan perubahan jadwal, lalu menghubungi mitra untuk menyepakati jadwal pengganti dan mekanisme pemberitahuan",
+    "Membubarkan warga dan meminta mereka mengecek sendiri jadwal baru di media sosial mitra",
+    "Menunda kegiatan tanpa penjelasan sampai mitra menghubungi Anda",
+    "Meminta warga menunggu di tempat sampai mitra datang, tanpa batas waktu yang jelas"
+   ],
+   "j": 1,
+   "s": [
+    1,
+    5,
+    2,
+    2,
+    3
+   ],
+   "b": "Jejaring kerja yang baik menuntut komunikasi dua arah dan tanggung jawab bersama: warga dilayani dengan penjelasan yang jelas, sedangkan koordinasi dengan mitra diperbaiki agar perubahan jadwal diberitahukan tepat waktu. Menyalahkan mitra di depan warga justru merusak kepercayaan kedua belah pihak.",
+   "po": [
+    "Kurang tepat — menyalahkan mitra merusak kepercayaan kedua belah pihak.",
+    "Paling tepat — warga ditenangkan dan koordinasi dengan mitra diperbaiki.",
+    "Kurang tepat — warga dibiarkan mencari informasi sendiri.",
+    "Kurang tepat — menunda tanpa penjelasan membuat warga kebingungan.",
+    "Kurang tepat — menunggu tanpa batas waktu bukan pelayanan yang baik."
+   ],
+   "sumber": "Riset kerja sama antarinstansi — soal original (turunan H225).",
+   "turunan": "Turunan H225 — dari mitra yang meminta salinan data menjadi mitra yang mengubah jadwal mendadak; level tetap C4.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H246",
+   "k": "TKP",
+   "m": "Teknologi Informasi & Komunikasi",
+   "d": "Mudah",
+   "jenis": "PG",
+   "waktu": 60,
+   "lvl": "C3",
+   "t": "Saat bekerja dari rumah, Anda menerima surel yang mengaku dari bagian IT dan meminta Anda mengeklik tautan untuk memverifikasi kata sandi akun sistem. Tindakan yang paling tepat adalah …",
+   "o": [
+    "Mengeklik tautan itu dan memasukkan kata sandi karena pengirimnya mengaku dari IT",
+    "Mengabaikan surel itu tanpa melapor karena Anda tidak mengeklik apa pun",
+    "Memeriksa alamat pengirim melalui saluran resmi IT dan melaporkan surel mencurigakan itu",
+    "Meneruskan surel itu ke rekan kerja agar mereka juga waspada",
+    "Membalas surel itu untuk menanyakan apakah tautan itu asli"
+   ],
+   "j": 2,
+   "s": [
+    1,
+    3,
+    5,
+    2,
+    2
+   ],
+   "b": "Surel yang meminta kata sandi lewat tautan adalah ciri khas phishing; langkah benar adalah memverifikasi melalui saluran resmi dan melaporkannya agar tim IT dapat memblokirnya. Mengabaikan tanpa melapor membiarkan ancaman tetap ada bagi rekan lain, sedangkan membalas atau meneruskannya justru berisiko.",
+   "po": [
+    "Kurang tepat — tautan phishing tidak boleh diklik apa pun alasannya.",
+    "Kurang tepat — ancaman tetap ada bila tidak dilaporkan.",
+    "Paling tepat — verifikasi resmi dan laporkan ke IT.",
+    "Kurang tepat — meneruskan surel berbahaya dapat menyebarkan ancaman.",
+    "Kurang tepat — membalas justru mengonfirmasi alamat Anda kepada pelaku."
+   ],
+   "sumber": "Riset keamanan informasi dan phishing — soal original (turunan H226).",
+   "turunan": "Turunan H226 — dari rekan yang meminta kata sandi menjadi surel phishing yang mengaku dari bagian IT; level tetap C3.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H247",
+   "k": "TKP",
+   "m": "Sosial Budaya",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 75,
+   "lvl": "C5",
+   "t": "Di wilayah penempatan Anda, masyarakat mengadakan tradisi tahunan yang melibatkan seluruh warga. Seorang warga pendatang dari daerah lain merasa sungkan ikut karena tidak memahami tata caranya. Sikap Anda sebagai ASN yang paling tepat adalah …",
+   "o": [
+    "Membiarkannya karena keikutsertaan dalam tradisi bersifat sukarela",
+    "Memaksanya ikut agar tidak dianggap tidak menghormati tradisi setempat",
+    "Mengajaknya ikut dengan menjelaskan tata cara tradisi itu dan menemaninya selama kegiatan",
+    "Menyarankan agar ia mengadakan tradisi daerahnya sendiri secara terpisah",
+    "Melaporkan keengganannya kepada tokoh masyarakat agar ia ditegur"
+   ],
+   "j": 2,
+   "s": [
+    3,
+    1,
+    5,
+    2,
+    1
+   ],
+   "b": "Sosial budaya dalam TKP menekankan kemampuan beradaptasi dan membangun kebersamaan: pendatang dibantu memahami tradisi setempat dengan pendampingan, bukan dipaksa atau dibiarkan sendiri. Pendekatan ini menjaga keharmonisan sekaligus menghormati perbedaan latar belakang.",
+   "po": [
+    "Kurang tepat — membiarkan berarti tidak membangun kebersamaan.",
+    "Kurang tepat — memaksa justru menimbulkan ketegangan.",
+    "Paling tepat — pendampingan membantu pendatang merasa diterima.",
+    "Kurang tepat — tradisi terpisah justru memperlebar jarak sosial.",
+    "Kurang tepat — menegur pendatang karena sungkan adalah tindakan tidak bijak."
+   ],
+   "sumber": "Riset adaptasi sosial budaya ASN — soal original (turunan H224).",
+   "turunan": "Turunan H224 — dari perpustakaan keliling menjadi pendampingan pendatang dalam tradisi tahunan; level naik ke C5.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H248",
+   "k": "TKP",
+   "m": "Anti Korupsi",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 75,
+   "lvl": "C5",
+   "t": "Seorang rekan kerja menyodorkan daftar hadir rapat dan meminta Anda membubuhkan tanda tangan, padahal Anda tidak menghadiri rapat itu. Alasannya, daftar itu hanya formalitas untuk pencairan honorarium. Tindakan Anda yang paling tepat adalah …",
+   "o": [
+    "Menandatanganinya karena Anda memang diundang dalam rapat itu",
+    "Menolak menandatangani dan menjelaskan bahwa tanda tangan Anda berarti membenarkan kehadiran yang tidak terjadi",
+    "Menandatanganinya tetapi menuliskan catatan kecil bahwa Anda tidak hadir",
+    "Meminta rekan lain menandatangani atas nama Anda",
+    "Menandatanganinya karena honorariumnya akan dibagikan kepada seluruh tim"
+   ],
+   "j": 1,
+   "s": [
+    2,
+    5,
+    3,
+    1,
+    2
+   ],
+   "b": "Menandatangani daftar hadir yang tidak benar adalah pemalsuan dokumen dan dapat menjadi pintu penyalahgunaan anggaran, meskipun alasannya hanya formalitas. Menolak sekaligus menjelaskan alasannya menunjukkan sikap antikorupsi yang konsisten, sedangkan menandatangani dengan catatan atau lewat orang lain tetap membenarkan dokumen palsu.",
+   "po": [
+    "Kurang tepat — diundang bukan berarti hadir.",
+    "Paling tepat — menolak dan menjelaskan makna tanda tangan itu.",
+    "Kurang tepat — catatan kecil tidak mengubah dokumen yang salah.",
+    "Kurang tepat — meminta orang lain menandatangani adalah pemalsuan juga.",
+    "Kurang tepat — pembagian honorarium tidak membenarkan dokumen palsu."
+   ],
+   "sumber": "Riset sikap antikorupsi ASN — soal original (turunan H227).",
+   "turunan": "Turunan H227 — dari laporan perjalanan dinas fiktif menjadi daftar hadir rapat yang tidak dihadiri; level naik ke C5.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H249",
+   "k": "TKP",
+   "m": "Profesionalisme",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 75,
+   "lvl": "C4",
+   "t": "Anda diberi tugas menyusun pedoman layanan baru dengan tenggat dua hari. Di tengah pengerjaan, Anda menemukan bahwa data acuan yang diberikan atasan sudah kedaluwarsa. Sikap profesional yang paling tepat adalah …",
+   "o": [
+    "Tetap memakai data lama agar pedoman selesai tepat waktu",
+    "Menghentikan pengerjaan dan menunggu atasan memberi data baru tanpa memberi kabar",
+    "Segera memberi tahu atasan tentang data kedaluwarsa itu, mengusulkan data pengganti yang mutakhir, dan menyesuaikan jadwal bila perlu",
+    "Menyusun pedoman berdasarkan perkiraan sendiri tanpa memeriksa data",
+    "Menyelesaikan pedoman dengan data lama, lalu diam-diam memperbaikinya setelah diserahkan"
+   ],
+   "j": 2,
+   "s": [
+    2,
+    1,
+    5,
+    1,
+    3
+   ],
+   "b": "Profesionalisme berarti menjaga mutu hasil kerja sekaligus komunikasi yang jujur: data kedaluwarsa harus segera dilaporkan kepada atasan beserta usulan solusinya, bukan disembunyikan demi tenggat atau diperbaiki diam-diam setelah diserahkan.",
+   "po": [
+    "Kurang tepat — data kedaluwarsa menghasilkan pedoman yang salah.",
+    "Kurang tepat — berhenti tanpa kabar menghambat pekerjaan.",
+    "Paling tepat — laporkan masalahnya beserta usulan solusi.",
+    "Kurang tepat — perkiraan bukan pengganti data yang benar.",
+    "Kurang tepat — memperbaiki diam-diam menutupi kesalahan proses."
+   ],
+   "sumber": "Riset profesionalisme ASN — soal original (turunan H229).",
+   "turunan": "Turunan H229 — dari kesalahan data dalam laporan yang sudah terkirim menjadi data acuan kedaluwarsa saat menyusun pedoman; level tetap C4.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
+  },
+  {
+   "id": "H250",
+   "k": "TKP",
+   "m": "Jejaring Kerja",
+   "d": "Sedang",
+   "jenis": "PG",
+   "waktu": 75,
+   "lvl": "C5",
+   "t": "Laporan lintas unit yang Anda susun membutuhkan angka rekap dari unit lain. Unit itu menolak memberi data dengan alasan kerahasiaan, padahal Anda hanya memerlukan totalnya, bukan rincian per kasus. Langkah Anda yang paling tepat adalah …",
+   "o": [
+    "Menyusun laporan tanpa data itu dan membiarkan laporannya tidak lengkap",
+    "Meminta atasan Anda memerintahkan unit itu menyerahkan seluruh datanya",
+    "Mengajukan permintaan resmi yang menjelaskan hanya rekap total yang dibutuhkan, disertai jaminan kerahasiaan dan dasar tugasnya",
+    "Meminta rekan di unit itu membocorkan data secara diam-diam",
+    "Menunda laporan sampai unit itu berubah pikiran sendiri"
+   ],
+   "j": 2,
+   "s": [
+    2,
+    2,
+    5,
+    1,
+    3
+   ],
+   "b": "Jejaring kerja yang efektif menyelesaikan hambatan lewat jalur resmi: permintaan tertulis yang menjelaskan kebutuhan minimal, yaitu rekap total bukan rincian rahasia, beserta jaminan kerahasiaan menunjukkan profesionalisme dan menghormati aturan unit lain. Meminta bocoran diam-diam justru melanggar etika kerja.",
+   "po": [
+    "Kurang tepat — laporan tidak lengkap merugikan pengguna laporan.",
+    "Kurang tepat — perintah atasan tidak menyelesaikan keberatan kerahasiaan.",
+    "Paling tepat — permintaan resmi dengan kebutuhan minimal dan jaminan kerahasiaan.",
+    "Kurang tepat — membocorkan data melanggar etika dan aturan.",
+    "Kurang tepat — menunggu tanpa usaha tidak menyelesaikan hambatan."
+   ],
+   "sumber": "Riset kerja sama antarunit — soal original (turunan H205).",
+   "turunan": "Turunan H205 — dari unit yang menolak memberi data rahasia menjadi permintaan rekap total lewat jalur resmi; level naik ke C5.",
+   "tgl": "2026-11-16",
+   "status": "lolos"
   }
  ],
  "otomatis": {
