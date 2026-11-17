@@ -1,6 +1,6 @@
 {
  "versi": 1,
- "diperbarui": "2026-11-17",
+ "diperbarui": "2026-11-18",
  "batch": [
   {
    "tanggal": "2026-11-08",
@@ -81,6 +81,13 @@
   },
   {
    "tanggal": "2026-11-17",
+   "dibuat": 20,
+   "lulus": 20,
+   "ditolak": 0,
+   "sumber": "Mesin Soal Otonom — riset konsep kisi SKD, soal original"
+  },
+  {
+   "tanggal": "2026-11-18",
    "dibuat": 20,
    "lulus": 20,
    "ditolak": 0,
@@ -8888,6 +8895,687 @@
    "sumber": "Riset konsep kisi SKD — soal original",
    "tgl": "2026-11-17",
    "turunan": "Turunan H170 — dari laporan dengan data belum lengkap menjadi laporan yang sudah diserahkan tetapi memuat angka salah ketik.",
+   "status": "lolos"
+  },
+  {
+   "b": "Menurut kaidah PUEBI, nama diri seperti nama orang, nama tempat, dan nama hari ditulis dengan huruf kapital, sedangkan nama jabatan yang dipakai secara umum ditulis dengan huruf kecil. Hanya kalimat ketiga yang memenuhi ketentuan itu: 'Senin' sebagai nama hari ditulis kapital, sementara 'upacara bendera' bukan nama diri sehingga tetap huruf kecil.",
+   "d": "Sedang",
+   "id": "H271",
+   "j": 2,
+   "jenis": "PG",
+   "k": "TWK",
+   "lvl": "C4",
+   "m": "Bahasa Indonesia",
+   "o": [
+    "Warga desa wonosari bergotong royong memperbaiki jembatan yang rusak akibat banjir.",
+    "Kegiatan itu dihadiri oleh Bupati, Camat, dan Kepala Desa setempat.",
+    "Upacara bendera dilaksanakan setiap hari Senin di lapangan sekolah.",
+    "Mereka berlibur ke pulau bali pada bulan Desember.",
+    "Novel Laskar Pelangi karya andrea hirata sangat terkenal."
+   ],
+   "po": [
+    "Salah — 'Wonosari' adalah nama tempat sehingga harus ditulis kapital.",
+    "Salah — nama jabatan yang dipakai secara umum ditulis dengan huruf kecil.",
+    "Benar — nama hari ditulis kapital dan frasa umumnya ditulis kecil.",
+    "Salah — 'Bali' adalah nama tempat sehingga harus ditulis kapital.",
+    "Salah — 'Andrea Hirata' adalah nama orang sehingga harus ditulis kapital."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Kalimat yang penulisan huruf kapitalnya sesuai kaidah bahasa Indonesia adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H004 — dari kata baku menjadi penerapan huruf kapital dalam kalimat.",
+   "waktu": 60,
+   "status": "lolos"
+  },
+  {
+   "b": "'Kredibel' berasal dari kata Latin credibilis yang berarti dapat dipercaya. Dalam kalimat itu, keterangan saksi dinilai dapat dipercaya karena diperkuat bukti rekaman. Pilihan 'sesuai dengan kenyataan' lebih dekat ke makna 'faktual', sedangkan pilihan lain tidak berkaitan dengan kepercayaan terhadap sumber informasi.",
+   "d": "Mudah",
+   "id": "H272",
+   "j": 4,
+   "jenis": "PG",
+   "k": "TWK",
+   "lvl": "C3",
+   "m": "Bahasa Indonesia",
+   "o": [
+    "mudah dipahami oleh pendengar",
+    "sesuai dengan kenyataan",
+    "diatur oleh peraturan",
+    "disampaikan dengan tegas",
+    "dapat dipercaya"
+   ],
+   "po": [
+    "Salah — itu lebih dekat ke makna 'mudah dimengerti', bukan 'kredibel'.",
+    "Salah — itu lebih dekat ke makna 'faktual'.",
+    "Salah — tidak ada kaitan dengan peraturan.",
+    "Salah — cara penyampaian tidak menentukan kredibilitas.",
+    "Benar — 'kredibel' berarti dapat dipercaya."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Perhatikan kalimat berikut. 'Keterangan saksi itu dianggap kredibel karena didukung bukti rekaman.' Kata 'kredibel' pada kalimat tersebut bermakna …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H192 — dari penulisan kata yang benar menjadi makna kata serapan dalam kalimat.",
+   "waktu": 45,
+   "status": "lolos"
+  },
+  {
+   "b": "Integritas berarti berpegang pada aturan meski ada tekanan dari rekan dan risiko proses tertunda. Menolak meloloskan penyedia yang tidak memenuhi syarat dan menyampaikan keberatan secara tertulis melalui jalur resmi melindungi keadilan seleksi sekaligus menciptakan jejak yang dapat dipertanggungjawabkan. Menegur tanpa mencatat, melengkapi diam-diam, atau menunggu sampai selesai semuanya membiarkan pelanggaran tetap berjalan.",
+   "d": "Sulit",
+   "id": "H273",
+   "j": 1,
+   "jenis": "PG",
+   "k": "TWK",
+   "lvl": "C5",
+   "m": "Integritas",
+   "o": [
+    "Meloloskan penyedia itu demi menjaga hubungan baik dengan rekan satu tim.",
+    "Menolak meloloskan penyedia yang dokumennya tidak lengkap dan menyampaikan keberatan secara tertulis melalui jalur resmi.",
+    "Menegur rekan itu secara pribadi tanpa mencatat apa pun dan tetap meloloskan penyedia itu.",
+    "Meminta penyedia itu melengkapi dokumennya secara diam-diam setelah dinyatakan lolos.",
+    "Menunggu sampai seleksi selesai, lalu melaporkan kecurangan itu setelah pemenang diumumkan."
+   ],
+   "po": [
+    "Salah — menjaga hubungan tidak boleh mengorbankan aturan seleksi.",
+    "Benar — menolak pelanggaran dan melaporkannya secara tertulis melalui jalur resmi.",
+    "Salah — teguran tanpa catatan tidak melindungi proses seleksi.",
+    "Salah — melengkapi dokumen setelah dinyatakan lolos adalah pemalsuan proses.",
+    "Salah — menunggu sampai pemenang diumumkan membuat pelanggaran sulit diperbaiki."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Anda menjadi anggota tim seleksi penyedia jasa kebersihan di instansi Anda. Seorang rekan satu tim meminta Anda meloloskan salah satu penyedia yang dokumen penawarannya tidak lengkap, dengan alasan penyedia itu sudah biasa bekerja sama dengan instansi. Anda tahu bila dilaporkan, proses seleksi akan tertunda dan rekan Anda akan tersinggung. Sikap yang paling mencerminkan integritas adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H213 — dari membocorkan kriteria penilaian menjadi tekanan meloloskan penyedia berdokumen tidak lengkap.",
+   "waktu": 75,
+   "status": "lolos"
+  },
+  {
+   "b": "Dalam Negara Kesatuan Republik Indonesia, hubungan luar negeri, pertahanan dan keamanan, moneter, serta yustisi merupakan kewenangan mutlak pemerintah pusat. Otonomi daerah tidak mencakup penandatanganan perjanjian dengan negara lain; daerah dapat menjalin kerja sama luar negeri hanya dalam batas dan prosedur yang diatur pemerintah pusat.",
+   "d": "Sedang",
+   "id": "H274",
+   "j": 0,
+   "jenis": "PG",
+   "k": "TWK",
+   "lvl": "C4",
+   "m": "NKRI & Bhinneka Tunggal Ika",
+   "o": [
+    "urusan hubungan luar negeri merupakan kewenangan pemerintah pusat dalam negara kesatuan",
+    "daerah tidak boleh menerima investasi dari luar negeri",
+    "kerja sama perdagangan hanya boleh dilakukan oleh perusahaan swasta",
+    "pemerintah pusat tidak berwenang mengatur perdagangan antardaerah",
+    "daerah otonom tidak memiliki anggaran untuk kerja sama internasional"
+   ],
+   "po": [
+    "Benar — hubungan luar negeri adalah kewenangan pusat dalam negara kesatuan.",
+    "Salah — daerah boleh menerima investasi, tetapi tidak membuat perjanjian internasional.",
+    "Salah — perusahaan swasta bukan pihak yang menandatangani perjanjian antarnegara.",
+    "Salah — pemerintah pusat justru berwenang mengatur perdagangan, termasuk antardaerah.",
+    "Salah — alasan anggaran tidak berkaitan dengan kewenangan membuat perjanjian."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Seorang kepala daerah mengusulkan agar pemerintah daerahnya dapat menandatangani kerja sama perdagangan langsung dengan pemerintah negara lain tanpa melalui pemerintah pusat, dengan alasan mempercepat investasi. Usulan itu bertentangan dengan prinsip Negara Kesatuan Republik Indonesia karena …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H003 — dari bunyi Pasal 1 ayat (1) menjadi penerapan kewenangan pusat dalam negara kesatuan.",
+   "waktu": 60,
+   "status": "lolos"
+  },
+  {
+   "b": "BPUPKI (Dokuritsu Junbi Cosakai) dibentuk pada 29 April 1945 untuk menyelidiki usaha-usaha persiapan kemerdekaan Indonesia. Sidang pertamanya merumuskan dasar negara; pengesahan UUD 1945 dilakukan oleh PPKI pada 18 Agustus 1945, bukan oleh BPUPKI.",
+   "d": "Sedang",
+   "id": "H275",
+   "j": 2,
+   "jenis": "PG",
+   "k": "TWK",
+   "lvl": "C3",
+   "m": "Sejarah Perjuangan",
+   "o": [
+    "menyusun tentara sukarela untuk membantu Jepang dalam perang",
+    "mengawasi pergerakan para pemuda di Pulau Jawa",
+    "menyelidiki usaha-usaha persiapan kemerdekaan Indonesia",
+    "menentukan pembagian wilayah pendudukan Jepang di Asia Tenggara",
+    "mengesahkan Undang-Undang Dasar 1945 sebagai konstitusi negara"
+   ],
+   "po": [
+    "Salah — pembentukan tentara sukarela bukan tugas BPUPKI.",
+    "Salah — pengawasan pergerakan pemuda bukan tugas BPUPKI.",
+    "Benar — itulah tugas resmi BPUPKI.",
+    "Salah — pembagian wilayah pendudukan bukan urusan BPUPKI.",
+    "Salah — pengesahan UUD 1945 dilakukan oleh PPKI."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan (BPUPKI) dibentuk oleh pemerintah pendudukan Jepang pada tahun 1945 dengan tujuan …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H005 — dari ikrar Sumpah Pemuda menjadi lembaga persiapan kemerdekaan.",
+   "waktu": 60,
+   "status": "lolos"
+  },
+  {
+   "b": "Sila keempat Pancasila menegaskan musyawarah untuk mufakat: suara terbanyak bukan penetapan otomatis, melainkan bahan pertimbangan dalam musyawarah yang menimbang alasan dan kepentingan bersama. Membagi rata mengabaikan prioritas, menyerahkan keputusan kepada ketua RT mengabaikan musyawarah, dan mengulang pemungutan suara tetap bertumpu pada voting, bukan mufakat.",
+   "d": "Sulit",
+   "id": "H276",
+   "integrasi": "TWK × TIU (musyawarah dan membaca data suara)",
+   "j": 1,
+   "jenis": "PG",
+   "k": "TWK",
+   "lvl": "C5",
+   "m": "Pilar Negara",
+   "o": [
+    "Melaksanakan pengecatan gapura karena memperoleh suara terbanyak.",
+    "Membuka kembali musyawarah untuk mencari mufakat dengan mempertimbangkan alasan di balik setiap pilihan, dan menjadikan suara sebagai bahan pertimbangan.",
+    "Membagi kas RT secara rata ke ketiga pilihan tanpa musyawarah lanjutan.",
+    "Menyerahkan keputusan sepenuhnya kepada ketua RT tanpa melibatkan warga.",
+    "Mengulang pemungutan suara sampai satu pilihan memperoleh lebih dari setengah suara."
+   ],
+   "po": [
+    "Salah — suara terbanyak bukan penetapan otomatis menurut sila keempat.",
+    "Benar — musyawarah mencari mufakat dengan suara sebagai bahan pertimbangan.",
+    "Salah — pembagian rata mengabaikan prioritas kebutuhan warga.",
+    "Salah — menyerahkan keputusan sepihak bertentangan dengan musyawarah.",
+    "Salah — mengulang voting tetap mengandalkan suara, bukan mufakat."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Rapat warga RT 07 membahas rencana penggunaan kas RT. Tiga pilihan muncul: mengecat ulang gapura memperoleh 17 suara, memperbaiki saluran air memperoleh 12 suara, dan menambah lampu gang memperoleh 9 suara. Seorang warga berpendapat pilihan dengan suara terbanyak harus langsung dilaksanakan tanpa dibahas lagi. Menurut sila keempat Pancasila, sikap yang paling tepat adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H251 — dari musyawarah dana desa menjadi keputusan mufakat atas tiga pilihan kas RT.",
+   "waktu": 75,
+   "status": "lolos"
+  },
+  {
+   "b": "Setiap suku diperoleh dengan menggandakan suku sebelumnya lalu mengurangi 1: 5 dikali 2 dikurangi 1 sama dengan 9; 9 dikali 2 dikurangi 1 sama dengan 17; 17 dikali 2 dikurangi 1 sama dengan 33; dan 33 dikali 2 dikurangi 1 sama dengan 65. Suku berikutnya adalah 65 dikali 2 dikurangi 1, yaitu 129.",
+   "d": "Sedang",
+   "id": "H277",
+   "j": 3,
+   "jenis": "Numerik",
+   "jenisSalah": {
+    "0": "hitung",
+    "1": "konsep",
+    "2": "rumus",
+    "4": "rumus"
+   },
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Deret & Pola Bilangan",
+   "o": [
+    "97",
+    "113",
+    "125",
+    "129",
+    "131"
+   ],
+   "po": [
+    "Salah — 97 diperoleh bila penambahan 32 dianggap tetap.",
+    "Salah — tidak mengikuti pola kali-dua-kurang-satu.",
+    "Salah — 125 diperoleh bila suku sebelumnya hanya digandakan lalu dikurangi 5.",
+    "Benar — pola kali-dua-kurang-satu menghasilkan 129.",
+    "Salah — 131 diperoleh bila operasi akhirnya ditambah 1, bukan dikurangi 1."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Jumlah pengunjung pameran pendidikan di sebuah kota pada lima hari pertama membentuk pola: 5, 9, 17, 33, 65. Jika pola itu berlanjut, jumlah pengunjung pada hari keenam adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H007 — dari deret selisih berjenjang menjadi pola kali-dua-kurang-satu dalam konteks pengunjung pameran.",
+   "waktu": 60,
+   "status": "lolos"
+  },
+  {
+   "b": "Dari diagram: kantor A 120 pendaftar, B 180 pendaftar, C 90 pendaftar, dan D 210 pendaftar. Kantor C menambah setengah dari A, yaitu 60 pendaftar, sehingga C menjadi 150 pendaftar. Jumlah seluruhnya adalah 120 ditambah 180 ditambah 150 ditambah 210, yaitu 660. Rata-rata keempat kantor adalah 660 dibagi 4, yaitu 165.",
+   "d": "Sulit",
+   "g": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Diagram batang jumlah pendaftar seleksi pegawai di empat kantor wilayah: A 120, B 180, C 90, D 210\"><line x1=\"20\" y1=\"150\" x2=\"300\" y2=\"150\" stroke=\"currentColor\" stroke-width=\"2\"/><rect x=\"40\" y=\"90\" width=\"40\" height=\"60\" fill=\"currentColor\"/><rect x=\"110\" y=\"60\" width=\"40\" height=\"90\" fill=\"currentColor\"/><rect x=\"180\" y=\"105\" width=\"40\" height=\"45\" fill=\"currentColor\"/><rect x=\"250\" y=\"45\" width=\"40\" height=\"105\" fill=\"currentColor\"/><text x=\"60\" y=\"82\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">120</text><text x=\"130\" y=\"52\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">180</text><text x=\"200\" y=\"97\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">90</text><text x=\"270\" y=\"37\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">210</text><text x=\"60\" y=\"168\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">A</text><text x=\"130\" y=\"168\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">B</text><text x=\"200\" y=\"168\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">C</text><text x=\"270\" y=\"168\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">D</text></svg>",
+   "gb": "<svg viewBox=\"0 0 320 180\" role=\"img\" aria-label=\"Diagram batang setelah penambahan: A 120, B 180, C 150, D 210, dengan garis rata-rata 165\"><line x1=\"20\" y1=\"150\" x2=\"300\" y2=\"150\" stroke=\"currentColor\" stroke-width=\"2\"/><rect x=\"40\" y=\"90\" width=\"40\" height=\"60\" fill=\"currentColor\"/><rect x=\"110\" y=\"60\" width=\"40\" height=\"90\" fill=\"currentColor\"/><rect x=\"180\" y=\"75\" width=\"40\" height=\"75\" fill=\"currentColor\"/><rect x=\"250\" y=\"45\" width=\"40\" height=\"105\" fill=\"currentColor\"/><line x1=\"20\" y1=\"67.5\" x2=\"300\" y2=\"67.5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-dasharray=\"5,4\"/><text x=\"60\" y=\"82\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">120</text><text x=\"130\" y=\"52\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">180</text><text x=\"200\" y=\"67\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">150</text><text x=\"270\" y=\"37\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">210</text><text x=\"296\" y=\"60\" text-anchor=\"end\" font-size=\"12\" fill=\"currentColor\">165</text><text x=\"60\" y=\"168\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">A</text><text x=\"130\" y=\"168\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">B</text><text x=\"200\" y=\"168\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">C</text><text x=\"270\" y=\"168\" text-anchor=\"middle\" font-size=\"12\" fill=\"currentColor\">D</text></svg>",
+   "id": "H278",
+   "integrasi": "TIU × TWK (pendaftar seleksi pegawai negeri)",
+   "j": 2,
+   "jenis": "Numerik",
+   "jenisSalah": {
+    "0": "baca data",
+    "1": "hitung",
+    "3": "hitung",
+    "4": "konsep"
+   },
+   "k": "TIU",
+   "lvl": "C5",
+   "m": "Aritmatika Dasar",
+   "o": [
+    "150",
+    "160",
+    "165",
+    "170",
+    "180"
+   ],
+   "po": [
+    "Salah — 150 adalah jumlah pendaftar kantor C setelah penambahan, bukan rata-rata.",
+    "Salah — tidak sesuai hitung ulang jumlah seluruh pendaftar.",
+    "Benar — total 660 pendaftar dibagi 4 kantor sama dengan 165.",
+    "Salah — tidak sesuai hitung ulang jumlah seluruh pendaftar.",
+    "Salah — 180 adalah jumlah pendaftar kantor B, bukan rata-rata."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Diagram batang berikut menunjukkan jumlah pendaftar seleksi pegawai di empat kantor wilayah. Kantor C kemudian menambah pendaftar sebanyak setengah dari jumlah pendaftar kantor A. Setelah penambahan itu, rata-rata jumlah pendaftar keempat kantor adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H009 — dari persentase kenaikan diagram batang menjadi rata-rata setelah perubahan data.",
+   "waktu": 90,
+   "status": "lolos"
+  },
+  {
+   "b": "Tangga, dinding, dan tanah membentuk segitiga siku-siku dengan sisi miring 5 meter dan alas 3 meter. Menurut teorema Pythagoras, tinggi yang dicapai sama dengan akar kuadrat dari 25 dikurangi 9, yaitu akar kuadrat dari 16, sama dengan 4 meter.",
+   "d": "Sedang",
+   "g": "<svg viewBox=\"0 0 200 160\" role=\"img\" aria-label=\"Tangga sepanjang 5 meter bersandar pada dinding, kaki tangga berjarak 3 meter dari dinding\"><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"140\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"40\" y1=\"140\" x2=\"170\" y2=\"140\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"40\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"currentColor\" stroke-width=\"3\"/><path d=\"M40,128 L52,128 L52,140\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><text x=\"82\" y=\"88\" font-size=\"12\" fill=\"currentColor\">5 m</text><text x=\"62\" y=\"156\" font-size=\"12\" fill=\"currentColor\">3 m</text><text x=\"22\" y=\"105\" font-size=\"12\" fill=\"currentColor\">?</text></svg>",
+   "gb": "<svg viewBox=\"0 0 200 160\" role=\"img\" aria-label=\"Segitiga siku-siku tangga dengan tinggi 4 meter\"><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"140\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"40\" y1=\"140\" x2=\"170\" y2=\"140\" stroke=\"currentColor\" stroke-width=\"2\"/><line x1=\"40\" y1=\"60\" x2=\"100\" y2=\"140\" stroke=\"currentColor\" stroke-width=\"3\"/><line x1=\"40\" y1=\"60\" x2=\"40\" y2=\"140\" stroke=\"currentColor\" stroke-width=\"4\"/><path d=\"M40,128 L52,128 L52,140\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><text x=\"82\" y=\"88\" font-size=\"12\" fill=\"currentColor\">5 m</text><text x=\"62\" y=\"156\" font-size=\"12\" fill=\"currentColor\">3 m</text><text x=\"8\" y=\"105\" font-size=\"12\" fill=\"currentColor\">4 m</text></svg>",
+   "id": "H279",
+   "j": 1,
+   "jenis": "Numerik",
+   "jenisSalah": {
+    "0": "konsep",
+    "2": "rumus",
+    "3": "hitung",
+    "4": "hitung"
+   },
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Geometri",
+   "o": [
+    "3 meter",
+    "4 meter",
+    "5 meter",
+    "6 meter",
+    "8 meter"
+   ],
+   "po": [
+    "Salah — 3 meter adalah jarak kaki tangga dari dinding, bukan tingginya.",
+    "Benar — teorema Pythagoras menghasilkan tinggi 4 meter.",
+    "Salah — 5 meter adalah panjang tangga itu sendiri.",
+    "Salah — tidak diperoleh dari perhitungan segitiga siku-siku yang benar.",
+    "Salah — 8 meter adalah hasil penjumlahan 5 dan 3, bukan perhitungan Pythagoras."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Sebuah tangga sepanjang 5 meter disandarkan pada sebuah dinding. Kaki tangga berjarak 3 meter dari dinding. Ketinggian ujung tangga pada dinding adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H013 — dari luas segitiga siku-siku menjadi penerapan teorema Pythagoras pada tangga.",
+   "waktu": 75,
+   "status": "lolos"
+  },
+  {
+   "b": "Hubungannya adalah profesi dengan kegiatan utamanya: guru mengajar, dokter mengobati. Menghitung, membangun, mengadili, dan menyanyi bukan kegiatan utama seorang dokter.",
+   "d": "Mudah",
+   "id": "H280",
+   "j": 1,
+   "jenis": "PG",
+   "k": "TIU",
+   "lvl": "C3",
+   "m": "Verbal: Analogi",
+   "o": [
+    "Menghitung",
+    "Mengobati",
+    "Membangun",
+    "Mengadili",
+    "Menyanyi"
+   ],
+   "po": [
+    "Salah — menghitung bukan kegiatan utama dokter.",
+    "Benar — mengobati adalah kegiatan utama dokter.",
+    "Salah — membangun adalah kegiatan utama tukang, bukan dokter.",
+    "Salah — mengadili adalah kegiatan utama hakim, bukan dokter.",
+    "Salah — menyanyi bukan kegiatan utama dokter."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "GURU : MENGAJAR = DOKTER : …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H011 — dari pelaku dan kendaraan menjadi profesi dan kegiatan utama.",
+   "waktu": 50,
+   "status": "lolos"
+  },
+  {
+   "b": "'Dinamis' berarti bergerak dan berubah-ubah; dalam kalimat itu, pelayanan yang dinamis membuat antrean tidak menumpuk. Antonimnya 'statis' yang berarti tetap dan tidak berubah. 'Aktif' dan 'bergerak' justru searah maknanya dengan 'dinamis', sedangkan 'cepat' dan 'lentur' tidak berlawanan dengannya.",
+   "d": "Mudah",
+   "id": "H281",
+   "j": 3,
+   "jenis": "PG",
+   "k": "TIU",
+   "lvl": "C3",
+   "m": "Verbal: Sinonim & Antonim",
+   "o": [
+    "aktif",
+    "cepat",
+    "bergerak",
+    "statis",
+    "lentur"
+   ],
+   "po": [
+    "Salah — 'aktif' searah maknanya dengan 'dinamis'.",
+    "Salah — 'cepat' tidak berlawanan dengan 'dinamis'.",
+    "Salah — 'bergerak' searah maknanya dengan 'dinamis'.",
+    "Benar — 'statis' berarti tetap dan tidak berubah.",
+    "Salah — 'lentur' tidak berlawanan dengan 'dinamis'."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Perhatikan kalimat berikut. 'Pelayanan di kantor itu berjalan sangat dinamis sehingga antrean tidak pernah menumpuk.' Kata yang berlawanan makna dengan 'dinamis' pada kalimat tersebut adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Orisinal — Verbal: Sinonim & Antonim",
+   "waktu": 50,
+   "status": "lolos"
+  },
+  {
+   "b": "Premis pertama memastikan seluruh siswa yang lulus ujian praktik berada di dalam kelompok peserta magang, sehingga sebagian peserta magang (yaitu mereka yang lulus ujian praktik) pasti adalah siswa yang lulus ujian praktik. Hubungan siswa kelas dua belas dengan kelulusan ujian praktik tidak dapat dipastikan karena kata 'sebagian' pada premis kedua tidak menunjuk kelompok yang sama.",
+   "d": "Sedang",
+   "id": "H282",
+   "j": 2,
+   "jenis": "Logika",
+   "jenisSalah": {
+    "0": "logika",
+    "1": "logika",
+    "3": "logika",
+    "4": "logika"
+   },
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Logika & Silogisme",
+   "o": [
+    "Sebagian siswa kelas dua belas adalah siswa yang lulus ujian praktik",
+    "Semua siswa kelas dua belas mengikuti magang di perusahaan mitra",
+    "Sebagian peserta magang di perusahaan mitra adalah siswa yang lulus ujian praktik",
+    "Semua peserta magang di perusahaan mitra adalah siswa kelas dua belas",
+    "Tidak ada siswa kelas dua belas yang lulus ujian praktik"
+   ],
+   "po": [
+    "Salah — siswa kelas dua belas yang magang belum tentu yang lulus ujian praktik.",
+    "Salah — premis hanya menyebut sebagian peserta magang adalah siswa kelas dua belas.",
+    "Benar — konsekuensi langsung dari premis pertama.",
+    "Salah — peserta magang bisa berasal dari kelas lain.",
+    "Salah — premis tidak menutup kemungkinan adanya siswa kelas dua belas yang lulus ujian praktik."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Semua siswa yang lulus ujian praktik mengikuti magang di perusahaan mitra. Sebagian peserta magang di perusahaan mitra adalah siswa kelas dua belas. Kesimpulan yang PASTI benar adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H010 — dari atlet dan pelatihan menjadi siswa dan magang dengan pola semua–sebagian yang sama.",
+   "waktu": 70,
+   "status": "lolos"
+  },
+  {
+   "b": "Jumlah lingkaran kecil di dalam persegi bertambah satu setiap langkah: satu, dua, lalu tiga. Gambar berikutnya memuat empat lingkaran kecil, melanjutkan pola 1, 2, 3, 4.",
+   "d": "Sedang",
+   "g": "<svg viewBox=\"0 0 260 80\" role=\"img\" aria-label=\"Deret gambar: persegi berisi satu, dua, lalu tiga lingkaran kecil\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"40\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><rect x=\"100\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"118\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"142\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><rect x=\"190\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"205\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"220\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"235\" cy=\"40\" r=\"5\" fill=\"currentColor\"/></svg>",
+   "gb": "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Persegi berisi empat lingkaran kecil sebagai kelanjutan pola\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"22\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"34\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"46\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"58\" cy=\"40\" r=\"5\" fill=\"currentColor\"/></svg>",
+   "id": "H283",
+   "j": 0,
+   "jenis": "Figural",
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Figural",
+   "o": [
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Persegi berisi empat lingkaran kecil\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"22\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"34\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"46\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"58\" cy=\"40\" r=\"5\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Persegi berisi lima lingkaran kecil\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"18\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"29\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"40\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"51\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"62\" cy=\"40\" r=\"5\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Persegi berisi tiga lingkaran kecil\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"25\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"40\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"55\" cy=\"40\" r=\"5\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Persegi berisi dua lingkaran kecil\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"30\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"50\" cy=\"40\" r=\"5\" fill=\"currentColor\"/></svg>",
+    "<svg viewBox=\"0 0 80 80\" role=\"img\" aria-label=\"Persegi berisi enam lingkaran kecil\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"60\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"15\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"25\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"35\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"45\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"55\" cy=\"40\" r=\"5\" fill=\"currentColor\"/><circle cx=\"65\" cy=\"40\" r=\"5\" fill=\"currentColor\"/></svg>"
+   ],
+   "po": [
+    "Benar — empat lingkaran melanjutkan pola 1, 2, 3, 4.",
+    "Salah — lima lingkaran melompati satu langkah.",
+    "Salah — tiga lingkaran sudah muncul pada langkah ketiga.",
+    "Salah — dua lingkaran sudah muncul pada langkah kedua.",
+    "Salah — enam lingkaran melompati dua langkah."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Perhatikan deret gambar berikut. Jumlah lingkaran kecil di dalam persegi bertambah satu pada setiap langkah: satu, dua, lalu tiga. Gambar berikutnya dalam deret adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H033 — dari banyak sisi bangun menjadi banyak lingkaran di dalam persegi.",
+   "waktu": 90,
+   "status": "lolos"
+  },
+  {
+   "b": "Sikap sosial budaya yang baik adalah menghormati perbedaan dan aktif mempelajari adat setempat, bukan memaksakan kebiasaan sendiri atau menarik diri. Komunikasi yang terbuka mempercepat penyesuaian dan membangun kepercayaan di lingkungan kerja yang baru.",
+   "d": "Mudah",
+   "id": "H284",
+   "j": 0,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C3",
+   "m": "Sosial Budaya",
+   "o": [
+    "Mempelajari dan menghormati adat setempat sambil tetap menjalin komunikasi yang terbuka dengan rekan kerja.",
+    "Meminta rekan kerja menyesuaikan diri dengan kebiasaan daerah asal Anda.",
+    "Membatasi interaksi hanya pada urusan pekerjaan agar tidak terjadi kesalahpahaman.",
+    "Menilai kebiasaan setempat dari sudut pandang daerah asal Anda.",
+    "Menghindari kegiatan bersama warga setempat sampai Anda benar-benar terbiasa."
+   ],
+   "po": [
+    "Paling tepat — mempelajari adat setempat dengan komunikasi terbuka.",
+    "Kurang tepat — memaksakan kebiasaan sendiri kepada orang lain.",
+    "Cukup — aman, tetapi menghambat penyesuaian dan kerja sama.",
+    "Tidak tepat — menilai adat lain dari sudut pandang sendiri.",
+    "Baik — berhati-hati, tetapi menarik diri memperlambat penyesuaian."
+   ],
+   "s": [
+    5,
+    2,
+    3,
+    1,
+    4
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Anda dipindahkan ke unit kerja di daerah yang adat istiadatnya berbeda dengan daerah asal Anda. Rekan kerja baru Anda memiliki kebiasaan dan cara berkomunikasi yang belum Anda kenal. Sikap yang paling tepat adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H252 — dari toleransi beragama bertetangga menjadi penyesuaian diri di daerah dengan adat berbeda.",
+   "waktu": 60,
+   "status": "lolos"
+  },
+  {
+   "b": "Konflik pemanfaatan fasilitas bersama paling baik diselesaikan dengan memfasilitasi dialog dan menyusun jadwal bersama yang adil, sehingga kedua kelompok merasa didengar dan kesepakatan dapat bertahan. Keputusan sepihak atau penutupan aula justru memperpanjang perselisihan, sedangkan mengusir kedua kelompok keluar dari kelurahan bukan solusi.",
+   "d": "Sedang",
+   "id": "H285",
+   "j": 2,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C4",
+   "m": "Sosial Budaya",
+   "o": [
+    "Memberikan aula sepenuhnya kepada kelompok lansia karena mereka lebih dulu menggunakannya.",
+    "Menetapkan jadwal sepihak tanpa mendengar keberatan kedua kelompok.",
+    "Memfasilitasi pertemuan kedua kelompok untuk menyusun jadwal bersama yang adil dan disepakati kedua belah pihak.",
+    "Menutup aula sementara sampai kedua kelompok berhenti berselisih.",
+    "Meminta kedua kelompok mencari tempat lain di luar kelurahan."
+   ],
+   "po": [
+    "Kurang tepat — mendahulukan satu kelompok tanpa musyawarah.",
+    "Tidak tepat — keputusan sepihak memperpanjang perselisihan.",
+    "Paling tepat — memfasilitasi dialog dan jadwal bersama yang adil.",
+    "Cukup — meredakan sementara, tetapi tidak menyelesaikan masalah.",
+    "Baik — memberi jalan keluar, tetapi bukan penyelesaian yang adil."
+   ],
+   "s": [
+    2,
+    1,
+    5,
+    3,
+    4
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Di lingkungan tempat Anda bertugas, kelompok pemuda dan kelompok lansia berselisih soal jadwal penggunaan aula kelurahan. Pemuda ingin memakai aula setiap malam untuk latihan, sedangkan lansia membutuhkannya untuk kegiatan senam pagi dan pengajian. Sebagai aparat kelurahan, tindakan Anda yang paling tepat adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H176 — dari perselisihan warga pendatang dan warga asli soal pemanfaatan lahan menjadi mediasi konflik jadwal fasilitas bersama.",
+   "waktu": 75,
+   "status": "lolos"
+  },
+  {
+   "b": "Pemberian kepada penyelenggara negara yang berkaitan dengan jabatan adalah gratifikasi yang wajib ditolak dan dilaporkan, tanpa memandang waktu pemberiannya. Menerima dengan alasan tender sudah selesai tetap melanggar aturan, sedangkan mengembalikan diam-diam menghilangkan jejak yang seharusnya dicatat dan dilaporkan.",
+   "d": "Sedang",
+   "id": "H286",
+   "j": 3,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C4",
+   "m": "Anti Korupsi",
+   "o": [
+    "Menerima parsel itu karena tender sudah selesai dan tidak ada yang dirugikan.",
+    "Menerima parsel itu lalu membagikannya kepada seluruh anggota panitia.",
+    "Menyimpan parsel itu dan melaporkannya hanya bila ada yang menanyakan.",
+    "Menolak parsel itu dan melaporkannya kepada atasan atau unit pengendalian gratifikasi sesuai aturan.",
+    "Mengembalikan parsel itu secara diam-diam tanpa mencatatnya."
+   ],
+   "po": [
+    "Tidak tepat — waktu pemberian tidak menghapus sifat gratifikasi.",
+    "Kurang tepat — membagikan tidak mengubah status pemberian itu.",
+    "Baik — berniat melapor, tetapi menunda tanpa kepastian.",
+    "Paling tepat — menolak dan melaporkan gratifikasi sesuai aturan.",
+    "Cukup — parsel dikembalikan, tetapi tidak ada catatan resmi."
+   ],
+   "s": [
+    1,
+    2,
+    4,
+    5,
+    3
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Setelah sebuah tender selesai, penyedia yang menang mengirimkan sebuah parsel berisi uang tunai kepada Anda sebagai 'ucapan terima kasih'. Penyedia itu beralasan parsel tersebut tidak memengaruhi hasil tender karena pemenang sudah ditetapkan. Sikap Anda yang paling tepat adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H152 — dari parsel buah sebelum pengumuman menjadi parsel uang tunai setelah tender selesai.",
+   "waktu": 75,
+   "status": "lolos"
+  },
+  {
+   "b": "Jejaring kerja yang baik dibangun dengan komunikasi langsung yang sopan dan tawaran kerja sama, bukan dengan menyalahkan atau mengulang cara yang sudah terbukti tidak berhasil. Mendatangi langsung membuka peluang menemukan kendala sebenarnya di unit tersebut.",
+   "d": "Sedang",
+   "id": "H287",
+   "j": 4,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C3",
+   "m": "Jejaring Kerja",
+   "o": [
+    "Melaporkan unit tersebut kepada pimpinan dengan nada menyalahkan.",
+    "Menyusun laporan tanpa data itu dan membiarkan laporannya tidak lengkap.",
+    "Mengirim surat yang sama berulang kali tanpa mengubah cara komunikasi.",
+    "Meminta data yang sama dari unit lain yang tidak berwenang.",
+    "Mendatangi unit tersebut secara langsung, menyampaikan kebutuhan dengan sopan, dan menawarkan bantuan agar datanya dapat disiapkan bersama."
+   ],
+   "po": [
+    "Kurang tepat — menyalahkan merusak hubungan antarunit.",
+    "Tidak tepat — laporan tidak lengkap merugikan pengguna laporan.",
+    "Cukup — berusaha, tetapi mengulang cara yang sudah gagal.",
+    "Baik — mencari alternatif, tetapi unit itu tidak berwenang.",
+    "Paling tepat — komunikasi langsung yang sopan disertai tawaran kerja sama."
+   ],
+   "s": [
+    2,
+    1,
+    3,
+    4,
+    5
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Untuk menyelesaikan laporan tepat waktu, Anda membutuhkan data dari unit lain. Unit tersebut sudah dua kali tidak membalas surat permohonan data Anda, padahal tenggat laporan semakin dekat. Langkah Anda yang paling tepat adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Orisinal — Jejaring Kerja",
+   "waktu": 60,
+   "status": "lolos"
+  },
+  {
+   "b": "Surel dengan alamat yang dimiripkan adalah ciri khas penipuan daring. Lampiran tidak boleh dibuka dan kata sandi tidak boleh diisi; langkah yang benar adalah melaporkannya ke bagian keamanan TI agar dapat ditangani dan diperingatkan ke seluruh pegawai. Membalas surel itu justru mengonfirmasi alamat Anda aktif kepada pelaku.",
+   "d": "Sulit",
+   "id": "H288",
+   "j": 1,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C5",
+   "m": "Teknologi Informasi & Komunikasi",
+   "o": [
+    "Mengunduh lampiran itu untuk memeriksa apakah isinya benar-benar berbahaya.",
+    "Tidak membuka lampiran, tidak mengisi kata sandi, dan melaporkan surel itu ke bagian keamanan TI.",
+    "Membalas surel itu untuk menanyakan kebenaran permintaannya.",
+    "Mengisi kata sandi karena alamatnya hampir sama dengan alamat atasan.",
+    "Meneruskan surel itu kepada rekan kerja agar mereka waspada, tanpa melaporkannya."
+   ],
+   "po": [
+    "Kurang tepat — lampiran berbahaya dapat aktif begitu diunduh.",
+    "Paling tepat — tidak membuka lampiran dan melapor ke keamanan TI.",
+    "Cukup — bertanya, tetapi membalas mengonfirmasi alamat Anda aktif.",
+    "Tidak tepat — kemiripan alamat justru tanda penipuan.",
+    "Baik — memperingatkan rekan, tetapi laporan resmi tetap diperlukan."
+   ],
+   "s": [
+    2,
+    5,
+    3,
+    1,
+    4
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Anda menerima surel dari alamat yang menyerupai alamat resmi atasan Anda. Surel itu meminta Anda segera mengunduh lampiran 'daftar-penerima-bonus' dan mengisi kata sandi akun kantor, dengan alasan pembaruan data kepegawaian. Setelah diperiksa, alamat pengirim ternyata memakai satu huruf yang berbeda dari alamat resmi. Tindakan Anda yang paling tepat adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Turunan H246 — dari tautan verifikasi kata sandi menjadi lampiran dan alamat pengirim yang dimiripkan.",
+   "waktu": 90,
+   "status": "lolos"
+  },
+  {
+   "b": "Pelayanan publik yang baik menjelaskan kekurangan berkas dengan tenang, memberi daftar periksa tertulis, dan membantu warga melengkapinya. Memproses berkas yang tidak lengkap melanggar prosedur, sedangkan menolak dengan nada tinggi atau mengusir tanpa penjelasan merusak kepercayaan terhadap layanan.",
+   "d": "Sedang",
+   "id": "H289",
+   "j": 2,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C4",
+   "m": "Pelayanan Publik",
+   "o": [
+    "Memproses permohonan itu apa adanya demi menolong warga tersebut.",
+    "Menyuruh warga itu pulang tanpa menjelaskan berkas apa yang kurang.",
+    "Menjelaskan dengan tenang berkas yang kurang, memberikan daftar periksa tertulis, dan membantu warga itu melengkapi berkasnya.",
+    "Menolak dengan nada tinggi agar warga itu tidak mengulangi kesalahannya.",
+    "Menerima berkas yang tidak lengkap dan meminta warga itu kembali besok tanpa kepastian."
+   ],
+   "po": [
+    "Kurang tepat — menolong dengan melanggar prosedur.",
+    "Cukup — menolak, tetapi tanpa penjelasan yang membantu.",
+    "Paling tepat — menjelaskan kekurangan dan membantu melengkapi berkas.",
+    "Tidak tepat — nada tinggi merusak kepercayaan terhadap layanan.",
+    "Baik — menerima, tetapi tanpa kepastian penyelesaian."
+   ],
+   "s": [
+    2,
+    3,
+    5,
+    1,
+    4
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Seorang warga datang dari jauh untuk mengurus permohonan, tetapi berkas yang ia bawa tidak lengkap sehingga permohonannya tidak dapat diproses. Ia memohon agar tetap dilayani dengan alasan sudah menempuh perjalanan jauh. Sebagai petugas layanan, sikap Anda yang paling tepat adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Orisinal — Pelayanan Publik",
+   "waktu": 75,
+   "status": "lolos"
+  },
+  {
+   "b": "Profesionalisme berarti tidak hanya memperbaiki gejala, tetapi mencari akar masalah dan mengusulkan perbaikan sistem secara tertulis dengan data. Sikap ini menunjukkan tanggung jawab, inisiatif, dan orientasi pada mutu layanan, tanpa menyalahkan individu atau mengubah prosedur secara sepihak.",
+   "d": "Sulit",
+   "id": "H290",
+   "j": 4,
+   "jenis": "PG",
+   "k": "TKP",
+   "lvl": "C6",
+   "m": "Profesionalisme",
+   "o": [
+    "Terus memperbaiki setiap kesalahan yang muncul tanpa mencatat polanya.",
+    "Menunggu sampai ada keluhan dari pihak luar sebelum mengusulkan perubahan.",
+    "Menyalahkan petugas penginput karena tidak teliti dalam bekerja.",
+    "Mengubah prosedur sendiri tanpa memberi tahu atasan dan rekan kerja.",
+    "Menyusun analisis akar masalah beserta usulan perbaikan prosedur, lalu menyampaikannya kepada atasan dengan data tiga bulan terakhir."
+   ],
+   "po": [
+    "Kurang tepat — memperbaiki gejala tanpa mencegah terulangnya kesalahan.",
+    "Tidak tepat — menunggu keluhan berarti membiarkan mutu layanan menurun.",
+    "Cukup — menunjuk penyebab, tetapi tidak memperbaiki sistem.",
+    "Baik — berinisiatif, tetapi mengubah prosedur sepihak melanggar tata kelola.",
+    "Paling tepat — analisis akar masalah dengan data dan usulan perbaikan prosedur."
+   ],
+   "s": [
+    2,
+    1,
+    3,
+    4,
+    5
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Anda menemukan bahwa kesalahan penginputan data yang sama telah terjadi tiga bulan berturut-turut di unit Anda, dan setiap kali hanya diperbaiki per kasus tanpa dicari akar masalahnya. Atasan Anda menilai perbaikan per kasus sudah cukup karena tidak ada keluhan dari luar. Langkah yang paling menunjukkan profesionalisme adalah …",
+   "tgl": "2026-11-18",
+   "turunan": "Orisinal — Profesionalisme",
+   "waktu": 90,
    "status": "lolos"
   }
  ],
