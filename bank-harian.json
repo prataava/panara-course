@@ -1,6 +1,6 @@
 {
  "versi": 1,
- "diperbarui": "2026-11-20",
+ "diperbarui": "2026-11-21",
  "batch": [
   {
    "tanggal": "2026-11-08",
@@ -102,6 +102,13 @@
   },
   {
    "tanggal": "2026-11-20",
+   "dibuat": 20,
+   "lulus": 20,
+   "ditolak": 0,
+   "sumber": "Mesin Soal Otonom — riset konsep kisi SKD, soal original"
+  },
+  {
+   "tanggal": "2026-11-21",
    "dibuat": 20,
    "lulus": 20,
    "ditolak": 0,
@@ -10915,6 +10922,622 @@
    "t": "Sebagai anggota tim audit internal, kamu menemukan selisih sebesar Rp12.000.000 dari total dana desa Rp120.000.000 yang tidak dapat dijelaskan oleh bendahara desa. Kepala desa memintamu 'menyelesaikan secara kekeluargaan' tanpa laporan tertulis. Sikapmu yang paling tepat adalah …",
    "tgl": "2026-11-20",
    "turunan": "Orisinal — Anti Korupsi"
+  },
+  {
+   "b": "Kata “diharapkan” harus ditulis serangkai karena “di” di sini merupakan awalan pembentuk kata kerja pasif, bukan kata depan yang menunjukkan tempat. Penulisan “di harapkan” terpisah adalah kesalahan karena “diharapkan” bukan frasa penunjuk tempat. Kata lain dalam paragraf sudah baku: “merencanakan”, “memperlancar”, “antusias”, dan “menyambut”.",
+   "d": "Sedang",
+   "id": "H331",
+   "j": 1,
+   "k": "TWK",
+   "lvl": "C4",
+   "m": "Bahasa Indonesia",
+   "o": [
+    "merencanakan",
+    "di harapkan",
+    "memperlancar",
+    "antusias",
+    "menyambut"
+   ],
+   "po": [
+    "Kata ini sudah baku dan ditulis dengan benar.",
+    "Penulisan yang benar adalah “diharapkan” serangkai, bukan terpisah.",
+    "Kata ini sudah baku dari kata dasar lancar dengan imbuhan memper-.",
+    "Kata ini sudah baku dan sesuai kaidah.",
+    "Kata ini sudah baku dan ditulis dengan benar."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Perhatikan paragraf berikut: “Pemerintah daerah merencanakan pembangunan jembatan baru di wilayah perbatasan. Program ini di harapkan dapat memperlancar arus transportasi dan distribusi hasil pertanian. Masyarakat di sekitar lokasi pembangunan antusias menyambut rencana tersebut.” Kata yang penulisannya tidak baku dalam paragraf tersebut adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Bahasa Indonesia"
+  },
+  {
+   "b": "Bhinneka Tunggal Ika dan sila pertama serta ketiga Pancasila menuntut negara menjamin kebebasan beribadah setiap warga sekaligus menjaga persatuan. Jalan yang tepat adalah musyawarah yang melibatkan semua pihak dan keputusan berdasarkan aturan, bukan mengikuti tekanan mayoritas atau membiarkan persoalan tanpa penyelesaian.",
+   "d": "Sulit",
+   "id": "H332",
+   "j": 2,
+   "k": "TWK",
+   "lvl": "C5",
+   "m": "NKRI & Bhinneka Tunggal Ika",
+   "o": [
+    "Menolak permohonan itu demi menjaga perasaan mayoritas warga desa.",
+    "Menunda keputusan tanpa batas waktu agar persoalan mereda dengan sendirinya.",
+    "Memfasilitasi musyawarah seluruh warga, menjamin hak beribadah sesuai aturan, dan menjaga kerukunan.",
+    "Menyerahkan keputusan sepenuhnya kepada organisasi kemasyarakatan setempat.",
+    "Menyetujui permohonan tanpa musyawarah dan tanpa memperhatikan aturan yang berlaku."
+   ],
+   "po": [
+    "Menolak berarti mengabaikan hak beribadah warga yang dijamin konstitusi.",
+    "Menunda tanpa batas waktu bukan penyelesaian dan merugikan pemohon.",
+    "Musyawarah, jaminan hak beribadah, dan kepatuhan pada aturan adalah sikap yang tepat.",
+    "Menyerahkan keputusan kepada ormas berarti melepaskan tanggung jawab pemerintah desa.",
+    "Menyetujui tanpa musyawarah dan aturan dapat menimbulkan konflik baru."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Di sebuah desa yang warganya memeluk beragam agama, sekelompok warga mengajukan izin mendirikan rumah ibadah. Sebagian warga lain menolak dengan alasan keyakinan mayoritas berbeda. Sebagai kepala desa, sikap yang paling sesuai dengan semangat Bhinneka Tunggal Ika dan Pancasila adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — NKRI & Bhinneka Tunggal Ika"
+  },
+  {
+   "b": "Perjanjian Renville ditandatangani pada Januari 1948, disusul Agresi Militer Belanda II pada Desember 1948. Serangan Umum 1 Maret 1949 membuktikan kepada dunia bahwa Indonesia masih berjuang, dan Konferensi Meja Bundar pada akhir 1949 mengakhiri konflik dengan pengakuan kedaulatan. Jadi urutan yang benar adalah (2), (1), (3), (4).",
+   "d": "Sedang",
+   "id": "H333",
+   "j": 0,
+   "k": "TWK",
+   "lvl": "C4",
+   "m": "Sejarah Perjuangan",
+   "o": [
+    "(2), (1), (3), (4)",
+    "(1), (2), (3), (4)",
+    "(2), (3), (1), (4)",
+    "(1), (3), (2), (4)",
+    "(3), (1), (2), (4)"
+   ],
+   "po": [
+    "Urutan ini sesuai kronologi: Renville 1948, Agresi II Desember 1948, Serangan Umum Maret 1949, KMB akhir 1949.",
+    "Agresi Militer II terjadi setelah Perjanjian Renville, bukan sebelumnya.",
+    "Serangan Umum terjadi setelah Agresi Militer II, bukan sebelum Perjanjian Renville.",
+    "Perjanjian Renville mendahului Agresi Militer II dan Serangan Umum.",
+    "Serangan Umum 1 Maret 1949 terjadi setelah Agresi Militer II, bukan yang paling awal."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Perhatikan rangkaian peristiwa berikut: (1) Agresi Militer Belanda II, (2) Perjanjian Renville, (3) Serangan Umum 1 Maret 1949, (4) Konferensi Meja Bundar. Urutan kronologis peristiwa tersebut dari yang paling awal adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Sejarah Perjuangan"
+  },
+  {
+   "b": "Syarat keanggotaan berdasarkan suku bertentangan dengan sila ketiga, Persatuan Indonesia, dan sila kedua, Kemanusiaan yang adil dan beradab, karena membedakan warga atas dasar asal-usul. Sikap yang paling sesuai adalah mengajak musyawarah sesuai sila keempat agar kebijakan diperbaiki dan keanggotaan terbuka bagi semua warga desa.",
+   "d": "Sulit",
+   "id": "H334",
+   "j": 2,
+   "k": "TWK",
+   "lvl": "C5",
+   "m": "Pancasila",
+   "o": [
+    "Menerima kebijakan itu karena koperasi berhak menentukan anggotanya sendiri.",
+    "Menuntut pembubaran koperasi tanpa memberi kesempatan berdialog.",
+    "Mengajak pengurus bermusyawarah agar keanggotaan terbuka bagi semua warga tanpa membedakan suku.",
+    "Membentuk koperasi tandingan yang khusus menerima suku-suku lain.",
+    "Melaporkan pengurus ke aparat penegak hukum sebelum mencoba bermusyawarah."
+   ],
+   "po": [
+    "Menerima kebijakan diskriminatif berarti membiarkan pelanggaran nilai persatuan.",
+    "Pembubaran tanpa dialog bertentangan dengan semangat musyawarah.",
+    "Musyawarah untuk membuka keanggotaan bagi semua warga adalah sikap yang paling sesuai.",
+    "Koperasi tandingan justru memperdalam perpecahan antarwarga.",
+    "Pelaporan dapat dilakukan, tetapi musyawarah lebih dahulu adalah langkah yang lebih tepat."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Sebuah koperasi desa menetapkan syarat keanggotaan hanya bagi warga dari suku tertentu dengan alasan menjaga kekompakan. Sikap yang paling sesuai dengan nilai-nilai Pancasila untuk menyikapi kebijakan tersebut adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Pancasila"
+  },
+  {
+   "b": "Pasal 23 UUD 1945 mengatur bahwa rancangan undang-undang APBN diajukan Presiden untuk dibahas bersama DPR dengan memperhatikan pertimbangan DPD. Ayat berikutnya menegaskan bahwa apabila DPR tidak menyetujui rancangan APBN yang diusulkan, pemerintah menjalankan APBN tahun yang lalu. MPR, Mahkamah Agung, dan DPD tidak berwenang menetapkan APBN.",
+   "d": "Sedang",
+   "id": "H335",
+   "j": 1,
+   "k": "TWK",
+   "lvl": "C4",
+   "m": "Pilar Negara",
+   "o": [
+    "Presiden dapat menetapkan APBN sendiri tanpa persetujuan DPR.",
+    "DPR bersama Presiden membahas dan menyetujui APBN; bila DPR tidak menyetujui, pemerintah menjalankan APBN tahun lalu.",
+    "MPR menetapkan APBN dalam sidang tahunan.",
+    "Mahkamah Agung yang memutuskan besaran APBN.",
+    "DPD menetapkan APBN setelah berkonsultasi dengan Presiden."
+   ],
+   "po": [
+    "Presiden tidak dapat menetapkan APBN tanpa persetujuan DPR.",
+    "Sesuai Pasal 23 UUD 1945, APBN dibahas bersama DPR dan bila tidak disetujui berlaku APBN tahun lalu.",
+    "MPR tidak berwenang menetapkan APBN.",
+    "Mahkamah Agung tidak berwenang menetapkan APBN.",
+    "DPD hanya memberikan pertimbangan, bukan menetapkan APBN."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "DPR menolak rancangan undang-undang APBN yang diajukan pemerintah, sementara pemerintah menilai APBN sangat mendesak untuk membiayai pembangunan. Berdasarkan UUD 1945, manakah pernyataan yang benar mengenai keadaan ini?",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Pilar Negara"
+  },
+  {
+   "b": "Pasal 27 ayat (1) UUD 1945 berbunyi “Segala warga negara bersamaan kedudukannya di dalam hukum dan pemerintahan dan wajib menjunjung hukum dan pemerintahan itu dengan tidak ada kecualinya.” Ketentuan ini menegaskan persamaan kedudukan setiap warga negara di hadapan hukum.",
+   "d": "Mudah",
+   "id": "H336",
+   "j": 1,
+   "k": "TWK",
+   "lvl": "C3",
+   "m": "UUD 1945",
+   "o": [
+    "Setiap warga negara berhak atas pekerjaan dan penghidupan yang layak bagi kemanusiaan.",
+    "Segala warga negara bersamaan kedudukannya di dalam hukum dan pemerintahan.",
+    "Kemerdekaan berserikat dan berkumpul serta mengeluarkan pikiran dijamin undang-undang.",
+    "Setiap warga negara bebas memeluk agamanya masing-masing dan beribadat menurut agamanya.",
+    "Fakir miskin dan anak-anak terlantar dipelihara oleh negara."
+   ],
+   "po": [
+    "Ketentuan ini terdapat pada Pasal 27 ayat (2), bukan ayat (1).",
+    "Inilah bunyi Pasal 27 ayat (1) UUD 1945.",
+    "Ketentuan ini terdapat pada Pasal 28 UUD 1945.",
+    "Ketentuan ini terdapat pada Pasal 29 ayat (2) UUD 1945.",
+    "Ketentuan ini terdapat pada Pasal 34 ayat (1) UUD 1945."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Pasal 27 ayat (1) UUD 1945 menegaskan bahwa …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — UUD 1945"
+  },
+  {
+   "b": "Pola deret ini adalah kalikan dua lalu tambah bilangan yang bertambah satu setiap langkah: 3 × 2 + 1 = 7; 7 × 2 + 2 = 16; 16 × 2 + 3 = 35; 35 × 2 + 4 = 74. Langkah berikutnya adalah 74 × 2 + 5 = 153.",
+   "d": "Sedang",
+   "id": "H337",
+   "j": 2,
+   "jenisSalah": {
+    "0": "hitung",
+    "1": "rumus",
+    "3": "hitung",
+    "4": "konsep"
+   },
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Deret & Pola Bilangan",
+   "o": [
+    "148",
+    "150",
+    "153",
+    "155",
+    "160"
+   ],
+   "po": [
+    "Hasil ini diperoleh bila penambahnya keliru dihitung.",
+    "Hasil ini diperoleh bila pola tambahannya tidak bertambah.",
+    "74 × 2 + 5 = 153 sesuai pola yang berlaku.",
+    "Hasil ini diperoleh bila penambah terakhir keliru.",
+    "Hasil ini diperoleh bila pola pengalinya keliru."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Perhatikan deret bilangan berikut: 3, 7, 16, 35, 74, … Bilangan selanjutnya adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Deret & Pola Bilangan"
+  },
+  {
+   "b": "Jumlah seluruh paket adalah 120 + 150 + 90 + 180 + 140 = 680 paket. Rata-rata per bulan adalah 680 ÷ 5 = 136 paket. Garis pada gambar pembahasan menunjukkan posisi rata-rata tersebut di antara batang-batang diagram.",
+   "d": "Sedang",
+   "g": "<svg viewBox=\"0 0 340 170\" role=\"img\" aria-label=\"Diagram batang penjualan paket Januari sampai Mei\" xmlns=\"http://www.w3.org/2000/svg\" stroke=\"currentColor\" fill=\"currentColor\"><line x1=\"20\" y1=\"140\" x2=\"330\" y2=\"140\" stroke-width=\"2\"/><rect x=\"35\" y=\"80\" width=\"40\" height=\"60\"/><rect x=\"95\" y=\"65\" width=\"40\" height=\"75\"/><rect x=\"155\" y=\"95\" width=\"40\" height=\"45\"/><rect x=\"215\" y=\"50\" width=\"40\" height=\"90\"/><rect x=\"275\" y=\"70\" width=\"40\" height=\"70\"/><text x=\"55\" y=\"74\" text-anchor=\"middle\" font-size=\"12\">120</text><text x=\"115\" y=\"59\" text-anchor=\"middle\" font-size=\"12\">150</text><text x=\"175\" y=\"89\" text-anchor=\"middle\" font-size=\"12\">90</text><text x=\"235\" y=\"44\" text-anchor=\"middle\" font-size=\"12\">180</text><text x=\"295\" y=\"64\" text-anchor=\"middle\" font-size=\"12\">140</text><text x=\"55\" y=\"156\" text-anchor=\"middle\" font-size=\"12\">Jan</text><text x=\"115\" y=\"156\" text-anchor=\"middle\" font-size=\"12\">Feb</text><text x=\"175\" y=\"156\" text-anchor=\"middle\" font-size=\"12\">Mar</text><text x=\"235\" y=\"156\" text-anchor=\"middle\" font-size=\"12\">Apr</text><text x=\"295\" y=\"156\" text-anchor=\"middle\" font-size=\"12\">Mei</text></svg>",
+   "gb": "<svg viewBox=\"0 0 340 170\" role=\"img\" aria-label=\"Garis rata-rata 136 pada diagram batang penjualan\" xmlns=\"http://www.w3.org/2000/svg\" stroke=\"currentColor\" fill=\"currentColor\"><line x1=\"20\" y1=\"140\" x2=\"330\" y2=\"140\" stroke-width=\"2\"/><rect x=\"35\" y=\"80\" width=\"40\" height=\"60\"/><rect x=\"95\" y=\"65\" width=\"40\" height=\"75\"/><rect x=\"155\" y=\"95\" width=\"40\" height=\"45\"/><rect x=\"215\" y=\"50\" width=\"40\" height=\"90\"/><rect x=\"275\" y=\"70\" width=\"40\" height=\"70\"/><line x1=\"20\" y1=\"72\" x2=\"330\" y2=\"72\" stroke-width=\"2\" stroke-dasharray=\"6 4\"/><text x=\"325\" y=\"66\" text-anchor=\"end\" font-size=\"12\">Rata-rata 136</text></svg>",
+   "id": "H338",
+   "j": 2,
+   "jenisSalah": {
+    "0": "hitung",
+    "1": "baca data",
+    "3": "rumus",
+    "4": "hitung"
+   },
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Aritmatika Dasar",
+   "o": [
+    "128",
+    "132",
+    "136",
+    "140",
+    "144"
+   ],
+   "po": [
+    "Hasil ini muncul bila jumlah totalnya keliru dihitung.",
+    "Hasil ini muncul bila salah satu batang salah dibaca.",
+    "680 ÷ 5 = 136 adalah rata-rata yang benar.",
+    "Hasil ini muncul bila hanya bulan tertinggi yang dipakai.",
+    "Hasil ini muncul bila pembaginya bukan lima bulan."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Diagram batang berikut menunjukkan jumlah paket terjual di sebuah toko selama lima bulan. Rata-rata paket yang terjual setiap bulan adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Aritmatika Dasar"
+  },
+  {
+   "b": "Kata “lugas” berarti disampaikan dengan tegas, jelas, dan terus terang tanpa berbelit-belit. Dalam kalimat tersebut, pidato yang lugas membuat pesan mudah dipahami warga, sehingga padanan yang paling tepat adalah “tegas dan terus terang”.",
+   "d": "Mudah",
+   "id": "H339",
+   "j": 1,
+   "k": "TIU",
+   "lvl": "C3",
+   "m": "Verbal: Sinonim & Antonim",
+   "o": [
+    "Berbelit-belit",
+    "Tegas dan terus terang",
+    "Ragu-ragu",
+    "Berlebihan",
+    "Samar-samar"
+   ],
+   "po": [
+    "Berbelit-belit adalah lawan kata lugas.",
+    "Lugas berarti tegas dan terus terang.",
+    "Ragu-ragu adalah lawan dari sikap tegas.",
+    "Berlebihan tidak berkaitan dengan kejelasan penyampaian.",
+    "Samar-samar adalah lawan dari jelas."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Pidato kepala desa itu lugas, sehingga seluruh warga memahami maksudnya dengan jelas. Kata yang paling dekat maknanya dengan “lugas” adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Verbal: Sinonim & Antonim"
+  },
+  {
+   "b": "Pena memerlukan tinta sebagai bahan untuk menulis, sebagaimana kuas memerlukan cat sebagai bahan untuk melukis. Kanvas adalah media tempat melukis, sedangkan lukisan dan gambar adalah hasil karya, bukan bahan yang dipakai kuas. Warna hanyalah sifat dari cat itu sendiri.",
+   "d": "Sedang",
+   "id": "H340",
+   "j": 0,
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Verbal: Analogi",
+   "o": [
+    "Cat",
+    "Kanvas",
+    "Lukisan",
+    "Warna",
+    "Gambar"
+   ],
+   "po": [
+    "Kuas memakai cat seperti pena memakai tinta.",
+    "Kanvas adalah media, bukan bahan yang dipakai kuas.",
+    "Lukisan adalah hasil karya, bukan bahan yang dipakai kuas.",
+    "Warna adalah sifat cat, bukan bahan itu sendiri.",
+    "Gambar adalah hasil karya, bukan bahan yang dipakai kuas."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "PENA : TINTA = KUAS : …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Verbal: Analogi"
+  },
+  {
+   "b": "Pernyataan pertama menempatkan seluruh anggota koperasi di dalam himpunan warga desa, sedangkan pernyataan kedua hanya menyatakan sebagian warga desa adalah petani tanpa menjelaskan apakah bagian itu beririsan dengan anggota koperasi. Karena irisan kedua himpunan itu tidak diketahui, tidak ada kesimpulan yang sahih mengenai hubungan petani dan anggota koperasi.",
+   "d": "Sulit",
+   "id": "H341",
+   "j": 3,
+   "jenisSalah": {
+    "0": "logika",
+    "1": "logika",
+    "2": "logika",
+    "4": "logika"
+   },
+   "k": "TIU",
+   "lvl": "C5",
+   "m": "Logika & Silogisme",
+   "o": [
+    "Semua petani adalah anggota koperasi.",
+    "Sebagian petani adalah anggota koperasi.",
+    "Sebagian anggota koperasi adalah petani.",
+    "Tidak dapat disimpulkan hubungan antara petani dan anggota koperasi.",
+    "Semua anggota koperasi adalah petani."
+   ],
+   "po": [
+    "Pernyataan tidak menjamin seluruh petani menjadi anggota koperasi.",
+    "Sebagian warga desa yang menjadi petani belum tentu anggota koperasi.",
+    "Anggota koperasi belum tentu termasuk warga desa yang menjadi petani.",
+    "Irisan himpunan petani dan anggota koperasi tidak dapat dipastikan dari kedua pernyataan.",
+    "Pernyataan hanya menyebut sebagian warga desa adalah petani, bukan seluruh anggota koperasi."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Perhatikan dua pernyataan berikut: (1) Semua anggota koperasi adalah warga desa. (2) Sebagian warga desa adalah petani. Kesimpulan yang sahih berdasarkan kedua pernyataan tersebut adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Logika & Silogisme"
+  },
+  {
+   "b": "Gambar A, B, C, dan E adalah gambar yang sama yang diputar: panah dengan titik di sisi atas ekornya bila diputar menjadi panah ke bawah, ke kiri, dan ke atas dengan titik tetap berada di sisi yang sama terhadap ekor panah. Gambar D adalah bayangan cermin dari gambar A karena titiknya berada di sisi bawah ekor panah, posisi yang tidak dapat dicapai hanya dengan memutar gambar.",
+   "d": "Sedang",
+   "id": "H342",
+   "j": 3,
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Figural",
+   "o": [
+    "<svg viewBox=\"0 0 100 100\" role=\"img\" aria-label=\"Panah ke kanan dengan titik di atas ekor\" xmlns=\"http://www.w3.org/2000/svg\" stroke=\"currentColor\" fill=\"currentColor\"><line x1=\"22\" y1=\"50\" x2=\"72\" y2=\"50\" stroke-width=\"4\"/><polygon points=\"72,42 88,50 72,58\"/><circle cx=\"34\" cy=\"30\" r=\"6\"/></svg>",
+    "<svg viewBox=\"0 0 100 100\" role=\"img\" aria-label=\"Panah ke bawah dengan titik di kanan ekor\" xmlns=\"http://www.w3.org/2000/svg\" stroke=\"currentColor\" fill=\"currentColor\"><line x1=\"50\" y1=\"22\" x2=\"50\" y2=\"72\" stroke-width=\"4\"/><polygon points=\"42,72 50,88 58,72\"/><circle cx=\"70\" cy=\"34\" r=\"6\"/></svg>",
+    "<svg viewBox=\"0 0 100 100\" role=\"img\" aria-label=\"Panah ke kiri dengan titik di bawah ekor\" xmlns=\"http://www.w3.org/2000/svg\" stroke=\"currentColor\" fill=\"currentColor\"><line x1=\"78\" y1=\"50\" x2=\"28\" y2=\"50\" stroke-width=\"4\"/><polygon points=\"28,42 12,50 28,58\"/><circle cx=\"66\" cy=\"70\" r=\"6\"/></svg>",
+    "<svg viewBox=\"0 0 100 100\" role=\"img\" aria-label=\"Panah ke kanan dengan titik di bawah ekor\" xmlns=\"http://www.w3.org/2000/svg\" stroke=\"currentColor\" fill=\"currentColor\"><line x1=\"22\" y1=\"50\" x2=\"72\" y2=\"50\" stroke-width=\"4\"/><polygon points=\"72,42 88,50 72,58\"/><circle cx=\"34\" cy=\"70\" r=\"6\"/></svg>",
+    "<svg viewBox=\"0 0 100 100\" role=\"img\" aria-label=\"Panah ke atas dengan titik di kiri ekor\" xmlns=\"http://www.w3.org/2000/svg\" stroke=\"currentColor\" fill=\"currentColor\"><line x1=\"50\" y1=\"78\" x2=\"50\" y2=\"28\" stroke-width=\"4\"/><polygon points=\"42,28 50,12 58,28\"/><circle cx=\"30\" cy=\"66\" r=\"6\"/></svg>"
+   ],
+   "po": [
+    "Gambar ini adalah gambar yang sama dengan gambar lainnya.",
+    "Gambar ini adalah gambar A yang diputar 90 derajat searah jarum jam.",
+    "Gambar ini adalah gambar A yang diputar 180 derajat.",
+    "Gambar ini adalah bayangan cermin, bukan hasil putaran.",
+    "Gambar ini adalah gambar A yang diputar 270 derajat searah jarum jam."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Empat dari lima gambar berikut merupakan gambar yang sama yang diputar. Manakah gambar yang berbeda dari keempat gambar lainnya?",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Figural"
+  },
+  {
+   "b": "Luas lantai adalah 24 × 18 = 432 meter persegi. Luas satu ubin adalah 0,6 × 0,6 = 0,36 meter persegi, sehingga dibutuhkan 432 ÷ 0,36 = 1.200 keping ubin. Jumlah dus yang diperlukan adalah 1.200 ÷ 4 = 300 dus, dan biayanya 300 × Rp48.000,00 = Rp14.400.000,00.",
+   "d": "Sedang",
+   "id": "H343",
+   "integrasi": "TIU × TWK (anggaran desa)",
+   "j": 2,
+   "jenisSalah": {
+    "0": "rumus",
+    "1": "satuan",
+    "3": "hitung",
+    "4": "konsep"
+   },
+   "k": "TIU",
+   "lvl": "C4",
+   "m": "Geometri",
+   "o": [
+    "Rp12.000.000,00",
+    "Rp13.200.000,00",
+    "Rp14.400.000,00",
+    "Rp15.600.000,00",
+    "Rp16.800.000,00"
+   ],
+   "po": [
+    "Hasil ini muncul bila luas ubin salah dihitung.",
+    "Hasil ini muncul bila konversi sentimeter ke meter keliru.",
+    "432 ÷ 0,36 = 1.200 keping, 300 dus, biayanya Rp14.400.000,00.",
+    "Hasil ini muncul bila jumlah dus salah dihitung.",
+    "Hasil ini muncul bila harga per dus keliru dipakai."
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Balai desa berbentuk persegi panjang dengan panjang 24 meter dan lebar 18 meter. Lantainya akan dipasang ubin berukuran 60 cm × 60 cm. Satu dus ubin berisi 4 keping dan harganya Rp48.000,00. Berapa biaya yang diperlukan untuk membeli ubin seluruh lantai balai desa?",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Geometri"
+  },
+  {
+   "b": "Petugas pelayanan yang baik memberi kepastian kepada warga: menjelaskan penyebab keterlambatan, menyampaikan perkiraan waktu tunggu, dan menawarkan solusi seperti nomor antrean prioritas bila memungkinkan. Sikap ini menunjukkan empati, transparansi, dan tanggung jawab atas pelayanan publik.",
+   "d": "Sedang",
+   "id": "H344",
+   "j": 1,
+   "k": "TKP",
+   "lvl": "C4",
+   "m": "Pelayanan Publik",
+   "o": [
+    "Meminta warga menunggu dengan sabar tanpa memberi informasi.",
+    "Menjelaskan penyebab keterlambatan, memberi perkiraan waktu, dan menawarkan nomor antrean prioritas bila memungkinkan.",
+    "Menyuruh warga pulang dan datang lain hari.",
+    "Meminta warga mengurus lewat calo agar cepat.",
+    "Mengabaikan keluhan karena antrean memang panjang."
+   ],
+   "po": [
+    "Meminta menunggu tanpa informasi membuat warga tidak mendapat kepastian.",
+    "Menjelaskan penyebab, memberi perkiraan waktu, dan menawarkan solusi adalah pelayanan terbaik.",
+    "Menyuruh pulang berarti menolak melayani warga.",
+    "Mengarahkan ke calo melanggar aturan dan merugikan warga.",
+    "Mengabaikan keluhan menunjukkan sikap tidak peduli terhadap warga."
+   ],
+   "s": [
+    2,
+    5,
+    1,
+    1,
+    2
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Seorang warga datang ke kantor kelurahan untuk mengurus KTP dan sudah menunggu dua jam tanpa kejelasan. Sebagai petugas pelayanan, sikap yang paling tepat adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Pelayanan Publik"
+  },
+  {
+   "b": "Koordinasi antarinstansi menuntut komunikasi aktif dan sikap saling membantu. Menghubungi penanggung jawab, memahami kendala yang dihadapi, lalu menyepakati tenggat bersama adalah cara yang menjaga hubungan kerja sekaligus memastikan program berjalan tepat waktu.",
+   "d": "Sedang",
+   "id": "H345",
+   "j": 1,
+   "k": "TKP",
+   "lvl": "C4",
+   "m": "Jejaring Kerja",
+   "o": [
+    "Melaporkan instansi itu ke atasan tanpa mencoba menghubungi.",
+    "Menghubungi penanggung jawab instansi tersebut, menanyakan kendalanya, dan menawarkan bantuan serta tenggat yang disepakati bersama.",
+    "Mengerjakan program tanpa data instansi itu dan menyalahkannya di laporan.",
+    "Menunggu sampai data dikirim sendiri tanpa tindak lanjut.",
+    "Meminta instansi lain menekan instansi tersebut."
+   ],
+   "po": [
+    "Melapor tanpa menghubungi lebih dahulu melewatkan kesempatan menyelesaikan kendala bersama.",
+    "Menghubungi, memahami kendala, dan menyepakati tenggat bersama adalah langkah terbaik.",
+    "Mengerjakan tanpa data lalu menyalahkan instansi lain merusak kerja sama.",
+    "Menunggu pasif membuat program berisiko melewati tenggat.",
+    "Menekan melalui instansi lain menimbulkan ketegangan antarinstansi."
+   ],
+   "s": [
+    2,
+    5,
+    2,
+    1,
+    3
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Anda ditugaskan berkoordinasi dengan tiga instansi lain untuk sebuah program bersama, tetapi salah satu instansi belum mengirim data yang dibutuhkan padahal tenggat semakin dekat. Tindakan yang paling tepat adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Jejaring Kerja"
+  },
+  {
+   "b": "Menghormati kebiasaan rekan dari budaya berbeda sekaligus mengajaknya beradaptasi secara bertahap menunjukkan sikap toleran dan inklusif. Sikap ini menjaga keharmonisan tim tanpa memaksa siapa pun meninggalkan identitas budayanya.",
+   "d": "Mudah",
+   "id": "H346",
+   "j": 0,
+   "k": "TKP",
+   "lvl": "C3",
+   "m": "Sosial Budaya",
+   "o": [
+    "Menghormati kebiasaannya selama tidak mengganggu pekerjaan dan mengajaknya beradaptasi secara bertahap.",
+    "Memintanya segera meninggalkan seluruh kebiasaannya.",
+    "Menghindari bekerja sama dengannya.",
+    "Menjadikan kebiasaannya bahan candaan di kantor.",
+    "Bersikap acuh dan tidak peduli."
+   ],
+   "po": [
+    "Menghormati kebiasaan rekan sambil mengajak beradaptasi adalah sikap yang paling tepat.",
+    "Memaksa rekan meninggalkan kebiasaannya adalah sikap tidak toleran.",
+    "Menghindari kerja sama merugikan tim dan rekan tersebut.",
+    "Menjadikan kebiasaan rekan bahan candaan adalah sikap tidak menghormati.",
+    "Bersikap acuh menunjukkan kurangnya kepedulian terhadap rekan kerja."
+   ],
+   "s": [
+    5,
+    1,
+    1,
+    2,
+    2
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Di unit kerja Anda ada rekan baru dari daerah dengan adat istiadat yang berbeda. Sikap yang paling tepat adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Sosial Budaya"
+  },
+  {
+   "b": "Informasi yang belum terverifikasi tidak boleh disebarkan lebih lanjut karena dapat menimbulkan kesalahpahaman. Langkah yang tepat adalah memeriksa kebenarannya ke sumber resmi, lalu menyampaikan hasil verifikasi di grup agar semua anggota memperoleh informasi yang benar.",
+   "d": "Sedang",
+   "id": "H347",
+   "j": 1,
+   "k": "TKP",
+   "lvl": "C4",
+   "m": "Teknologi Informasi & Komunikasi",
+   "o": [
+    "Ikut menyebarkan agar rekan lain waspada.",
+    "Memverifikasi kebenaran informasi ke sumber resmi, lalu menginformasikan hasil verifikasi di grup.",
+    "Menghapus pesan tanpa penjelasan.",
+    "Membiarkan saja karena bukan urusan Anda.",
+    "Menegur pengirim di depan semua anggota grup."
+   ],
+   "po": [
+    "Ikut menyebarkan informasi yang belum jelas kebenarannya memperluas kabar yang belum pasti.",
+    "Memverifikasi ke sumber resmi lalu menginformasikan hasilnya adalah tindakan yang paling tepat.",
+    "Menghapus pesan tanpa penjelasan membuat anggota grup kebingungan.",
+    "Membiarkan informasi yang belum pasti beredar tanpa klarifikasi adalah sikap pasif.",
+    "Menegur pengirim di depan umum dapat menimbulkan konflik tanpa menyelesaikan persoalan."
+   ],
+   "s": [
+    1,
+    5,
+    3,
+    2,
+    2
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Anda menerima pesan berantai di grup kerja yang berisi informasi belum terverifikasi tentang kebijakan instansi, dan beberapa rekan mulai menyebarkannya. Tindakan yang paling tepat adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Teknologi Informasi & Komunikasi"
+  },
+  {
+   "b": "Mengubah data laporan demi memenuhi target adalah pelanggaran integritas dan dapat berakibat hukum. Sikap profesional adalah menolak dengan sopan, menyampaikan data yang sebenarnya, dan mengusulkan langkah perbaikan yang sah agar target dapat dicapai dengan cara yang benar.",
+   "d": "Sulit",
+   "id": "H348",
+   "j": 1,
+   "k": "TKP",
+   "lvl": "C5",
+   "m": "Profesionalisme",
+   "o": [
+    "Mengubah data sesuai perintah karena itu tugas bawahan.",
+    "Menolak dengan sopan, menjelaskan data yang sebenarnya, dan mengusulkan langkah perbaikan agar target tercapai secara sah.",
+    "Mengubah sebagian data agar tidak terlalu terlihat.",
+    "Mengubah data tetapi mencatatnya untuk diri sendiri.",
+    "Mengabaikan perintah tanpa memberi alasan."
+   ],
+   "po": [
+    "Mengikuti perintah yang melanggar integritas tetap merupakan pelanggaran.",
+    "Menolak dengan sopan, menyampaikan data sebenarnya, dan mengusulkan perbaikan adalah sikap yang paling tepat.",
+    "Mengubah sebagian data tetap berarti memalsukan laporan.",
+    "Mengubah data dengan catatan pribadi tetap melanggar aturan.",
+    "Mengabaikan perintah tanpa alasan bukan cara menyelesaikan persoalan secara profesional."
+   ],
+   "s": [
+    1,
+    5,
+    1,
+    2,
+    2
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Atasan Anda meminta Anda mengubah data laporan agar target instansi terlihat tercapai, padahal data sebenarnya belum mencapai target. Sikap yang paling tepat adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Profesionalisme"
+  },
+  {
+   "b": "Hadiah dari pihak yang dilayani, sekecil apa pun, termasuk gratifikasi yang dapat memengaruhi objektivitas pelayanan dan wajib ditolak serta dilaporkan sesuai aturan. Menolak dengan sopan sambil menjelaskan bahwa pelayanan adalah tugas menunjukkan integritas dan melindungi diri dari jerat korupsi.",
+   "d": "Sulit",
+   "id": "H349",
+   "j": 1,
+   "k": "TKP",
+   "lvl": "C5",
+   "m": "Anti Korupsi",
+   "o": [
+    "Menerima karena prosesnya sudah sesuai prosedur.",
+    "Menolak dengan sopan dan menjelaskan bahwa pelayanan adalah tugas serta melaporkan penerimaan hadiah sesuai aturan.",
+    "Menerima tetapi membagikannya kepada rekan kerja.",
+    "Menolak diam-diam tanpa melapor.",
+    "Menerima dan menyimpannya sebagai dana kas unit."
+   ],
+   "po": [
+    "Proses yang sesuai prosedur tidak membuat hadiah menjadi boleh diterima.",
+    "Menolak dengan sopan dan melaporkan sesuai aturan adalah sikap yang paling tepat.",
+    "Membagikan hadiah kepada rekan tidak menghapus sifat gratifikasinya.",
+    "Menolak tanpa melapor melewatkan kewajiban pelaporan gratifikasi.",
+    "Menyimpan hadiah sebagai dana kas tetap berarti menerima gratifikasi."
+   ],
+   "s": [
+    2,
+    5,
+    1,
+    3,
+    1
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Seorang penyedia jasa menawarkan Anda hadiah berupa voucher belanja sebagai ucapan terima kasih setelah Anda membantu mempercepat proses administrasi sesuai prosedur. Sikap yang paling tepat adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Anti Korupsi"
+  },
+  {
+   "b": "Kerja bakti adalah wujud gotong royong yang tumbuh dari kesadaran bersama, bukan dari paksaan. Memberi contoh dengan ikut serta dan mengajak warga secara persuasif sambil menjelaskan manfaatnya adalah cara yang paling efektif menumbuhkan partisipasi tanpa menimbulkan pertentangan.",
+   "d": "Sedang",
+   "id": "H350",
+   "j": 1,
+   "k": "TKP",
+   "lvl": "C4",
+   "m": "Sosial Budaya",
+   "o": [
+    "Memaksa semua warga ikut dengan ancaman denda.",
+    "Memberi contoh dengan ikut serta, mengajak warga secara persuasif, dan menjelaskan manfaatnya bagi lingkungan bersama.",
+    "Membiarkan hanya warga yang mau saja tanpa mengajak.",
+    "Melaporkan warga yang enggan ke ketua RT untuk ditegur keras.",
+    "Membayar orang lain agar kerja bakti tetap berjalan tanpa melibatkan warga."
+   ],
+   "po": [
+    "Memaksa dengan ancaman denda menimbulkan penolakan dan merusak kebersamaan.",
+    "Memberi contoh, mengajak secara persuasif, dan menjelaskan manfaatnya adalah cara yang paling tepat.",
+    "Membiarkan tanpa mengajak membuat partisipasi tetap rendah.",
+    "Melaporkan warga untuk ditegur keras menimbulkan konflik antarwarga.",
+    "Membayar orang lain menghilangkan makna gotong royong bagi warga."
+   ],
+   "s": [
+    2,
+    5,
+    3,
+    2,
+    1
+   ],
+   "sumber": "Riset konsep kisi SKD — soal original",
+   "t": "Lingkungan tempat tinggal Anda akan mengadakan kerja bakti membersihkan saluran air, tetapi sebagian warga enggan ikut karena merasa bukan tanggung jawabnya. Sebagai warga, tindakan yang paling tepat adalah …",
+   "tgl": "2026-11-21",
+   "turunan": "Orisinal — Sosial Budaya"
   }
  ],
  "otomatis": {
